@@ -91,8 +91,15 @@
 					        <apiPackage>org.api.cardnexus</apiPackage>
 					        <modelPackage>org.api.cardnexus.model</modelPackage>
 					        <configOptions>
-					            <library>apache-httpclient</library>
+					            <serializationLibrary>gson</serializationLibrary>
+					            <serializableModel>true</serializableModel>
+								<library>native</library>
 					            <openApiNullable>false</openApiNullable>
+					            <supportUrlQuery>false</supportUrlQuery>
+					            <generateApis>false</generateApis>
+								<generateSupportingFiles>false</generateSupportingFiles>
+								<generateModelTests>false</generateModelTests>
+								<generateModelDocumentation>false</generateModelDocumentation>
 					        </configOptions>
 					        <addCompileSourceRoot>true</addCompileSourceRoot>
 					        </configuration>
