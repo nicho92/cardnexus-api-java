@@ -28,7 +28,7 @@
 		<developerConnection>scm:git:https://github.com/nicho92/cardnexus-api-java.git</developerConnection>
 	</scm>
 	
-	<version>0.1</version>
+	<version>1.2.0</version>
 	<packaging>jar</packaging>
 
 	<properties>
@@ -123,23 +123,46 @@
 			                <goal>generate</goal>
 			            </goals>
 			            <configuration>
-			                <inputSpec>${project.basedir}/src/main/resources/cardnexus.yml</inputSpec>
 			                <generatorName>java</generatorName>
-					        <output>${project.build.directory}/generated-sources/openapi</output>
-					        <apiPackage>org.api.cardnexus</apiPackage>
+			                
+			                <inputSpec>${project.basedir}/src/main/resources/cardnexus.yml</inputSpec>
+					        <output>${project.build.directory}/generated-sources/cardnexus-openapi</output>
+					        
+					        <apiPackage>org.api.cardnexus.api</apiPackage>
 					        <modelPackage>org.api.cardnexus.model</modelPackage>
-					        <generateApis>true</generateApis>
-						    <generateSupportingFiles>true</generateSupportingFiles>
-						    <generateModelTests>false</generateModelTests>
-						    <generateModelDocumentation>false</generateModelDocumentation>
-					        <configOptions>
-							    <library>okhttp-gson</library>
-							    <serializationLibrary>gson</serializationLibrary>
-							    <hideGenerationTimestamp>true</hideGenerationTimestamp>
-							    <useRuntimeException>true</useRuntimeException>
-							    <dateLibrary>java8</dateLibrary>
+					        <invokerPackage>org.api.cardnexus.client</invokerPackage>
+					        
+					  		<globalProperties>
+								<apiDocs>false</apiDocs>
+								<modelDocs>false</modelDocs>
+								<apiTests>false</apiTests>
+								<modelTests>false</modelTests>
+							</globalProperties>
+							
+							<generateApis>true</generateApis>
+							<generateModels>true</generateModels>
+							<generateSupportingFiles>true</generateSupportingFiles>
+							<generateApiTests>false</generateApiTests>
+							<generateModelTests>false</generateModelTests>
+							<generateApiDocumentation>false</generateApiDocumentation>
+							<generateModelDocumentation>false</generateModelDocumentation>
+							<skipValidateSpec>false</skipValidateSpec>
+							
+							<configOptions>
+								<library>okhttp-gson</library>
+								<serializationLibrary>gson</serializationLibrary>
+								<sourceFolder>src/main/java</sourceFolder>
+								<dateLibrary>java8</dateLibrary>
+								<hideGenerationTimestamp>true</hideGenerationTimestamp>
+								<useRuntimeException>true</useRuntimeException>
+								<useTags>true</useTags>
+								<enumUnknownDefaultCase>true</enumUnknownDefaultCase>
+								<ensureUniqueParams>true</ensureUniqueParams>
+								<disallowAdditionalPropertiesIfNotPresent>false</disallowAdditionalPropertiesIfNotPresent>
 							</configOptions>
-					        <addCompileSourceRoot>true</addCompileSourceRoot>
+							<addCompileSourceRoot>true</addCompileSourceRoot>
+							
+							
 					        </configuration>
 			        </execution>
 			    </executions>
