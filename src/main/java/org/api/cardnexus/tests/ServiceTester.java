@@ -20,8 +20,7 @@ public class ServiceTester{
 //	    });
 //		
 		
-		
-		System.out.println(service.listExpansions("mtg"));
+		System.out.println(	service.getProduct("50212"));
 	}
 	
 }
