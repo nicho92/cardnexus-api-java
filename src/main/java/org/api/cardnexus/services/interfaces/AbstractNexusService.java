@@ -1,4 +1,4 @@
-package org.api.cardnexus.services;
+package org.api.cardnexus.services.interfaces;
 
 import org.api.cardnexus.client.ApiClient;
 import org.api.cardnexus.client.Configuration;

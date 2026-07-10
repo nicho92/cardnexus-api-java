@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import org.api.cardnexus.api.PricingApi;
 import org.api.cardnexus.client.ApiException;
+import org.api.cardnexus.services.interfaces.AbstractNexusService;
 import org.api.cardnexus.services.model.EnumFinish;
 import org.api.cardnexus.services.model.EnumMarketPlace;
 
