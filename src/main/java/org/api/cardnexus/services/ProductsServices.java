@@ -4,10 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.api.cardnexus.api.ProductsApi;
+import org.api.cardnexus.client.JSON;
+import org.api.cardnexus.model.CardProductDetail;
 import org.api.cardnexus.model.ExpansionSummary;
 import org.api.cardnexus.model.GameSummary;
+import org.api.cardnexus.model.ProductsSearchProducts200Response;
+import org.api.cardnexus.model.ProductsSearchProductsRequest;
+import org.api.cardnexus.model.ProductsSearchProductsRequest.SortByEnum;
+import org.api.cardnexus.model.ProductsSearchProductsRequest.SortDirectionEnum;
+import org.api.cardnexus.model.SealedProductDetail;
 import org.api.cardnexus.services.interfaces.AbstractNexusService;
-import org.api.cardnexus.services.model.NexusProduct;
 
 public class ProductsServices extends AbstractNexusService {
 
@@ -51,13 +57,32 @@ public class ProductsServices extends AbstractNexusService {
 	
 	}
 		
-	public NexusProduct getProduct(String idProduct)
+	public CardProductDetail getCardProduct(String idProduct)
 	{
-		var obj = apiInstance.productsGetProduct(idProduct);
-		
-		var prod = new NexusProduct();
-		
-		return prod;
+		var obj = JSON.getGson().toJsonTree(apiInstance.productsGetProduct(idProduct)).getAsJsonObject();
+		return JSON.getGson().fromJson(obj, CardProductDetail.class);
+	}
+	
+	public SealedProductDetail getSealedProduct(String idProduct)
+	{
+	    var obj = JSON.getGson().toJsonTree(apiInstance.productsGetProduct(idProduct)).getAsJsonObject();
+	    return JSON.getGson().fromJson(obj, SealedProductDetail.class);
+	}
+	
+	public ProductsSearchProducts200Response searchProduct(String name)
+	{
+	    
+	    var req = new ProductsSearchProductsRequest(); 
+	    req.setName(name);
+	    req.setLimit(200);
+	    req.setOffset(0);
+	    req.setSortBy(SortByEnum.NAME);
+	    req.setSortDirection(SortDirectionEnum.ASC);
+	    
+	    
+	   return  apiInstance.productsSearchProducts(req);
+	    
+	    
 	}
 	
 	

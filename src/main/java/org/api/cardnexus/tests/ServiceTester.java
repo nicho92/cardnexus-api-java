@@ -10,17 +10,11 @@ public class ServiceTester{
 
 	public static void main(String[] args) throws IOException {
 	    
-		NexusConfig.loadTokenFromFile(new File("C:\\Users\\nicolas.pihen\\Downloads\\token.txt"));
+		NexusConfig.loadTokenFromFile(new File("E:\\Mon Drive\\token.txt"));
 		
 		var service = new ProductsServices();
-	
 		
-//		priceService.listPrices(50212, MarketplaceEnum.CARDMARKET, FinishEnum.STANDARD).forEach(p->{
-//	    	System.out.println(p);
-//	    });
-//		
-		
-		System.out.println(	service.getProduct("50212"));
+		System.out.println(service.searchProduct("Black Lotus"));
 	}
 	
 }

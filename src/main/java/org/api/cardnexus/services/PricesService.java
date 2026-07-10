@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.api.cardnexus.api.PricingApi;
 import org.api.cardnexus.client.ApiException;
+import org.api.cardnexus.model.CardCondition;
 import org.api.cardnexus.model.PricingGetHistory200ResponseDataInner;
 import org.api.cardnexus.model.PricingGetHistory200ResponseDataInner.FinishEnum;
 import org.api.cardnexus.model.PricingGetProductPrices200Response;
@@ -36,9 +37,9 @@ public class PricesService extends AbstractNexusService {
        
         }
     	
-    	public PricingGetSales200Response getSales(Integer productId) throws ApiException
+    	public PricingGetSales200Response getSales(Integer productId,CardCondition condition, String langage) throws ApiException
     	{
-            return apiInstance.pricingGetSales(productId, null, null, null, null, null);
+            return apiInstance.pricingGetSales(productId, null, null, null, condition, langage);
        
         }
     	
