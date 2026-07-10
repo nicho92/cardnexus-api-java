@@ -133,7 +133,7 @@
 					        <invokerPackage>org.api.cardnexus.client</invokerPackage>
 					        
 					  		<globalProperties>
-								<apiDocs>false</apiDocs>
+								<apiDocs>true</apiDocs>
 								<modelDocs>false</modelDocs>
 								<apiTests>false</apiTests>
 								<modelTests>false</modelTests>
