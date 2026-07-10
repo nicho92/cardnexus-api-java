@@ -13,23 +13,27 @@ public class PricesService extends AbstractNexusService {
     
     	public static void main(String[] args) {
     	    
-    	    
-    	    new PricesService().listPrices();
+    	    new PricesService().listPrices(50212, EnumMarketPlace.CARDMARKET, EnumFinish.Standard);
     	}
-    	
-    	
-    	
-    	public void listPrices()
-    	{
 
-    	var apiInstance = new PricingApi(defaultClient);
-        var productId = 50212; 
-        var marketplace = EnumMarketPlace.CARDMARKET.toValue();  
-        var finish = EnumFinish.Standard.name();  
+
+
+	private PricingApi apiInstance;
+    	
+    	
+    	public PricesService() {
+    	    apiInstance = new PricingApi(defaultClient);
+	}
+    	
+    	
+    	
+    	public void listPrices(Integer productId, EnumMarketPlace market, EnumFinish finish)
+    	{
+    	
         var from = LocalDate.of(2026,6,1);  
         var to = LocalDate.now();  
         try {
-          var result = apiInstance.pricingGetHistory(productId, marketplace, finish, from, to);
+          var result = apiInstance.pricingGetHistory(productId, market.toValue(), finish.name(), from, to);
           System.out.println(result);
         } catch (ApiException e) {
           e.printStackTrace();
