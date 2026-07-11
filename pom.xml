@@ -28,7 +28,7 @@
 		<developerConnection>scm:git:https://github.com/nicho92/cardnexus-api-java.git</developerConnection>
 	</scm>
 	
-	<version>1.2.0</version>
+	<version>1.3.0</version>
 	<packaging>jar</packaging>
 
 	<properties>
@@ -125,7 +125,7 @@
 			            <configuration>
 			                <generatorName>java</generatorName>
 			                
-			                <inputSpec>${project.basedir}/src/main/resources/cardnexus.yml</inputSpec>
+			                <inputSpec>${project.basedir}/src/main/resources/CardNexus Public API.yaml</inputSpec>
 					        <output>${project.build.directory}/generated-sources/cardnexus-openapi</output>
 					        
 					        <apiPackage>org.api.cardnexus.api</apiPackage>
@@ -146,7 +146,7 @@
 							<generateModelTests>false</generateModelTests>
 							<generateApiDocumentation>false</generateApiDocumentation>
 							<generateModelDocumentation>false</generateModelDocumentation>
-							<skipValidateSpec>false</skipValidateSpec>
+							<skipValidateSpec>true</skipValidateSpec>
 							
 							<configOptions>
 								<library>okhttp-gson</library>
@@ -159,6 +159,7 @@
 								<enumUnknownDefaultCase>true</enumUnknownDefaultCase>
 								<ensureUniqueParams>true</ensureUniqueParams>
 								<disallowAdditionalPropertiesIfNotPresent>false</disallowAdditionalPropertiesIfNotPresent>
+								<useOneOfInterfaces>true</useOneOfInterfaces>
 							</configOptions>
 							<addCompileSourceRoot>true</addCompileSourceRoot>
 							

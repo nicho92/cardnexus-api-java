@@ -1,6 +1,6 @@
 info:
   title: CardNexus Public API
-  version: 1.2.0
+  version: 1.3.0
   description: >-
     The CardNexus Public API provides programmatic access to the CardNexus
     marketplace and catalogue — games, expansions, and products across Magic:
@@ -221,7 +221,7 @@ components:
             same expansion (e.g. `borderless`, `extended-art`, `showcase`,
             `promo`).
         rarity:
-          anyof:
+          anyOf:
             - type: string
             - type: "null"
           description: The card's rarity. Values are game-specific (e.g. `common`,
@@ -470,18 +470,18 @@ components:
                   description: Aggregate market price — what we display as the canonical price
                     (decimal major units).
                 change24h:
-                  anyof:
+                  anyOf:
                     - type: number
                     - type: "null"
                   description: Percent change of `marketValue` vs. 24 hours ago. `null` when
                     there's not enough history.
                 change7d:
-                  anyof:
+                  anyOf:
                     - type: number
                     - type: "null"
                   description: Percent change of `marketValue` vs. 7 days ago.
                 change30d:
-                  anyof:
+                  anyOf:
                     - type: number
                     - type: "null"
                   description: Percent change of `marketValue` vs. 30 days ago.
@@ -507,18 +507,18 @@ components:
                   description: Aggregate market price — what we display as the canonical price
                     (decimal major units).
                 change24h:
-                  anyof:
+                  anyOf:
                     - type: number
                     - type: "null"
                   description: Percent change of `marketValue` vs. 24 hours ago. `null` when
                     there's not enough history.
                 change7d:
-                  anyof:
+                  anyOf:
                     - type: number
                     - type: "null"
                   description: Percent change of `marketValue` vs. 7 days ago.
                 change30d:
-                  anyof:
+                  anyOf:
                     - type: number
                     - type: "null"
                   description: Percent change of `marketValue` vs. 30 days ago.
@@ -645,7 +645,7 @@ components:
             same expansion (e.g. `borderless`, `extended-art`, `showcase`,
             `promo`).
         rarity:
-          anyof:
+          anyOf:
             - type: string
             - type: "null"
           description: The card's rarity. Values are game-specific (e.g. `common`,
@@ -848,18 +848,18 @@ components:
                   description: Aggregate market price — what we display as the canonical price
                     (decimal major units).
                 change24h:
-                  anyof:
+                  anyOf:
                     - type: number
                     - type: "null"
                   description: Percent change of `marketValue` vs. 24 hours ago. `null` when
                     there's not enough history.
                 change7d:
-                  anyof:
+                  anyOf:
                     - type: number
                     - type: "null"
                   description: Percent change of `marketValue` vs. 7 days ago.
                 change30d:
-                  anyof:
+                  anyOf:
                     - type: number
                     - type: "null"
                   description: Percent change of `marketValue` vs. 30 days ago.
@@ -885,18 +885,18 @@ components:
                   description: Aggregate market price — what we display as the canonical price
                     (decimal major units).
                 change24h:
-                  anyof:
+                  anyOf:
                     - type: number
                     - type: "null"
                   description: Percent change of `marketValue` vs. 24 hours ago. `null` when
                     there's not enough history.
                 change7d:
-                  anyof:
+                  anyOf:
                     - type: number
                     - type: "null"
                   description: Percent change of `marketValue` vs. 7 days ago.
                 change30d:
-                  anyof:
+                  anyOf:
                     - type: number
                     - type: "null"
                   description: Percent change of `marketValue` vs. 30 days ago.
@@ -1123,18 +1123,18 @@ components:
               description: Aggregate market price — what we display as the canonical price
                 (decimal major units).
             change24h:
-              anyof:
+              anyOf:
                 - type: number
                 - type: "null"
               description: Percent change of `marketValue` vs. 24 hours ago. `null` when
                 there's not enough history.
             change7d:
-              anyof:
+              anyOf:
                 - type: number
                 - type: "null"
               description: Percent change of `marketValue` vs. 7 days ago.
             change30d:
-              anyof:
+              anyOf:
                 - type: number
                 - type: "null"
               description: Percent change of `marketValue` vs. 30 days ago.
@@ -1160,18 +1160,18 @@ components:
               description: Aggregate market price — what we display as the canonical price
                 (decimal major units).
             change24h:
-              anyof:
+              anyOf:
                 - type: number
                 - type: "null"
               description: Percent change of `marketValue` vs. 24 hours ago. `null` when
                 there's not enough history.
             change7d:
-              anyof:
+              anyOf:
                 - type: number
                 - type: "null"
               description: Percent change of `marketValue` vs. 7 days ago.
             change30d:
-              anyof:
+              anyOf:
                 - type: number
                 - type: "null"
               description: Percent change of `marketValue` vs. 30 days ago.
@@ -1288,7 +1288,7 @@ components:
           type: string
           description: The grade assigned by the grading company, as printed on the slab.
         certification:
-          anyof:
+          anyOf:
             - type: string
             - type: "null"
           description: The certification number printed on the slab. `null` when the card
@@ -1490,7 +1490,7 @@ components:
       type: object
       properties:
         productId:
-          anyof:
+          anyOf:
             - $ref: "#/components/schemas/CatalogId"
             - type: "null"
           description: The catalogue product that was sold. Returned by `GET
@@ -1500,13 +1500,13 @@ components:
           type: string
           description: The product name captured at the time of sale.
         imageUrl:
-          anyof:
+          anyOf:
             - type: string
             - type: "null"
           description: The product image captured at the time of sale. `null` when there
             is none.
         condition:
-          anyof:
+          anyOf:
             - $ref: "#/components/schemas/CardCondition"
             - type: "null"
           description: "The card's condition: `NM`, `LP`, `MP`, `HP`, or `DMG`. `null`
@@ -1518,7 +1518,7 @@ components:
           type: string
           description: The card's finish, e.g. `Standard`, `Foil`, `Reverse Holo`.
         graded:
-          anyof:
+          anyOf:
             - $ref: "#/components/schemas/Graded"
             - type: "null"
           description: Grading details when the item is graded. `null` for raw cards and
@@ -1570,18 +1570,18 @@ components:
           type: string
           description: Their public handle.
         avatarUrl:
-          anyof:
+          anyOf:
             - type: string
             - type: "null"
           description: Their avatar URL. `null` when they haven't uploaded one.
         country:
-          anyof:
+          anyOf:
             - type: string
             - type: "null"
           description: Their country as a two-letter ISO 3166-1 alpha-2 code (e.g. `FR`,
             `US`). `null` when unknown.
         type:
-          anyof:
+          anyOf:
             - enum:
                 - pro
                 - individual
@@ -1595,7 +1595,7 @@ components:
         rating:
           $ref: "#/components/schemas/OrderPartyRating"
         reliability:
-          anyof:
+          anyOf:
             - $ref: "#/components/schemas/OrderPartyReliability"
             - type: "null"
           description: A seller's recent order-handling stats. `null` for a buyer, or when
@@ -1628,7 +1628,7 @@ components:
       type: object
       properties:
         average:
-          anyof:
+          anyOf:
             - type: number
               minimum: 1
               maximum: 5
@@ -1662,7 +1662,7 @@ components:
           maximum: 9007199254740991
           description: Of those, how many completed successfully.
         completionRate:
-          anyof:
+          anyOf:
             - type: number
               minimum: 0
               maximum: 1
@@ -1670,7 +1670,7 @@ components:
           description: Share of orders completed, from 0 to 1. `null` when there aren't
             enough orders to compute it.
         avgShipTimeHours:
-          anyof:
+          anyOf:
             - type: number
               minimum: 0
             - type: "null"
@@ -1697,7 +1697,7 @@ components:
           type: string
           description: Street address, first line.
         line2:
-          anyof:
+          anyOf:
             - type: string
             - type: "null"
           description: Street address, second line. `null` when unused.
@@ -1705,7 +1705,7 @@ components:
           type: string
           description: City.
         state:
-          anyof:
+          anyOf:
             - type: string
             - type: "null"
           description: State or province. `null` when unused.
@@ -1716,7 +1716,7 @@ components:
           type: string
           description: Destination country as a two-letter ISO 3166-1 alpha-2 code.
         phone:
-          anyof:
+          anyOf:
             - type: string
             - type: "null"
           description: Contact phone. `null` when not provided.
@@ -1746,17 +1746,17 @@ components:
           type: string
           description: The carrier tracking number.
         carrier:
-          anyof:
+          anyOf:
             - type: string
             - type: "null"
           description: The carrier, e.g. `Colissimo`. `null` when unknown.
         trackingUrl:
-          anyof:
+          anyOf:
             - type: string
             - type: "null"
           description: A link to track the parcel. `null` when unavailable.
         status:
-          anyof:
+          anyOf:
             - type: string
             - type: "null"
           description: The latest carrier status. `null` before the first scan.
@@ -1767,12 +1767,12 @@ components:
           examples:
             - 2024-08-14T10:23:11.000Z
         deliveredAt:
-          anyof:
+          anyOf:
             - $ref: "#/components/schemas/DateString"
             - type: "null"
           description: When the parcel was delivered. `null` until it arrives.
         history:
-          anyof:
+          anyOf:
             - type: array
               items:
                 $ref: "#/components/schemas/OrderTrackingEvent"
@@ -1813,12 +1813,12 @@ components:
           examples:
             - 2024-08-14T10:23:11.000Z
         location:
-          anyof:
+          anyOf:
             - type: string
             - type: "null"
           description: Where the scan happened. `null` when unknown.
         description:
-          anyof:
+          anyOf:
             - type: string
             - type: "null"
           description: Carrier description. `null` when none.
@@ -1851,7 +1851,7 @@ components:
           type: string
           description: The cancellation reason code.
         reasonText:
-          anyof:
+          anyOf:
             - type: string
             - type: "null"
           description: A free-text note about the cancellation. `null` when none was given.
@@ -1893,19 +1893,19 @@ components:
       type: object
       properties:
         amount:
-          anyof:
+          anyOf:
             - $ref: "#/components/schemas/Money"
             - type: "null"
           description: What you receive for this order, after the seller fee. `null` until
             it is calculated.
         eligibleAt:
-          anyof:
+          anyOf:
             - $ref: "#/components/schemas/DateString"
             - type: "null"
           description: When the payout becomes eligible for transfer. `null` when not yet
             set.
         paidOutAt:
-          anyof:
+          anyOf:
             - $ref: "#/components/schemas/DateString"
             - type: "null"
           description: When the payout was transferred to you. `null` until paid out.
@@ -1926,7 +1926,7 @@ components:
         amount:
           $ref: "#/components/schemas/Money"
         refundedAt:
-          anyof:
+          anyOf:
             - $ref: "#/components/schemas/DateString"
             - type: "null"
           description: When the refund was issued. `null` when it is still pending.
@@ -1956,17 +1956,17 @@ components:
           examples:
             - 2024-08-14T10:23:11.000Z
         shippedAt:
-          anyof:
+          anyOf:
             - $ref: "#/components/schemas/DateString"
             - type: "null"
           description: When the order was marked shipped. `null` if not yet.
         deliveredAt:
-          anyof:
+          anyOf:
             - $ref: "#/components/schemas/DateString"
             - type: "null"
           description: When the parcel was delivered. `null` if not yet.
         completedAt:
-          anyof:
+          anyOf:
             - $ref: "#/components/schemas/DateString"
             - type: "null"
           description: When the order closed. `null` if still open.
@@ -2102,17 +2102,17 @@ components:
           examples:
             - 2024-08-14T10:23:11.000Z
         shippedAt:
-          anyof:
+          anyOf:
             - $ref: "#/components/schemas/DateString"
             - type: "null"
           description: When the order was marked shipped. `null` if not yet.
         deliveredAt:
-          anyof:
+          anyOf:
             - $ref: "#/components/schemas/DateString"
             - type: "null"
           description: When the parcel was delivered. `null` if not yet.
         completedAt:
-          anyof:
+          anyOf:
             - $ref: "#/components/schemas/DateString"
             - type: "null"
           description: When the order closed. `null` if still open.
@@ -2161,12 +2161,12 @@ components:
         shippingAddress:
           $ref: "#/components/schemas/OrderShippingAddress"
         shipping:
-          anyof:
+          anyOf:
             - $ref: "#/components/schemas/OrderShipping"
             - type: "null"
           description: Tracking details once you mark the order shipped. `null` before then.
         cancellation:
-          anyof:
+          anyOf:
             - $ref: "#/components/schemas/OrderCancellation"
             - type: "null"
           description: Cancellation details when the order was cancelled. `null` otherwise.
@@ -2281,17 +2281,17 @@ components:
           examples:
             - 2024-08-14T10:23:11.000Z
         shippedAt:
-          anyof:
+          anyOf:
             - $ref: "#/components/schemas/DateString"
             - type: "null"
           description: When the order was marked shipped. `null` if not yet.
         deliveredAt:
-          anyof:
+          anyOf:
             - $ref: "#/components/schemas/DateString"
             - type: "null"
           description: When the parcel was delivered. `null` if not yet.
         completedAt:
-          anyof:
+          anyOf:
             - $ref: "#/components/schemas/DateString"
             - type: "null"
           description: When the order closed. `null` if still open.
@@ -2433,17 +2433,17 @@ components:
           examples:
             - 2024-08-14T10:23:11.000Z
         shippedAt:
-          anyof:
+          anyOf:
             - $ref: "#/components/schemas/DateString"
             - type: "null"
           description: When the order was marked shipped. `null` if not yet.
         deliveredAt:
-          anyof:
+          anyOf:
             - $ref: "#/components/schemas/DateString"
             - type: "null"
           description: When the parcel was delivered. `null` if not yet.
         completedAt:
-          anyof:
+          anyOf:
             - $ref: "#/components/schemas/DateString"
             - type: "null"
           description: When the order closed. `null` if still open.
@@ -2494,18 +2494,18 @@ components:
         shippingAddress:
           $ref: "#/components/schemas/OrderShippingAddress"
         shipping:
-          anyof:
+          anyOf:
             - $ref: "#/components/schemas/OrderShipping"
             - type: "null"
           description: Tracking and delivery details once the seller ships. `null` before
             then.
         refund:
-          anyof:
+          anyOf:
             - $ref: "#/components/schemas/PurchaseRefund"
             - type: "null"
           description: Refund details when any money was returned to you. `null` otherwise.
         cancellation:
-          anyof:
+          anyOf:
             - $ref: "#/components/schemas/OrderCancellation"
             - type: "null"
           description: Cancellation details when the order was cancelled. `null` otherwise.
@@ -2644,7 +2644,7 @@ paths:
                     examples:
                       - 2024-08-14T10:23:11.000Z
                   seller:
-                    anyof:
+                    anyOf:
                       - type: object
                         properties:
                           type:
@@ -3133,7 +3133,7 @@ paths:
                       suspended: Set by CardNexus; can't be changed here.
                       banned: Set by CardNexus; can't be changed here.
                   since:
-                    anyof:
+                    anyOf:
                       - $ref: "#/components/schemas/DateString"
                       - type: "null"
                     description: When your seller account last changed state. `null` when it has
@@ -3330,7 +3330,7 @@ paths:
                       suspended: Set by CardNexus; can't be changed here.
                       banned: Set by CardNexus; can't be changed here.
                   since:
-                    anyof:
+                    anyOf:
                       - $ref: "#/components/schemas/DateString"
                       - type: "null"
                     description: When your seller account last changed state. `null` when it has
@@ -4150,7 +4150,7 @@ paths:
           in: path
           required: true
           schema:
-            anyof:
+            anyOf:
               - type: number
               - type: string
                 pattern: ^[0-9]+$
@@ -4393,7 +4393,7 @@ paths:
                   type: array
                   minItems: 1
                   items:
-                    anyof:
+                    anyOf:
                       - type: number
                       - type: string
                         pattern: ^[0-9]+$
@@ -4402,7 +4402,7 @@ paths:
                   description: Restrict results to a specific set of product ids. Useful for batch
                     lookups when you already know which products you want.
                 expansionId:
-                  anyof:
+                  anyOf:
                     - type: number
                     - type: string
                       pattern: ^[0-9]+$
@@ -4476,7 +4476,7 @@ paths:
                   description: Restrict to a single sealed-product category (e.g. `booster_box`,
                     `bundle`). Only meaningful when filtering on `sealed`.
                 gameFilters:
-                  anyof:
+                  anyOf:
                     - type: object
                       properties:
                         game:
@@ -4685,7 +4685,7 @@ paths:
                                 - op
                                 - values
                             cost:
-                              anyof:
+                              anyOf:
                                 - type: object
                                   properties:
                                     op:
@@ -4736,7 +4736,7 @@ paths:
                                 - op
                                 - values
                             airThreshold:
-                              anyof:
+                              anyOf:
                                 - type: object
                                   properties:
                                     op:
@@ -4764,7 +4764,7 @@ paths:
                                     - min
                                     - max
                             fireThreshold:
-                              anyof:
+                              anyOf:
                                 - type: object
                                   properties:
                                     op:
@@ -4792,7 +4792,7 @@ paths:
                                     - min
                                     - max
                             earthThreshold:
-                              anyof:
+                              anyOf:
                                 - type: object
                                   properties:
                                     op:
@@ -4820,7 +4820,7 @@ paths:
                                     - min
                                     - max
                             waterThreshold:
-                              anyof:
+                              anyOf:
                                 - type: object
                                   properties:
                                     op:
@@ -7386,7 +7386,7 @@ paths:
                                 - op
                                 - values
                             attack:
-                              anyof:
+                              anyOf:
                                 - type: object
                                   properties:
                                     op:
@@ -7414,7 +7414,7 @@ paths:
                                     - min
                                     - max
                             defense:
-                              anyof:
+                              anyOf:
                                 - type: object
                                   properties:
                                     op:
@@ -7442,7 +7442,7 @@ paths:
                                     - min
                                     - max
                             life:
-                              anyof:
+                              anyOf:
                                 - type: object
                                   properties:
                                     op:
@@ -7470,7 +7470,7 @@ paths:
                                     - min
                                     - max
                             maxLevel:
-                              anyof:
+                              anyOf:
                                 - type: object
                                   properties:
                                     op:
@@ -7835,7 +7835,7 @@ paths:
                                 - op
                                 - values
                             energyCost:
-                              anyof:
+                              anyOf:
                                 - type: object
                                   properties:
                                     op:
@@ -7863,7 +7863,7 @@ paths:
                                     - min
                                     - max
                             mightCost:
-                              anyof:
+                              anyOf:
                                 - type: object
                                   properties:
                                     op:
@@ -8089,7 +8089,7 @@ paths:
                                 - op
                                 - values
                             cost:
-                              anyof:
+                              anyOf:
                                 - type: object
                                   properties:
                                     op:
@@ -8117,7 +8117,7 @@ paths:
                                     - min
                                     - max
                             attack:
-                              anyof:
+                              anyOf:
                                 - type: object
                                   properties:
                                     op:
@@ -8145,7 +8145,7 @@ paths:
                                     - min
                                     - max
                             riposte:
-                              anyof:
+                              anyOf:
                                 - type: object
                                   properties:
                                     op:
@@ -8173,7 +8173,7 @@ paths:
                                     - min
                                     - max
                             health:
-                              anyof:
+                              anyOf:
                                 - type: object
                                   properties:
                                     op:
@@ -8201,7 +8201,7 @@ paths:
                                     - min
                                     - max
                             rangedAttack:
-                              anyof:
+                              anyOf:
                                 - type: object
                                   properties:
                                     op:
@@ -8229,7 +8229,7 @@ paths:
                                     - min
                                     - max
                             prestige:
-                              anyof:
+                              anyOf:
                                 - type: object
                                   properties:
                                     op:
@@ -8257,7 +8257,7 @@ paths:
                                     - min
                                     - max
                             nbTactic:
-                              anyof:
+                              anyOf:
                                 - type: object
                                   properties:
                                     op:
@@ -8285,7 +8285,7 @@ paths:
                                     - min
                                     - max
                             nbSupply:
-                              anyof:
+                              anyOf:
                                 - type: object
                                   properties:
                                     op:
@@ -8313,7 +8313,7 @@ paths:
                                     - min
                                     - max
                             goldGain:
-                              anyof:
+                              anyOf:
                                 - type: object
                                   properties:
                                     op:
@@ -8341,7 +8341,7 @@ paths:
                                     - min
                                     - max
                             drawCount:
-                              anyof:
+                              anyOf:
                                 - type: object
                                   properties:
                                     op:
@@ -8620,7 +8620,7 @@ paths:
                                 - op
                                 - values
                             cost:
-                              anyof:
+                              anyOf:
                                 - type: object
                                   properties:
                                     op:
@@ -8648,7 +8648,7 @@ paths:
                                     - min
                                     - max
                             power:
-                              anyof:
+                              anyOf:
                                 - type: object
                                   properties:
                                     op:
@@ -8676,7 +8676,7 @@ paths:
                                     - min
                                     - max
                             ram:
-                              anyof:
+                              anyOf:
                                 - type: object
                                   properties:
                                     op:
@@ -9227,7 +9227,7 @@ paths:
                                 - op
                                 - values
                             cost:
-                              anyof:
+                              anyOf:
                                 - type: object
                                   properties:
                                     op:
@@ -9255,7 +9255,7 @@ paths:
                                     - min
                                     - max
                             power:
-                              anyof:
+                              anyOf:
                                 - type: object
                                   properties:
                                     op:
@@ -9283,7 +9283,7 @@ paths:
                                     - min
                                     - max
                             hp:
-                              anyof:
+                              anyOf:
                                 - type: object
                                   properties:
                                     op:
@@ -9687,7 +9687,7 @@ paths:
                                 - op
                                 - values
                             chakra:
-                              anyof:
+                              anyOf:
                                 - type: object
                                   properties:
                                     op:
@@ -9715,7 +9715,7 @@ paths:
                                     - min
                                     - max
                             power:
-                              anyof:
+                              anyOf:
                                 - type: object
                                   properties:
                                     op:
@@ -10028,7 +10028,7 @@ paths:
                                 - op
                                 - values
                             costValue:
-                              anyof:
+                              anyOf:
                                 - type: object
                                   properties:
                                     op:
@@ -10056,7 +10056,7 @@ paths:
                                     - min
                                     - max
                             power:
-                              anyof:
+                              anyOf:
                                 - type: object
                                   properties:
                                     op:
@@ -10084,7 +10084,7 @@ paths:
                                     - min
                                     - max
                             life:
-                              anyof:
+                              anyOf:
                                 - type: object
                                   properties:
                                     op:
@@ -10112,7 +10112,7 @@ paths:
                                     - min
                                     - max
                             durability:
-                              anyof:
+                              anyOf:
                                 - type: object
                                   properties:
                                     op:
@@ -10140,7 +10140,7 @@ paths:
                                     - min
                                     - max
                             level:
-                              anyof:
+                              anyOf:
                                 - type: object
                                   properties:
                                     op:
@@ -10446,7 +10446,7 @@ paths:
                                 - op
                                 - values
                             supplyCost:
-                              anyof:
+                              anyOf:
                                 - type: object
                                   properties:
                                     op:
@@ -10474,7 +10474,7 @@ paths:
                                     - min
                                     - max
                             influence:
-                              anyof:
+                              anyOf:
                                 - type: object
                                   properties:
                                     op:
@@ -10502,7 +10502,7 @@ paths:
                                     - min
                                     - max
                             attack:
-                              anyof:
+                              anyOf:
                                 - type: object
                                   properties:
                                     op:
@@ -10530,7 +10530,7 @@ paths:
                                     - min
                                     - max
                             health:
-                              anyof:
+                              anyOf:
                                 - type: object
                                   properties:
                                     op:
@@ -10707,7 +10707,7 @@ paths:
                                 - op
                                 - values
                             power:
-                              anyof:
+                              anyOf:
                                 - type: object
                                   properties:
                                     op:
@@ -10735,7 +10735,7 @@ paths:
                                     - min
                                     - max
                             comboPower:
-                              anyof:
+                              anyOf:
                                 - type: object
                                   properties:
                                     op:
@@ -10763,7 +10763,7 @@ paths:
                                     - min
                                     - max
                             energyCost:
-                              anyof:
+                              anyOf:
                                 - type: object
                                   properties:
                                     op:
@@ -11018,7 +11018,7 @@ paths:
                                 - op
                                 - values
                             power:
-                              anyof:
+                              anyOf:
                                 - type: object
                                   properties:
                                     op:
@@ -11046,7 +11046,7 @@ paths:
                                     - min
                                     - max
                             comboPower:
-                              anyof:
+                              anyOf:
                                 - type: object
                                   properties:
                                     op:
@@ -11232,7 +11232,7 @@ paths:
                                 - op
                                 - values
                             level:
-                              anyof:
+                              anyOf:
                                 - type: object
                                   properties:
                                     op:
@@ -11260,7 +11260,7 @@ paths:
                                     - min
                                     - max
                             cost:
-                              anyof:
+                              anyOf:
                                 - type: object
                                   properties:
                                     op:
@@ -11288,7 +11288,7 @@ paths:
                                     - min
                                     - max
                             attackPoints:
-                              anyof:
+                              anyOf:
                                 - type: object
                                   properties:
                                     op:
@@ -11316,7 +11316,7 @@ paths:
                                     - min
                                     - max
                             hitPoints:
-                              anyof:
+                              anyOf:
                                 - type: object
                                   properties:
                                     op:
@@ -11813,7 +11813,7 @@ paths:
                                 - op
                                 - values
                             maxShieldValue:
-                              anyof:
+                              anyOf:
                                 - type: object
                                   properties:
                                     op:
@@ -11841,7 +11841,7 @@ paths:
                                     - min
                                     - max
                             maxLifeValue:
-                              anyof:
+                              anyOf:
                                 - type: object
                                   properties:
                                     op:
@@ -11869,7 +11869,7 @@ paths:
                                     - min
                                     - max
                             coreCost:
-                              anyof:
+                              anyOf:
                                 - type: object
                                   properties:
                                     op:
@@ -11897,7 +11897,7 @@ paths:
                                     - min
                                     - max
                             damageValue:
-                              anyof:
+                              anyOf:
                                 - type: object
                                   properties:
                                     op:
@@ -11925,7 +11925,7 @@ paths:
                                     - min
                                     - max
                             chargeValue:
-                              anyof:
+                              anyOf:
                                 - type: object
                                   properties:
                                     op:
@@ -11992,7 +11992,7 @@ paths:
                   data:
                     type: array
                     items:
-                      anyof:
+                      anyOf:
                         - $ref: "#/components/schemas/CardProduct"
                         - $ref: "#/components/schemas/SealedProduct"
                   pagination:
@@ -12205,7 +12205,7 @@ paths:
           in: path
           required: true
           schema:
-            anyof:
+            anyOf:
               - type: number
               - type: string
                 pattern: ^[0-9]+$
@@ -12219,7 +12219,7 @@ paths:
           content:
             application/json:
               schema:
-                anyof:
+                anyOf:
                   - $ref: "#/components/schemas/CardProductDetail"
                   - $ref: "#/components/schemas/SealedProductDetail"
                 examples:
@@ -12470,7 +12470,7 @@ paths:
                           maximum: 9007199254740991
                           description: The marketplace id you asked about.
                         product:
-                          anyof:
+                          anyOf:
                             - type: object
                               properties:
                                 id:
@@ -12490,7 +12490,7 @@ paths:
                                   type: string
                                   description: The game this product belongs to (e.g. `mtg`, `pokemon`).
                                 expansionId:
-                                  anyof:
+                                  anyOf:
                                     - $ref: "#/components/schemas/CatalogId"
                                     - type: "null"
                                   description: The expansion this product belongs to, or `null` when it isn't tied
@@ -12745,7 +12745,7 @@ paths:
                 type: object
                 properties:
                   catalog:
-                    anyof:
+                    anyOf:
                       - type: object
                         properties:
                           feedType:
@@ -12825,7 +12825,7 @@ paths:
                       - type: "null"
                     description: The products feed, or null if it has not been generated yet.
                   expansions:
-                    anyof:
+                    anyOf:
                       - type: object
                         properties:
                           feedType:
@@ -12905,7 +12905,7 @@ paths:
                       - type: "null"
                     description: The expansions feed, or null if it has not been generated yet.
                   prices:
-                    anyof:
+                    anyOf:
                       - type: object
                         properties:
                           feedType:
@@ -14192,7 +14192,7 @@ paths:
                     type: object
                     properties:
                       nextCursor:
-                        anyof:
+                        anyOf:
                           - type: string
                           - type: "null"
                     required:
@@ -14389,7 +14389,7 @@ paths:
           in: path
           required: true
           schema:
-            anyof:
+            anyOf:
               - type: number
               - type: string
                 pattern: ^[0-9]+$
@@ -14482,18 +14482,18 @@ paths:
                               description: Aggregate market price — the value shown as the canonical price on
                                 cardnexus.com. Decimal major units.
                             change24h:
-                              anyof:
+                              anyOf:
                                 - type: number
                                 - type: "null"
                               description: Percent change of `marketValue` vs. 24 hours ago. `null` when
                                 there's not enough history.
                             change7d:
-                              anyof:
+                              anyOf:
                                 - type: number
                                 - type: "null"
                               description: Percent change of `marketValue` vs. 7 days ago.
                             change30d:
-                              anyof:
+                              anyOf:
                                 - type: number
                                 - type: "null"
                               description: Percent change of `marketValue` vs. 30 days ago.
@@ -14611,18 +14611,18 @@ paths:
                               description: Aggregate market price — the value shown as the canonical price on
                                 cardnexus.com. Decimal major units.
                             change24h:
-                              anyof:
+                              anyOf:
                                 - type: number
                                 - type: "null"
                               description: Percent change of `marketValue` vs. 24 hours ago. `null` when
                                 there's not enough history.
                             change7d:
-                              anyof:
+                              anyOf:
                                 - type: number
                                 - type: "null"
                               description: Percent change of `marketValue` vs. 7 days ago.
                             change30d:
-                              anyof:
+                              anyOf:
                                 - type: number
                                 - type: "null"
                               description: Percent change of `marketValue` vs. 30 days ago.
@@ -15247,7 +15247,7 @@ paths:
           in: path
           required: true
           schema:
-            anyof:
+            anyOf:
               - type: number
               - type: string
                 pattern: ^[0-9]+$
@@ -15683,7 +15683,7 @@ paths:
           in: path
           required: true
           schema:
-            anyof:
+            anyOf:
               - type: number
               - type: string
                 pattern: ^[0-9]+$
@@ -15892,7 +15892,7 @@ paths:
                           type: string
                           description: The card's finish, e.g. `Standard`, `Foil`, `Reverse Holo`.
                         condition:
-                          anyof:
+                          anyOf:
                             - $ref: "#/components/schemas/CardCondition"
                             - type: "null"
                           description: "The card's condition: `NM`, `LP`, `MP`, `HP`, or `DMG`. `null`
@@ -15901,20 +15901,20 @@ paths:
                           type: string
                           description: The card's language as a two-letter code, e.g. `en`, `fr`.
                         graded:
-                          anyof:
+                          anyOf:
                             - type: object
                               properties:
                                 grade:
                                   type: string
                                   description: The grade assigned by the grading company, as printed on the slab.
                                 gradingService:
-                                  anyof:
+                                  anyOf:
                                     - type: string
                                     - type: "null"
                                   description: The grading company that graded the card, e.g. `PSA`, `BGS`, `CGC`.
                                     `null` when not recorded.
                                 certification:
-                                  anyof:
+                                  anyOf:
                                     - type: string
                                     - type: "null"
                                   description: The certification number printed on the slab. `null` when the card
@@ -15957,7 +15957,7 @@ paths:
                     type: object
                     properties:
                       nextCursor:
-                        anyof:
+                        anyOf:
                           - type: string
                           - type: "null"
                     required:
@@ -16223,7 +16223,7 @@ paths:
           schema:
             type: array
             items:
-              anyof:
+              anyOf:
                 - type: number
                 - type: string
                   pattern: ^[0-9]+$
@@ -16365,25 +16365,25 @@ paths:
                           type: string
                           description: Stable opaque identifier for this inventory line. Do not parse.
                         customId:
-                          anyof:
+                          anyOf:
                             - $ref: "#/components/schemas/CustomId"
                             - type: "null"
                           description: Your own stable identifier for this line, unique across your live
                             lines. `null` when you have not set one.
                         comment:
-                          anyof:
+                          anyOf:
                             - type: string
                             - type: "null"
                           description: Free-text note attached to this line, shown to buyers on your
                             Marketplace listing. `null` when there is none.
                         notes:
-                          anyof:
+                          anyOf:
                             - type: string
                             - type: "null"
                           description: Your private note on this line, visible only to you and never shown
                             to buyers. `null` when there is none.
                         location:
-                          anyof:
+                          anyOf:
                             - type: string
                             - type: "null"
                           description: The name of the location this line sits in. `null` when it has
@@ -16409,13 +16409,13 @@ paths:
                           type: string
                           description: The card's finish, e.g. `Standard`, `Foil`, `Reverse Holo`.
                         condition:
-                          anyof:
+                          anyOf:
                             - $ref: "#/components/schemas/CardCondition"
                             - type: "null"
                           description: "The card's condition: `NM`, `LP`, `MP`, `HP`, or `DMG`. `null`
                             when the card is graded."
                         language:
-                          anyof:
+                          anyOf:
                             - type: string
                             - type: "null"
                           description: The card's language as a two-letter code, e.g. `en`, `fr`, `de`.
@@ -16425,7 +16425,7 @@ paths:
                           maximum: 9007199254740991
                           description: How many cards this line holds.
                         graded:
-                          anyof:
+                          anyOf:
                             - $ref: "#/components/schemas/Graded"
                             - type: "null"
                           description: Grading details when the card is graded. `null` for raw cards.
@@ -16434,7 +16434,7 @@ paths:
                           description: "`true` when this line is published to the Marketplace with a
                             price. `false` when it sits in your Collection."
                         listing:
-                          anyof:
+                          anyOf:
                             - type: object
                               properties:
                                 price:
@@ -16497,7 +16497,7 @@ paths:
                     type: object
                     properties:
                       nextCursor:
-                        anyof:
+                        anyOf:
                           - type: string
                           - type: "null"
                     required:
@@ -16721,7 +16721,7 @@ paths:
                     type: object
                     properties:
                       productId:
-                        anyof:
+                        anyOf:
                           - type: number
                           - type: string
                             pattern: ^[0-9]+$
@@ -16925,25 +16925,25 @@ paths:
                           type: string
                           description: Stable opaque identifier for this inventory line. Do not parse.
                         customId:
-                          anyof:
+                          anyOf:
                             - $ref: "#/components/schemas/CustomId"
                             - type: "null"
                           description: Your own stable identifier for this line, unique across your live
                             lines. `null` when you have not set one.
                         comment:
-                          anyof:
+                          anyOf:
                             - type: string
                             - type: "null"
                           description: Free-text note attached to this line, shown to buyers on your
                             Marketplace listing. `null` when there is none.
                         notes:
-                          anyof:
+                          anyOf:
                             - type: string
                             - type: "null"
                           description: Your private note on this line, visible only to you and never shown
                             to buyers. `null` when there is none.
                         location:
-                          anyof:
+                          anyOf:
                             - type: string
                             - type: "null"
                           description: The name of the location this line sits in. `null` when it has
@@ -16969,13 +16969,13 @@ paths:
                           type: string
                           description: The card's finish, e.g. `Standard`, `Foil`, `Reverse Holo`.
                         condition:
-                          anyof:
+                          anyOf:
                             - $ref: "#/components/schemas/CardCondition"
                             - type: "null"
                           description: "The card's condition: `NM`, `LP`, `MP`, `HP`, or `DMG`. `null`
                             when the card is graded."
                         language:
-                          anyof:
+                          anyOf:
                             - type: string
                             - type: "null"
                           description: The card's language as a two-letter code, e.g. `en`, `fr`, `de`.
@@ -16985,7 +16985,7 @@ paths:
                           maximum: 9007199254740991
                           description: How many cards this line holds.
                         graded:
-                          anyof:
+                          anyOf:
                             - $ref: "#/components/schemas/Graded"
                             - type: "null"
                           description: Grading details when the card is graded. `null` for raw cards.
@@ -16994,7 +16994,7 @@ paths:
                           description: "`true` when this line is published to the Marketplace with a
                             price. `false` when it sits in your Collection."
                         listing:
-                          anyof:
+                          anyOf:
                             - type: object
                               properties:
                                 price:
@@ -17110,7 +17110,7 @@ paths:
                           propertyNames:
                             type: string
                           additionalProperties:
-                            anyof:
+                            anyOf:
                               - type: string
                               - type: number
                           description: The values that caused the rejection, e.g. the product id that was
@@ -17415,25 +17415,25 @@ paths:
                     type: string
                     description: Stable opaque identifier for this inventory line. Do not parse.
                   customId:
-                    anyof:
+                    anyOf:
                       - $ref: "#/components/schemas/CustomId"
                       - type: "null"
                     description: Your own stable identifier for this line, unique across your live
                       lines. `null` when you have not set one.
                   comment:
-                    anyof:
+                    anyOf:
                       - type: string
                       - type: "null"
                     description: Free-text note attached to this line, shown to buyers on your
                       Marketplace listing. `null` when there is none.
                   notes:
-                    anyof:
+                    anyOf:
                       - type: string
                       - type: "null"
                     description: Your private note on this line, visible only to you and never shown
                       to buyers. `null` when there is none.
                   location:
-                    anyof:
+                    anyOf:
                       - type: string
                       - type: "null"
                     description: The name of the location this line sits in. `null` when it has
@@ -17459,13 +17459,13 @@ paths:
                     type: string
                     description: The card's finish, e.g. `Standard`, `Foil`, `Reverse Holo`.
                   condition:
-                    anyof:
+                    anyOf:
                       - $ref: "#/components/schemas/CardCondition"
                       - type: "null"
                     description: "The card's condition: `NM`, `LP`, `MP`, `HP`, or `DMG`. `null`
                       when the card is graded."
                   language:
-                    anyof:
+                    anyOf:
                       - type: string
                       - type: "null"
                     description: The card's language as a two-letter code, e.g. `en`, `fr`, `de`.
@@ -17475,7 +17475,7 @@ paths:
                     maximum: 9007199254740991
                     description: How many cards this line holds.
                   graded:
-                    anyof:
+                    anyOf:
                       - $ref: "#/components/schemas/Graded"
                       - type: "null"
                     description: Grading details when the card is graded. `null` for raw cards.
@@ -17484,7 +17484,7 @@ paths:
                     description: "`true` when this line is published to the Marketplace with a
                       price. `false` when it sits in your Collection."
                   listing:
-                    anyof:
+                    anyOf:
                       - type: object
                         properties:
                           price:
@@ -17758,7 +17758,7 @@ paths:
               type: object
               properties:
                 quantity:
-                  anyof:
+                  anyOf:
                     - type: object
                       properties:
                         set:
@@ -17830,7 +17830,7 @@ paths:
                     Reverse Holo: A card with a reverse-holofoil finish.
                     Etched: A card with an etched-foil finish.
                 graded:
-                  anyof:
+                  anyOf:
                     - type: object
                       properties:
                         grade:
@@ -17875,19 +17875,19 @@ paths:
                   description: New grading details, or `null` to turn the line back into a raw
                     card (set `condition` in the same call).
                 customId:
-                  anyof:
+                  anyOf:
                     - $ref: "#/components/schemas/CustomId"
                     - type: "null"
                   description: Your own stable identifier for this line, unique across your live
                     lines. Pass `null` to remove it.
                 comment:
-                  anyof:
+                  anyOf:
                     - $ref: "#/components/schemas/InventoryComment"
                     - type: "null"
                   description: Free-text note for the line, shown to buyers on your Marketplace
                     listing. Pass `null` to remove it.
                 notes:
-                  anyof:
+                  anyOf:
                     - type: string
                       maxLength: 2000
                       description: Private free-text note attached to this inventory line, visible
@@ -17898,7 +17898,7 @@ paths:
                   description: Private note for the line, visible only to you. Pass `null` to
                     remove it.
                 location:
-                  anyof:
+                  anyOf:
                     - type: string
                       minLength: 1
                       maxLength: 100
@@ -17912,7 +17912,7 @@ paths:
                     existing locations. Pass `null` to move the line to no
                     location.
                 tags:
-                  anyof:
+                  anyOf:
                     - type: object
                       properties:
                         set:
@@ -18000,25 +18000,25 @@ paths:
                         type: string
                         description: Stable opaque identifier for this inventory line. Do not parse.
                       customId:
-                        anyof:
+                        anyOf:
                           - $ref: "#/components/schemas/CustomId"
                           - type: "null"
                         description: Your own stable identifier for this line, unique across your live
                           lines. `null` when you have not set one.
                       comment:
-                        anyof:
+                        anyOf:
                           - type: string
                           - type: "null"
                         description: Free-text note attached to this line, shown to buyers on your
                           Marketplace listing. `null` when there is none.
                       notes:
-                        anyof:
+                        anyOf:
                           - type: string
                           - type: "null"
                         description: Your private note on this line, visible only to you and never shown
                           to buyers. `null` when there is none.
                       location:
-                        anyof:
+                        anyOf:
                           - type: string
                           - type: "null"
                         description: The name of the location this line sits in. `null` when it has
@@ -18044,13 +18044,13 @@ paths:
                         type: string
                         description: The card's finish, e.g. `Standard`, `Foil`, `Reverse Holo`.
                       condition:
-                        anyof:
+                        anyOf:
                           - $ref: "#/components/schemas/CardCondition"
                           - type: "null"
                         description: "The card's condition: `NM`, `LP`, `MP`, `HP`, or `DMG`. `null`
                           when the card is graded."
                       language:
-                        anyof:
+                        anyOf:
                           - type: string
                           - type: "null"
                         description: The card's language as a two-letter code, e.g. `en`, `fr`, `de`.
@@ -18060,7 +18060,7 @@ paths:
                         maximum: 9007199254740991
                         description: How many cards this line holds.
                       graded:
-                        anyof:
+                        anyOf:
                           - $ref: "#/components/schemas/Graded"
                           - type: "null"
                         description: Grading details when the card is graded. `null` for raw cards.
@@ -18069,7 +18069,7 @@ paths:
                         description: "`true` when this line is published to the Marketplace with a
                           price. `false` when it sits in your Collection."
                       listing:
-                        anyof:
+                        anyOf:
                           - type: object
                             properties:
                               price:
@@ -18132,32 +18132,32 @@ paths:
                             currency: EUR
                         updatedAt: 2026-06-01T17:40:02.000Z
                   remainder:
-                    anyof:
+                    anyOf:
                       - type: object
                         properties:
                           id:
                             type: string
                             description: Stable opaque identifier for this inventory line. Do not parse.
                           customId:
-                            anyof:
+                            anyOf:
                               - $ref: "#/components/schemas/CustomId"
                               - type: "null"
                             description: Your own stable identifier for this line, unique across your live
                               lines. `null` when you have not set one.
                           comment:
-                            anyof:
+                            anyOf:
                               - type: string
                               - type: "null"
                             description: Free-text note attached to this line, shown to buyers on your
                               Marketplace listing. `null` when there is none.
                           notes:
-                            anyof:
+                            anyOf:
                               - type: string
                               - type: "null"
                             description: Your private note on this line, visible only to you and never shown
                               to buyers. `null` when there is none.
                           location:
-                            anyof:
+                            anyOf:
                               - type: string
                               - type: "null"
                             description: The name of the location this line sits in. `null` when it has
@@ -18183,13 +18183,13 @@ paths:
                             type: string
                             description: The card's finish, e.g. `Standard`, `Foil`, `Reverse Holo`.
                           condition:
-                            anyof:
+                            anyOf:
                               - $ref: "#/components/schemas/CardCondition"
                               - type: "null"
                             description: "The card's condition: `NM`, `LP`, `MP`, `HP`, or `DMG`. `null`
                               when the card is graded."
                           language:
-                            anyof:
+                            anyOf:
                               - type: string
                               - type: "null"
                             description: The card's language as a two-letter code, e.g. `en`, `fr`, `de`.
@@ -18199,7 +18199,7 @@ paths:
                             maximum: 9007199254740991
                             description: How many cards this line holds.
                           graded:
-                            anyof:
+                            anyOf:
                               - $ref: "#/components/schemas/Graded"
                               - type: "null"
                             description: Grading details when the card is graded. `null` for raw cards.
@@ -18208,7 +18208,7 @@ paths:
                             description: "`true` when this line is published to the Marketplace with a
                               price. `false` when it sits in your Collection."
                           listing:
-                            anyof:
+                            anyOf:
                               - type: object
                                 properties:
                                   price:
@@ -18896,25 +18896,25 @@ paths:
                     type: string
                     description: Stable opaque identifier for this inventory line. Do not parse.
                   customId:
-                    anyof:
+                    anyOf:
                       - $ref: "#/components/schemas/CustomId"
                       - type: "null"
                     description: Your own stable identifier for this line, unique across your live
                       lines. `null` when you have not set one.
                   comment:
-                    anyof:
+                    anyOf:
                       - type: string
                       - type: "null"
                     description: Free-text note attached to this line, shown to buyers on your
                       Marketplace listing. `null` when there is none.
                   notes:
-                    anyof:
+                    anyOf:
                       - type: string
                       - type: "null"
                     description: Your private note on this line, visible only to you and never shown
                       to buyers. `null` when there is none.
                   location:
-                    anyof:
+                    anyOf:
                       - type: string
                       - type: "null"
                     description: The name of the location this line sits in. `null` when it has
@@ -18940,13 +18940,13 @@ paths:
                     type: string
                     description: The card's finish, e.g. `Standard`, `Foil`, `Reverse Holo`.
                   condition:
-                    anyof:
+                    anyOf:
                       - $ref: "#/components/schemas/CardCondition"
                       - type: "null"
                     description: "The card's condition: `NM`, `LP`, `MP`, `HP`, or `DMG`. `null`
                       when the card is graded."
                   language:
-                    anyof:
+                    anyOf:
                       - type: string
                       - type: "null"
                     description: The card's language as a two-letter code, e.g. `en`, `fr`, `de`.
@@ -18956,7 +18956,7 @@ paths:
                     maximum: 9007199254740991
                     description: How many cards this line holds.
                   graded:
-                    anyof:
+                    anyOf:
                       - $ref: "#/components/schemas/Graded"
                       - type: "null"
                     description: Grading details when the card is graded. `null` for raw cards.
@@ -18965,7 +18965,7 @@ paths:
                     description: "`true` when this line is published to the Marketplace with a
                       price. `false` when it sits in your Collection."
                   listing:
-                    anyof:
+                    anyOf:
                       - type: object
                         properties:
                           price:
@@ -19415,7 +19415,7 @@ paths:
                           json: A JSON file.
                           csv: A CSV file.
                       mode:
-                        anyof:
+                        anyOf:
                           - enum:
                               - upsert
                               - replace
@@ -19430,7 +19430,7 @@ paths:
                           - type: "null"
                         description: "Import jobs: `upsert` or `replace`. `null` on export jobs."
                       counts:
-                        anyof:
+                        anyOf:
                           - type: object
                             properties:
                               total:
@@ -19461,21 +19461,21 @@ paths:
                         description: Row tallies, updated while the job runs. `null` until processing
                           starts.
                       progress:
-                        anyof:
+                        anyOf:
                           - type: integer
                             minimum: 0
                             maximum: 100
                           - type: "null"
                         description: How far along the job is, from 0 to 100.
                       errorMessage:
-                        anyof:
+                        anyOf:
                           - type: string
                           - type: "null"
                         description: Why the job failed, when `status` is `failed`. `null` otherwise.
                           Individual row failures do not fail the job — they go
                           to the error report instead.
                       downloadUrl:
-                        anyof:
+                        anyOf:
                           - type: string
                           - type: "null"
                         description: "Export jobs: a temporary link to the generated file once the job
@@ -19483,7 +19483,7 @@ paths:
                           was issued — fetch the job again for a fresh one.
                           `null` until then, and always `null` on import jobs."
                       errorReportUrl:
-                        anyof:
+                        anyOf:
                           - type: string
                           - type: "null"
                         description: "Import jobs: a temporary link to a JSON report listing every
@@ -19492,7 +19492,7 @@ paths:
                           minutes after it was issued — fetch the job again for
                           a fresh one. `null` when every row succeeded."
                       expiresAt:
-                        anyof:
+                        anyOf:
                           - $ref: "#/components/schemas/DateString"
                           - type: "null"
                         description: When the job's files (export file, error report) are deleted — 7
@@ -19882,7 +19882,7 @@ paths:
                           json: A JSON file.
                           csv: A CSV file.
                       mode:
-                        anyof:
+                        anyOf:
                           - enum:
                               - upsert
                               - replace
@@ -19897,7 +19897,7 @@ paths:
                           - type: "null"
                         description: "Import jobs: `upsert` or `replace`. `null` on export jobs."
                       counts:
-                        anyof:
+                        anyOf:
                           - type: object
                             properties:
                               total:
@@ -19928,21 +19928,21 @@ paths:
                         description: Row tallies, updated while the job runs. `null` until processing
                           starts.
                       progress:
-                        anyof:
+                        anyOf:
                           - type: integer
                             minimum: 0
                             maximum: 100
                           - type: "null"
                         description: How far along the job is, from 0 to 100.
                       errorMessage:
-                        anyof:
+                        anyOf:
                           - type: string
                           - type: "null"
                         description: Why the job failed, when `status` is `failed`. `null` otherwise.
                           Individual row failures do not fail the job — they go
                           to the error report instead.
                       downloadUrl:
-                        anyof:
+                        anyOf:
                           - type: string
                           - type: "null"
                         description: "Export jobs: a temporary link to the generated file once the job
@@ -19950,7 +19950,7 @@ paths:
                           was issued — fetch the job again for a fresh one.
                           `null` until then, and always `null` on import jobs."
                       errorReportUrl:
-                        anyof:
+                        anyOf:
                           - type: string
                           - type: "null"
                         description: "Import jobs: a temporary link to a JSON report listing every
@@ -19959,7 +19959,7 @@ paths:
                           minutes after it was issued — fetch the job again for
                           a fresh one. `null` when every row succeeded."
                       expiresAt:
-                        anyof:
+                        anyOf:
                           - $ref: "#/components/schemas/DateString"
                           - type: "null"
                         description: When the job's files (export file, error report) are deleted — 7
@@ -20360,7 +20360,7 @@ paths:
                           json: A JSON file.
                           csv: A CSV file.
                       mode:
-                        anyof:
+                        anyOf:
                           - enum:
                               - upsert
                               - replace
@@ -20375,7 +20375,7 @@ paths:
                           - type: "null"
                         description: "Import jobs: `upsert` or `replace`. `null` on export jobs."
                       counts:
-                        anyof:
+                        anyOf:
                           - type: object
                             properties:
                               total:
@@ -20406,21 +20406,21 @@ paths:
                         description: Row tallies, updated while the job runs. `null` until processing
                           starts.
                       progress:
-                        anyof:
+                        anyOf:
                           - type: integer
                             minimum: 0
                             maximum: 100
                           - type: "null"
                         description: How far along the job is, from 0 to 100.
                       errorMessage:
-                        anyof:
+                        anyOf:
                           - type: string
                           - type: "null"
                         description: Why the job failed, when `status` is `failed`. `null` otherwise.
                           Individual row failures do not fail the job — they go
                           to the error report instead.
                       downloadUrl:
-                        anyof:
+                        anyOf:
                           - type: string
                           - type: "null"
                         description: "Export jobs: a temporary link to the generated file once the job
@@ -20428,7 +20428,7 @@ paths:
                           was issued — fetch the job again for a fresh one.
                           `null` until then, and always `null` on import jobs."
                       errorReportUrl:
-                        anyof:
+                        anyOf:
                           - type: string
                           - type: "null"
                         description: "Import jobs: a temporary link to a JSON report listing every
@@ -20437,7 +20437,7 @@ paths:
                           minutes after it was issued — fetch the job again for
                           a fresh one. `null` when every row succeeded."
                       expiresAt:
-                        anyof:
+                        anyOf:
                           - $ref: "#/components/schemas/DateString"
                           - type: "null"
                         description: When the job's files (export file, error report) are deleted — 7
@@ -20837,7 +20837,7 @@ paths:
                           json: A JSON file.
                           csv: A CSV file.
                       mode:
-                        anyof:
+                        anyOf:
                           - enum:
                               - upsert
                               - replace
@@ -20852,7 +20852,7 @@ paths:
                           - type: "null"
                         description: "Import jobs: `upsert` or `replace`. `null` on export jobs."
                       counts:
-                        anyof:
+                        anyOf:
                           - type: object
                             properties:
                               total:
@@ -20883,21 +20883,21 @@ paths:
                         description: Row tallies, updated while the job runs. `null` until processing
                           starts.
                       progress:
-                        anyof:
+                        anyOf:
                           - type: integer
                             minimum: 0
                             maximum: 100
                           - type: "null"
                         description: How far along the job is, from 0 to 100.
                       errorMessage:
-                        anyof:
+                        anyOf:
                           - type: string
                           - type: "null"
                         description: Why the job failed, when `status` is `failed`. `null` otherwise.
                           Individual row failures do not fail the job — they go
                           to the error report instead.
                       downloadUrl:
-                        anyof:
+                        anyOf:
                           - type: string
                           - type: "null"
                         description: "Export jobs: a temporary link to the generated file once the job
@@ -20905,7 +20905,7 @@ paths:
                           was issued — fetch the job again for a fresh one.
                           `null` until then, and always `null` on import jobs."
                       errorReportUrl:
-                        anyof:
+                        anyOf:
                           - type: string
                           - type: "null"
                         description: "Import jobs: a temporary link to a JSON report listing every
@@ -20914,7 +20914,7 @@ paths:
                           minutes after it was issued — fetch the job again for
                           a fresh one. `null` when every row succeeded."
                       expiresAt:
-                        anyof:
+                        anyOf:
                           - $ref: "#/components/schemas/DateString"
                           - type: "null"
                         description: When the job's files (export file, error report) are deleted — 7
@@ -21249,7 +21249,7 @@ paths:
                     productId:
                       type: array
                       items:
-                        anyof:
+                        anyOf:
                           - type: number
                           - type: string
                             pattern: ^[0-9]+$
@@ -21388,7 +21388,7 @@ paths:
                           json: A JSON file.
                           csv: A CSV file.
                       mode:
-                        anyof:
+                        anyOf:
                           - enum:
                               - upsert
                               - replace
@@ -21403,7 +21403,7 @@ paths:
                           - type: "null"
                         description: "Import jobs: `upsert` or `replace`. `null` on export jobs."
                       counts:
-                        anyof:
+                        anyOf:
                           - type: object
                             properties:
                               total:
@@ -21434,21 +21434,21 @@ paths:
                         description: Row tallies, updated while the job runs. `null` until processing
                           starts.
                       progress:
-                        anyof:
+                        anyOf:
                           - type: integer
                             minimum: 0
                             maximum: 100
                           - type: "null"
                         description: How far along the job is, from 0 to 100.
                       errorMessage:
-                        anyof:
+                        anyOf:
                           - type: string
                           - type: "null"
                         description: Why the job failed, when `status` is `failed`. `null` otherwise.
                           Individual row failures do not fail the job — they go
                           to the error report instead.
                       downloadUrl:
-                        anyof:
+                        anyOf:
                           - type: string
                           - type: "null"
                         description: "Export jobs: a temporary link to the generated file once the job
@@ -21456,7 +21456,7 @@ paths:
                           was issued — fetch the job again for a fresh one.
                           `null` until then, and always `null` on import jobs."
                       errorReportUrl:
-                        anyof:
+                        anyOf:
                           - type: string
                           - type: "null"
                         description: "Import jobs: a temporary link to a JSON report listing every
@@ -21465,7 +21465,7 @@ paths:
                           minutes after it was issued — fetch the job again for
                           a fresh one. `null` when every row succeeded."
                       expiresAt:
-                        anyof:
+                        anyOf:
                           - $ref: "#/components/schemas/DateString"
                           - type: "null"
                         description: When the job's files (export file, error report) are deleted — 7
@@ -21722,7 +21722,7 @@ paths:
                           names its line with either `inventoryId` or `customId`
                           — exactly one of the two.
                       quantity:
-                        anyof:
+                        anyOf:
                           - type: object
                             properties:
                               set:
@@ -21795,13 +21795,13 @@ paths:
                           Reverse Holo: A card with a reverse-holofoil finish.
                           Etched: A card with an etched-foil finish.
                       comment:
-                        anyof:
+                        anyOf:
                           - $ref: "#/components/schemas/InventoryComment"
                           - type: "null"
                         description: New free-text note for the line, shown to buyers on your
                           Marketplace listing. Pass `null` to remove it.
                       notes:
-                        anyof:
+                        anyOf:
                           - type: string
                             maxLength: 2000
                             description: Private free-text note attached to this inventory line, visible
@@ -21812,7 +21812,7 @@ paths:
                         description: New private note for the line, visible only to you. Pass `null` to
                           remove it.
                       location:
-                        anyof:
+                        anyOf:
                           - type: string
                             minLength: 1
                             maxLength: 100
@@ -21826,7 +21826,7 @@ paths:
                           existing locations. Pass `null` to move the line to no
                           location.
                       tags:
-                        anyof:
+                        anyOf:
                           - type: object
                             properties:
                               set:
@@ -21912,7 +21912,7 @@ paths:
                   results:
                     type: array
                     items:
-                      anyof:
+                      anyOf:
                         - type: object
                           properties:
                             index:
@@ -21978,7 +21978,7 @@ paths:
                               propertyNames:
                                 type: string
                               additionalProperties:
-                                anyof:
+                                anyOf:
                                   - type: string
                                   - type: number
                               description: The values that caused the rejection, e.g. the line's available
@@ -22236,7 +22236,7 @@ paths:
                           json: A JSON file.
                           csv: A CSV file.
                       mode:
-                        anyof:
+                        anyOf:
                           - enum:
                               - upsert
                               - replace
@@ -22251,7 +22251,7 @@ paths:
                           - type: "null"
                         description: "Import jobs: `upsert` or `replace`. `null` on export jobs."
                       counts:
-                        anyof:
+                        anyOf:
                           - type: object
                             properties:
                               total:
@@ -22282,21 +22282,21 @@ paths:
                         description: Row tallies, updated while the job runs. `null` until processing
                           starts.
                       progress:
-                        anyof:
+                        anyOf:
                           - type: integer
                             minimum: 0
                             maximum: 100
                           - type: "null"
                         description: How far along the job is, from 0 to 100.
                       errorMessage:
-                        anyof:
+                        anyOf:
                           - type: string
                           - type: "null"
                         description: Why the job failed, when `status` is `failed`. `null` otherwise.
                           Individual row failures do not fail the job — they go
                           to the error report instead.
                       downloadUrl:
-                        anyof:
+                        anyOf:
                           - type: string
                           - type: "null"
                         description: "Export jobs: a temporary link to the generated file once the job
@@ -22304,7 +22304,7 @@ paths:
                           was issued — fetch the job again for a fresh one.
                           `null` until then, and always `null` on import jobs."
                       errorReportUrl:
-                        anyof:
+                        anyOf:
                           - type: string
                           - type: "null"
                         description: "Import jobs: a temporary link to a JSON report listing every
@@ -22313,7 +22313,7 @@ paths:
                           minutes after it was issued — fetch the job again for
                           a fresh one. `null` when every row succeeded."
                       expiresAt:
-                        anyof:
+                        anyOf:
                           - $ref: "#/components/schemas/DateString"
                           - type: "null"
                         description: When the job's files (export file, error report) are deleted — 7
@@ -22557,13 +22557,13 @@ paths:
                       type: string
                       description: The label's name, unique within your account.
                     color:
-                      anyof:
+                      anyOf:
                         - type: string
                         - type: "null"
                       description: The label's display colour, free-form text. `null` when you haven't
                         set one.
                     icon:
-                      anyof:
+                      anyOf:
                         - type: string
                         - type: "null"
                       description: The label's display icon, free-form text. `null` when you haven't
@@ -22753,13 +22753,13 @@ paths:
                     type: string
                     description: The label's name, unique within your account.
                   color:
-                    anyof:
+                    anyOf:
                       - type: string
                       - type: "null"
                     description: The label's display colour, free-form text. `null` when you haven't
                       set one.
                   icon:
-                    anyof:
+                    anyOf:
                       - type: string
                       - type: "null"
                     description: The label's display icon, free-form text. `null` when you haven't
@@ -22964,7 +22964,7 @@ paths:
                   maxLength: 100
                   description: A new name for the tag. Omit to leave the name unchanged.
                 color:
-                  anyof:
+                  anyOf:
                     - type: string
                       minLength: 1
                       maxLength: 50
@@ -22976,7 +22976,7 @@ paths:
                   description: A new display colour. Send `null` to remove the colour, omit to
                     leave it unchanged.
                 icon:
-                  anyof:
+                  anyOf:
                     - type: string
                       minLength: 1
                       maxLength: 50
@@ -23000,13 +23000,13 @@ paths:
                     type: string
                     description: The label's name, unique within your account.
                   color:
-                    anyof:
+                    anyOf:
                       - type: string
                       - type: "null"
                     description: The label's display colour, free-form text. `null` when you haven't
                       set one.
                   icon:
-                    anyof:
+                    anyOf:
                       - type: string
                       - type: "null"
                     description: The label's display icon, free-form text. `null` when you haven't
@@ -23235,7 +23235,7 @@ paths:
           content:
             application/json:
               schema:
-                anyof:
+                anyOf:
                   - not: {}
                   - not: {}
         "400":
@@ -23424,13 +23424,13 @@ paths:
                       type: string
                       description: The label's name, unique within your account.
                     color:
-                      anyof:
+                      anyOf:
                         - type: string
                         - type: "null"
                       description: The label's display colour, free-form text. `null` when you haven't
                         set one.
                     icon:
-                      anyof:
+                      anyOf:
                         - type: string
                         - type: "null"
                       description: The label's display icon, free-form text. `null` when you haven't
@@ -23620,13 +23620,13 @@ paths:
                     type: string
                     description: The label's name, unique within your account.
                   color:
-                    anyof:
+                    anyOf:
                       - type: string
                       - type: "null"
                     description: The label's display colour, free-form text. `null` when you haven't
                       set one.
                   icon:
-                    anyof:
+                    anyOf:
                       - type: string
                       - type: "null"
                     description: The label's display icon, free-form text. `null` when you haven't
@@ -23831,7 +23831,7 @@ paths:
                   maxLength: 100
                   description: A new name for the location. Omit to leave the name unchanged.
                 color:
-                  anyof:
+                  anyOf:
                     - type: string
                       minLength: 1
                       maxLength: 50
@@ -23843,7 +23843,7 @@ paths:
                   description: A new display colour. Send `null` to remove the colour, omit to
                     leave it unchanged.
                 icon:
-                  anyof:
+                  anyOf:
                     - type: string
                       minLength: 1
                       maxLength: 50
@@ -23867,13 +23867,13 @@ paths:
                     type: string
                     description: The label's name, unique within your account.
                   color:
-                    anyof:
+                    anyOf:
                       - type: string
                       - type: "null"
                     description: The label's display colour, free-form text. `null` when you haven't
                       set one.
                   icon:
-                    anyof:
+                    anyOf:
                       - type: string
                       - type: "null"
                     description: The label's display icon, free-form text. `null` when you haven't
@@ -24102,7 +24102,7 @@ paths:
           content:
             application/json:
               schema:
-                anyof:
+                anyOf:
                   - not: {}
                   - not: {}
         "400":
@@ -24314,7 +24314,7 @@ paths:
           schema:
             type: array
             items:
-              anyof:
+              anyOf:
                 - type: number
                 - type: string
                   pattern: ^[0-9]+$
@@ -24448,25 +24448,25 @@ paths:
                           type: string
                           description: Stable opaque identifier for this inventory line. Do not parse.
                         customId:
-                          anyof:
+                          anyOf:
                             - $ref: "#/components/schemas/CustomId"
                             - type: "null"
                           description: Your own stable identifier for this line, unique across your live
                             lines. `null` when you have not set one.
                         comment:
-                          anyof:
+                          anyOf:
                             - type: string
                             - type: "null"
                           description: Free-text note attached to this line, shown to buyers on your
                             Marketplace listing. `null` when there is none.
                         notes:
-                          anyof:
+                          anyOf:
                             - type: string
                             - type: "null"
                           description: Your private note on this line, visible only to you and never shown
                             to buyers. `null` when there is none.
                         location:
-                          anyof:
+                          anyOf:
                             - type: string
                             - type: "null"
                           description: The name of the location this line sits in. `null` when it has
@@ -24492,13 +24492,13 @@ paths:
                           type: string
                           description: The card's finish, e.g. `Standard`, `Foil`, `Reverse Holo`.
                         condition:
-                          anyof:
+                          anyOf:
                             - $ref: "#/components/schemas/CardCondition"
                             - type: "null"
                           description: "The card's condition: `NM`, `LP`, `MP`, `HP`, or `DMG`. `null`
                             when the card is graded."
                         language:
-                          anyof:
+                          anyOf:
                             - type: string
                             - type: "null"
                           description: The card's language as a two-letter code, e.g. `en`, `fr`, `de`.
@@ -24508,7 +24508,7 @@ paths:
                           maximum: 9007199254740991
                           description: How many cards this line holds.
                         graded:
-                          anyof:
+                          anyOf:
                             - $ref: "#/components/schemas/Graded"
                             - type: "null"
                           description: Grading details when the card is graded. `null` for raw cards.
@@ -24517,7 +24517,7 @@ paths:
                           description: "`true` when this line is published to the Marketplace with a
                             price. `false` when it sits in your Collection."
                         listing:
-                          anyof:
+                          anyOf:
                             - type: object
                               properties:
                                 price:
@@ -24580,7 +24580,7 @@ paths:
                     type: object
                     properties:
                       nextCursor:
-                        anyof:
+                        anyOf:
                           - type: string
                           - type: "null"
                     required:
@@ -24840,25 +24840,25 @@ paths:
                         type: string
                         description: Stable opaque identifier for this inventory line. Do not parse.
                       customId:
-                        anyof:
+                        anyOf:
                           - $ref: "#/components/schemas/CustomId"
                           - type: "null"
                         description: Your own stable identifier for this line, unique across your live
                           lines. `null` when you have not set one.
                       comment:
-                        anyof:
+                        anyOf:
                           - type: string
                           - type: "null"
                         description: Free-text note attached to this line, shown to buyers on your
                           Marketplace listing. `null` when there is none.
                       notes:
-                        anyof:
+                        anyOf:
                           - type: string
                           - type: "null"
                         description: Your private note on this line, visible only to you and never shown
                           to buyers. `null` when there is none.
                       location:
-                        anyof:
+                        anyOf:
                           - type: string
                           - type: "null"
                         description: The name of the location this line sits in. `null` when it has
@@ -24884,13 +24884,13 @@ paths:
                         type: string
                         description: The card's finish, e.g. `Standard`, `Foil`, `Reverse Holo`.
                       condition:
-                        anyof:
+                        anyOf:
                           - $ref: "#/components/schemas/CardCondition"
                           - type: "null"
                         description: "The card's condition: `NM`, `LP`, `MP`, `HP`, or `DMG`. `null`
                           when the card is graded."
                       language:
-                        anyof:
+                        anyOf:
                           - type: string
                           - type: "null"
                         description: The card's language as a two-letter code, e.g. `en`, `fr`, `de`.
@@ -24900,7 +24900,7 @@ paths:
                         maximum: 9007199254740991
                         description: How many cards this line holds.
                       graded:
-                        anyof:
+                        anyOf:
                           - $ref: "#/components/schemas/Graded"
                           - type: "null"
                         description: Grading details when the card is graded. `null` for raw cards.
@@ -24909,7 +24909,7 @@ paths:
                         description: "`true` when this line is published to the Marketplace with a
                           price. `false` when it sits in your Collection."
                       listing:
-                        anyof:
+                        anyOf:
                           - type: object
                             properties:
                               price:
@@ -24970,32 +24970,32 @@ paths:
                             currency: EUR
                         updatedAt: 2026-06-01T17:40:02.000Z
                   remainder:
-                    anyof:
+                    anyOf:
                       - type: object
                         properties:
                           id:
                             type: string
                             description: Stable opaque identifier for this inventory line. Do not parse.
                           customId:
-                            anyof:
+                            anyOf:
                               - $ref: "#/components/schemas/CustomId"
                               - type: "null"
                             description: Your own stable identifier for this line, unique across your live
                               lines. `null` when you have not set one.
                           comment:
-                            anyof:
+                            anyOf:
                               - type: string
                               - type: "null"
                             description: Free-text note attached to this line, shown to buyers on your
                               Marketplace listing. `null` when there is none.
                           notes:
-                            anyof:
+                            anyOf:
                               - type: string
                               - type: "null"
                             description: Your private note on this line, visible only to you and never shown
                               to buyers. `null` when there is none.
                           location:
-                            anyof:
+                            anyOf:
                               - type: string
                               - type: "null"
                             description: The name of the location this line sits in. `null` when it has
@@ -25021,13 +25021,13 @@ paths:
                             type: string
                             description: The card's finish, e.g. `Standard`, `Foil`, `Reverse Holo`.
                           condition:
-                            anyof:
+                            anyOf:
                               - $ref: "#/components/schemas/CardCondition"
                               - type: "null"
                             description: "The card's condition: `NM`, `LP`, `MP`, `HP`, or `DMG`. `null`
                               when the card is graded."
                           language:
-                            anyof:
+                            anyOf:
                               - type: string
                               - type: "null"
                             description: The card's language as a two-letter code, e.g. `en`, `fr`, `de`.
@@ -25037,7 +25037,7 @@ paths:
                             maximum: 9007199254740991
                             description: How many cards this line holds.
                           graded:
-                            anyof:
+                            anyOf:
                               - $ref: "#/components/schemas/Graded"
                               - type: "null"
                             description: Grading details when the card is graded. `null` for raw cards.
@@ -25046,7 +25046,7 @@ paths:
                             description: "`true` when this line is published to the Marketplace with a
                               price. `false` when it sits in your Collection."
                           listing:
-                            anyof:
+                            anyOf:
                               - type: object
                                 properties:
                                   price:
@@ -25550,25 +25550,25 @@ paths:
                     type: string
                     description: Stable opaque identifier for this inventory line. Do not parse.
                   customId:
-                    anyof:
+                    anyOf:
                       - $ref: "#/components/schemas/CustomId"
                       - type: "null"
                     description: Your own stable identifier for this line, unique across your live
                       lines. `null` when you have not set one.
                   comment:
-                    anyof:
+                    anyOf:
                       - type: string
                       - type: "null"
                     description: Free-text note attached to this line, shown to buyers on your
                       Marketplace listing. `null` when there is none.
                   notes:
-                    anyof:
+                    anyOf:
                       - type: string
                       - type: "null"
                     description: Your private note on this line, visible only to you and never shown
                       to buyers. `null` when there is none.
                   location:
-                    anyof:
+                    anyOf:
                       - type: string
                       - type: "null"
                     description: The name of the location this line sits in. `null` when it has
@@ -25594,13 +25594,13 @@ paths:
                     type: string
                     description: The card's finish, e.g. `Standard`, `Foil`, `Reverse Holo`.
                   condition:
-                    anyof:
+                    anyOf:
                       - $ref: "#/components/schemas/CardCondition"
                       - type: "null"
                     description: "The card's condition: `NM`, `LP`, `MP`, `HP`, or `DMG`. `null`
                       when the card is graded."
                   language:
-                    anyof:
+                    anyOf:
                       - type: string
                       - type: "null"
                     description: The card's language as a two-letter code, e.g. `en`, `fr`, `de`.
@@ -25610,7 +25610,7 @@ paths:
                     maximum: 9007199254740991
                     description: How many cards this line holds.
                   graded:
-                    anyof:
+                    anyOf:
                       - $ref: "#/components/schemas/Graded"
                       - type: "null"
                     description: Grading details when the card is graded. `null` for raw cards.
@@ -25619,7 +25619,7 @@ paths:
                     description: "`true` when this line is published to the Marketplace with a
                       price. `false` when it sits in your Collection."
                   listing:
-                    anyof:
+                    anyOf:
                       - type: object
                         properties:
                           price:
@@ -25968,25 +25968,25 @@ paths:
                     type: string
                     description: Stable opaque identifier for this inventory line. Do not parse.
                   customId:
-                    anyof:
+                    anyOf:
                       - $ref: "#/components/schemas/CustomId"
                       - type: "null"
                     description: Your own stable identifier for this line, unique across your live
                       lines. `null` when you have not set one.
                   comment:
-                    anyof:
+                    anyOf:
                       - type: string
                       - type: "null"
                     description: Free-text note attached to this line, shown to buyers on your
                       Marketplace listing. `null` when there is none.
                   notes:
-                    anyof:
+                    anyOf:
                       - type: string
                       - type: "null"
                     description: Your private note on this line, visible only to you and never shown
                       to buyers. `null` when there is none.
                   location:
-                    anyof:
+                    anyOf:
                       - type: string
                       - type: "null"
                     description: The name of the location this line sits in. `null` when it has
@@ -26012,13 +26012,13 @@ paths:
                     type: string
                     description: The card's finish, e.g. `Standard`, `Foil`, `Reverse Holo`.
                   condition:
-                    anyof:
+                    anyOf:
                       - $ref: "#/components/schemas/CardCondition"
                       - type: "null"
                     description: "The card's condition: `NM`, `LP`, `MP`, `HP`, or `DMG`. `null`
                       when the card is graded."
                   language:
-                    anyof:
+                    anyOf:
                       - type: string
                       - type: "null"
                     description: The card's language as a two-letter code, e.g. `en`, `fr`, `de`.
@@ -26028,7 +26028,7 @@ paths:
                     maximum: 9007199254740991
                     description: How many cards this line holds.
                   graded:
-                    anyof:
+                    anyOf:
                       - $ref: "#/components/schemas/Graded"
                       - type: "null"
                     description: Grading details when the card is graded. `null` for raw cards.
@@ -26037,7 +26037,7 @@ paths:
                     description: "`true` when this line is published to the Marketplace with a
                       price. `false` when it sits in your Collection."
                   listing:
-                    anyof:
+                    anyOf:
                       - type: object
                         properties:
                           price:
@@ -26407,7 +26407,7 @@ paths:
                               progress.
                             hold: Cards you're keeping aside.
                         description:
-                          anyof:
+                          anyOf:
                             - type: string
                             - type: "null"
                           description: Your free-text note on the list. `null` when there is none.
@@ -26706,7 +26706,7 @@ paths:
                         progress.
                       hold: Cards you're keeping aside.
                   description:
-                    anyof:
+                    anyOf:
                       - type: string
                       - type: "null"
                     description: Your free-text note on the list. `null` when there is none.
@@ -26760,13 +26760,13 @@ paths:
                     examples:
                       - USD
                   defaultMinCondition:
-                    anyof:
+                    anyOf:
                       - $ref: "#/components/schemas/CardCondition"
                       - type: "null"
                     description: The minimum condition applied to new cards when you don't set one.
                       `null` when unset.
                   defaultLanguage:
-                    anyof:
+                    anyOf:
                       - type: string
                       - type: "null"
                     description: The language applied to new cards when you don't set one, as a
@@ -26802,8 +26802,15 @@ paths:
                         name:
                           type: string
                           description: The product's name, e.g. `Charizard ex`.
+                        nameSlug:
+                          type: string
+                          description: URL-friendly slug of the product name. Cards that share a name
+                            across printings and expansions share this slug.
+                            Accepted as the `nameSlug` filter on `POST
+                            /v1/products/search` to list every printing of the
+                            card.
                         expansion:
-                          anyof:
+                          anyOf:
                             - type: string
                             - type: "null"
                           description: The name of the expansion the product belongs to. `null` when it
@@ -26812,13 +26819,13 @@ paths:
                           type: string
                           description: The card's finish, e.g. `Standard`, `Foil`, `Reverse Holo`.
                         language:
-                          anyof:
+                          anyOf:
                             - type: string
                             - type: "null"
                           description: The card's language as a short code, e.g. `en`, `fr`. `null` when
                             unset.
                         minCondition:
-                          anyof:
+                          anyOf:
                             - $ref: "#/components/schemas/CardCondition"
                             - type: "null"
                           description: "The minimum condition you'll accept for this card: `NM`, `LP`,
@@ -26836,13 +26843,13 @@ paths:
                             your inventory. Read-only; never more than
                             `quantity`.
                         wantPrice:
-                          anyof:
+                          anyOf:
                             - type: number
                             - type: "null"
                           description: Your target price per copy, in the list's currency. `null` when
                             unset.
                         sellPrice:
-                          anyof:
+                          anyOf:
                             - type: number
                             - type: "null"
                           description: Your sale price per copy, in the list's currency. `null` when
@@ -26851,6 +26858,7 @@ paths:
                         - id
                         - productId
                         - name
+                        - nameSlug
                         - expansion
                         - finish
                         - language
@@ -26863,6 +26871,7 @@ paths:
                         - id: 665f3a2b1c8d4e9f7a6b5c4d
                           productId: 50212
                           name: Charizard ex
+                          nameSlug: charizard-ex
                           expansion: Obsidian Flames
                           finish: Standard
                           language: en
@@ -26907,6 +26916,7 @@ paths:
                       - id: 665f3a2b1c8d4e9f7a6b5c4d
                         productId: 71044
                         name: Lightning Bolt
+                        nameSlug: lightning-bolt
                         expansion: Modern Horizons 2
                         finish: Standard
                         language: en
@@ -26918,6 +26928,7 @@ paths:
                       - id: 665f3a2b1c8d4e9f7a6b5c4e
                         productId: 50212
                         name: Ragavan, Nimble Pilferer
+                        nameSlug: ragavan-nimble-pilferer
                         expansion: Modern Horizons 2
                         finish: Foil
                         language: en
@@ -27135,7 +27146,7 @@ paths:
                         progress.
                       hold: Cards you're keeping aside.
                   description:
-                    anyof:
+                    anyOf:
                       - type: string
                       - type: "null"
                     description: Your free-text note on the list. `null` when there is none.
@@ -27189,13 +27200,13 @@ paths:
                     examples:
                       - USD
                   defaultMinCondition:
-                    anyof:
+                    anyOf:
                       - $ref: "#/components/schemas/CardCondition"
                       - type: "null"
                     description: The minimum condition applied to new cards when you don't set one.
                       `null` when unset.
                   defaultLanguage:
-                    anyof:
+                    anyOf:
                       - type: string
                       - type: "null"
                     description: The language applied to new cards when you don't set one, as a
@@ -27231,8 +27242,15 @@ paths:
                         name:
                           type: string
                           description: The product's name, e.g. `Charizard ex`.
+                        nameSlug:
+                          type: string
+                          description: URL-friendly slug of the product name. Cards that share a name
+                            across printings and expansions share this slug.
+                            Accepted as the `nameSlug` filter on `POST
+                            /v1/products/search` to list every printing of the
+                            card.
                         expansion:
-                          anyof:
+                          anyOf:
                             - type: string
                             - type: "null"
                           description: The name of the expansion the product belongs to. `null` when it
@@ -27241,13 +27259,13 @@ paths:
                           type: string
                           description: The card's finish, e.g. `Standard`, `Foil`, `Reverse Holo`.
                         language:
-                          anyof:
+                          anyOf:
                             - type: string
                             - type: "null"
                           description: The card's language as a short code, e.g. `en`, `fr`. `null` when
                             unset.
                         minCondition:
-                          anyof:
+                          anyOf:
                             - $ref: "#/components/schemas/CardCondition"
                             - type: "null"
                           description: "The minimum condition you'll accept for this card: `NM`, `LP`,
@@ -27265,13 +27283,13 @@ paths:
                             your inventory. Read-only; never more than
                             `quantity`.
                         wantPrice:
-                          anyof:
+                          anyOf:
                             - type: number
                             - type: "null"
                           description: Your target price per copy, in the list's currency. `null` when
                             unset.
                         sellPrice:
-                          anyof:
+                          anyOf:
                             - type: number
                             - type: "null"
                           description: Your sale price per copy, in the list's currency. `null` when
@@ -27280,6 +27298,7 @@ paths:
                         - id
                         - productId
                         - name
+                        - nameSlug
                         - expansion
                         - finish
                         - language
@@ -27292,6 +27311,7 @@ paths:
                         - id: 665f3a2b1c8d4e9f7a6b5c4d
                           productId: 50212
                           name: Charizard ex
+                          nameSlug: charizard-ex
                           expansion: Obsidian Flames
                           finish: Standard
                           language: en
@@ -27336,6 +27356,7 @@ paths:
                       - id: 665f3a2b1c8d4e9f7a6b5c4d
                         productId: 71044
                         name: Lightning Bolt
+                        nameSlug: lightning-bolt
                         expansion: Modern Horizons 2
                         finish: Standard
                         language: en
@@ -27347,6 +27368,7 @@ paths:
                       - id: 665f3a2b1c8d4e9f7a6b5c4e
                         productId: 50212
                         name: Ragavan, Nimble Pilferer
+                        nameSlug: ragavan-nimble-pilferer
                         expansion: Modern Horizons 2
                         finish: Foil
                         language: en
@@ -27657,7 +27679,7 @@ paths:
                         progress.
                       hold: Cards you're keeping aside.
                   description:
-                    anyof:
+                    anyOf:
                       - type: string
                       - type: "null"
                     description: Your free-text note on the list. `null` when there is none.
@@ -27711,13 +27733,13 @@ paths:
                     examples:
                       - USD
                   defaultMinCondition:
-                    anyof:
+                    anyOf:
                       - $ref: "#/components/schemas/CardCondition"
                       - type: "null"
                     description: The minimum condition applied to new cards when you don't set one.
                       `null` when unset.
                   defaultLanguage:
-                    anyof:
+                    anyOf:
                       - type: string
                       - type: "null"
                     description: The language applied to new cards when you don't set one, as a
@@ -27753,8 +27775,15 @@ paths:
                         name:
                           type: string
                           description: The product's name, e.g. `Charizard ex`.
+                        nameSlug:
+                          type: string
+                          description: URL-friendly slug of the product name. Cards that share a name
+                            across printings and expansions share this slug.
+                            Accepted as the `nameSlug` filter on `POST
+                            /v1/products/search` to list every printing of the
+                            card.
                         expansion:
-                          anyof:
+                          anyOf:
                             - type: string
                             - type: "null"
                           description: The name of the expansion the product belongs to. `null` when it
@@ -27763,13 +27792,13 @@ paths:
                           type: string
                           description: The card's finish, e.g. `Standard`, `Foil`, `Reverse Holo`.
                         language:
-                          anyof:
+                          anyOf:
                             - type: string
                             - type: "null"
                           description: The card's language as a short code, e.g. `en`, `fr`. `null` when
                             unset.
                         minCondition:
-                          anyof:
+                          anyOf:
                             - $ref: "#/components/schemas/CardCondition"
                             - type: "null"
                           description: "The minimum condition you'll accept for this card: `NM`, `LP`,
@@ -27787,13 +27816,13 @@ paths:
                             your inventory. Read-only; never more than
                             `quantity`.
                         wantPrice:
-                          anyof:
+                          anyOf:
                             - type: number
                             - type: "null"
                           description: Your target price per copy, in the list's currency. `null` when
                             unset.
                         sellPrice:
-                          anyof:
+                          anyOf:
                             - type: number
                             - type: "null"
                           description: Your sale price per copy, in the list's currency. `null` when
@@ -27802,6 +27831,7 @@ paths:
                         - id
                         - productId
                         - name
+                        - nameSlug
                         - expansion
                         - finish
                         - language
@@ -27814,6 +27844,7 @@ paths:
                         - id: 665f3a2b1c8d4e9f7a6b5c4d
                           productId: 50212
                           name: Charizard ex
+                          nameSlug: charizard-ex
                           expansion: Obsidian Flames
                           finish: Standard
                           language: en
@@ -27858,6 +27889,7 @@ paths:
                       - id: 665f3a2b1c8d4e9f7a6b5c4d
                         productId: 71044
                         name: Lightning Bolt
+                        nameSlug: lightning-bolt
                         expansion: Modern Horizons 2
                         finish: Standard
                         language: en
@@ -27869,6 +27901,7 @@ paths:
                       - id: 665f3a2b1c8d4e9f7a6b5c4e
                         productId: 50212
                         name: Ragavan, Nimble Pilferer
+                        nameSlug: ragavan-nimble-pilferer
                         expansion: Modern Horizons 2
                         finish: Foil
                         language: en
@@ -28275,7 +28308,7 @@ paths:
                         description: The id of an existing line to update, from a list response. Omit to
                           add a new line.
                       productId:
-                        anyof:
+                        anyOf:
                           - type: number
                           - type: string
                             pattern: ^[0-9]+$
@@ -28360,14 +28393,14 @@ paths:
                         description: The minimum condition you'll accept for this card. Omit to leave it
                           unset.
                       wantPrice:
-                        anyof:
+                        anyOf:
                           - type: number
                             minimum: 0
                           - type: "null"
                         description: Your target price per copy, in the list's currency. Send `null` to
                           clear it.
                       sellPrice:
-                        anyof:
+                        anyOf:
                           - type: number
                             minimum: 0
                           - type: "null"
@@ -28415,7 +28448,7 @@ paths:
                         progress.
                       hold: Cards you're keeping aside.
                   description:
-                    anyof:
+                    anyOf:
                       - type: string
                       - type: "null"
                     description: Your free-text note on the list. `null` when there is none.
@@ -28469,13 +28502,13 @@ paths:
                     examples:
                       - USD
                   defaultMinCondition:
-                    anyof:
+                    anyOf:
                       - $ref: "#/components/schemas/CardCondition"
                       - type: "null"
                     description: The minimum condition applied to new cards when you don't set one.
                       `null` when unset.
                   defaultLanguage:
-                    anyof:
+                    anyOf:
                       - type: string
                       - type: "null"
                     description: The language applied to new cards when you don't set one, as a
@@ -28511,8 +28544,15 @@ paths:
                         name:
                           type: string
                           description: The product's name, e.g. `Charizard ex`.
+                        nameSlug:
+                          type: string
+                          description: URL-friendly slug of the product name. Cards that share a name
+                            across printings and expansions share this slug.
+                            Accepted as the `nameSlug` filter on `POST
+                            /v1/products/search` to list every printing of the
+                            card.
                         expansion:
-                          anyof:
+                          anyOf:
                             - type: string
                             - type: "null"
                           description: The name of the expansion the product belongs to. `null` when it
@@ -28521,13 +28561,13 @@ paths:
                           type: string
                           description: The card's finish, e.g. `Standard`, `Foil`, `Reverse Holo`.
                         language:
-                          anyof:
+                          anyOf:
                             - type: string
                             - type: "null"
                           description: The card's language as a short code, e.g. `en`, `fr`. `null` when
                             unset.
                         minCondition:
-                          anyof:
+                          anyOf:
                             - $ref: "#/components/schemas/CardCondition"
                             - type: "null"
                           description: "The minimum condition you'll accept for this card: `NM`, `LP`,
@@ -28545,13 +28585,13 @@ paths:
                             your inventory. Read-only; never more than
                             `quantity`.
                         wantPrice:
-                          anyof:
+                          anyOf:
                             - type: number
                             - type: "null"
                           description: Your target price per copy, in the list's currency. `null` when
                             unset.
                         sellPrice:
-                          anyof:
+                          anyOf:
                             - type: number
                             - type: "null"
                           description: Your sale price per copy, in the list's currency. `null` when
@@ -28560,6 +28600,7 @@ paths:
                         - id
                         - productId
                         - name
+                        - nameSlug
                         - expansion
                         - finish
                         - language
@@ -28572,6 +28613,7 @@ paths:
                         - id: 665f3a2b1c8d4e9f7a6b5c4d
                           productId: 50212
                           name: Charizard ex
+                          nameSlug: charizard-ex
                           expansion: Obsidian Flames
                           finish: Standard
                           language: en
@@ -28616,6 +28658,7 @@ paths:
                       - id: 665f3a2b1c8d4e9f7a6b5c4d
                         productId: 71044
                         name: Lightning Bolt
+                        nameSlug: lightning-bolt
                         expansion: Modern Horizons 2
                         finish: Standard
                         language: en
@@ -28627,6 +28670,7 @@ paths:
                       - id: 665f3a2b1c8d4e9f7a6b5c4e
                         productId: 50212
                         name: Ragavan, Nimble Pilferer
+                        nameSlug: ragavan-nimble-pilferer
                         expansion: Modern Horizons 2
                         finish: Foil
                         language: en
@@ -29145,7 +29189,7 @@ paths:
                     type: object
                     properties:
                       nextCursor:
-                        anyof:
+                        anyOf:
                           - type: string
                           - type: "null"
                     required:
@@ -29605,7 +29649,7 @@ paths:
                     type: object
                     properties:
                       nextCursor:
-                        anyof:
+                        anyOf:
                           - type: string
                           - type: "null"
                     required:
@@ -30329,7 +30373,7 @@ webhooks:
                         resolved_return: Dispute resolved with a return.
                         resolved_goodwill_refund: Dispute resolved with a goodwill refund.
                     previousStatus:
-                      anyof:
+                      anyOf:
                         - enum:
                             - pending_shipment
                             - cancellation_requested
@@ -30380,7 +30424,7 @@ webhooks:
                       examples:
                         - 2024-08-14T10:23:11.000Z
                     reason:
-                      anyof:
+                      anyOf:
                         - type: string
                         - type: "null"
                       description: Why the status changed, when one applies (e.g. a cancellation or
@@ -30451,7 +30495,7 @@ webhooks:
                       type: string
                       description: Opaque identifier for the message.
                     context:
-                      anyof:
+                      anyOf:
                         - type: object
                           properties:
                             type:
@@ -30734,7 +30778,7 @@ webhooks:
                             type: string
                             description: The inventory line's unique identifier.
                           customId:
-                            anyof:
+                            anyOf:
                               - type: string
                               - type: "null"
                             description: Your own identifier for this line, if you've set one. `null`
@@ -30822,7 +30866,7 @@ webhooks:
                   examples:
                     - 2024-08-14T10:23:11.000Z
                 data:
-                  anyof:
+                  anyOf:
                     - type: object
                       properties:
                         jobId:
@@ -30856,7 +30900,7 @@ webhooks:
                             - failed
                           description: Per-row outcome of the import.
                         errorReportUrl:
-                          anyof:
+                          anyOf:
                             - type: string
                             - type: "null"
                           description: A time-limited link to a report describing the rows that could not
@@ -30983,7 +31027,7 @@ webhooks:
                   examples:
                     - 2024-08-14T10:23:11.000Z
                 data:
-                  anyof:
+                  anyOf:
                     - type: object
                       properties:
                         jobId:
