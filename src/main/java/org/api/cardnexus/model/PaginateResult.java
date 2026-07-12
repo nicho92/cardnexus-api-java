@@ -9,16 +9,16 @@ public class PaginateResult<T> {
    
    
    public List<T> getData() {
-    return data;
+       return data;
    }
    public void setData(List<T> data) {
-    this.data = data;
+       this.data = data;
    }
    public Pagination getPagination() {
-    return pagination;
+       return pagination;
    }
    public void setPagination(Pagination pagination) {
-    this.pagination = pagination;
+       this.pagination = pagination;
    }
     
     

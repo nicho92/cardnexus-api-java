@@ -7,7 +7,6 @@ import java.util.List;
 import org.api.cardnexus.configuration.NexusConstants;
 import org.api.cardnexus.model.Expansion;
 import org.api.cardnexus.model.Game;
-import org.api.cardnexus.model.PaginateResult;
 import org.api.cardnexus.services.interfaces.AbstractNexusService;
 
 import com.google.gson.JsonObject;
@@ -15,15 +14,19 @@ import com.google.gson.JsonObject;
 public class ProductsService extends AbstractNexusService{
 
     
+    private static final String ROOT_ENDPOINT="/games";
+    
+    
+    
     public List<Game> listGames() throws IOException
     {
-	var arr = client.get("/games", null, JsonObject.class).get("data").getAsJsonArray();
-	return arr.asList().stream().map(e->client.fromJson(e.toString(),Game.class)).toList();
+	var arr = client.get(ROOT_ENDPOINT, null, JsonObject.class).get("data").getAsJsonArray();
+	return client.toList(arr, Game.class);
     }
     
     public Game getGameById(String id) throws IOException
     {
-	return client.get("/games/"+id, null, Game.class);
+	return client.get(ROOT_ENDPOINT+id, null, Game.class);
     }
     
 
@@ -37,15 +40,18 @@ public class ProductsService extends AbstractNexusService{
     {
 	var ret = new ArrayList<Expansion>();
 	
-	PaginateResult<Expansion> results = client.get("/games/"+id+"/expansions?offset="+ret.size()+"&limit="+NexusConstants.LIMIT_LIST_RESULTS, null, PaginateResult.class);
+	var result =  client.getPaginated(ROOT_ENDPOINT+"/"+id+"/expansions?offset="+ret.size()+"&limit="+NexusConstants.LIMIT_LIST_RESULTS, null, Expansion.class);
 	
-	System.out.println();
+	ret.addAll(result.getData());
 	
 	
+	while(result.getPagination().hasMore())
+	{
+	    result = client.getPaginated(ROOT_ENDPOINT+"/"+id+"/expansions?offset="+ret.size()+"&limit="+NexusConstants.LIMIT_LIST_RESULTS, null, Expansion.class);
+	    ret.addAll(result.getData());
+	}
 	
 	return ret;
-	
-	
     }
     
     

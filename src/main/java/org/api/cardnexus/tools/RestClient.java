@@ -2,8 +2,10 @@ package org.api.cardnexus.tools;
 
 import java.io.Closeable;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.time.Instant;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
@@ -21,11 +23,12 @@ import org.apache.logging.log4j.Logger;
 import org.api.cardnexus.configuration.NexusConstants;
 import org.api.cardnexus.listener.URLCallInfo;
 import org.api.cardnexus.listener.URLCallListener;
-import org.api.cardnexus.model.Expansion;
 import org.api.cardnexus.model.PaginateResult;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
 
 public class RestClient implements Closeable {
 
@@ -60,12 +63,24 @@ public class RestClient implements Closeable {
 
     // -------------------- Méthodes principales --------------------
     
+    public <T> PaginateResult<T> getPaginated(String url,Map<String,String> headers, Class<T> clazz) throws IOException {
+		var type = TypeToken.getParameterized(PaginateResult.class,clazz).getType();
+		return get(url, headers, type);
+    }
+    
+    public <T> T get(String url, Map<String, String> headers,Type responseType) throws IOException {
+        
+        var request = new HttpGet(NexusConstants.API_BASE_URL + url);
+        applyHeaders(request, headers);
+        return executeRequest(request, responseType);
+        }
+    
     public <T> T get(String url, Map<String, String> headers, Class<T> responseType) throws IOException {
         var request = new HttpGet(NexusConstants.API_BASE_URL+url);
         applyHeaders(request, headers);
         return executeRequest(request, responseType);
     }
-
+    
     public <T> T post(String url, Object body, Map<String, String> headers, Class<T> responseType) throws IOException {
         var request = new HttpPost(NexusConstants.API_BASE_URL+url);
         applyHeaders(request, headers);
@@ -107,17 +122,30 @@ public class RestClient implements Closeable {
     }
 
     
+    public <T> List<T> toList(JsonArray array, Class<T> clazz)
+    {
+	var listType = TypeToken.getParameterized​(List.class, clazz).getType();
+	return gson.fromJson(array,listType);
+    }
+    
+    public <T> T fromJson(String json, Type responseType)
+    {
+    	return gson.fromJson(json, responseType);
+    }
+    
     public <T> T fromJson(String json, Class<T> responseType)
     {
     	return gson.fromJson(json, responseType);
     }
+    
     
     public void setCallListener(URLCallListener listener2) {
 		this.listener=listener2;
 		
 	}
     
-    private <T> T executeRequest(HttpRequestBase request, Class<T> responseType) throws IOException {
+    @SuppressWarnings("unchecked")
+    private <T> T executeRequest(HttpRequestBase request, Type  responseType) throws IOException {
     	
     	var callInfo = new URLCallInfo();
     	
@@ -135,7 +163,7 @@ public class RestClient implements Closeable {
             if (statusCode >= 200 && statusCode < 300) 
             {
                 if (responseType == String.class) {
-                    return responseType.cast(jsonResponse);
+                    return (T) jsonResponse;
                 }
                 if (jsonResponse != null && !jsonResponse.isEmpty()) {
                     try {

@@ -14,7 +14,7 @@ public class ServiceTester{
 		
 		var service = new ProductsService();
 		
-		System.out.println(service.listExpansion("mtg"));
+		System.out.println( service.listExpansion("mtg").size());
 		
 		
 		
