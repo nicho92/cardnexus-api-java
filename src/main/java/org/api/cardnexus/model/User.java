@@ -10,6 +10,13 @@ public class User {
     String country;
     String type;
     Map<String,Double> rating;
+    
+    
+    @Override
+    public String toString() {
+          return getUsername();
+    }
+    
     public String getId() {
         return id;
     }

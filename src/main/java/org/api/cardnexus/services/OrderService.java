@@ -25,5 +25,11 @@ public class OrderService extends AbstractNexusService {
 	
     }
     
+    public Order getOrder(String orderNumber) throws IOException
+    {
+	 return client.get(ROOT_SALES_ENDPOINT+"/"+orderNumber,null,Order.class);
+    }
+    
+    
     
 }

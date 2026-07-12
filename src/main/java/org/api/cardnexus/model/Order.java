@@ -17,9 +17,24 @@ public class Order {
     private String currency;
     private List<OrderItem> items;
     private User buyer;
-    
+    private Payout payout;
+    private Fee sellerFee;
     private Amount subtotal;
     private Amount shippingAmount;
+    
+    
+    public Fee getSellerFee() {
+	return sellerFee;
+    }
+    public void setSellerFee(Fee sellerFee) {
+	this.sellerFee = sellerFee;
+    }
+    public Payout getPayout() {
+	return payout;
+    }
+    public void setPayout(Payout payout) {
+	this.payout = payout;
+    }
     
     public User getBuyer() {
 	return buyer;
