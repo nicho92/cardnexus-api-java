@@ -1,8 +1,11 @@
 package org.api.cardnexus.model;
 
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 
 import org.api.cardnexus.model.enums.EnumFinishes;
+import org.api.cardnexus.model.enums.EnumMarketCurrency;
 import org.api.cardnexus.model.enums.EnumRarity;
 
 public class CardProduct extends AbstractProduct {
@@ -10,29 +13,29 @@ public class CardProduct extends AbstractProduct {
     private String printNumber;
     private EnumRarity rarity;
     private List<EnumFinishes> finishes;
+    private Map<EnumFinishes,Map<EnumMarketCurrency,MarketPrice>> pricesByFinish;
+    private CardAttributs attributes;
     
     
     
+    public CardProduct() {
+	pricesByFinish = new EnumMap<>(EnumFinishes.class);
+    }
+    
+    public CardAttributs getAttributes() {
+	return attributes;
+    }
+    public MarketPrice getPrices(EnumFinishes finish,EnumMarketCurrency currency)   {
+		return pricesByFinish.get(finish).get(currency);
+    }
     public String getPrintNumber() {
         return printNumber;
-    }
-    public void setPrintNumber(String printNumber) {
-        this.printNumber = printNumber;
     }
     public EnumRarity getRarity() {
         return rarity;
     }
-    public void setRarity(EnumRarity rarity) {
-        this.rarity = rarity;
-    }
     public List<EnumFinishes> getFinishes() {
         return finishes;
     }
-    public void setFinishes(List<EnumFinishes> finishes) {
-        this.finishes = finishes;
-    }
-    
-    
-    
     
 }

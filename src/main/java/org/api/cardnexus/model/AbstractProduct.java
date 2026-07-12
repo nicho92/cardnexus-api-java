@@ -2,6 +2,8 @@ package org.api.cardnexus.model;
 
 import java.util.List;
 
+import org.api.cardnexus.model.enums.EnumFinishes;
+import org.api.cardnexus.model.enums.EnumMarketCurrency;
 import org.api.cardnexus.model.enums.EnumProductType;
 
 public abstract class AbstractProduct {
@@ -21,6 +23,9 @@ public abstract class AbstractProduct {
     public String toString() {
            return String.valueOf(getId());
     }
+    
+    public abstract MarketPrice getPrices(EnumFinishes finish, EnumMarketCurrency currency);
+    
     
     
     public Integer getId() {

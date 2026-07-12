@@ -4,16 +4,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.api.cardnexus.configuration.AbstractNexusService;
 import org.api.cardnexus.configuration.NexusConstants;
 import org.api.cardnexus.model.AbstractProduct;
-import org.api.cardnexus.model.CardProduct;
 import org.api.cardnexus.model.Expansion;
 import org.api.cardnexus.model.Game;
 import org.api.cardnexus.model.Pagination;
 import org.api.cardnexus.model.requests.SearchProductRequest;
-import org.api.cardnexus.services.interfaces.AbstractNexusService;
-
-import com.google.gson.JsonObject;
 
 public class ProductsService extends AbstractNexusService{
 
@@ -25,8 +22,8 @@ public class ProductsService extends AbstractNexusService{
     
     public List<Game> listGames() throws IOException
     {
-	var arr = client.get(ROOT_GAME_ENDPOINT, null, JsonObject.class).get("data").getAsJsonArray();
-	return client.toList(arr, Game.class);
+	var arr = client.getPaginated(ROOT_GAME_ENDPOINT, null, Game.class);
+	return arr.getData();
     }
     
     public Game getGameById(String id) throws IOException
@@ -60,7 +57,7 @@ public class ProductsService extends AbstractNexusService{
 	while(pagination.hasMore())
 	{
 	    req.setOffset(ret.size());
-	    var result = client.postPaginated(ROOT_PRODUCT_ENDPOINT+"/search",req,null,CardProduct.class);
+	    var result = client.postPaginated(ROOT_PRODUCT_ENDPOINT+"/search",req,null,AbstractProduct.class);
 	    ret.addAll(result.getData());
 	    pagination=result.getPagination();
 	}

@@ -23,9 +23,11 @@ import org.apache.logging.log4j.Logger;
 import org.api.cardnexus.configuration.NexusConstants;
 import org.api.cardnexus.listener.URLCallInfo;
 import org.api.cardnexus.listener.URLCallListener;
+import org.api.cardnexus.model.AbstractProduct;
 import org.api.cardnexus.model.PaginateResult;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
@@ -53,7 +55,7 @@ public class RestClient implements Closeable {
      */
     public RestClient(String token) {
         this.httpClient = HttpClients.createDefault();
-        this.gson = new Gson();
+        this.gson = new GsonBuilder().registerTypeAdapter(AbstractProduct.class, new ProductAdapter()).create();
         this.defaultHeaders = new HashMap<>();
         
         defaultHeaders.put("Authorization", "Bearer " +token);
