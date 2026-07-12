@@ -4,8 +4,8 @@ import java.io.File;
 import java.io.IOException;
 
 import org.api.cardnexus.configuration.NexusConfig;
-import org.api.cardnexus.model.requests.SearchProductRequest;
-import org.api.cardnexus.services.ProductsService;
+import org.api.cardnexus.model.enums.EnumFeedKey;
+import org.api.cardnexus.services.FeedsService;
 
 public class ServiceTester{
 
@@ -13,19 +13,11 @@ public class ServiceTester{
 	    
 		NexusConfig.loadTokenFromFile(new File("E:\\Mon Drive\\token.txt"));
 		
-		var service = new ProductsService();
-		
-		var req = new SearchProductRequest();
-		req.setNameSlug("auntie-ool-cursewretch");
-		req.addGameFilter("game", "mtg");
-		
-//		service.searchProduct(req).forEach(p->{
-//		    System.out.println(p.getId() + " " + p.getProductType() + " " + p.getName() + " " + p.getExpansion() + " "+ p.getClass().getSimpleName() + " " + p.getPrices(EnumFinishes.Standard,EnumMarketCurrency.eur).getMarketValue());
-//		});
-		
-		service.getLastSales(213551);
+		var service = new FeedsService();
 		
 		
+		var m = service.getFeed("mtg",EnumFeedKey.catalog);
+		System.out.println(m);
 		
 	}
 	
