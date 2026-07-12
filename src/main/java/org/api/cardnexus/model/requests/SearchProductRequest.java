@@ -1,0 +1,102 @@
+package org.api.cardnexus.model.requests;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class SearchProductRequest {
+    
+    private int offset;
+    private int limit;
+    private List<Integer> productIds;
+    private Integer expansionId;
+    private String name;
+    private String nameSlug;
+    private List<Integer> cardmarketId;
+    private List<Integer> tcgplayerId;
+    private String sortBy;
+    private String sortDirection;
+    
+    private Map<String, Object> gameFilters;
+    
+    
+    public SearchProductRequest() {
+	gameFilters = new HashMap<>();
+	productIds= new ArrayList<>();
+	cardmarketId = new ArrayList<>();
+	tcgplayerId= new ArrayList<>();
+    }
+    
+    public void addGameFilter(String gameId,String value)
+    {
+	gameFilters.put(gameId, value);
+    }
+    
+    public int getOffset() {
+        return offset;
+    }
+    public void setOffset(int offset) {
+        this.offset = offset;
+    }
+    public int getLimit() {
+        return limit;
+    }
+    public void setLimit(int limit) {
+        this.limit = limit;
+    }
+    public List<Integer> getProductIds() {
+        return productIds;
+    }
+    public void setProductIds(List<Integer> productIds) {
+        this.productIds = productIds;
+    }
+    public Integer getExpansionId() {
+        return expansionId;
+    }
+    public void setExpansionId(Integer expansionId) {
+        this.expansionId = expansionId;
+    }
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getNameSlug() {
+        return nameSlug;
+    }
+    public void setNameSlug(String nameSlug) {
+        this.nameSlug = nameSlug;
+    }
+    public List<Integer> getCardmarketId() {
+        return cardmarketId;
+    }
+    public void setCardmarketId(List<Integer> cardmarketId) {
+        this.cardmarketId = cardmarketId;
+    }
+    public List<Integer> getTcgplayerId() {
+        return tcgplayerId;
+    }
+    public void setTcgplayerId(List<Integer> tcgplayerId) {
+        this.tcgplayerId = tcgplayerId;
+    }
+    public String getSortBy() {
+        return sortBy;
+    }
+    public void setSortBy(String sortBy) {
+        this.sortBy = sortBy;
+    }
+    public String getSortDirection() {
+        return sortDirection;
+    }
+    public void setSortDirection(String sortDirection) {
+        this.sortDirection = sortDirection;
+    }
+   
+    
+    
+    
+    
+    
+  }

@@ -14,7 +14,7 @@ public class ServiceTester{
 		
 		var service = new ProductsService();
 		
-		System.out.println( service.listExpansion("mtg").size());
+		System.out.println( service.searchProduct("Lion's Eye Diamond").size());
 		
 		
 		

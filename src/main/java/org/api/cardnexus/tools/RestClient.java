@@ -68,6 +68,11 @@ public class RestClient implements Closeable {
 		return get(url, headers, type);
     }
     
+    public <T> PaginateResult<T> postPaginated(String url, Object body,Map<String,String> headers, Class<T> clazz) throws IOException {
+ 		var type = TypeToken.getParameterized(PaginateResult.class,clazz).getType();
+ 		return post(url, body, headers, type);
+     }
+    
     public <T> T get(String url, Map<String, String> headers,Type responseType) throws IOException {
         
         var request = new HttpGet(NexusConstants.API_BASE_URL + url);
@@ -87,6 +92,15 @@ public class RestClient implements Closeable {
         addJsonBody(request, body);
         return executeRequest(request, responseType);
     }
+    
+    public <T> T post(String url, Object body, Map<String, String> headers,Type responseType) throws IOException {
+        var request = new HttpPost(NexusConstants.API_BASE_URL+url);
+        applyHeaders(request, headers);
+        addJsonBody(request, body);
+        return executeRequest(request, responseType);
+    }
+
+    
 
     public <T> T put(String url, Object body, Map<String, String> headers, Class<T> responseType) throws IOException {
         var request = new HttpPut(NexusConstants.API_BASE_URL+url);
