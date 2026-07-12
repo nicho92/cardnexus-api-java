@@ -2,12 +2,11 @@ package org.api.cardnexus.tests;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.ZoneId;
 
 import org.api.cardnexus.configuration.NexusConfig;
-import org.api.cardnexus.model.requests.HistoryRequest;
-import org.api.cardnexus.services.catalog.PricesService;
+import org.api.cardnexus.model.enums.EnumCondition;
+import org.api.cardnexus.model.requests.InventoryRequest;
+import org.api.cardnexus.services.inventory.InventoryService;
 
 public class ServiceTester{
 
@@ -15,14 +14,14 @@ public class ServiceTester{
 	    
 		NexusConfig.loadTokenFromFile(new File("E:\\Mon Drive\\token.txt"));
 		
-		var service = new PricesService();
-		var req = new HistoryRequest();
-		req.setIdProduct(213551);
-		req.setFrom(LocalDate.now(ZoneId.systemDefault()).minusMonths(6));
+		var service = new InventoryService();
+		var req = new InventoryRequest();
+        		req.setLanguage("fr");
+        		req.setGame("mtg");
+        		req.setCondition(EnumCondition.MP);
 		
-		var prices = service.getHistoryPrice(req);
-		
-		
+		service.getInventoryLines(req);
+
 	}
 	
 }

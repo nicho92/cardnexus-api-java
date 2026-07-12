@@ -1,12 +1,9 @@
 package org.api.cardnexus.services.catalog;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.http.client.utils.URIBuilder;
 import org.api.cardnexus.model.AbstractProduct;
 import org.api.cardnexus.model.CardNexusPrice;
 import org.api.cardnexus.model.History;
@@ -48,31 +45,10 @@ public class PricesService extends AbstractNexusService {
     }
     
     
-    public List<History> getHistoryPrice(HistoryRequest request) throws IOException
+    public List<History> getHistoryPrice(HistoryRequest req) throws IOException
     {
-	
-	try {
-	    var b= new URIBuilder(ROOT_PRODUCT_ENDPOINT+"/"+request.getIdProduct()+"/prices/history");
+	return client.getPaginated(ROOT_PRODUCT_ENDPOINT+"/"+req.getIdProduct()+"/prices/history?"+req.toQueryString(), null, History.class).getData();
 	    
-	    var format = DateTimeFormatter.ofPattern("YYYY-MM-DD");
-	    
-	    if(request.getFrom()!=null)
-		b.addParameter("from",format.format(request.getFrom()));
-
-	    if(request.getTo()!=null)
-		b.addParameter("to",format.format(request.getTo()));
-
-	    if(request.getPlace()!=null)
-		b.addParameter("marketplace",request.getPlace().name());
-	    
-	    if(request.getFinish()!=null)
-		b.addParameter("finish",request.getFinish().name());
-	    
-	    return client.getPaginated(b.toString(), null, History.class).getData();
-	    
-	} catch (URISyntaxException e) {
-	    throw new IOException(e);
-	}
     }
     
     

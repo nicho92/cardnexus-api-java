@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import org.api.cardnexus.model.enums.EnumFinishes;
 import org.api.cardnexus.model.enums.EnumMarketPlace;
 
-public class HistoryRequest {
+public class HistoryRequest extends AbstractGetRequest{
 
   private Integer idProduct;
   private LocalDate from;
