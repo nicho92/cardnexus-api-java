@@ -16,11 +16,17 @@ public class Order {
     private Date completedAt;
     private String currency;
     private List<OrderItem> items;
+    private User buyer;
     
     private Amount subtotal;
     private Amount shippingAmount;
     
-    
+    public User getBuyer() {
+	return buyer;
+    }
+    public void setBuyer(User buyer) {
+	this.buyer = buyer;
+    }
     public String getOrderNumber() {
         return orderNumber;
     }
