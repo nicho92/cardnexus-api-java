@@ -125,12 +125,16 @@
 			            <configuration>
 			                <generatorName>java</generatorName>
 			                
-			                <inputSpec>${project.basedir}/src/main/resources/CardNexus Public API.yaml</inputSpec>
+			                <inputSpec>${project.basedir}/src/main/resources/CardNexus-Public-API.yaml</inputSpec>
 					        <output>${project.build.directory}/generated-sources/cardnexus-openapi</output>
 					        
 					        <apiPackage>org.api.cardnexus.api</apiPackage>
 					        <modelPackage>org.api.cardnexus.model</modelPackage>
 					        <invokerPackage>org.api.cardnexus.client</invokerPackage>
+					        
+					        <openapiNormalizer>
+					          <openapiNormalizer>REMOVE_ANYOF_ONEOF_AND_KEEP_PROPERTIES_ONLY=true</openapiNormalizer>
+					        </openapiNormalizer>
 					        
 					  		<globalProperties>
 								<apiDocs>true</apiDocs>
@@ -160,10 +164,14 @@
 								<ensureUniqueParams>true</ensureUniqueParams>
 								<disallowAdditionalPropertiesIfNotPresent>false</disallowAdditionalPropertiesIfNotPresent>
 								<useOneOfInterfaces>true</useOneOfInterfaces>
+								<useOneOfDiscriminatorLookup>true</useOneOfDiscriminatorLookup>
 							</configOptions>
 							<addCompileSourceRoot>true</addCompileSourceRoot>
-							
-							
+							<schemaMappings>
+								<schemaMapping>ProductsSearchProductsRequestProductIdsInner=java.lang.String</schemaMapping>
+								<schemaMapping>ModelNull=java.lang.Object</schemaMapping>
+								<schemaMapping>AnyOf=java.lang.Object</schemaMapping>
+							</schemaMappings>
 					        </configuration>
 			        </execution>
 			    </executions>
