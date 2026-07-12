@@ -15,6 +15,8 @@ public abstract class AbstractNexusService {
     protected static final String ROOT_FEED_ENDPOINT="/feeds";
     protected static final String ROOT_ACCOUNT_ENDPOINT="/account";
     protected static final String ROOT_INVENTORY_ENDPOINT="/inventory";
+    protected static final String ROOT_LISTING_ENDPOINT="/listings";
+    protected static final String ROOT_LISTS_ENDPOINT="/lists";
     
    protected AbstractNexusService() {
 	client = new RestClient(NexusConfig.getToken());

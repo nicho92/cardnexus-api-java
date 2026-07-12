@@ -1,4 +1,4 @@
-package org.api.cardnexus.services.catalog;
+package org.api.cardnexus.services;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,7 +13,6 @@ import org.api.cardnexus.model.Sales;
 import org.api.cardnexus.model.enums.EnumFinishes;
 import org.api.cardnexus.model.enums.EnumMarketPlace;
 import org.api.cardnexus.model.requests.HistoryRequest;
-import org.api.cardnexus.services.AbstractNexusService;
 
 import com.google.gson.JsonObject;
 

@@ -1,4 +1,4 @@
-package org.api.cardnexus.services.catalog;
+package org.api.cardnexus.services;
 
 import java.io.IOException;
 import java.util.EnumMap;
@@ -7,7 +7,6 @@ import java.util.Map;
 import org.api.cardnexus.model.Feed;
 import org.api.cardnexus.model.Game;
 import org.api.cardnexus.model.enums.EnumFeedKey;
-import org.api.cardnexus.services.AbstractNexusService;
 
 import com.google.gson.JsonObject;
 

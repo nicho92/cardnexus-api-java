@@ -1,6 +1,7 @@
 package org.api.cardnexus.model;
 
 import java.util.Date;
+import java.util.Map;
 
 import org.api.cardnexus.model.enums.EnumCondition;
 import org.api.cardnexus.model.enums.EnumFinishes;
@@ -19,11 +20,17 @@ public class InventoryLine {
     private Integer quantity;
     private boolean forSale;
     private Date updatedAt;
+    private Map<String,Amount> listings; 
     
     
     
     
-    
+    public Map<String, Amount> getListings() {
+        return listings;
+    }
+    public void setListings(Map<String, Amount> listings) {
+        this.listings = listings;
+    }
     public String getId() {
         return id;
     }

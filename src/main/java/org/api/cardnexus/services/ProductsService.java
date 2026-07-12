@@ -1,4 +1,4 @@
-package org.api.cardnexus.services.catalog;
+package org.api.cardnexus.services;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,7 +10,6 @@ import org.api.cardnexus.model.Expansion;
 import org.api.cardnexus.model.Game;
 import org.api.cardnexus.model.Pagination;
 import org.api.cardnexus.model.requests.SearchProductRequest;
-import org.api.cardnexus.services.AbstractNexusService;
 
 public class ProductsService extends AbstractNexusService{
 
