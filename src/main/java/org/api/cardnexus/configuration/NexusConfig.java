@@ -7,7 +7,16 @@ import java.nio.file.Files;
 public class NexusConfig {
 	
 	private static String token;
-
+	private static File fileDirectory = new File(System.getProperty("user.home"));
+	
+	public static File getFileDirectory() {
+	    return fileDirectory;
+	}
+	
+	public static void setFileDirectory(File fileDirectory) {
+	    NexusConfig.fileDirectory = fileDirectory;
+	}
+	
 	public static String getToken()
 	{
 		return token;

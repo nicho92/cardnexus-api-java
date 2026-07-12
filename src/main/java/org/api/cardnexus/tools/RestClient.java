@@ -51,8 +51,7 @@ public class RestClient implements Closeable {
     /**
      * Constructeur avec authentification.
      *
-     * @param email  email account
-     * @param token Manapool integration token
+     * @param token  integration token
      */
     public RestClient(String token) {
         this.httpClient = HttpClients.createDefault();
