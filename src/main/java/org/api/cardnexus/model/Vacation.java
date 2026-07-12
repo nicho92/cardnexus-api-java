@@ -1,4 +1,4 @@
-package org.api.cardnexus.model.account;
+package org.api.cardnexus.model;
 
 import java.util.Date;
 

@@ -7,7 +7,7 @@ import org.api.cardnexus.tools.RestClient;
 
 public abstract class AbstractNexusService {
 
-    protected Logger logger = LogManager.getLogger(AbstractNexusService.class);
+    protected Logger logger = LogManager.getLogger(getClass());
     protected RestClient client;
 
     

@@ -21,6 +21,8 @@ import org.apache.logging.log4j.Logger;
 import org.api.cardnexus.configuration.NexusConstants;
 import org.api.cardnexus.listener.URLCallInfo;
 import org.api.cardnexus.listener.URLCallListener;
+import org.api.cardnexus.model.Expansion;
+import org.api.cardnexus.model.PaginateResult;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
@@ -57,7 +59,7 @@ public class RestClient implements Closeable {
     }
 
     // -------------------- Méthodes principales --------------------
-
+    
     public <T> T get(String url, Map<String, String> headers, Class<T> responseType) throws IOException {
         var request = new HttpGet(NexusConstants.API_BASE_URL+url);
         applyHeaders(request, headers);
@@ -176,4 +178,5 @@ public class RestClient implements Closeable {
             return "DELETE";
         }
     }
+
 }
