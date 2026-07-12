@@ -21,7 +21,6 @@ public class SearchProductRequest  {
     private List<Integer> tcgplayerId;
     private EnumProductSort sortBy;
     private EnumSortDirection sortDirection;
-    private Map<String,Object> productTypes;
     private Map<String, Object> gameFilters;
     
     
@@ -33,7 +32,7 @@ public class SearchProductRequest  {
     
     public void setProductTypes(EnumProductType...values)
     {
-	productTypes = new HashMap<>();
+	var productTypes = new HashMap<>();
 	productTypes.put("op", "or");
 	productTypes.put("values", values);
     }

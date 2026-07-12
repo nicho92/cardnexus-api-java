@@ -31,15 +31,10 @@ public abstract class AbstractGetRequest {
 
                 if (value != null) 
                 {
-                    if(value instanceof LocalDate d)
-                    {
-                	joiner.add(encode(pd.getName()) + "=" +encode(DateTimeFormatter.ofPattern(NexusConstants.REQ_DATE_PATTERN).format(d)));
-                    }
-                    else
-                    {
-                	joiner.add(encode(pd.getName()) + "=" +encode(value.toString()));
-                    }
-                    
+		    if (value instanceof LocalDate d)
+			joiner.add(encode(pd.getName()) + "="+ encode(DateTimeFormatter.ofPattern(NexusConstants.REQ_DATE_PATTERN).format(d)));
+		    else
+			joiner.add(encode(pd.getName()) + "=" + encode(value.toString()));
                 }
             }
 
