@@ -9,7 +9,7 @@ import org.api.cardnexus.model.enums.EnumProductSort;
 import org.api.cardnexus.model.enums.EnumProductType;
 import org.api.cardnexus.model.enums.EnumSortDirection;
 
-public class SearchProductRequest extends AbstractGetRequest {
+public class SearchProductRequest  {
     
     private int offset;
     private int limit;
