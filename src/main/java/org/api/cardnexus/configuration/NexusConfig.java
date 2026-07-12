@@ -1,4 +1,4 @@
-package org.api.cardnexus.services;
+package org.api.cardnexus.configuration;
 
 import java.io.File;
 import java.io.IOException;

@@ -51,132 +51,26 @@
 		</repository>
 	</distributionManagement>
 	<dependencies>
-		<dependency>
-		    <groupId>io.swagger.parser.v3</groupId>
-		    <artifactId>swagger-parser</artifactId>
-		    <version>2.1.42</version>
-		</dependency>
-		<dependency>
-		    <groupId>io.swagger.core.v3</groupId>
-		    <artifactId>swagger-annotations</artifactId>
-		    <version>2.2.52</version>
-		</dependency>
-		<dependency>
-            <groupId>jakarta.annotation</groupId>
-            <artifactId>jakarta.annotation-api</artifactId>
-            <version>1.3.5</version>
-            <scope>provided</scope>
-        </dependency>
-         <dependency>
-            <groupId>org.openapitools</groupId>
-            <artifactId>jackson-databind-nullable</artifactId>
-            <version>0.2.10</version>
-        </dependency>
-        <dependency>
-		    <groupId>com.fasterxml.jackson.core</groupId>
-		    <artifactId>jackson-databind</artifactId>
-		    <version>2.20.0</version>
-		</dependency>
 		
-		<dependency>
-		    <groupId>com.fasterxml.jackson.datatype</groupId>
-		    <artifactId>jackson-datatype-jsr310</artifactId>
-		    <version>2.20.0</version>
-		</dependency>
-		
-		<dependency>
-		    <groupId>com.fasterxml.jackson.core</groupId>
-		    <artifactId>jackson-annotations</artifactId>
-		    <version>2.22</version>
-		</dependency>
-		 <dependency>
-            <groupId>com.squareup.okhttp3</groupId>
-            <artifactId>okhttp</artifactId>
-            <version>4.12.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.squareup.okhttp3</groupId>
-            <artifactId>logging-interceptor</artifactId>
-            <version>4.12.0</version>
-        </dependency>
 		<dependency>
 		    <groupId>com.google.code.gson</groupId>
 		    <artifactId>gson</artifactId>
 		    <version>2.14.0</version>
 		</dependency>
 		<dependency>
-            <groupId>io.gsonfire</groupId>
-            <artifactId>gson-fire</artifactId>
-            <version>1.9.0</version>
-        </dependency>
+    		<groupId>org.apache.logging.log4j</groupId>
+    		<artifactId>log4j-core</artifactId>
+    		<version>2.24.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5.14</version>
+		</dependency>
+	
 	</dependencies>
 	<build>
 		<plugins>
-			<plugin>
-			    <groupId>org.openapitools</groupId>
-			    <artifactId>openapi-generator-maven-plugin</artifactId>
-			    <version>7.23.0</version>
-			    <executions>
-			        <execution>
-			        	<phase>generate-sources</phase>
-			            <goals>
-			                <goal>generate</goal>
-			            </goals>
-			            <configuration>
-			                <generatorName>java</generatorName>
-			                
-			                <inputSpec>${project.basedir}/src/main/resources/CardNexus-Public-API.yaml</inputSpec>
-					        <output>${project.build.directory}/generated-sources/cardnexus-openapi</output>
-					        
-					        <apiPackage>org.api.cardnexus.api</apiPackage>
-					        <modelPackage>org.api.cardnexus.model</modelPackage>
-					        <invokerPackage>org.api.cardnexus.client</invokerPackage>
-					        
-					        <openapiNormalizer>
-					          <openapiNormalizer>REMOVE_ANYOF_ONEOF_AND_KEEP_PROPERTIES_ONLY=true</openapiNormalizer>
-					        </openapiNormalizer>
-					        
-					  		<globalProperties>
-								<apiDocs>true</apiDocs>
-								<modelDocs>false</modelDocs>
-								<apiTests>false</apiTests>
-								<modelTests>false</modelTests>
-							</globalProperties>
-							
-							<generateApis>true</generateApis>
-							<generateModels>true</generateModels>
-							<generateSupportingFiles>true</generateSupportingFiles>
-							<generateApiTests>false</generateApiTests>
-							<generateModelTests>false</generateModelTests>
-							<generateApiDocumentation>false</generateApiDocumentation>
-							<generateModelDocumentation>false</generateModelDocumentation>
-							<skipValidateSpec>true</skipValidateSpec>
-							
-							<configOptions>
-								<library>okhttp-gson</library>
-								<serializationLibrary>gson</serializationLibrary>
-								<sourceFolder>src/main/java</sourceFolder>
-								<dateLibrary>java8</dateLibrary>
-								<hideGenerationTimestamp>true</hideGenerationTimestamp>
-								<useRuntimeException>true</useRuntimeException>
-								<useTags>true</useTags>
-								<enumUnknownDefaultCase>true</enumUnknownDefaultCase>
-								<ensureUniqueParams>true</ensureUniqueParams>
-								<disallowAdditionalPropertiesIfNotPresent>false</disallowAdditionalPropertiesIfNotPresent>
-								<useOneOfInterfaces>true</useOneOfInterfaces>
-								<useOneOfDiscriminatorLookup>true</useOneOfDiscriminatorLookup>
-							</configOptions>
-							<addCompileSourceRoot>true</addCompileSourceRoot>
-							<schemaMappings>
-								<schemaMapping>ProductsSearchProductsRequestProductIdsInner=java.lang.String</schemaMapping>
-								<schemaMapping>ModelNull=java.lang.Object</schemaMapping>
-								<schemaMapping>AnyOf=java.lang.Object</schemaMapping>
-							</schemaMappings>
-					        </configuration>
-			        </execution>
-			    </executions>
-			</plugin>
-		
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>

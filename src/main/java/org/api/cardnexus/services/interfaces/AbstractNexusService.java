@@ -1,25 +1,19 @@
 package org.api.cardnexus.services.interfaces;
 
-import org.api.cardnexus.client.ApiClient;
-import org.api.cardnexus.client.Configuration;
-import org.api.cardnexus.client.auth.HttpBearerAuth;
-import org.api.cardnexus.services.NexusConfig;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.api.cardnexus.configuration.NexusConfig;
+import org.api.cardnexus.tools.RestClient;
 
 public abstract class AbstractNexusService {
 
-    
-    protected ApiClient defaultClient;
+    protected Logger logger = LogManager.getLogger(AbstractNexusService.class);
+    protected RestClient client;
 
-    public AbstractNexusService() {
-	    defaultClient = Configuration.getDefaultApiClient();
-    	defaultClient.setBasePath("https://public-api.cardnexus.com/v1");
-    	setBearer(NexusConfig.getToken());
+    
+   protected AbstractNexusService() {
+	client = new RestClient(NexusConfig.getToken());
     }
     
-    
-    private void setBearer(String token)
-    {
-    	 ((HttpBearerAuth) defaultClient.getAuthentication("bearerAuth")).setBearerToken(token);
-    }
-    
+
 }
