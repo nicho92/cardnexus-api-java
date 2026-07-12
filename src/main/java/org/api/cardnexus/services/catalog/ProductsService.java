@@ -1,16 +1,16 @@
-package org.api.cardnexus.services;
+package org.api.cardnexus.services.catalog;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.api.cardnexus.configuration.AbstractNexusService;
 import org.api.cardnexus.configuration.NexusConstants;
 import org.api.cardnexus.model.AbstractProduct;
 import org.api.cardnexus.model.Expansion;
 import org.api.cardnexus.model.Game;
 import org.api.cardnexus.model.Pagination;
 import org.api.cardnexus.model.requests.SearchProductRequest;
+import org.api.cardnexus.services.AbstractNexusService;
 
 public class ProductsService extends AbstractNexusService{
 

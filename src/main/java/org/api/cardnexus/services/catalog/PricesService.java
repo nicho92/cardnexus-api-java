@@ -1,15 +1,12 @@
-package org.api.cardnexus.services;
+package org.api.cardnexus.services.catalog;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.client.utils.URIBuilder;
-import org.api.cardnexus.configuration.AbstractNexusService;
-import org.api.cardnexus.configuration.NexusConstants;
 import org.api.cardnexus.model.AbstractProduct;
 import org.api.cardnexus.model.CardNexusPrice;
 import org.api.cardnexus.model.History;
@@ -19,6 +16,7 @@ import org.api.cardnexus.model.Sales;
 import org.api.cardnexus.model.enums.EnumFinishes;
 import org.api.cardnexus.model.enums.EnumMarketPlace;
 import org.api.cardnexus.model.requests.HistoryRequest;
+import org.api.cardnexus.services.AbstractNexusService;
 
 import com.google.gson.JsonObject;
 

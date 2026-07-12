@@ -1,11 +1,11 @@
-package org.api.cardnexus.services;
+package org.api.cardnexus.services.catalog;
 
 import java.io.IOException;
 
-import org.api.cardnexus.configuration.AbstractNexusService;
 import org.api.cardnexus.model.Account;
 import org.api.cardnexus.model.Balance;
 import org.api.cardnexus.model.Vacation;
+import org.api.cardnexus.services.AbstractNexusService;
 
 import com.google.gson.JsonObject;
 

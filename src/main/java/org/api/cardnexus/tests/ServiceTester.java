@@ -7,7 +7,7 @@ import java.time.ZoneId;
 
 import org.api.cardnexus.configuration.NexusConfig;
 import org.api.cardnexus.model.requests.HistoryRequest;
-import org.api.cardnexus.services.PricesService;
+import org.api.cardnexus.services.catalog.PricesService;
 
 public class ServiceTester{
 
