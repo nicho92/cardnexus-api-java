@@ -15,7 +15,7 @@
 	<Loggers>
 		<Logger name="org.apache.http" level="ERROR"></Logger>
 		
-        <Root level="DEBUG">
+        <Root level="ERROR">
             <AppenderRef ref="CONSOLE"/>
         </Root>
     </Loggers>

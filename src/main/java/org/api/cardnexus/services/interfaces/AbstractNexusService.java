@@ -15,5 +15,4 @@ public abstract class AbstractNexusService {
 	client = new RestClient(NexusConfig.getToken());
     }
     
-
 }

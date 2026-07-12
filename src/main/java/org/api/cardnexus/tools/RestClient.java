@@ -181,9 +181,7 @@ public class RestClient implements Closeable {
                 }
                 if (jsonResponse != null && !jsonResponse.isEmpty()) {
                     try {
-                    	
                     	  logger.debug("result: {},", jsonResponse );
-                    	
                         return fromJson(jsonResponse, responseType);
                     } catch (JsonSyntaxException e) {
                         throw new IOException("Erreur de parsing JSON : " + e.getMessage(), e);

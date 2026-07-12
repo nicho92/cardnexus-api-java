@@ -5,7 +5,7 @@ public class Pagination {
     private int offset;
     private int limit;
     private int total;
-    private boolean hasMore;
+    private boolean hasMore=true;
     
     
     public int getOffset() {

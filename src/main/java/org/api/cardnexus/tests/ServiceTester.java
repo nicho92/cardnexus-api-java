@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 
 import org.api.cardnexus.configuration.NexusConfig;
+import org.api.cardnexus.model.enums.EnumProductType;
+import org.api.cardnexus.model.requests.SearchProductRequest;
 import org.api.cardnexus.services.ProductsService;
 
 public class ServiceTester{
@@ -14,7 +16,14 @@ public class ServiceTester{
 		
 		var service = new ProductsService();
 		
-		System.out.println( service.searchProduct("Lion's Eye Diamond").size());
+		
+
+		var req = new SearchProductRequest();
+		req.setNameSlug("forest");
+		req.addGameFilter("game", "mtg");
+		req.setProductTypes(EnumProductType.card);
+
+		System.out.println(service.searchProduct(req).size());
 		
 		
 		

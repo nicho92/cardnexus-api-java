@@ -5,9 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.api.cardnexus.configuration.NexusConstants;
+import org.api.cardnexus.model.AbstractProduct;
+import org.api.cardnexus.model.CardProduct;
 import org.api.cardnexus.model.Expansion;
 import org.api.cardnexus.model.Game;
-import org.api.cardnexus.model.Product;
+import org.api.cardnexus.model.Pagination;
 import org.api.cardnexus.model.requests.SearchProductRequest;
 import org.api.cardnexus.services.interfaces.AbstractNexusService;
 
@@ -41,37 +43,32 @@ public class ProductsService extends AbstractNexusService{
     public List<Expansion> listExpansion(String id) throws IOException
     {
 	var ret = new ArrayList<Expansion>();
-	
-	var result =  client.getPaginated(ROOT_GAME_ENDPOINT+"/"+id+"/expansions?offset="+ret.size()+"&limit="+NexusConstants.LIMIT_LIST_RESULTS, null, Expansion.class);
-	
-	ret.addAll(result.getData());
-	
-	
-	while(result.getPagination().hasMore())
+	var pagination=new Pagination();
+	while(pagination.hasMore())
 	{
-	    result = client.getPaginated(ROOT_GAME_ENDPOINT+"/"+id+"/expansions?offset="+ret.size()+"&limit="+NexusConstants.LIMIT_LIST_RESULTS, null, Expansion.class);
-	    ret.addAll(result.getData());
+		var result =  client.getPaginated(ROOT_GAME_ENDPOINT+"/"+id+"/expansions?offset="+ret.size()+"&limit="+NexusConstants.LIMIT_LIST_RESULTS, null, Expansion.class);
+		ret.addAll(result.getData());
+		pagination = result.getPagination();
 	}
-	
 	return ret;
     }
     
-    public List<Product> searchProduct(String name) throws IOException
+    public List<AbstractProduct> searchProduct(SearchProductRequest req) throws IOException
     {
-	var req = new SearchProductRequest();
-	
-	req.getCardmarketId().add(1);
-	req.setExpansionId(42);
-	req.addGameFilter("game", "mtg");
-	req.setSortBy("printNumber");
-	req.setSortDirection("asc");
-	
-	var page = client.postPaginated(ROOT_PRODUCT_ENDPOINT+"/search",req,null,Product.class);
-	
-	
-	return new ArrayList<>();
-	
+	var ret = new ArrayList<AbstractProduct>();
+	var pagination=new Pagination();
+	while(pagination.hasMore())
+	{
+	    req.setOffset(ret.size());
+	    var result = client.postPaginated(ROOT_PRODUCT_ENDPOINT+"/search",req,null,CardProduct.class);
+	    ret.addAll(result.getData());
+	    pagination=result.getPagination();
+	}
+	return ret;
     }
+    
+    
+    
     
     
     

@@ -1,9 +1,13 @@
 package org.api.cardnexus.model.requests;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.api.cardnexus.configuration.NexusConstants;
+import org.api.cardnexus.model.enums.EnumProductSort;
+import org.api.cardnexus.model.enums.EnumProductType;
+import org.api.cardnexus.model.enums.EnumSortDirection;
 
 public class SearchProductRequest {
     
@@ -15,18 +19,25 @@ public class SearchProductRequest {
     private String nameSlug;
     private List<Integer> cardmarketId;
     private List<Integer> tcgplayerId;
-    private String sortBy;
-    private String sortDirection;
-    
+    private EnumProductSort sortBy;
+    private EnumSortDirection sortDirection;
+    private Map<String,Object> productTypes;
     private Map<String, Object> gameFilters;
     
     
     public SearchProductRequest() {
+	limit = NexusConstants.LIMIT_LIST_RESULTS;
 	gameFilters = new HashMap<>();
-	productIds= new ArrayList<>();
-	cardmarketId = new ArrayList<>();
-	tcgplayerId= new ArrayList<>();
+	
     }
+    
+    public void setProductTypes(EnumProductType...values)
+    {
+	productTypes = new HashMap<>();
+	productTypes.put("op", "or");
+	productTypes.put("values", values);
+    }
+    
     
     public void addGameFilter(String gameId,String value)
     {
@@ -81,22 +92,23 @@ public class SearchProductRequest {
     public void setTcgplayerId(List<Integer> tcgplayerId) {
         this.tcgplayerId = tcgplayerId;
     }
-    public String getSortBy() {
+
+    public EnumProductSort getSortBy() {
         return sortBy;
     }
-    public void setSortBy(String sortBy) {
+
+    public void setSortBy(EnumProductSort sortBy) {
         this.sortBy = sortBy;
     }
-    public String getSortDirection() {
+
+    public EnumSortDirection getSortDirection() {
         return sortDirection;
     }
-    public void setSortDirection(String sortDirection) {
+
+    public void setSortDirection(EnumSortDirection sortDirection) {
         this.sortDirection = sortDirection;
     }
    
-    
-    
-    
     
     
   }
