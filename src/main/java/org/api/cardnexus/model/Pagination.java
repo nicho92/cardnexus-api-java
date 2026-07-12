@@ -6,8 +6,13 @@ public class Pagination {
     private int limit;
     private int total;
     private boolean hasMore=true;
+    private String nextCursor;
     
     
+    
+    public String getNextCursor() {
+        return nextCursor;
+    }
     public int getOffset() {
         return offset;
     }
@@ -32,8 +37,4 @@ public class Pagination {
     public void setHasMore(boolean hasMore) {
         this.hasMore = hasMore;
     }
-    
-    
-    
-    
 }

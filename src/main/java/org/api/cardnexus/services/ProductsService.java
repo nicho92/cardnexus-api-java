@@ -10,6 +10,7 @@ import org.api.cardnexus.model.AbstractProduct;
 import org.api.cardnexus.model.Expansion;
 import org.api.cardnexus.model.Game;
 import org.api.cardnexus.model.Pagination;
+import org.api.cardnexus.model.Sales;
 import org.api.cardnexus.model.requests.SearchProductRequest;
 
 public class ProductsService extends AbstractNexusService{
@@ -64,7 +65,18 @@ public class ProductsService extends AbstractNexusService{
 	return ret;
     }
     
+    public List<Sales> getLastSales(AbstractProduct product) throws IOException
+    {
+	return getLastSales(product.getId());
+    }
     
+    public List<Sales> getLastSales(Integer productId) throws IOException
+    {
+	var ret = new ArrayList<Sales>();
+	var result = client.getPaginated(ROOT_PRODUCT_ENDPOINT+"/"+productId+"/sales" ,null,Sales.class);
+	    ret.addAll(result.getData());
+	return ret;
+    }
     
     
     
