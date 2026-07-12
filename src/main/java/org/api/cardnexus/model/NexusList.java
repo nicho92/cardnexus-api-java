@@ -12,13 +12,18 @@ public class NexusList {
     private double completionPercentage;
     private int itemCount;
     private int totalQuantity;
+ 
+    @Override
+    public String toString() {
+       return getId();
+    }
     
     public boolean isComplete()
     {
 	return completionPercentage>=100;
     }
     
-    
+ 
     public String getId() {
         return id;
     }

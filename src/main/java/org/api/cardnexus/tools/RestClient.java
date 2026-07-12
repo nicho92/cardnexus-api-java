@@ -10,6 +10,7 @@ import java.util.Map;
 
 import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPatch;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpRequestBase;
@@ -90,6 +91,13 @@ public class RestClient implements Closeable {
     
     public <T> T post(String url, Object body, Map<String, String> headers, Class<T> responseType) throws IOException {
         var request = new HttpPost(NexusConstants.API_BASE_URL+url);
+        applyHeaders(request, headers);
+        addJsonBody(request, body);
+        return executeRequest(request, responseType);
+    }
+    
+    public <T> T patch(String url, Object body, Map<String, String> headers, Class<T> responseType) throws IOException {
+        var request = new HttpPatch(NexusConstants.API_BASE_URL+url);
         applyHeaders(request, headers);
         addJsonBody(request, body);
         return executeRequest(request, responseType);
