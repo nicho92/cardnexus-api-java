@@ -12,9 +12,7 @@ import org.api.cardnexus.model.enums.EnumFeedKey;
 import com.google.gson.JsonObject;
 
 public class FeedsService extends AbstractNexusService{
-
-    private static final String ROOT_FEED_ENDPOINT="/feeds";
-    
+   
     public Map<EnumFeedKey, Feed> getGameFeeds(String gameId) throws IOException
     {
 	var obj = client.get(ROOT_FEED_ENDPOINT+"/"+gameId, null, JsonObject.class);

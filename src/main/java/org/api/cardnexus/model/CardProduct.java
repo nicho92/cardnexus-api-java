@@ -13,7 +13,7 @@ public class CardProduct extends AbstractProduct {
     private String printNumber;
     private EnumRarity rarity;
     private List<EnumFinishes> finishes;
-    private Map<EnumFinishes,Map<EnumMarketCurrency,MarketPrice>> pricesByFinish;
+    private Map<EnumFinishes,Map<EnumMarketCurrency,MarketVariations>> pricesByFinish;
     private CardAttributs attributes;
     
     
@@ -25,7 +25,7 @@ public class CardProduct extends AbstractProduct {
     public CardAttributs getAttributes() {
 	return attributes;
     }
-    public MarketPrice getPrices(EnumFinishes finish,EnumMarketCurrency currency)   {
+    public MarketVariations getPrices(EnumFinishes finish,EnumMarketCurrency currency)   {
 		return pricesByFinish.get(finish).get(currency);
     }
     public String getPrintNumber() {

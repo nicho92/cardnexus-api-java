@@ -24,7 +24,7 @@ public abstract class AbstractProduct {
            return String.valueOf(getId());
     }
     
-    public abstract MarketPrice getPrices(EnumFinishes finish, EnumMarketCurrency currency);
+    public abstract MarketVariations getPrices(EnumFinishes finish, EnumMarketCurrency currency);
     
     
     

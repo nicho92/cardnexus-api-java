@@ -10,6 +10,14 @@ public abstract class AbstractNexusService {
     protected RestClient client;
 
     
+    
+    
+    protected static final String ROOT_GAME_ENDPOINT="/games";
+    protected static final String ROOT_PRODUCT_ENDPOINT="/products";
+    protected static final String ROOT_FEED_ENDPOINT="/feeds";
+    protected static final String ROOT_ACCOUNT_ENDPOINT="/account";
+    
+    
    protected AbstractNexusService() {
 	client = new RestClient(NexusConfig.getToken());
     }

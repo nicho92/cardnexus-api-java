@@ -4,8 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import org.api.cardnexus.configuration.NexusConfig;
-import org.api.cardnexus.model.enums.EnumFeedKey;
-import org.api.cardnexus.services.FeedsService;
+import org.api.cardnexus.services.PricesService;
 
 public class ServiceTester{
 
@@ -13,11 +12,16 @@ public class ServiceTester{
 	    
 		NexusConfig.loadTokenFromFile(new File("E:\\Mon Drive\\token.txt"));
 		
-		var service = new FeedsService();
+		var service = new PricesService();
 		
 		
-		var m = service.getFeed("mtg",EnumFeedKey.catalog);
-		System.out.println(m);
+		var price = service.getCurrentPrice(213551);
+		
+		
+		
+		price.getCardNexus().entrySet().forEach(e->{
+		    System.out.println(e.getKey() + " " + e.getValue());
+		});
 		
 	}
 	

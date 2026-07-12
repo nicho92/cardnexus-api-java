@@ -1,14 +1,27 @@
 package org.api.cardnexus.model;
 
-public class MarketPrice {
+import java.util.Date;
+
+public class MarketVariations {
     private double low;
     private double mid;
     private double marketValue;
     private double change24h;
     private double change7d;
     private double change30d;
+    private Date date;
     
+    @Override
+    public String toString() {
+	return String.valueOf(getMarketValue());
+    }
     
+    public Date getDate() {
+	return date;
+    }
+    public void setDate(Date date) {
+	this.date = date;
+    }
     public double getLow() {
         return low;
     }

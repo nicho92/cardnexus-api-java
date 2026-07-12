@@ -10,7 +10,7 @@ public class SealedProduct extends AbstractProduct {
 
     private String ean;
     private EnumSealedType productCategory;
-    private Map<EnumMarketCurrency,MarketPrice> prices;
+    private Map<EnumMarketCurrency,MarketVariations> prices;
     
     public String getEan() {
         return ean;
@@ -18,7 +18,7 @@ public class SealedProduct extends AbstractProduct {
     public EnumSealedType getProductCategory() {
         return productCategory;
     }
-    public MarketPrice getPrices(EnumFinishes f,EnumMarketCurrency currency) {
+    public MarketVariations getPrices(EnumFinishes f,EnumMarketCurrency currency) {
         return prices.get(currency);
     }
     

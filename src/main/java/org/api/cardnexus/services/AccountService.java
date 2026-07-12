@@ -15,17 +15,17 @@ public class AccountService extends AbstractNexusService {
     
     public Account getAccount() throws IOException
     {
-	return client.get("/account/me", null, Account.class);
+	return client.get(ROOT_ACCOUNT_ENDPOINT+"/me", null, Account.class);
     }
     
     public Balance getWalletBalance() throws IOException
     {
-	return client.get("/account/balance", null, Balance.class);
+	return client.get(ROOT_ACCOUNT_ENDPOINT+"/balance", null, Balance.class);
     }
     
     public Vacation getVacationMode() throws IOException
     {
-	return client.get("/account/vacation", null, Vacation.class);
+	return client.get(ROOT_ACCOUNT_ENDPOINT+"/vacation", null, Vacation.class);
     }
     
     public Vacation setVacationMode(boolean enabled, String reason) throws IOException
@@ -35,7 +35,7 @@ public class AccountService extends AbstractNexusService {
 	      obj.addProperty("reason", reason);
 	      
 	      
-	return client.post("/account/vacation", obj, null,Vacation.class);
+	return client.post(ROOT_ACCOUNT_ENDPOINT+"/vacation", obj, null,Vacation.class);
     }
     
     

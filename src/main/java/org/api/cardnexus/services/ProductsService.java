@@ -15,12 +15,6 @@ import org.api.cardnexus.model.requests.SearchProductRequest;
 
 public class ProductsService extends AbstractNexusService{
 
-    
-    private static final String ROOT_GAME_ENDPOINT="/games";
-    private static final String ROOT_PRODUCT_ENDPOINT="/products";
-    
-    
-    
     public List<Game> listGames() throws IOException
     {
 	var arr = client.getPaginated(ROOT_GAME_ENDPOINT, null, Game.class);
