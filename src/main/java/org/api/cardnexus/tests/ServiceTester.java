@@ -19,7 +19,6 @@ public class ServiceTester{
 		
 		var req = new SearchProductRequest();
 			req.setGame("mtg");
-			//req.setNameSlug("mountain");
 			req.setName("Mountain");
 		
 		service.searchProduct(req);

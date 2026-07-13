@@ -3,20 +3,39 @@
 [![Maven Central](https://img.shields.io/maven-central/v/com.github.nicho92/cardnexus-api-java.svg)](https://central.sonatype.com/artifact/com.github.nicho92/cardnexus-api-java)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
 [![Java](https://img.shields.io/badge/Java-23-orange.svg)](https://openjdk.org/)
+[![Build](https://img.shields.io/badge/build-Maven-red.svg)](pom.xml)
 
-Java client for the **CardNexus** API.
+A lightweight Java SDK for the **CardNexus API**, providing typed access to CardNexus's card, pricing, and marketplace data from Java applications.
 
-This SDK is part of a series of Java clients built for the [MtgDesktopCompanion](https://www.mtgcompanion.org) ecosystem, providing access to the main trading card marketplace APIs (Cardmarket, CardTrader, MTGStock, ManaPool, and now CardNexus).
+This project is part of a family of Java API clients built around the [MtgDesktopCompanion](https://www.mtgcompanion.org) ecosystem, alongside [`mkm-api-java`](https://github.com/nicho92/mkm-api-java) (Cardmarket), [`cardtrader-api-java`](https://github.com/nicho92/cardtrader-api-java) (CardTrader), [`mtgstock-api-java`](https://github.com/nicho92/mtgstock-api-java) (MTGStock) and [`manapool-api-java`](https://github.com/nicho92/manapool-api-java) (ManaPool). All of them follow the same design conventions, so if you've used one, you'll feel at home with `cardnexus-api-java`.
 
 ## Table of contents
 
-- [Installation](#installation)
+- [Why this project](#why-this-project)
 - [Requirements](#requirements)
+- [Installation](#installation)
 - [Quick start](#quick-start)
-- [Features](#features)
+- [Project structure](#project-structure)
+- [Configuration](#configuration)
 - [Error handling](#error-handling)
+- [Logging](#logging)
+- [Building from source](#building-from-source)
+- [Testing](#testing)
+- [Roadmap](#roadmap)
+- [Related projects](#related-projects)
 - [Contributing](#contributing)
 - [License](#license)
+- [Author](#author)
+
+## Why this project
+
+CardNexus exposes card and pricing data over HTTP. `cardnexus-api-java` wraps those endpoints in a small, dependency-light Java library so you don't have to hand-roll HTTP calls, JSON parsing, and error handling yourself. It's designed to be embedded in desktop apps, batch jobs, or backend services that need programmatic access to CardNexus data.
+
+## Requirements
+
+- **Java 23** or higher (see `maven.compiler.source` / `maven.compiler.target` in `pom.xml`)
+- **Maven** 3.6+ to build from source
+- A valid CardNexus API key/credentials
 
 ## Installation
 
@@ -36,14 +55,11 @@ This SDK is part of a series of Java clients built for the [MtgDesktopCompanion]
 implementation 'com.github.nicho92:cardnexus-api-java:1.3.0'
 ```
 
-## Requirements
-
-- Java 23 or higher
-- Valid CardNexus API credentials (API key/token, as per the official CardNexus documentation)
+The library is published on [Maven Central](https://central.sonatype.com/artifact/com.github.nicho92/cardnexus-api-java), so no extra repository declaration is needed.
 
 ## Quick start
 
-<!-- TODO: adjust class/package names below to match the actual implementation -->
+<!-- TODO: replace with the real package/class names from src/main -->
 
 ```java
 import org.api.cardnexus.tools.CardNexusAPIConfig;
@@ -54,12 +70,11 @@ import java.util.List;
 
 public class Example {
     public static void main(String[] args) throws Exception {
-        // Initialize the API configuration once at application startup
+        // Initialize the API configuration once, at application startup
         NexusConfig.setToken(
             System.getenv("CARDNEXUS_API_KEY")
         );
 
-        // Use the domain-specific service classes
         var service = new ProductsService();
 		
 		
@@ -67,29 +82,82 @@ public class Example {
 			req.setGame("mtg");
 			req.setName("Mountain");
 		
-		service.searchProduct(req);
-		
+		service.searchProduct(req).forEach(p->{
+			System.out.println(p);
+		});
     }
 }
 ```
 
-Expected environment variables:
+Required environment variables:
+
+| Variable            | Description                     |
+|---------------------|----------------------------------|
+| `CARDNEXUS_API_KEY`  | Your CardNexus API key/token     |
+
+## Project structure
+
+<!-- TODO: confirm against the actual src/main tree -->
+
+Following the same layout as the other clients in this series:
 
 ```
-CARDNEXUS_API_KEY=your-api-key
+src/main/java/org/api/cardnexus/services    Service classes, one per API domain (cards, prices, ...)
+src/main/java/org/api/cardnexus/modele      API model / DTO classes
+src/main/java/org/api/cardnexus/tools       Configuration, constants, HTTP and JSON helpers
+src/main/java/org/api/cardnexus/exceptions  Custom exception types
+src/test/java                                Unit and integration tests
 ```
 
-## Features
+## Configuration
 
-<!-- TODO: list the endpoints actually covered -->
-
-- Card search
-- Price / listing retrieval
-- Collection management *(depending on CardNexus API availability)*
+The client is configured through a singleton (`CardNexusAPIConfig` or equivalent), initialized once at application startup with your API credentials, then reused by all service classes. Credentials should never be hardcoded — pass them via environment variables, a `.env` file, or a secrets manager.
 
 ## Error handling
 
-Network calls and parsing failures are typically surfaced as `IOException`. API-specific errors (missing credentials, invalid requests, etc.) are wrapped in dedicated exceptions from the `exceptions` package.
+<!-- TODO: confirm the actual exception hierarchy -->
+
+- Network and parsing failures are generally surfaced as `IOException`.
+- Missing or invalid credentials typically throw a dedicated configuration exception.
+- Non-2xx HTTP responses from CardNexus are wrapped in a custom API exception exposing the status code and error payload where available.
+
+## Logging
+
+The project uses **Log4j2** for logging. Add or adjust a `log4j2.xml` on your classpath to control log verbosity; the Maven build excludes `log4j2.xml` from the packaged jar so consuming applications can supply their own configuration.
+
+## Building from source
+
+```bash
+git clone https://github.com/nicho92/cardnexus-api-java.git
+cd cardnexus-api-java
+mvn clean install
+```
+
+## Testing
+
+```bash
+mvn clean test
+```
+
+<!-- TODO: mention if tests require live CardNexus credentials / mocked responses -->
+
+## Roadmap
+
+<!-- TODO: fill in with actual planned work -->
+
+- [ ] Full endpoint coverage for CardNexus
+- [ ] Integration examples
+- [ ] Publish Javadoc
+
+## Related projects
+
+| Project | Marketplace |
+|---|---|
+| [mkm-api-java](https://github.com/nicho92/mkm-api-java) | Cardmarket |
+| [cardtrader-api-java](https://github.com/nicho92/cardtrader-api-java) | CardTrader |
+| [mtgstock-api-java](https://github.com/nicho92/mtgstock-api-java) | MTGStock |
+| [manapool-api-java](https://github.com/nicho92/manapool-api-java) | ManaPool |
+| [MtgDesktopCompanion](https://github.com/nicho92/MtgDesktopCompanion) | Full MTG collection/deck manager built on top of these clients |
 
 ## Contributing
 
@@ -97,7 +165,7 @@ Contributions are welcome:
 
 1. Fork the repository
 2. Create a feature branch
-3. Make your changes (with tests when possible)
+3. Make your changes, with tests when possible
 4. Run `mvn clean test`
 5. Open a pull request describing the change and any compatibility impact
 
