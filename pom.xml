@@ -28,7 +28,7 @@
 		<developerConnection>scm:git:https://github.com/nicho92/cardnexus-api-java.git</developerConnection>
 	</scm>
 	
-	<version>1.4.1</version>
+	<version>1.4.2</version>
 	<packaging>jar</packaging>
 
 	<properties>

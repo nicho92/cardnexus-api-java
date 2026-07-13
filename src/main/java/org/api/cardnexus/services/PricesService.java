@@ -35,7 +35,7 @@ public class PricesService extends AbstractNexusService {
 	        if(m.getKey().equals(EnumMarketPlace.tcgplayer.name()))
 	    		p.getTcgplayer().put(finish, client.fromJson(m.getValue().toString(), MarketVariations.class));
 	    	    
-	        if(m.getKey().equals("cardnexus"))
+	        if(m.getKey().equals(EnumMarketPlace.cardnexus.name()))
 	    		p.getCardNexus().put(finish, client.fromJson(m.getValue().toString(), CardNexusPrice.class));
 	    });
 	    

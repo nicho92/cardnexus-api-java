@@ -175,7 +175,7 @@ public class RestClient implements Closeable {
         	var statusCode = response.getStatusLine().getStatusCode();
             var jsonResponse = response.getEntity() != null ? EntityUtils.toString(response.getEntity()) : null;
        
-            logger.info("{} : {},", request,statusCode );
+            logger.debug("{} : {},", request,statusCode );
     		callInfo.setEnd(Instant.now());
     		callInfo.setUrl(request.getURI().toASCIIString());
     		callInfo.setRequest(request);
@@ -189,7 +189,7 @@ public class RestClient implements Closeable {
                 }
                 if (jsonResponse != null && !jsonResponse.isEmpty()) {
                     try {
-                    	  logger.debug("result: {},", jsonResponse );
+                    	  logger.trace("result: {},", jsonResponse );
                         return fromJson(jsonResponse, responseType);
                     } catch (JsonSyntaxException e) {
                         throw new IOException("Erreur de parsing JSON : " + e.getMessage(), e);
