@@ -62,9 +62,9 @@ The library is published on [Maven Central](https://central.sonatype.com/artifac
 <!-- TODO: replace with the real package/class names from src/main -->
 
 ```java
-import org.api.cardnexus.tools.CardNexusAPIConfig;
-import org.api.cardnexus.services.CardService;
-import org.api.cardnexus.modele.Card;
+import org.api.cardnexus.configuration.NexusConfig;
+import org.api.cardnexus.model.requests.SearchProductRequest;
+import org.api.cardnexus.services.ProductsService;
 
 import java.util.List;
 
