@@ -4,8 +4,8 @@ import java.io.File;
 import java.io.IOException;
 
 import org.api.cardnexus.configuration.NexusConfig;
-import org.api.cardnexus.model.enums.EnumFeedKey;
-import org.api.cardnexus.services.FeedsService;
+import org.api.cardnexus.model.requests.SearchProductRequest;
+import org.api.cardnexus.services.ProductsService;
 
 public class ServiceTester{
 
@@ -14,9 +14,16 @@ public class ServiceTester{
 		NexusConfig.loadTokenFromFile(new File("E:\\Mon Drive\\token.txt"));
 		NexusConfig.setFileDirectory(new File("C:\\Users\\nicol\\.magicDeskCompanion\\data"));
 		
-		var service = new FeedsService();
-		service.download("mtg", EnumFeedKey.prices);
+		var service = new ProductsService();
+		
+		
+		var req = new SearchProductRequest();
+			req.setGame("mtg");
+			//req.setNameSlug("mountain");
+			req.setName("Mountain");
+		
+		service.searchProduct(req);
+		
 		
 	}
-	
 }

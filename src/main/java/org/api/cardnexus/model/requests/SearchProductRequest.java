@@ -37,10 +37,15 @@ public class SearchProductRequest  {
 	productTypes.put("values", values);
     }
     
-    
-    public void addGameFilter(String gameId,String value)
+    public void addFilter(String name, String value)
     {
-	gameFilters.put(gameId, value);
+	gameFilters.put(name, value);
+    }
+    
+    
+    public void setGame(String gameId)
+    {
+	gameFilters.put("game", gameId);
     }
     
     public int getOffset() {
