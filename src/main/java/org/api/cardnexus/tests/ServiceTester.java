@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 
 import org.api.cardnexus.configuration.NexusConfig;
-import org.api.cardnexus.model.CardProduct;
 import org.api.cardnexus.model.requests.SearchProductRequest;
 import org.api.cardnexus.services.ProductsService;
 
@@ -24,8 +23,7 @@ public class ServiceTester{
 		var res = service.searchProduct(req);
 		
 		res.forEach(p->{
-		    if(p instanceof CardProduct c)
-			System.out.println(p.getName() + " / " + c.getAttributes());
+		    System.out.println(p.getName());
 		});
 
 			
