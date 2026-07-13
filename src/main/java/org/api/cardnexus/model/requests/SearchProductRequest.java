@@ -9,7 +9,8 @@ import org.api.cardnexus.model.enums.EnumProductSort;
 import org.api.cardnexus.model.enums.EnumProductType;
 import org.api.cardnexus.model.enums.EnumSortDirection;
 
-public class SearchProductRequest  {
+public class SearchProductRequest
+{
     
     private int offset;
     private int limit;
@@ -22,7 +23,7 @@ public class SearchProductRequest  {
     private EnumProductSort sortBy;
     private EnumSortDirection sortDirection;
     private Map<String, Object> gameFilters;
-    
+    private boolean strictTerms;
     
     public SearchProductRequest() {
 	limit = NexusConfig.LIMIT_LIST_RESULTS;
@@ -42,6 +43,13 @@ public class SearchProductRequest  {
 	gameFilters.put(name, value);
     }
     
+    public void setStrictTerms(boolean strictTerms) {
+	this.strictTerms = strictTerms;
+    }
+    
+    public boolean isStrictTerms() {
+	return strictTerms;
+    }
     
     public void setGame(String gameId)
     {

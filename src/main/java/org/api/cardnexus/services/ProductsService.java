@@ -3,8 +3,11 @@ package org.api.cardnexus.services;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.api.cardnexus.configuration.NexusConfig;
 import org.api.cardnexus.model.AbstractProduct;
 import org.api.cardnexus.model.Expansion;
@@ -18,6 +21,15 @@ import com.github.benmanes.caffeine.cache.Caffeine;
 
 public class ProductsService extends AbstractNexusService{
 
+    
+    Cache<Integer, AbstractProduct> cache ;
+    
+    
+    public ProductsService() {
+	super();
+	cache = Caffeine.newBuilder().build();
+    }
+    
     public List<Game> listGames() throws IOException
     {
 	var arr = client.getPaginated(ROOT_GAME_ENDPOINT, null, Game.class);
@@ -48,12 +60,19 @@ public class ProductsService extends AbstractNexusService{
 	return ret;
     }
     
-    public AbstractProduct getProductById(Integer id) throws IOException
+    public AbstractProduct getProductById(Integer id)
     {
-	return client.get(ROOT_PRODUCT_ENDPOINT+"/"+id, null, AbstractProduct.class);
+	return cache.get(id, _->{
+	    try {
+		logger.info("{} is not in cache. getting it",id);
+		return client.get(ROOT_PRODUCT_ENDPOINT+"/"+id, null, AbstractProduct.class);
+	    } catch (IOException e) {
+		logger.error(e);
+		return null;
+	    }    
+	});	
     }
-    
-    
+        
     public List<AbstractProduct> searchProduct(SearchProductRequest req) throws IOException
     {
 	var ret = new ArrayList<AbstractProduct>();
@@ -65,6 +84,13 @@ public class ProductsService extends AbstractNexusService{
 	    ret.addAll(result.getData());
 	    pagination=result.getPagination();
 	}
+	
+	if(req.isStrictTerms() && req.getName()!=null)
+	{
+	    var words = Arrays.asList(StringUtils.split(req.getName()));
+	    return ret.stream().filter(o -> words.stream().allMatch(word ->Strings.CI.contains(o.getName(), word))).toList();
+	}
+	
 	return ret;
     }
     
@@ -74,13 +100,12 @@ public class ProductsService extends AbstractNexusService{
 	
 	var f = serv.download(gameId, EnumFeedKey.catalog);
 	
-	Cache<Integer, AbstractProduct> cache = Caffeine.newBuilder().build();
-	
+	logger.info("begin caching");
 	Files.readAllLines(f.toPath()).forEach(s->{
 	    var obj = client.fromJson(s, AbstractProduct.class);
 	    cache.put(obj.getId(), obj);
 	});
-	logger.info("Caching {} products for {}", cache.stats(), gameId );
+	logger.info("Caching {} products for {}", cache.estimatedSize(), gameId );
 	
     }
     
