@@ -55,14 +55,20 @@ import java.util.List;
 public class Example {
     public static void main(String[] args) throws Exception {
         // Initialize the API configuration once at application startup
-        CardNexusAPIConfig.getInstance().init(
+        NexusConfig.setToken(
             System.getenv("CARDNEXUS_API_KEY")
         );
 
         // Use the domain-specific service classes
-        List<Card> cards = new CardService().searchCards("Black Lotus");
-
-        cards.forEach(card -> System.out.println(card.getName()));
+        var service = new ProductsService();
+		
+		
+		var req = new SearchProductRequest();
+			req.setGame("mtg");
+			req.setName("Mountain");
+		
+		service.searchProduct(req);
+		
     }
 }
 ```
