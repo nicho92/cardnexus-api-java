@@ -11,7 +11,6 @@ This project is part of a family of Java API clients built around the [MtgDeskto
 
 ## Table of contents
 
-- [Why this project](#why-this-project)
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Quick start](#quick-start)
@@ -26,10 +25,6 @@ This project is part of a family of Java API clients built around the [MtgDeskto
 - [Contributing](#contributing)
 - [License](#license)
 - [Author](#author)
-
-## Why this project
-
-CardNexus exposes card and pricing data over HTTP. `cardnexus-api-java` wraps those endpoints in a small, dependency-light Java library so you don't have to hand-roll HTTP calls, JSON parsing, and error handling yourself. It's designed to be embedded in desktop apps, batch jobs, or backend services that need programmatic access to CardNexus data.
 
 ## Requirements
 
