@@ -8,20 +8,18 @@ import org.api.cardnexus.model.enums.EnumFinishes;
 import org.api.cardnexus.model.enums.EnumMarketCurrency;
 import org.api.cardnexus.model.enums.EnumProductType;
 import org.api.cardnexus.model.requests.SearchProductRequest;
-import org.api.cardnexus.services.PricesService;
 import org.api.cardnexus.services.ProductsService;
 import org.junit.jupiter.api.Test;
 
 
-public class ServiceTester{
+class ServiceTester{
     	@Test
-    	public void testSearchProduct() throws IOException {
+    	void testSearchProduct() throws IOException {
 	    
 		NexusConfig.loadTokenFromEnv();
 		
 		var service = new ProductsService();
-		var pricer = new PricesService();
-		
+			
 		
 		var req = new SearchProductRequest();
 			req.setGame("mtg");
