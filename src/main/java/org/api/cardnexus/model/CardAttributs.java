@@ -9,8 +9,6 @@ public class CardAttributs {
    private List<String> types;
    private String description;
    
-   
-   
     public List<String> getColor() {
         return color;
     }
