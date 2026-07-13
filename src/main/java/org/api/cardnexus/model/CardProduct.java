@@ -26,7 +26,12 @@ public class CardProduct extends AbstractProduct {
 	return attributes;
     }
     public MarketVariations getPrices(EnumFinishes finish,EnumMarketCurrency currency)   {
-		return pricesByFinish.get(finish).get(currency);
+		var a = pricesByFinish.get(finish);
+		
+		if(a==null)
+		    return null;
+		
+		return a.get(currency);
     }
     public String getPrintNumber() {
         return printNumber;

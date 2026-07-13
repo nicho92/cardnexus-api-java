@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.api.cardnexus.configuration.NexusConstants;
+import org.api.cardnexus.configuration.NexusConfig;
 import org.api.cardnexus.model.NexusList;
 import org.api.cardnexus.model.NexusListFull;
 import org.api.cardnexus.model.Pagination;
@@ -25,7 +25,7 @@ public class ListsServices extends AbstractNexusService {
 	var pagination=new Pagination();
 	while(pagination.hasMore())
 	{
-		var result =  client.getPaginated(ROOT_LISTS_ENDPOINT+"?offset="+ret.size()+"&limit="+NexusConstants.LIMIT_LIST_RESULTS, null, NexusList.class);
+		var result =  client.getPaginated(ROOT_LISTS_ENDPOINT+"?offset="+ret.size()+"&limit="+NexusConfig.LIMIT_LIST_RESULTS, null, NexusList.class);
 		ret.addAll(result.getData());
 		pagination = result.getPagination();
 	}

@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.api.cardnexus.configuration.NexusConstants;
+import org.api.cardnexus.configuration.NexusConfig;
 import org.api.cardnexus.model.AbstractProduct;
 import org.api.cardnexus.model.Expansion;
 import org.api.cardnexus.model.Game;
@@ -36,7 +36,7 @@ public class ProductsService extends AbstractNexusService{
 	var pagination=new Pagination();
 	while(pagination.hasMore())
 	{
-		var result =  client.getPaginated(ROOT_GAME_ENDPOINT+"/"+id+"/expansions?offset="+ret.size()+"&limit="+NexusConstants.LIMIT_LIST_RESULTS, null, Expansion.class);
+		var result =  client.getPaginated(ROOT_GAME_ENDPOINT+"/"+id+"/expansions?offset="+ret.size()+"&limit="+NexusConfig.LIMIT_LIST_RESULTS, null, Expansion.class);
 		ret.addAll(result.getData());
 		pagination = result.getPagination();
 	}
@@ -62,7 +62,7 @@ public class ProductsService extends AbstractNexusService{
 	}
 	return ret;
     }
-   
+    
     
     
     

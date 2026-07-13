@@ -21,7 +21,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.api.cardnexus.configuration.NexusConstants;
+import org.api.cardnexus.configuration.NexusConfig;
 import org.api.cardnexus.listener.URLCallInfo;
 import org.api.cardnexus.listener.URLCallListener;
 import org.api.cardnexus.model.AbstractProduct;
@@ -77,33 +77,33 @@ public class RestClient implements Closeable {
     
     public <T> T get(String url, Map<String, String> headers,Type responseType) throws IOException {
         
-        var request = new HttpGet(NexusConstants.API_BASE_URL + url);
+        var request = new HttpGet(NexusConfig.API_BASE_URL + url);
         applyHeaders(request, headers);
         return executeRequest(request, responseType);
         }
     
     public <T> T get(String url, Map<String, String> headers, Class<T> responseType) throws IOException {
-        var request = new HttpGet(NexusConstants.API_BASE_URL+url);
+        var request = new HttpGet(NexusConfig.API_BASE_URL+url);
         applyHeaders(request, headers);
         return executeRequest(request, responseType);
     }
     
     public <T> T post(String url, Object body, Map<String, String> headers, Class<T> responseType) throws IOException {
-        var request = new HttpPost(NexusConstants.API_BASE_URL+url);
+        var request = new HttpPost(NexusConfig.API_BASE_URL+url);
         applyHeaders(request, headers);
         addJsonBody(request, body);
         return executeRequest(request, responseType);
     }
     
     public <T> T patch(String url, Object body, Map<String, String> headers, Class<T> responseType) throws IOException {
-        var request = new HttpPatch(NexusConstants.API_BASE_URL+url);
+        var request = new HttpPatch(NexusConfig.API_BASE_URL+url);
         applyHeaders(request, headers);
         addJsonBody(request, body);
         return executeRequest(request, responseType);
     }
     
     public <T> T post(String url, Object body, Map<String, String> headers,Type responseType) throws IOException {
-        var request = new HttpPost(NexusConstants.API_BASE_URL+url);
+        var request = new HttpPost(NexusConfig.API_BASE_URL+url);
         applyHeaders(request, headers);
         addJsonBody(request, body);
         return executeRequest(request, responseType);
@@ -112,14 +112,14 @@ public class RestClient implements Closeable {
     
 
     public <T> T put(String url, Object body, Map<String, String> headers, Class<T> responseType) throws IOException {
-        var request = new HttpPut(NexusConstants.API_BASE_URL+url);
+        var request = new HttpPut(NexusConfig.API_BASE_URL+url);
         applyHeaders(request, headers);
         addJsonBody(request, body);
         return executeRequest(request, responseType);
     }
 
     public <T> T delete(String url, Object body, Map<String, String> headers, Class<T> responseType) throws IOException {
-        var request = new HttpDeleteWithBody(NexusConstants.API_BASE_URL+url);
+        var request = new HttpDeleteWithBody(NexusConfig.API_BASE_URL+url);
         applyHeaders(request, headers);
         if (body != null) {
             addJsonBody(request, body);

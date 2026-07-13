@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.StringJoiner;
 
-import org.api.cardnexus.configuration.NexusConstants;
+import org.api.cardnexus.configuration.NexusConfig;
 
 public abstract class AbstractGetRequest {
 
@@ -32,7 +32,7 @@ public abstract class AbstractGetRequest {
                 if (value != null) 
                 {
 		    if (value instanceof LocalDate d)
-			joiner.add(encode(pd.getName()) + "="+ encode(DateTimeFormatter.ofPattern(NexusConstants.REQ_DATE_PATTERN).format(d)));
+			joiner.add(encode(pd.getName()) + "="+ encode(DateTimeFormatter.ofPattern(NexusConfig.REQ_DATE_PATTERN).format(d)));
 		    else
 			joiner.add(encode(pd.getName()) + "=" + encode(value.toString()));
                 }

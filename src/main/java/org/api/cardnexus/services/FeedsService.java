@@ -42,9 +42,8 @@ public class FeedsService extends AbstractNexusService{
 	var feed = getFeed(gameId, k);
 	var zipFile = FileTools.download(URI.create(feed.getUrl()).toURL(),k);
 	return FileTools.ungzip(zipFile, NexusConfig.getFileDirectory());
-	
-	
     }
+    
     
     
 }

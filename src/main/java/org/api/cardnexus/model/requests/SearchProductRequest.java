@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.api.cardnexus.configuration.NexusConstants;
+import org.api.cardnexus.configuration.NexusConfig;
 import org.api.cardnexus.model.enums.EnumProductSort;
 import org.api.cardnexus.model.enums.EnumProductType;
 import org.api.cardnexus.model.enums.EnumSortDirection;
@@ -25,7 +25,7 @@ public class SearchProductRequest  {
     
     
     public SearchProductRequest() {
-	limit = NexusConstants.LIMIT_LIST_RESULTS;
+	limit = NexusConfig.LIMIT_LIST_RESULTS;
 	gameFilters = new HashMap<>();
 	
     }

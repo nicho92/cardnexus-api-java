@@ -16,20 +16,22 @@ import org.api.cardnexus.configuration.NexusConfig;
 import org.api.cardnexus.model.enums.EnumFeedKey;
 
 public class FileTools {
+    
+    private FileTools() {
+        /* This utility class should not be instantiated */
+    }
+
 
     private static Logger logger = LogManager.getLogger(FileTools.class);
-
-    
-    
     
     public static File download(URL url,EnumFeedKey key) throws IOException
     {
 	
 	try (var urlStream = url.openStream(); BoundedInputStream stream = BoundedInputStream.builder().setInputStream(urlStream).get()) 
 	{
-	    File f = new File(NexusConfig.getFileDirectory(), key.name() + ".gz");
+	    var f = new File(NexusConfig.getFileDirectory(), key.name() + ".gz");
 	    FileUtils.copyInputStreamToFile(stream, f);
-	    logger.info("Downloaded {} bytes", f.length());
+	    logger.debug("Downloaded {} bytes", f.length());
 	    return f;
 	}
     }
@@ -43,16 +45,13 @@ public class FileTools {
 	    String fileName = gzFile.getName().replaceFirst("\\.gz$", ".ndjson");
 	    File output = new File(destination, fileName);
 
-	    try (var gis = new GZIPInputStream(new FileInputStream(gzFile));
-	         FileOutputStream fos = new FileOutputStream(output)) {
-
+	    try (var gis = new GZIPInputStream(new FileInputStream(gzFile));var fos = new FileOutputStream(output)) 
+	    {
 	        gis.transferTo(fos);
 	    }
 
 	    Files.delete(gzFile.toPath());
-
 	    logger.debug("ungzip {} to {}", gzFile, output);
-
 	    return output;	}
     
 }

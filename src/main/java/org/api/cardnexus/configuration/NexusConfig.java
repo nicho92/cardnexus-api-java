@@ -5,7 +5,12 @@ import java.io.IOException;
 import java.nio.file.Files;
 
 public class NexusConfig {
-	
+    
+        public static final String API_BASE_URL="https://public-api.cardnexus.com/v1"; 
+        public static final String API_VERSION="1.3.0";
+        public static final int LIMIT_LIST_RESULTS=200;
+        public static final String REQ_DATE_PATTERN="YYYY-MM-dd";
+     
 	private static String token;
 	private static File fileDirectory = new File(System.getProperty("user.home"));
 	
