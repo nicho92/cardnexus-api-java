@@ -106,7 +106,7 @@ src/test/java                                Unit and integration tests
 
 ## Configuration
 
-The client is configured through a singleton (`CardNexusAPIConfig` or equivalent), initialized once at application startup with your API credentials, then reused by all service classes. Credentials should never be hardcoded — pass them via environment variables, a `.env` file, or a secrets manager.
+The client is configured through a singleton (`NexusConfig`), initialized once at application startup with your API credentials, then reused by all service classes. Credentials should never be hardcoded — pass them via environment variables, a `.env` file, or a secrets manager.
 
 ## Error handling
 
