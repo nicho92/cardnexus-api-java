@@ -13,7 +13,9 @@ import org.api.cardnexus.model.AbstractProduct;
 import org.api.cardnexus.model.Expansion;
 import org.api.cardnexus.model.Game;
 import org.api.cardnexus.model.Pagination;
+import org.api.cardnexus.model.SealedProduct;
 import org.api.cardnexus.model.enums.EnumFeedKey;
+import org.api.cardnexus.model.enums.EnumProductType;
 import org.api.cardnexus.model.requests.SearchProductRequest;
 
 import com.github.benmanes.caffeine.cache.Cache;
@@ -87,8 +89,9 @@ public class ProductsService extends AbstractNexusService{
 	
 	if(req.isStrictTerms() && req.getName()!=null)
 	{
-	    var words = Arrays.asList(StringUtils.split(req.getName()));
-	    return ret.stream().filter(o -> words.stream().allMatch(word ->Strings.CI.contains(o.getName(), word))).toList();
+	    return ret.stream().filter(p->p.getName().equalsIgnoreCase(req.getName())).toList();
+	   // var words = Arrays.asList(StringUtils.split(req.getName()));
+	   // return ret.stream().filter(o -> words.stream().allMatch(word ->Strings.CI.contains(o.getName(), word))).toList();
 	}
 	
 	return ret;
@@ -105,7 +108,7 @@ public class ProductsService extends AbstractNexusService{
 	    var obj = client.fromJson(s, AbstractProduct.class);
 	    cache.put(obj.getId(), obj);
 	});
-	logger.info("Caching {} products for {}", cache.estimatedSize(), gameId );
+	logger.info("Cached {} products for {}", cache.estimatedSize(), gameId );
 	
     }
     

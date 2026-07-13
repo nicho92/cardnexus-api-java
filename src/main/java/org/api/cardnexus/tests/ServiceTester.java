@@ -1,9 +1,11 @@
-package org.api.cardnexus.tests;
+package org.	api.cardnexus.tests;
 
-import java.io.File;
 import java.io.IOException;
 
 import org.api.cardnexus.configuration.NexusConfig;
+import org.api.cardnexus.model.SealedProduct;
+import org.api.cardnexus.model.enums.EnumMarketCurrency;
+import org.api.cardnexus.model.enums.EnumProductType;
 import org.api.cardnexus.model.requests.SearchProductRequest;
 import org.api.cardnexus.services.ProductsService;
 
@@ -12,21 +14,27 @@ public class ServiceTester{
 	public static void main(String[] args) throws IOException {
 	    
 		NexusConfig.loadTokenFromEnv();
-		NexusConfig.setFileDirectory(new File("C:\\Users\\nicol\\.magicDeskCompanion\\data"));
 		
 		var service = new ProductsService();
 		
 		var req = new SearchProductRequest();
 			req.setGame("mtg");
-			req.setName("liliana of the veil");
-			req.setStrictTerms(true);
+			req.setName("Conflux");
+			req.setProductTypes(EnumProductType.sealed);
+			req.setStrictTerms(false);
+			
 		var res = service.searchProduct(req);
 		
 		res.forEach(p->{
-		    System.out.println(p.getName());
+		    if(p instanceof SealedProduct s)
+			System.out.println(p.getId() + " " + p.getName() + " " + s.getExpansion().getCode().toUpperCase() + "/"+  s.getProductCategory() + " -> " + s.getPrices(null, EnumMarketCurrency.eur));
+		    
 		});
 
-			
+		
+		
+		service.cachingProducts("mtg");
+		
 		
 	}
 }

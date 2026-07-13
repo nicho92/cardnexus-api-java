@@ -8,5 +8,7 @@ public enum EnumFinishes {
     Gold,
     Etched,
     Signed,
-
+    Holofoil,
+    Embossed,
+    Serialized
 }

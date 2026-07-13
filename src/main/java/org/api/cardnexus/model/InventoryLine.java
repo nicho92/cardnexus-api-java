@@ -21,10 +21,16 @@ public class InventoryLine {
     private boolean forSale;
     private Date updatedAt;
     private Map<String,Amount> listings; 
+    private Graded graded;
     
     
     
-    
+    public Graded getGraded() {
+        return graded;
+    }
+    public void setGraded(Graded graded) {
+        this.graded = graded;
+    }
     public Map<String, Amount> getListings() {
         return listings;
     }
