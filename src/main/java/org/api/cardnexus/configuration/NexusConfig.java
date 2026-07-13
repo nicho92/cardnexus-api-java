@@ -12,6 +12,7 @@ public class NexusConfig {
     
         public static final String API_BASE_URL="https://public-api.cardnexus.com/v1"; 
         public static final String API_VERSION="1.3.0";
+        public static final String ENV_TOKEN_KEY="CARDNEXUS_API_KEY";
         public static final int LIMIT_LIST_RESULTS=200;
         public static final String REQ_DATE_PATTERN="YYYY-MM-dd";
      
@@ -22,8 +23,8 @@ public class NexusConfig {
 	    return fileDirectory;
 	}
 	
-	public static void setFileDirectory(File fileDirectory) {
-	    NexusConfig.fileDirectory = fileDirectory;
+	public static void setFileDirectory(File f) {
+	    fileDirectory = f;
 	}
 	
 	public static String getToken()
@@ -31,10 +32,22 @@ public class NexusConfig {
 		return token;
 	}
 	
+	
 	public static void setToken(String t)
 	{
 		token=t;
 	}
+	
+	public static void loadTokenFromEnv() throws IOException
+	{
+	    var t = System.getenv(ENV_TOKEN_KEY);
+	    
+	  	if(t==null)
+	  	    throw new IOException("No Key found in env "+ENV_TOKEN_KEY);
+	    
+		setToken(t);
+	}
+	
 	
 	public static void loadTokenFromFile(File f) throws IOException
 	{

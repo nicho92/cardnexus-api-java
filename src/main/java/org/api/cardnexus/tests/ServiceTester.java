@@ -15,7 +15,7 @@ public class ServiceTester{
 
 	public static void main(String[] args) throws IOException {
 	    
-		NexusConfig.loadTokenFromFile(new File("E:\\Mon Drive\\token.txt"));
+		NexusConfig.loadTokenFromEnv();
 		NexusConfig.setFileDirectory(new File("C:\\Users\\nicol\\.magicDeskCompanion\\data"));
 		
 		var service = new ProductsService();
@@ -27,10 +27,8 @@ public class ServiceTester{
 			req.setProductTypes(EnumProductType.card);
 			
 		service.searchProduct(req).forEach(p->{
-		    
-		    System.out.println(p.getName());
-		    System.out.println(p.getExpansion());
-		    System.out.println(p.getPrices(EnumFinishes.Standard, EnumMarketCurrency.eur));
+		    System.out.println(p.getName() + " / " + p.getExpansion());
+		    System.out.println("--->" +p.getPrices(EnumFinishes.Standard, EnumMarketCurrency.eur));
 		});
 		
 		
