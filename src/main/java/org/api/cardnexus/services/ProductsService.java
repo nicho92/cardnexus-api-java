@@ -3,19 +3,14 @@ package org.api.cardnexus.services;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Strings;
 import org.api.cardnexus.configuration.NexusConfig;
 import org.api.cardnexus.model.AbstractProduct;
 import org.api.cardnexus.model.Expansion;
 import org.api.cardnexus.model.Game;
 import org.api.cardnexus.model.Pagination;
-import org.api.cardnexus.model.SealedProduct;
 import org.api.cardnexus.model.enums.EnumFeedKey;
-import org.api.cardnexus.model.enums.EnumProductType;
 import org.api.cardnexus.model.requests.SearchProductRequest;
 
 import com.github.benmanes.caffeine.cache.Cache;
