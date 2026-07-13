@@ -20,8 +20,7 @@ public class ServiceTester{
 		
 		var service = new ProductsService();
 		
-		
-		var req = new SearchProductRequest();
+		/*var req = new SearchProductRequest();
 			req.setGame("mtg");
 			req.setNameSlug(Slugifyer.nameSlug("Liliana of the Veil","mtg"));
 			req.setProductTypes(EnumProductType.card);
@@ -30,6 +29,10 @@ public class ServiceTester{
 		    System.out.println(p.getName() + " / " + p.getExpansion());
 		    System.out.println("--->" +p.getPrices(EnumFinishes.Standard, EnumMarketCurrency.eur));
 		});
+		*/
+		
+		
+		service.cachingProducts("mtg");
 		
 		
 	}

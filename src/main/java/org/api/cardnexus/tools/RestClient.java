@@ -163,9 +163,8 @@ public class RestClient implements Closeable {
     
     
     public void setCallListener(URLCallListener listener2) {
-		this.listener=listener2;
-		
-	}
+	this.listener=listener2;
+    }
     
     @SuppressWarnings("unchecked")
     private <T> T executeRequest(HttpRequestBase request, Type  responseType) throws IOException {

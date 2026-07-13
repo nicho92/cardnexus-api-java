@@ -2,6 +2,8 @@ package org.api.cardnexus.tools;
 
 import java.lang.reflect.Type;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.api.cardnexus.model.AbstractProduct;
 import org.api.cardnexus.model.CardProduct;
 import org.api.cardnexus.model.SealedProduct;
@@ -13,12 +15,20 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 
 public class ProductAdapter implements JsonDeserializer<AbstractProduct>{
-
-    @Override
+    	protected Logger logger = LogManager.getLogger(getClass());
+    	@Override
 	public AbstractProduct deserialize(JsonElement elem, Type interfaceType, JsonDeserializationContext context) throws JsonParseException {
 		try {
-			return context.deserialize(elem,typeForName(EnumProductType.valueOf(elem.getAsJsonObject().get("productType").getAsString())));
+		    
+		    //TODO asking to cardnexus develpper to unify Product model with catalog
+		    	var typeProduct=elem.getAsJsonObject().get("productType");
+		    	if(typeProduct==null)
+		    	    typeProduct=elem.getAsJsonObject().get("type");
+		    
+		    
+		    	return context.deserialize(elem,typeForName(EnumProductType.valueOf(typeProduct.getAsString())));
 		} catch (Exception ex) {
+		    	logger.error(ex);
 			return context.deserialize(elem, typeForName(EnumProductType.sealed));
 		}
 	}

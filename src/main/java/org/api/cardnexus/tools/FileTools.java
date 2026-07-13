@@ -26,10 +26,10 @@ public class FileTools {
     
     public static File download(URL url,EnumFeedKey key) throws IOException
     {
+	var f = new File(NexusConfig.getFileDirectory(), key.name() + ".gz");
 	
 	try (var urlStream = url.openStream(); BoundedInputStream stream = BoundedInputStream.builder().setInputStream(urlStream).get()) 
 	{
-	    var f = new File(NexusConfig.getFileDirectory(), key.name() + ".gz");
 	    FileUtils.copyInputStreamToFile(stream, f);
 	    logger.debug("Downloaded {} bytes", f.length());
 	    return f;
@@ -42,8 +42,8 @@ public class FileTools {
 	        destination.mkdirs();
 	    }
 
-	    String fileName = gzFile.getName().replaceFirst("\\.gz$", ".ndjson");
-	    File output = new File(destination, fileName);
+	    var fileName = gzFile.getName().replaceFirst("\\.gz$", ".ndjson");
+	    var output = new File(destination, fileName);
 
 	    try (var gis = new GZIPInputStream(new FileInputStream(gzFile));var fos = new FileOutputStream(output)) 
 	    {

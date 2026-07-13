@@ -1,6 +1,7 @@
 package org.api.cardnexus.services;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +10,11 @@ import org.api.cardnexus.model.AbstractProduct;
 import org.api.cardnexus.model.Expansion;
 import org.api.cardnexus.model.Game;
 import org.api.cardnexus.model.Pagination;
+import org.api.cardnexus.model.enums.EnumFeedKey;
 import org.api.cardnexus.model.requests.SearchProductRequest;
+
+import com.github.benmanes.caffeine.cache.Cache;
+import com.github.benmanes.caffeine.cache.Caffeine;
 
 public class ProductsService extends AbstractNexusService{
 
@@ -63,7 +68,21 @@ public class ProductsService extends AbstractNexusService{
 	return ret;
     }
     
-    
+    public void cachingProducts(String gameId) throws IOException
+    {
+	var serv =new FeedsService();
+	
+	var f = serv.download(gameId, EnumFeedKey.catalog);
+	
+	Cache<Integer, AbstractProduct> cache = Caffeine.newBuilder().build();
+	
+	Files.readAllLines(f.toPath()).forEach(s->{
+	    var obj = client.fromJson(s, AbstractProduct.class);
+	    cache.put(obj.getId(), obj);
+	});
+	logger.info("Caching {} products for {}", cache.stats(), gameId );
+	
+    }
     
     
     
