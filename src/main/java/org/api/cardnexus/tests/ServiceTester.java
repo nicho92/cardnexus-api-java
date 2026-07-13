@@ -12,10 +12,10 @@ public class ServiceTester{
 	public static void main(String[] args) throws IOException {
 	    
 		NexusConfig.loadTokenFromFile(new File("E:\\Mon Drive\\token.txt"));
+		NexusConfig.setFileDirectory(new File("C:\\Users\\nicol\\.magicDeskCompanion\\data"));
 		
 		var service = new FeedsService();
-		
-		service.download("mtg", EnumFeedKey.catalog);
+		service.download("mtg", EnumFeedKey.prices);
 		
 	}
 	

@@ -5,7 +5,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
-import java.util.zip.ZipInputStream;
+import java.nio.file.Files;
+import java.util.zip.GZIPInputStream;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.input.BoundedInputStream;
@@ -23,36 +24,35 @@ public class FileTools {
     
     public static File download(URL url,EnumFeedKey key) throws IOException
     {
-	var stream = BoundedInputStream.builder().setInputStream(url.openStream()).get();
-	var f=  new File(NexusConfig.getFileDirectory(),key.name()+".zip");
-	FileUtils.copyInputStreamToFile(stream, f);
-	return f;
+	
+	try (var urlStream = url.openStream(); BoundedInputStream stream = BoundedInputStream.builder().setInputStream(urlStream).get()) 
+	{
+	    File f = new File(NexusConfig.getFileDirectory(), key.name() + ".gz");
+	    FileUtils.copyInputStreamToFile(stream, f);
+	    logger.info("Downloaded {} bytes", f.length());
+	    return f;
+	}
     }
 	
-    public static void unZipIt(File src, File dst) {
-	logger.debug("unzip : {} to {}", src.getAbsoluteFile(),dst.getAbsoluteFile());
-	var buffer = new byte[1024];
-	try (var zis = new ZipInputStream(new FileInputStream(src))) {
-		var ze = zis.getNextEntry();
-		while (ze != null) {
-			try (var fos = new FileOutputStream(dst)) {
-			    	int len;
-				while ((len = zis.read(buffer)) > 0) {
-					fos.write(buffer, 0, len);
-				}
-				ze = zis.getNextEntry();
-			}
-		}
-		
-		boolean del = FileUtils.deleteQuietly(src);
-		logger.debug("removing {}={}", src, del);
-		
-	} catch (IOException ex) {
-		logger.error(ex);
-	}
+    public static File ungzip(File gzFile, File destination) throws IOException {
 
+	 if (!destination.exists()) {
+	        destination.mkdirs();
+	    }
 
+	    String fileName = gzFile.getName().replaceFirst("\\.gz$", ".ndjson");
+	    File output = new File(destination, fileName);
 
-}
+	    try (var gis = new GZIPInputStream(new FileInputStream(gzFile));
+	         FileOutputStream fos = new FileOutputStream(output)) {
+
+	        gis.transferTo(fos);
+	    }
+
+	    Files.delete(gzFile.toPath());
+
+	    logger.debug("ungzip {} to {}", gzFile, output);
+
+	    return output;	}
     
 }
