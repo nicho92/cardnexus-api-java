@@ -5,6 +5,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 
 public class NexusConfig {
+        private NexusConfig() {
+                /* This utility class should not be instantiated */
+        }
+
     
         public static final String API_BASE_URL="https://public-api.cardnexus.com/v1"; 
         public static final String API_VERSION="1.3.0";
