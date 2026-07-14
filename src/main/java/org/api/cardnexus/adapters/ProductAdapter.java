@@ -1,4 +1,4 @@
-package org.api.cardnexus.tools;
+package org.api.cardnexus.adapters;
 
 import java.lang.reflect.Type;
 
@@ -24,12 +24,18 @@ public class ProductAdapter implements JsonDeserializer<AbstractProduct>{
 		    	var typeProduct=elem.getAsJsonObject().get("productType");
 		    	if(typeProduct==null)
 		    	    typeProduct=elem.getAsJsonObject().get("type");
-		    
-		    
+		    	
+		    	logger.trace("serialize a {} item", typeProduct);
+		    	
 		    	return context.deserialize(elem,typeForName(EnumProductType.valueOf(typeProduct.getAsString())));
-		} catch (Exception ex) {
+		} 
+		catch (Exception ex) 
+		{
 		    	logger.error(ex);
-			return context.deserialize(elem, typeForName(EnumProductType.sealed));
+		    	
+		    	logger.error(elem);
+		    	
+			throw new JsonParseException(ex.getMessage());
 		}
 	}
 

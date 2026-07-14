@@ -9,6 +9,7 @@ public class CardAttributs {
    private List<String> types;
    private String description;
    
+   
     public List<String> getColor() {
         return color;
     }
@@ -33,6 +34,5 @@ public class CardAttributs {
     public void setDescription(String description) {
         this.description = description;
     }
-    
-    
+ 
 }

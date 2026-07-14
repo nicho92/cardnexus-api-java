@@ -1,37 +1,45 @@
 package org.api.cardnexus.model;
 
-import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
 import org.api.cardnexus.model.enums.EnumFinishes;
-import org.api.cardnexus.model.enums.EnumMarketCurrency;
 import org.api.cardnexus.model.enums.EnumRarity;
+import org.api.cardnexus.model.enums.EnumVariant;
 
 public class CardProduct extends AbstractProduct {
 
     private String printNumber;
     private EnumRarity rarity;
     private List<EnumFinishes> finishes;
-    private Map<EnumFinishes,Map<EnumMarketCurrency,MarketVariations>> pricesByFinish;
+    private Map<EnumFinishes, ProductPriceMarket> pricesByFinish;
     private CardAttributs attributes;
+    private EnumVariant variant;
+
     
     
     
-    public CardProduct() {
-	pricesByFinish = new EnumMap<>(EnumFinishes.class);
+    @Override
+    public int hashCode() {
+        return getId().hashCode();
     }
     
+   @Override
+   public boolean equals(Object obj) {
+        if(obj instanceof CardProduct p)
+            return p.getId()==getId();
+        
+        return false;
+   }
+    
+   public Map<EnumFinishes, ProductPriceMarket> getPricesByFinish() {
+       return pricesByFinish;
+   }
+ 
+   
+   
     public CardAttributs getAttributes() {
 	return attributes;
-    }
-    public MarketVariations getPrices(EnumFinishes finish,EnumMarketCurrency currency)   {
-		var a = pricesByFinish.get(finish);
-		
-		if(a==null)
-		    return null;
-		
-		return a.get(currency);
     }
     public String getPrintNumber() {
         return printNumber;
@@ -41,6 +49,12 @@ public class CardProduct extends AbstractProduct {
     }
     public List<EnumFinishes> getFinishes() {
         return finishes;
+    }
+    public EnumVariant getVariant() {
+	return variant;
+    }
+    public void setVariant(EnumVariant variant) {
+	this.variant = variant;
     }
     
 }

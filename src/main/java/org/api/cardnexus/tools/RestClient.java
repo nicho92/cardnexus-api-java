@@ -21,6 +21,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.api.cardnexus.adapters.ProductAdapter;
 import org.api.cardnexus.configuration.NexusConfig;
 import org.api.cardnexus.listener.URLCallInfo;
 import org.api.cardnexus.listener.URLCallListener;
@@ -55,7 +56,15 @@ public class RestClient implements Closeable {
      */
     public RestClient(String token) {
         this.httpClient = HttpClients.createDefault();
-        this.gson = new GsonBuilder().registerTypeAdapter(AbstractProduct.class, new ProductAdapter()).create();
+        var builder = new GsonBuilder()
+        		.registerTypeAdapter(AbstractProduct.class, new ProductAdapter())
+        		;
+        
+        if(NexusConfig.GSON_PRETTY_PRINT)
+            builder.setPrettyPrinting();
+        
+        
+        this.gson=builder.create();
         this.defaultHeaders = new HashMap<>();
         
         defaultHeaders.put("Authorization", "Bearer " +token);

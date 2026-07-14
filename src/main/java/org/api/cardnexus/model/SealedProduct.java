@@ -1,16 +1,14 @@
 package org.api.cardnexus.model;
 
-import java.util.Map;
+import java.util.List;
 
-import org.api.cardnexus.model.enums.EnumFinishes;
-import org.api.cardnexus.model.enums.EnumMarketCurrency;
 import org.api.cardnexus.model.enums.EnumSealedType;
 
 public class SealedProduct extends AbstractProduct {
 
     private String ean;
     private EnumSealedType productCategory;
-    private Map<EnumMarketCurrency,MarketVariations> prices;
+    private ProductPriceMarket prices;
     
     public String getEan() {
         return ean;
@@ -18,8 +16,8 @@ public class SealedProduct extends AbstractProduct {
     public EnumSealedType getProductCategory() {
         return productCategory;
     }
-    public MarketVariations getPrices(EnumFinishes f,EnumMarketCurrency currency) {
-        return prices.get(currency);
+    public ProductPriceMarket getPrices() {
+	return prices;
     }
     
     
