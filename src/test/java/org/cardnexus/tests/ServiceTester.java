@@ -75,7 +75,6 @@ class ServiceTester{
 		
 		
 		var service = new ProductsService();
-		service.cachingProducts("mtg");
 		
 		var req = new SearchProductRequest();
 			req.setGame("mtg");
