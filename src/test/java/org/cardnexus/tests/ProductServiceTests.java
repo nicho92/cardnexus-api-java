@@ -42,7 +42,7 @@ class ProductServiceTests{
 		System.out.println("=====ResolveIds");
 		service.resolveProductsId(EnumMarketPlace.cardmarket, List.of(890585,250569)).entrySet().forEach(m->{
 		    
-		    System.out.println(EnumMarketPlace.cardmarket + " " + m.getKey() + " ->" + m.getValue());
+		System.out.println(EnumMarketPlace.cardmarket + " " + m.getKey() + " ->" + m.getValue());
 		    
 		});
 		

@@ -19,10 +19,7 @@ public class ProductAdapter implements JsonDeserializer<AbstractProduct>{
     	@Override
 	public AbstractProduct deserialize(JsonElement elem, Type interfaceType, JsonDeserializationContext context) throws JsonParseException {
 		try {
-		    
 		    	var typeProduct=elem.getAsJsonObject().get("productType");
-		    	logger.trace("serialize a {} item", typeProduct);
-		    	
 		    	return context.deserialize(elem,typeForName(EnumProductType.valueOf(typeProduct.getAsString())));
 		} 
 		catch (Exception ex) 

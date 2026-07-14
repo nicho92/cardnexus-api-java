@@ -5,9 +5,11 @@ public class PriceStockValue {
     private Integer listingCount;
     private Integer availableQuantity;
     
+    
+    
     @Override
     public String toString() {
-        return String.valueOf(getLow());
+        return getLow() + " "+ getAvailableQuantity();
     }
     
     
