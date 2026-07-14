@@ -8,7 +8,7 @@ public class CardNexusPrice {
     private Integer listingCount;
     private Integer availableQuantity;
     private Date date;
-    
+    private Regions regions;
     
     @Override
     public String toString() {
@@ -39,7 +39,12 @@ public class CardNexusPrice {
     public void setDate(Date date) {
         this.date = date;
     }
-    
+    public Regions getRegions() {
+	return regions;
+    }
+    public void setRegions(Regions regions) {
+	this.regions = regions;
+    }
     
     
     

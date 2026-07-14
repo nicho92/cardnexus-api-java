@@ -3,7 +3,9 @@ package org.api.cardnexus.services;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.api.cardnexus.configuration.NexusConfig;
 import org.api.cardnexus.model.AbstractProduct;
@@ -11,10 +13,13 @@ import org.api.cardnexus.model.Expansion;
 import org.api.cardnexus.model.Game;
 import org.api.cardnexus.model.Pagination;
 import org.api.cardnexus.model.enums.EnumFeedKey;
+import org.api.cardnexus.model.enums.EnumMarketPlace;
 import org.api.cardnexus.model.requests.SearchProductRequest;
 
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 public class ProductsService extends AbstractNexusService{
 
@@ -87,6 +92,30 @@ public class ProductsService extends AbstractNexusService{
 	
 	return ret;
     }
+    
+    public Map<Integer,Integer> resolveProductsId(EnumMarketPlace market, List<Integer> ids) throws IOException
+    {
+	var obj = new JsonObject();
+	      obj.addProperty("marketplace", market.name());
+	
+	      var idsarr = new JsonArray();
+	      	ids.forEach(idsarr::add);
+	      
+	      obj.add("ids", idsarr);
+	      
+	var arr = client.post(ROOT_PRODUCT_ENDPOINT+"/resolve", obj, null, JsonObject.class).get("results").getAsJsonArray();
+	
+	var map = new HashMap<Integer,Integer>();
+	
+	for(var el : arr)
+	{
+	    map.put(el.getAsJsonObject().get("externalId").getAsInt(), el.getAsJsonObject().get("product").getAsJsonObject().get("id").getAsInt());
+	}
+		
+	return map;
+    
+    }
+    
     
     public void cachingProducts(String gameId) throws IOException
     {

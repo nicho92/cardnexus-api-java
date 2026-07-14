@@ -7,13 +7,14 @@ import org.api.cardnexus.configuration.NexusConfig;
 import org.api.cardnexus.model.AbstractProduct;
 import org.api.cardnexus.model.CardProduct;
 import org.api.cardnexus.model.SealedProduct;
+import org.api.cardnexus.model.enums.EnumMarketPlace;
 import org.api.cardnexus.model.enums.EnumProductType;
 import org.api.cardnexus.model.requests.SearchProductRequest;
 import org.api.cardnexus.services.ProductsService;
 import org.junit.jupiter.api.Test;
 
 
-class ServiceTester{
+class ProductServiceTests{
     
     	@Test
     	void testSearchCardProduct() throws IOException {
@@ -37,7 +38,14 @@ class ServiceTester{
 		
 		System.out.println("=====CardproductById");
 		printData(service.getProductById(213551));
-			
+		
+		System.out.println("=====ResolveIds");
+		service.resolveProductsId(EnumMarketPlace.cardmarket, List.of(890585,250569)).entrySet().forEach(m->{
+		    
+		    System.out.println(EnumMarketPlace.cardmarket + " " + m.getKey() + " ->" + m.getValue());
+		    
+		});
+		
 	}
     	
     	void printData(AbstractProduct p)
@@ -47,14 +55,13 @@ class ServiceTester{
     		System.out.println(card.getNameSlug() + " " + card.getFinishes());
     		System.out.println("Types " + card.getAttributes().getTypes());
     		System.out.println("ScryfallID "+ card.getExternalIds().getScryfallId());
-    		System.out.println("Mkm "+ card.getExternalIds().getCardmarket());
+    		System.out.println("MkmId "+ card.getExternalIds().getCardmarket());
 	    
         	    for(var f : card.getFinishes())
         	    {
         		System.out.println(f + " mkm = " +  card.getPricesByFinish().get(f).getCardmarket());
         		System.out.println(f + " tcg =" +  card.getPricesByFinish().get(f).getTcgplayer());
         		System.out.println(f + " nexus=" +  card.getPricesByFinish().get(f).getCardnexus());
-        		
         	    }
     	    }
     	    else if(p instanceof SealedProduct sealed) 
@@ -62,7 +69,7 @@ class ServiceTester{
  		System.out.println(sealed.getId() + " " + sealed.getName() + " " + sealed.getExpansion());
  		System.out.println("Types " + sealed.getProductCategory());
  		System.out.println("MkmID "+ sealed.getExternalIds().getCardmarket());
- 		System.out.println("Prices "+ sealed.getPrices().getCardmarket());
+ 		System.out.println("NexusPrice "+ sealed.getPrices().getCardnexus());
 	    
  	    }
     	    
