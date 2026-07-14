@@ -20,11 +20,7 @@ public class ProductAdapter implements JsonDeserializer<AbstractProduct>{
 	public AbstractProduct deserialize(JsonElement elem, Type interfaceType, JsonDeserializationContext context) throws JsonParseException {
 		try {
 		    
-		    //TODO asking to cardnexus develpper to unify Product model with catalog
 		    	var typeProduct=elem.getAsJsonObject().get("productType");
-		    	if(typeProduct==null)
-		    	    typeProduct=elem.getAsJsonObject().get("type");
-		    	
 		    	logger.trace("serialize a {} item", typeProduct);
 		    	
 		    	return context.deserialize(elem,typeForName(EnumProductType.valueOf(typeProduct.getAsString())));

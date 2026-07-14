@@ -40,14 +40,14 @@ This project is part of a family of Java API clients built around the [MtgDeskto
 <dependency>
     <groupId>com.github.nicho92</groupId>
     <artifactId>cardnexus-api-java</artifactId>
-    <version>1.4.0</version>
+    <version>1.4.3</version>
 </dependency>
 ```
 
 ### Gradle
 
 ```groovy
-implementation 'com.github.nicho92:cardnexus-api-java:1.4.0'
+implementation 'com.github.nicho92:cardnexus-api-java:1.4.3'
 ```
 
 The library is published on [Maven Central](https://central.sonatype.com/artifact/com.github.nicho92/cardnexus-api-java), so no extra repository declaration is needed.
@@ -72,10 +72,11 @@ public class Example {
 
      	var service = new ProductsService();
 		
-		var req = new SearchProductRequest();
-			req.setGame("mtg");
-			req.setName("liliana of the veil");
-			req.setStrictTerms(true);
+		var req = new SearchProductRequest()
+				.setGame("mtg")
+				.setName("liliana of the veil")
+				.setStrictTerms(true);
+				
 		var res = service.searchProduct(req);
 		
 		res.forEach(p->{

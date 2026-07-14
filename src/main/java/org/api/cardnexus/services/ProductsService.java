@@ -61,7 +61,7 @@ public class ProductsService extends AbstractNexusService{
     {
 	return cache.get(id, _->{
 	    try {
-		logger.info("{} is not in cache. getting it",id);
+		logger.debug("{} is not in cache. getting it",id);
 		return client.get(ROOT_PRODUCT_ENDPOINT+"/"+id, null, AbstractProduct.class);
 	    } catch (IOException e) {
 		logger.error(e);
@@ -83,11 +83,7 @@ public class ProductsService extends AbstractNexusService{
 	}
 	
 	if(req.isStrictTerms() && req.getName()!=null)
-	{
 	    return ret.stream().filter(p->p.getName().equalsIgnoreCase(req.getName())).toList();
-	   // var words = Arrays.asList(StringUtils.split(req.getName()));
-	   // return ret.stream().filter(o -> words.stream().allMatch(word ->Strings.CI.contains(o.getName(), word))).toList();
-	}
 	
 	return ret;
     }

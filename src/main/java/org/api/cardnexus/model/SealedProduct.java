@@ -1,7 +1,5 @@
 package org.api.cardnexus.model;
 
-import java.util.List;
-
 import org.api.cardnexus.model.enums.EnumSealedType;
 
 public class SealedProduct extends AbstractProduct {

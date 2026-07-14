@@ -21,6 +21,10 @@ class ServiceTester{
 		NexusConfig.loadTokenFromEnv();
 		
 		var service = new ProductsService();
+		
+		
+//		
+		
 		var req = new SearchProductRequest()
 			.setGame("mtg")
 			.setStrictTerms(true)
@@ -28,10 +32,10 @@ class ServiceTester{
 			.setExpansionId(1187)
 			.setProductIds(List.of(213551));
 		
-		System.out.println("=====productBySearch");
+		System.out.println("=====CardproductBySearch");
 		printData(service.searchProduct(req).getFirst());
 		
-		System.out.println("=====productById");
+		System.out.println("=====CardproductById");
 		printData(service.getProductById(213551));
 			
 	}
@@ -64,7 +68,6 @@ class ServiceTester{
     	    
     	}
     	
-    	
     	@Test
     	void testSearchSealedProduct() throws IOException {
 	    
@@ -72,7 +75,7 @@ class ServiceTester{
 		
 		
 		var service = new ProductsService();
-			
+		service.cachingProducts("mtg");
 		
 		var req = new SearchProductRequest();
 			req.setGame("mtg");
@@ -81,10 +84,14 @@ class ServiceTester{
 			
 			
 			
-		System.out.println("=====productBySearch");
+		System.out.println("=====SealedproductBySearch");
 		printData(service.searchProduct(req).getFirst());
 		
-			
+		
+		System.out.println("=====SealedproductById");
+		printData(service.getProductById(164429));
+		
+		
 	}
     	
     	
