@@ -27,14 +27,14 @@ class ProductServiceTests{
 		req.setGame("mtg");
 		req.setStrictTerms(true);
 		req.setProductTypes(EnumProductType.card);
-		req.setExpansionId(1187);
-		req.setProductIds(List.of(213551));
+		
+		req.setProductIds(List.of(75886));
 		
 		System.out.println("=====CardproductBySearch");
 		printData(service.searchProduct(req).getFirst());
 		
 		System.out.println("=====CardproductById");
-		printData(service.getProductById(213551));
+		printData(service.getProductById(75886));
 		
 		System.out.println("=====ResolveIds");
 		service.resolveProductsId(EnumMarketPlace.cardmarket, List.of(890585,250569)).entrySet().forEach(m->{
@@ -53,7 +53,7 @@ class ProductServiceTests{
     		System.out.println("Types " + card.getAttributes().getTypes());
     		System.out.println("ScryfallID "+ card.getExternalIds().getScryfallId());
     		System.out.println("MkmId "+ card.getExternalIds().getCardmarket());
-	    
+    		
         	    for(var f : card.getFinishes())
         	    {
         		System.out.println(f + " mkm = " +  card.getPricesByFinish().get(f).getCardmarket());
