@@ -14,9 +14,15 @@
     
 	<Loggers>
 		<Logger name="org.apache.http" level="ERROR"></Logger>
-		
+		<Logger name="com.github.benmanes.caffeine" level="DEBUG"></Logger>
+        
         <Root level="ERROR">
             <AppenderRef ref="CONSOLE"/>
         </Root>
+        
+        
+        
     </Loggers>
 </Configuration>
+
+

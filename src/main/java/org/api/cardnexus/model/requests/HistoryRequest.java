@@ -10,7 +10,7 @@ public class HistoryRequest extends AbstractGetRequest{
   private Integer idProduct;
   private LocalDate from;
   private LocalDate to;
-  private EnumMarketPlace place;
+  private EnumMarketPlace marketplace;
   private EnumFinishes finish;
   
   public EnumFinishes getFinish() {
@@ -37,11 +37,11 @@ public class HistoryRequest extends AbstractGetRequest{
   public void setTo(LocalDate to) {
     this.to = to;
   }
-  public EnumMarketPlace getPlace() {
-    return place;
-  }
-  public void setPlace(EnumMarketPlace place) {
-    this.place = place;
-  }
+  public EnumMarketPlace getMarketplace() {
+	return marketplace;
+ }
+	 public void setMarketplace(EnumMarketPlace marketplace) {
+		this.marketplace = marketplace;
+	}
     
 }

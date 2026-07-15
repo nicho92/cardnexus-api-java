@@ -32,7 +32,6 @@ public class ProductsService extends AbstractNexusService{
 	super();
 		productsCache = Caffeine.newBuilder().build();
 		expansionCache = Caffeine.newBuilder().build();
-		
     }
     
     public List<Game> listGames() throws IOException
