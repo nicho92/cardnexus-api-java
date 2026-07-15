@@ -33,7 +33,6 @@ public class ListingServiceTests {
 		var testList = service.createList(req);
 		assertEquals(true, service.listNexusLists().contains(testList));
 		
-		
 		var reqItem = new ListItemRequest();
 			reqItem.addItem(null, 75886,EnumFinishes.Standard,"fr",1,EnumCondition.NM,500, 600);
 			reqItem.addItem(null, 93034,EnumFinishes.Standard,"fr",1,EnumCondition.HP,80, 90);
