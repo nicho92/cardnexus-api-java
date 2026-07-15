@@ -25,39 +25,57 @@ import com.google.gson.JsonObject;
 public class ProductsService extends AbstractNexusService{
 
     
-    Cache<Integer, AbstractProduct> cache ;
-    
+    Cache<Integer, AbstractProduct> productsCache ;
+    Cache<Integer, Expansion> expansionCache;
     
     public ProductsService() {
 	super();
-	cache = Caffeine.newBuilder().build();
+		productsCache = Caffeine.newBuilder().build();
+		expansionCache = Caffeine.newBuilder().build();
+		
     }
     
     public List<Game> listGames() throws IOException
     {
-	var arr = client.getPaginated(ROOT_GAME_ENDPOINT, null, Game.class);
-	return arr.getData();
+    	return client.getPaginated(ROOT_GAME_ENDPOINT, null, Game.class).getData();
     }
     
     public Game getGameById(String id) throws IOException
     {
-	return client.get(ROOT_GAME_ENDPOINT+id, null, Game.class);
+    	return client.get(ROOT_GAME_ENDPOINT+id, null, Game.class);
     }
     
+    public Expansion getExpansionById(Integer id) throws IOException
+    {
+    	return expansionCache.get(id, _->{
+    		try {
+    			logger.debug("Expansion {} is not in cache. getting it",id);
+				return client.get(ROOT_EXPANSION_ENDPOINT+"/"+id, null, Expansion.class);
+			} catch (IOException e) {
+				logger.error(e);
+				return null;
+			}
+    	});
+    	
+    }
 
     public List<Expansion> listExpansion(Game game) throws IOException
     {
 	return listExpansion(game.getId());
     }
     
-    public List<Expansion> listExpansion(String id) throws IOException
+    public List<Expansion> listExpansion(String gameid) throws IOException
     {
 	var ret = new ArrayList<Expansion>();
 	var pagination=new Pagination();
 	while(pagination.hasMore())
 	{
-		var result =  client.getPaginated(ROOT_GAME_ENDPOINT+"/"+id+"/expansions?offset="+ret.size()+"&limit="+NexusConfig.LIMIT_LIST_RESULTS, null, Expansion.class);
+		var result =  client.getPaginated(ROOT_GAME_ENDPOINT+"/"+gameid+"/expansions?offset="+ret.size()+"&limit="+NexusConfig.LIMIT_LIST_RESULTS, null, Expansion.class);
 		ret.addAll(result.getData());
+		
+		result.getData().forEach(ex->expansionCache.put(ex.getId(), ex));
+		
+		
 		pagination = result.getPagination();
 	}
 	return ret;
@@ -65,13 +83,13 @@ public class ProductsService extends AbstractNexusService{
     
     public AbstractProduct getProductById(Integer id)
     {
-	return cache.get(id, _->{
+	return productsCache.get(id, _->{
 	    try {
-		logger.debug("{} is not in cache. getting it",id);
-		return client.get(ROOT_PRODUCT_ENDPOINT+"/"+id, null, AbstractProduct.class);
+			logger.debug("{} is not in cache. getting it",id);
+			return client.get(ROOT_PRODUCT_ENDPOINT+"/"+id, null, AbstractProduct.class);
 	    } catch (IOException e) {
-		logger.error(e);
-		return null;
+			logger.error(e);
+			return null;
 	    }    
 	});	
     }
@@ -133,9 +151,9 @@ public class ProductsService extends AbstractNexusService{
 	logger.info("begin caching");
 	Files.readAllLines(f.toPath()).forEach(s->{
 	    var obj = client.fromJson(s, AbstractProduct.class);
-	    cache.put(obj.getId(), obj);
+	    productsCache.put(obj.getId(), obj);
 	});
-	logger.info("Cached {} products for {}", cache.estimatedSize(), gameId );
+	logger.info("Cached {} products for {}", productsCache.estimatedSize(), gameId );
 	
     }
     

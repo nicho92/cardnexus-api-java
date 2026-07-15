@@ -29,9 +29,18 @@ public class InventoryServiceTests {
 		req.setCondition(EnumCondition.MP);
 		
 		
+		serviceProduct.listExpansion("mtg"); // put in cache
+		
 		service.getInventoryLines(req).forEach(line->{
 			var p = (CardProduct)serviceProduct.getProductById(line.getProductId());
-			System.out.println(line + "/"+ line.getProductId() + " : " + p.getName() + " " +p.getExpansionId() + "/"+p.getPrintNumber() + " "  + line.getCondition());
+			try {
+				
+				p.setExpansion(serviceProduct.getExpansionById(p.getExpansionId()));
+				
+				System.out.println(line + "/"+ line.getProductId() + " : " + p.getName() + " " +p.getExpansion() + "/"+p.getPrintNumber() + " "  + line.getCondition());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		});
 		
 	}
