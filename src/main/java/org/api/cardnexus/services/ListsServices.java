@@ -9,6 +9,7 @@ import org.api.cardnexus.model.NexusList;
 import org.api.cardnexus.model.NexusListFull;
 import org.api.cardnexus.model.Pagination;
 import org.api.cardnexus.model.requests.ListCreationRequest;
+import org.api.cardnexus.model.requests.ListItemRequest;
 
 import com.google.gson.JsonObject;
 

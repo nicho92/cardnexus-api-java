@@ -1,4 +1,4 @@
-package org.api.cardnexus.services;
+package org.api.cardnexus.model.requests;
 
 import java.util.ArrayList;
 import java.util.List;

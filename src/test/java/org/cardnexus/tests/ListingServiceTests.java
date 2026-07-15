@@ -9,7 +9,7 @@ import org.api.cardnexus.model.enums.EnumCondition;
 import org.api.cardnexus.model.enums.EnumFinishes;
 import org.api.cardnexus.model.enums.EnumStatus;
 import org.api.cardnexus.model.requests.ListCreationRequest;
-import org.api.cardnexus.services.ListItemRequest;
+import org.api.cardnexus.model.requests.ListItemRequest;
 import org.api.cardnexus.services.ListsServices;
 import org.junit.jupiter.api.Test;
 
