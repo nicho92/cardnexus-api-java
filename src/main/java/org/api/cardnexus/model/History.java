@@ -15,6 +15,9 @@ public class History {
     private Double mid;
     private Double high;
     private Double marketValue;
+
+    
+    
     public Date getDate() {
         return date;
     }
