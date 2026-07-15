@@ -52,6 +52,7 @@ public class FileTools {
 
 	    Files.delete(gzFile.toPath());
 	    logger.debug("ungzip {} to {}", gzFile, output);
-	    return output;	}
+	    return output;	
+	    }
     
 }

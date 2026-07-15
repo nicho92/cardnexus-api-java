@@ -10,6 +10,7 @@ public abstract class AbstractProduct {
     private String gameId;
     private Game game;
     private Expansion expansion;
+    private Integer expansionId;
     private String name;
     private String nameSlug;
     private List<String> languages;
@@ -17,11 +18,18 @@ public abstract class AbstractProduct {
     private EnumProductType productType;
     private ExternalIds externalIds;
     
+  
     @Override
     public String toString() {
            return String.valueOf(getId());
     }
-    
+    public Integer getExpansionId() {
+  		return expansionId;
+  	}
+      public void setExpansionId(Integer expansionId) {
+  		this.expansionId = expansionId;
+  	}
+      
     public ExternalIds getExternalIds() {
    	return externalIds;
     }

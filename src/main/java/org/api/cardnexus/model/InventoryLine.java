@@ -23,7 +23,10 @@ public class InventoryLine {
     private Map<String,Amount> listings; 
     private Graded graded;
     
-    
+    @Override
+    public String toString() {
+    	return getId();
+    }
     
     public Graded getGraded() {
         return graded;

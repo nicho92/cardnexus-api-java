@@ -1,5 +1,6 @@
 package org.api.cardnexus.services;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
@@ -117,11 +118,17 @@ public class ProductsService extends AbstractNexusService{
     }
     
     
-    public void cachingProducts(String gameId) throws IOException
+    public void cachingProducts(String gameId, boolean forceDownload) throws IOException
     {
 	var serv =new FeedsService();
 	
-	var f = serv.download(gameId, EnumFeedKey.catalog);
+	var f = new File(NexusConfig.getFileDirectory(), "catalog.ndjson");
+	
+	if(forceDownload || !f.exists())
+	{
+		logger.warn("force download = {} and exists={}",forceDownload,f.exists());
+		f = serv.download(gameId, EnumFeedKey.catalog);
+	}
 	
 	logger.info("begin caching");
 	Files.readAllLines(f.toPath()).forEach(s->{
