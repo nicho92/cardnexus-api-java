@@ -50,6 +50,7 @@ public class FeedsService extends AbstractNexusService{
 		if(FileTools.md5(md5, zipFile))
 			throw new IOException("Checksum failed");
 			
+		logger.debug("Checksum for {} OK",zipFile);
 		
 		return FileTools.ungzip(zipFile, NexusConfig.getFileDirectory());
     }

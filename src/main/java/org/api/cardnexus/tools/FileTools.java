@@ -28,6 +28,12 @@ public class FileTools {
     
     public static boolean md5(String md5,File f) 
     {
+    	if(!NexusConfig.CHECKSUM_MD5_FEED)
+    	{
+    		logger.warn("Carreful, MD5 checksum for {} is disabled. You can change value by set CHECKSUM_MD5_FEED=true");
+    		return true;
+    	}
+    	
     	try {
     	 	MessageDigest digest = MessageDigest.getInstance("MD5");
     	    byte[] hash = digest.digest(Files.readAllBytes(f.toPath()));
