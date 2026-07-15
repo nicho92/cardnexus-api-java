@@ -1,6 +1,5 @@
 package org.cardnexus.tests;
 
-import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 
@@ -19,7 +18,7 @@ class PricesServiceTests{
     	@Test
     	void testPriceCardProduct() throws IOException {
 	    
-    		NexusConfig.loadTokenFromFile(new File("C:\\Users\\nicolas.pihen\\Documents\\Apps\\token.txt"));
+    		NexusConfig.loadTokenFromEnv();
     			
 		var service = new PricesService();
 

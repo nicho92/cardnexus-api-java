@@ -2,7 +2,6 @@ package org.cardnexus.tests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.io.File;
 import java.io.IOException;
 
 import org.api.cardnexus.configuration.NexusConfig;
@@ -19,7 +18,8 @@ public class ListingServiceTests {
 	@Test
 	void listsTest() throws IOException
 	{
-		NexusConfig.loadTokenFromFile(new File("C:\\Users\\nicolas.pihen\\Documents\\Apps\\token.txt"));
+  		NexusConfig.loadTokenFromEnv();
+  	  
 		
 		var service = new ListsServices();
 		
