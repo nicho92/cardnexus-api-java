@@ -3,7 +3,6 @@ package org.api.cardnexus.services;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
-import java.security.NoSuchAlgorithmException;
 import java.util.EnumMap;
 import java.util.Map;
 
@@ -40,14 +39,10 @@ public class FeedsService extends AbstractNexusService{
     
     public File download(String gameId,EnumFeedKey k) throws IOException
     {
-	
 		var feed = getFeed(gameId, k);
-		
-		var md5 = feed.getChecksum();
-		
 		var zipFile = FileTools.download(URI.create(feed.getUrl()).toURL(),k);
 	
-		if(FileTools.md5(md5, zipFile))
+		if(FileTools.md5(feed.getChecksum(), zipFile))
 			throw new IOException("Checksum failed");
 			
 		logger.debug("Checksum for {} OK",zipFile);

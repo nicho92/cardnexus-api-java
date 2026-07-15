@@ -16,9 +16,9 @@ import org.api.cardnexus.model.Pagination;
 import org.api.cardnexus.model.enums.EnumFeedKey;
 import org.api.cardnexus.model.enums.EnumMarketPlace;
 import org.api.cardnexus.model.requests.SearchProductRequest;
+import org.api.cardnexus.tools.CachingService;
 
 import com.github.benmanes.caffeine.cache.Cache;
-import com.github.benmanes.caffeine.cache.Caffeine;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
@@ -30,8 +30,8 @@ public class ProductsService extends AbstractNexusService{
     
     public ProductsService() {
 	super();
-		productsCache = Caffeine.newBuilder().build();
-		expansionCache = Caffeine.newBuilder().build();
+		productsCache = CachingService.createCache();
+		expansionCache = CachingService.createCache();
     }
     
     public List<Game> listGames() throws IOException
@@ -145,7 +145,7 @@ public class ProductsService extends AbstractNexusService{
 		
 		if(forceDownload || !f.exists())
 		{
-			logger.warn("force download = {} and exists={}",forceDownload,f.exists());
+			logger.warn("force= {} or exists={}",forceDownload,f.exists());
 			f = serv.download(gameId, EnumFeedKey.catalog);
 		}
 		
@@ -155,8 +155,7 @@ public class ProductsService extends AbstractNexusService{
 		    productsCache.put(obj.getId(), obj);
 		});
 		logger.info("Cached {} products for {}", productsCache.estimatedSize(), gameId );
-		
-	}
+   }
     
     
     

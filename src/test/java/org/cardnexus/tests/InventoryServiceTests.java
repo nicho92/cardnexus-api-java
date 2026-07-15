@@ -20,7 +20,7 @@ public class InventoryServiceTests {
 		var service = new InventoryService();
 		var serviceProduct = new ProductsService();
 		
-		serviceProduct.cachingProducts("mtg",false);
+		serviceProduct.cachingProducts("mtg",true);
 		
 		var req = new InventoryRequest();
 			req.setGame("mtg");
