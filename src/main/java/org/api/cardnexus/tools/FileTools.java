@@ -6,6 +6,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.HexFormat;
 import java.util.zip.GZIPInputStream;
 
 import org.apache.commons.io.FileUtils;
@@ -23,6 +26,18 @@ public class FileTools {
 
 
     private static Logger logger = LogManager.getLogger(FileTools.class);
+    
+    public static boolean md5(String md5,File f) throws NoSuchAlgorithmException, IOException
+    {
+    	 	MessageDigest digest = MessageDigest.getInstance("MD5");
+    	    byte[] hash = digest.digest(Files.readAllBytes(f.toPath()));
+
+    	    String myHash = HexFormat.of().formatHex(hash).toUpperCase();
+
+    	    return myHash.equalsIgnoreCase(md5);
+    }
+    
+    
     
     public static File download(URL url,EnumFeedKey key) throws IOException
     {
