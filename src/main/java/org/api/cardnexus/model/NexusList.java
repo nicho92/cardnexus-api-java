@@ -1,91 +1,22 @@
 package org.api.cardnexus.model;
 
+import java.util.List;
+
 import org.api.cardnexus.model.enums.EnumStatus;
 
-public class NexusList {
-
-    private String id;
-    private String name;
-    private String game;
-    private EnumStatus status;
-    private String description;
-    private double completionPercentage;
-    private int itemCount;
-    private int totalQuantity;
+public record NexusList (String id,String name,String game,EnumStatus status,String description,double completionPercentage, int itemCount,int totalQuantity,List<ListItem> items)
+{
  
     @Override
     public String toString() {
-       return getId();
+       return id();
     }
-    
-    @Override
-    public int hashCode() {
-    	return getId().hashCode();
-    }
-    
-	@Override
-	public boolean equals(Object obj) {
-		if(obj instanceof NexusList l)
-			return l.getId().equals(getId());
-		
-		return false;
-	}
     
     public boolean isComplete()
     {
-	return completionPercentage>=100;
+	return completionPercentage()>=100;
     }
-    
- 
-    public String getId() {
-        return id;
-    }
-    public void setId(String id) {
-        this.id = id;
-    }
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-    public String getGame() {
-        return game;
-    }
-    public void setGame(String game) {
-        this.game = game;
-    }
-    public EnumStatus getStatus() {
-        return status;
-    }
-    public void setStatus(EnumStatus status) {
-        this.status = status;
-    }
-    public String getDescription() {
-        return description;
-    }
-    public void setDescription(String description) {
-        this.description = description;
-    }
-    public double getCompletionPercentage() {
-        return completionPercentage;
-    }
-    public void setCompletionPercentage(double completionPercentage) {
-        this.completionPercentage = completionPercentage;
-    }
-    public int getItemCount() {
-        return itemCount;
-    }
-    public void setItemCount(int itemCount) {
-        this.itemCount = itemCount;
-    }
-    public int getTotalQuantity() {
-        return totalQuantity;
-    }
-    public void setTotalQuantity(int totalQuantity) {
-        this.totalQuantity = totalQuantity;
-    }
-    
+
     
     
     

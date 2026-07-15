@@ -50,9 +50,9 @@ class ProductServiceTests{
     	    if(p instanceof CardProduct card) {
     		System.out.println(card.getId() + " " + card.getName() + " " + card.getExpansion()+"/"+card.getPrintNumber() +" - " + card.getRarity());
     		System.out.println(card.getNameSlug() + " " + card.getFinishes());
-    		System.out.println("Types " + card.getAttributes().getTypes());
-    		System.out.println("ScryfallID "+ card.getExternalIds().getScryfallId());
-    		System.out.println("MkmId "+ card.getExternalIds().getCardmarket());
+    		System.out.println("Types " + card.getAttributes().type());
+    		System.out.println("ScryfallID "+ card.getExternalIds().scryfallId());
+    		System.out.println("MkmId "+ card.getExternalIds().cardmarket());
     		
         	    for(var f : card.getFinishes())
         	    {
@@ -65,7 +65,7 @@ class ProductServiceTests{
     	    {
  		System.out.println(sealed.getId() + " " + sealed.getName() + " " + sealed.getExpansion());
  		System.out.println("Types " + sealed.getProductCategory());
- 		System.out.println("MkmID "+ sealed.getExternalIds().getCardmarket());
+ 		System.out.println("MkmID "+ sealed.getExternalIds().cardmarket());
  		System.out.println("NexusPrice "+ sealed.getPrices().getCardnexus());
 	    
  	    }

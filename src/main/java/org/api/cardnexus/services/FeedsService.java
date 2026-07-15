@@ -29,7 +29,7 @@ public class FeedsService extends AbstractNexusService{
     
     public Feed getFeed(Game game, EnumFeedKey f) throws IOException
     {
-	return getFeed(game.getId(), f);
+	return getFeed(game.id(), f);
     }
     
     public Feed getFeed(String gameId, EnumFeedKey f) throws IOException
@@ -40,9 +40,9 @@ public class FeedsService extends AbstractNexusService{
     public File download(String gameId,EnumFeedKey k) throws IOException
     {
 		var feed = getFeed(gameId, k);
-		var zipFile = FileTools.download(URI.create(feed.getUrl()).toURL(),k);
+		var zipFile = FileTools.download(URI.create(feed.url()).toURL(),k);
 	
-		if(FileTools.md5(feed.getChecksum(), zipFile))
+		if(FileTools.md5(feed.checksum(), zipFile))
 			throw new IOException("Checksum failed");
 			
 		logger.debug("Checksum for {} OK",zipFile);

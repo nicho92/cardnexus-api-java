@@ -22,7 +22,7 @@ class PricesServiceTests{
     			
 		var service = new PricesService();
 
-		var eu = service.getCurrentPrice(213551).getPricesByFinish().get(EnumFinishes.Standard).getCardnexus().getRegions().getEu();
+		var eu = service.getCurrentPrice(213551).pricesByFinish().get(EnumFinishes.Standard).getCardnexus().regions().getEu();
 		var condition = eu.getByCondition().get(EnumCondition.NM);
 		var fr = condition.getByLanguage().get("fr");
 		
@@ -38,7 +38,7 @@ class PricesServiceTests{
 			
 		
 		service.getHistoryPrice(req).forEach(h->{
-			System.out.println(Formatter.format(h.getDate(),false) + " " + h.getMarketValue());
+			System.out.println(Formatter.format(h.date(),false) + " " + h.marketValue());
 		});
 		
 		

@@ -60,7 +60,7 @@ public class ProductsService extends AbstractNexusService{
 
     public List<Expansion> listExpansion(Game game) throws IOException
     {
-    	return listExpansion(game.getId());
+    	return listExpansion(game.id());
     }
     
     public List<Expansion> listExpansion(String gameid) throws IOException
@@ -72,7 +72,7 @@ public class ProductsService extends AbstractNexusService{
 			var result =  client.getPaginated(ROOT_GAME_ENDPOINT+"/"+gameid+"/expansions?offset="+ret.size()+"&limit="+NexusConfig.LIMIT_LIST_RESULTS, null, Expansion.class);
 			ret.addAll(result.getData());
 			
-			result.getData().forEach(ex->expansionCache.put(ex.getId(), ex));
+			result.getData().forEach(ex->expansionCache.put(ex.id(), ex));
 			
 			
 			pagination = result.getPagination();

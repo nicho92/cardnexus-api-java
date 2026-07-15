@@ -13,7 +13,7 @@ import org.api.cardnexus.model.requests.ListItemRequest;
 import org.api.cardnexus.services.ListsServices;
 import org.junit.jupiter.api.Test;
 
-public class ListingServiceTests {
+class ListingServiceTests {
 
 	@Test
 	void listsTest() throws IOException
@@ -38,15 +38,15 @@ public class ListingServiceTests {
 			reqItem.addItem(null, 93034,EnumFinishes.Standard,"fr",1,EnumCondition.HP,80, 90);
 			reqItem.addItem(null, 113580,EnumFinishes.Standard,"en",1,EnumCondition.MP,50, 60);
 		
-		var listResults = service.updateListItems(testList.getId(), reqItem);
+		var listResults = service.updateListItems(testList.id(), reqItem);
 		
 		
-		listResults.getItems().forEach(item->{
-			System.out.println("created item = "+ item.getId() + " " + item.getName());
+		listResults.items().forEach(item->{
+			System.out.println("created item = "+ item.id() + " " + item.name());
 		});
 		
 		
-		assertEquals(true, service.deleteList(testList.getId()));
+		assertEquals(true, service.deleteList(testList.id()));
 	}
 	
 }

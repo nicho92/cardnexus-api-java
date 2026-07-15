@@ -10,7 +10,7 @@ import org.api.cardnexus.services.InventoryService;
 import org.api.cardnexus.services.ProductsService;
 import org.junit.jupiter.api.Test;
 
-public class InventoryServiceTests {
+class InventoryServiceTests {
 
 	@Test
 	void listsTest() throws IOException
@@ -30,11 +30,11 @@ public class InventoryServiceTests {
 		serviceProduct.listExpansion("mtg"); // put in cache
 		
 		service.getInventoryLines(req).forEach(line->{
-			var p = (CardProduct)serviceProduct.getProductById(line.getProductId());
+			var p = (CardProduct)serviceProduct.getProductById(line.productId());
 			try 
 			{
 				p.setExpansion(serviceProduct.getExpansionById(p.getExpansionId()));
-				System.out.println(line + "/"+ line.getProductId() + " : " + p.getName() + " " +p.getExpansion() + "/"+p.getPrintNumber() + " "  + line.getCondition());
+				System.out.println(line + "/"+ line.productId() + " : " + p.getName() + " " +p.getExpansion() + "/"+p.getPrintNumber() + " "  + line.condition());
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
