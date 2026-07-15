@@ -2,6 +2,8 @@ package org.api.cardnexus.model;
 
 import java.util.List;
 
+import org.api.cardnexus.tools.Formatter;
+
 public class Progress {
     
     private double fraction;
@@ -17,6 +19,12 @@ public class Progress {
     }
     public void setOptions(List<RunOption> options) {
         this.options = options;
+    }
+    
+    
+    @Override
+    public String toString() {
+        return Formatter.format(getFraction()) +"%";
     }
     
     

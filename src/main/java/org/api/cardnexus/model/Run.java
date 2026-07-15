@@ -7,6 +7,8 @@ public class Run {
     	private String id;
     	private EnumRunStatus status;
     	private Progress progress;
+    	private RunResult result;
+    	
 	public String getId() {
 	    return id;
 	}
@@ -25,7 +27,12 @@ public class Run {
 	public void setProgress(Progress progress) {
 	    this.progress = progress;
 	}
-    	
+    	public RunResult getResult() {
+	    return result;
+	}
+    	public void setResult(RunResult result) {
+	    this.result = result;
+	}
     	
     	
 }
