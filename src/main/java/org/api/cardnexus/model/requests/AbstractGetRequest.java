@@ -10,7 +10,15 @@ import java.util.StringJoiner;
 import org.api.cardnexus.configuration.NexusConfig;
 
 public abstract class AbstractGetRequest {
-
+	private int limit=100;
+	
+	public int getLimit() {
+		return limit;
+	}
+	public void setLimit(int limit) {
+		this.limit = limit;
+	}
+	
     private String encode(String value) {
         return URLEncoder.encode(value, StandardCharsets.UTF_8);
     }

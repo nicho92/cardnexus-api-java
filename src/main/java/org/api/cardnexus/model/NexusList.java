@@ -18,6 +18,19 @@ public class NexusList {
        return getId();
     }
     
+    @Override
+    public int hashCode() {
+    	return getId().hashCode();
+    }
+    
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof NexusList l)
+			return l.getId().equals(getId());
+		
+		return false;
+	}
+    
     public boolean isComplete()
     {
 	return completionPercentage>=100;

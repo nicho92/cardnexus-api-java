@@ -23,15 +23,12 @@ class ProductServiceTests{
 		
 		var service = new ProductsService();
 		
-		
-//		
-		
-		var req = new SearchProductRequest()
-			.setGame("mtg")
-			.setStrictTerms(true)
-			.setProductTypes(EnumProductType.card)
-			.setExpansionId(1187)
-			.setProductIds(List.of(213551));
+		var req = new SearchProductRequest();
+		req.setGame("mtg");
+		req.setStrictTerms(true);
+		req.setProductTypes(EnumProductType.card);
+		req.setExpansionId(1187);
+		req.setProductIds(List.of(213551));
 		
 		System.out.println("=====CardproductBySearch");
 		printData(service.searchProduct(req).getFirst());
