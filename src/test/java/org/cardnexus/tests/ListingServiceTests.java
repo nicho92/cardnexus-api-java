@@ -40,13 +40,16 @@ class ListingServiceTests {
 		
 		var listResults = service.updateListItems(testList.id(), reqItem);
 		
+		assertEquals(listResults.items().size(), 3);
 		
 		listResults.items().forEach(item->{
-			System.out.println("created item = "+ item.id() + " " + item.name());
+			System.out.println(item);
 		});
 		
+		var ret = service.deleteList(testList.id());
+		System.out.println("Delete List Result: "+ret);
+		assertEquals(true, ret);
 		
-		assertEquals(true, service.deleteList(testList.id()));
 	}
 	
 }
