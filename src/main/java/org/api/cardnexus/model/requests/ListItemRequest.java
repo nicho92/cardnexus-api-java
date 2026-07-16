@@ -29,7 +29,6 @@ public class ListItemRequest {
     {
 	addItem(new ListItemRequestData(itemId, productId, finish, language, quantity, minCondition, wantPrice, sellPrice));
     }
-    
 }
 
 record ListItemRequestData(String itemId, Integer productId, EnumFinishes finish, String language, int quantity,EnumCondition minCondition, double wantPrice, double sellPrice) {   }
