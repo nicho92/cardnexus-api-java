@@ -53,8 +53,5 @@ public class CardProduct extends AbstractProduct {
     public EnumVariant getVariant() {
 	return variant;
     }
-    public void setVariant(EnumVariant variant) {
-	this.variant = variant;
-    }
     
 }
