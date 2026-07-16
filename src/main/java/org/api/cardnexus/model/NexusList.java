@@ -10,7 +10,16 @@ public record NexusList (String id,String name,String game,EnumStatus status,Str
     {
 	return completionPercentage()>=100;
     }
-
+    
+    @Override
+    public final boolean equals(Object obj) {
+        if(obj instanceof NexusList l)
+            return l.id.equals(id());
+        
+        return false;
+    }
+    
+    
     
     
     
