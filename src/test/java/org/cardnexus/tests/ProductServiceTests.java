@@ -56,9 +56,9 @@ class ProductServiceTests{
     		
         	    for(var f : card.getFinishes())
         	    {
-        		System.out.println(f + " mkm = " +  card.getPricesByFinish().get(f).getCardmarket());
-        		System.out.println(f + " tcg =" +  card.getPricesByFinish().get(f).getTcgplayer());
-        		System.out.println(f + " nexus=" +  card.getPricesByFinish().get(f).getCardnexus());
+        		System.out.println(f + " mkm = " +  card.getPricesByFinish().get(f).cardmarket());
+        		System.out.println(f + " tcg =" +  card.getPricesByFinish().get(f).tcgplayer());
+        		System.out.println(f + " nexus=" +  card.getPricesByFinish().get(f).cardnexus());
         	    }
     	    }
     	    else if(p instanceof SealedProduct sealed) 
@@ -66,7 +66,7 @@ class ProductServiceTests{
  		System.out.println(sealed.getId() + " " + sealed.getName() + " " + sealed.getExpansion());
  		System.out.println("Types " + sealed.getProductCategory());
  		System.out.println("MkmID "+ sealed.getExternalIds().cardmarket());
- 		System.out.println("NexusPrice "+ sealed.getPrices().getCardnexus());
+ 		System.out.println("NexusPrice "+ sealed.getPrices().cardnexus());
 	    
  	    }
     	    

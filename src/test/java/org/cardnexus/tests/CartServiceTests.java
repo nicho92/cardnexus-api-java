@@ -32,9 +32,9 @@ class CartServiceTests {
 	optiRequest.setCountry("fr");
 	
 	
-	var id = serv.runs(optiRequest);
+	var id = serv.runOptimizationQuery(optiRequest);
 	
-	var r = serv.runs(id);
+	var r = serv.getRunById(id);
 	
 	
 	System.out.println(r);

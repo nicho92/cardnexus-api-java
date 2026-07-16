@@ -2,18 +2,13 @@ package org.api.cardnexus.model;
 
 import java.util.Map;
 
-public class LangageData extends PriceStockValue {
+public record LangageData (Double low, Integer listingCount, Integer availableQuantity,Map<String, PriceStockValue> byLanguage) 
+{
+    
+}
 
-    @Override
-    public String toString() {
-        return getLow() + "  - " + getAvailableQuantity();
-    }
-    
-    
-    private Map<String, PriceStockValue> byLanguage;
-    
-    
-    public Map<String, PriceStockValue> getByLanguage() {
-	return byLanguage;
-    }
+
+record PriceStockValue (Double low, Integer listingCount,Integer availableQuantity)
+{
+            
 }

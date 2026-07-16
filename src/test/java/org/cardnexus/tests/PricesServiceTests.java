@@ -20,7 +20,7 @@ class PricesServiceTests{
     			
 		var service = new PricesService();
 
-		var eu = service.getCurrentPrice(213551).pricesByFinish().get(EnumFinishes.Standard).getCardnexus();
+		var eu = service.getCurrentPrice(213551).pricesByFinish().get(EnumFinishes.Standard).cardnexus();
 		System.out.println(eu);
 		
 		
