@@ -1,6 +1,6 @@
 package org.api.cardnexus.model;
 
-public class PriceStockValue {
+public abstract class PriceStockValue {
     private Double low;
     private Integer listingCount;
     private Integer availableQuantity;
