@@ -164,10 +164,16 @@ public class RestClient implements Closeable {
     	
     	var callInfo = new URLCallInfo();
     	
+    	request.addHeader("Authorization", "Bearer "+NexusConfig.getToken());
+    	
+    	
         try (var response = httpClient.execute(request)) {
         	var statusCode = response.getStatusLine().getStatusCode();
             var jsonResponse = response.getEntity() != null ? EntityUtils.toString(response.getEntity()) : null;
-       
+            
+            logger.trace("{}, X-RateLimit-Limit={}, X-RateLimit-Remaining={}",  response.getFirstHeader("X-Request-Id"), response.getFirstHeader("X-RateLimit-Limit"), response.getFirstHeader("X-RateLimit-Remaining"));
+            
+            
             logger.debug("{} : {},", request,statusCode );
     		callInfo.setEnd(Instant.now());
     		callInfo.setUrl(request.getURI().toASCIIString());
