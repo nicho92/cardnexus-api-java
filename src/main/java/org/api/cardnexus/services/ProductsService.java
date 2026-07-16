@@ -141,7 +141,7 @@ public class ProductsService extends AbstractNexusService{
     {
 		var serv =new FeedsService();
 		
-		var f = new File(NexusConfig.getFileDirectory(), "catalog.ndjson");
+		var f = new File(NexusConfig.DIRECTORY_FEED, "catalog.ndjson");
 		
 		if(forceDownload || !f.exists())
 		{

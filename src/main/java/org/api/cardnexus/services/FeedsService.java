@@ -47,7 +47,7 @@ public class FeedsService extends AbstractNexusService{
 			
 		logger.debug("Checksum for {} OK",zipFile);
 		
-		return FileTools.ungzip(zipFile, NexusConfig.getFileDirectory());
+		return FileTools.ungzip(zipFile, NexusConfig.DIRECTORY_FEED);
     }
     
     

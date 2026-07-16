@@ -50,7 +50,7 @@ public class FileTools {
     
     public static File download(URL url,EnumFeedKey key) throws IOException
     {
-	var f = new File(NexusConfig.getFileDirectory(), key.name() + ".gz");
+	var f = new File(NexusConfig.DIRECTORY_FEED, key.name() + ".gz");
 	
 	try (var urlStream = url.openStream(); BoundedInputStream stream = BoundedInputStream.builder().setInputStream(urlStream).get()) 
 	{
