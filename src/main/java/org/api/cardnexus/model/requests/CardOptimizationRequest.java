@@ -2,13 +2,11 @@ package org.api.cardnexus.model.requests;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import org.api.cardnexus.model.Amount;
 import org.api.cardnexus.model.enums.EnumCondition;
 import org.api.cardnexus.model.enums.EnumFinishes;
-
-
-
 
 public class CardOptimizationRequest {
 
@@ -17,12 +15,13 @@ public class CardOptimizationRequest {
     private List<ProductEntry> targets;
     
     public CardOptimizationRequest() {
-	targets = new ArrayList<ProductEntry>();
+    	targets = new ArrayList<ProductEntry>();
+    	destination = new ProductEntryCountry(Locale.getDefault().getCountry());
     }
     
     public void setCountry(String countryCode)
     {
-	destination = new ProductEntryCountry(countryCode);
+    	destination = new ProductEntryCountry(countryCode);
     }
     
     public void addEntry(int productId, int quantity,EnumCondition minCondition,EnumFinishes finish, List<String> languages,Amount maxUnitPrice)
