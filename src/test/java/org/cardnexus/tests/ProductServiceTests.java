@@ -50,7 +50,7 @@ class ProductServiceTests{
     	    if(p instanceof CardProduct card) {
     		System.out.println(card.getId() + " " + card.getName() + " " + card.getExpansion()+"/"+card.getPrintNumber() +" - " + card.getRarity());
     		System.out.println(card.getNameSlug() + " " + card.getFinishes());
-    		System.out.println("card " + card);
+    		System.out.println("Attributs " + card.getAttributes());
     		System.out.println("ScryfallID "+ card.getExternalIds().scryfallId());
     		System.out.println("MkmId "+ card.getExternalIds().cardmarket());
     		
