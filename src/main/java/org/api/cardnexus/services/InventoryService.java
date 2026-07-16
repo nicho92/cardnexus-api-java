@@ -51,14 +51,14 @@ public class InventoryService extends AbstractNexusService{
     
     public boolean deleteTag(String tagName) throws IOException
     {
-	try{
-	    client.post(ROOT_INVENTORY_ENDPOINT+"/tags/"+tagName, null, null, Object.class);
-	    return true;
-	}
-	catch(Exception _)
-	{
-	    return false;
-	}
+		try{
+		    client.post(ROOT_INVENTORY_ENDPOINT+"/tags/"+tagName, null, null, Object.class);
+		    return true;
+		}
+		catch(Exception _)
+		{
+		    return false;
+		}
 	
     }
     
