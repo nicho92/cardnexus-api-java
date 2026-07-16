@@ -28,14 +28,14 @@ class PricesServiceTests{
 			req.setIdProduct(75886);
 			req.setFinish(EnumFinishes.Standard);
 			req.setMarketplace(EnumMarketPlace.tcgplayer);
-			req.setFrom(LocalDate.now().minusDays(364));
+			req.setFrom(LocalDate.now().minusDays(10));
 			req.setTo(LocalDate.now());
 			
 		
-		service.getHistoryPrice(req).forEach(h->{
-			System.out.println(h);
-		});
+		service.getHistoryPrice(req).forEach(System.out::println);
 		
+		
+		System.out.println(service.getLastSales(108703));
 		
     	}
     	

@@ -16,7 +16,7 @@ public class ListsServices extends AbstractNexusService {
 
     public NexusList getNexusLists(String listId) throws IOException
     {
-	return   client.get(ROOT_LISTS_ENDPOINT+"/"+listId, null, NexusList.class);
+	return   client.get(ROOT_LISTS_ENDPOINT+"/"+listId, NexusList.class);
     }
     
     public List<NexusList> listNexusLists() throws IOException
@@ -25,7 +25,7 @@ public class ListsServices extends AbstractNexusService {
 	var pagination=new Pagination(null,null,null,true,null);
 	while(pagination.hasMore())
 	{
-		var result =  client.getPaginated(ROOT_LISTS_ENDPOINT+"?offset="+ret.size()+"&limit="+NexusConfig.LIMIT_LIST_RESULTS, null, NexusList.class);
+		var result =  client.getPaginated(ROOT_LISTS_ENDPOINT+"?offset="+ret.size()+"&limit="+NexusConfig.LIMIT_LIST_RESULTS, NexusList.class);
 		ret.addAll(result.data());
 		pagination = result.pagination();
 	}
@@ -34,27 +34,27 @@ public class ListsServices extends AbstractNexusService {
     
     public NexusList createList(ListCreationRequest req) throws IOException
     {
-	return client.post(ROOT_LISTS_ENDPOINT, req, null, NexusList.class);
+	return client.post(ROOT_LISTS_ENDPOINT, req, NexusList.class);
     }
     
     public NexusList updateList(String listId,ListCreationRequest req) throws IOException
     {
-	return client.patch(ROOT_LISTS_ENDPOINT+"/"+listId, req, null, NexusList.class);
+	return client.patch(ROOT_LISTS_ENDPOINT+"/"+listId, req, NexusList.class);
     }
     
     public boolean deleteList(String listId) throws IOException
     {
-	return client.delete(ROOT_LISTS_ENDPOINT+"/"+listId, null, null, JsonObject.class).get("deleted").getAsBoolean();
+	return client.delete(ROOT_LISTS_ENDPOINT+"/"+listId, null,  JsonObject.class).get("deleted").getAsBoolean();
     }
     
     public NexusList updateListItems(String listId, ListItemRequest req)  throws IOException
     {
-	return client.post(ROOT_LISTS_ENDPOINT+"/"+listId+"/items", req, null, NexusList.class);
+	return client.post(ROOT_LISTS_ENDPOINT+"/"+listId+"/items", req,  NexusList.class);
     }
     
     public boolean removeItem(String listId, String itemId)  throws IOException
     {
-	return client.post(ROOT_LISTS_ENDPOINT+"/"+listId+"/items/"+itemId, null, null, JsonObject.class).get("deleted").getAsBoolean();
+	return client.post(ROOT_LISTS_ENDPOINT+"/"+listId+"/items/"+itemId, null,  JsonObject.class).get("deleted").getAsBoolean();
     }
     
     

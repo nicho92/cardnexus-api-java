@@ -17,7 +17,7 @@ public class OrdersService extends AbstractNexusService {
 	var pagination=new Pagination(null,null,null,true,null);
 	while(pagination.hasMore())
 	{
-		var result =  client.getPaginated(ROOT_SALES_ENDPOINT+"?"+req.toQueryString(), null, Order.class);
+		var result =  client.getPaginated(ROOT_SALES_ENDPOINT+"?"+req.toQueryString(), Order.class);
 		ret.addAll(result.data());
 		pagination = result.pagination();
 	}
@@ -27,12 +27,12 @@ public class OrdersService extends AbstractNexusService {
     
     public Order getOrder(String orderNumber) throws IOException
     {
-	 return client.get(ROOT_SALES_ENDPOINT+"/"+orderNumber,null,Order.class);
+	 return client.get(ROOT_SALES_ENDPOINT+"/"+orderNumber,Order.class);
     }
     
     public Order getPurchase(String orderNumber) throws IOException
     {
-	 return client.get(ROOT_PURCHASES_ENDPOINT+"/"+orderNumber,null,Order.class);
+	 return client.get(ROOT_PURCHASES_ENDPOINT+"/"+orderNumber,Order.class);
     }
     
     public List<Order> listPurchases(SalesRequest req) throws IOException
@@ -41,7 +41,7 @@ public class OrdersService extends AbstractNexusService {
 	var pagination=new Pagination(null,null,null,true,null);
 	while(pagination.hasMore())
 	{
-		var result =  client.getPaginated(ROOT_PURCHASES_ENDPOINT+"?"+req.toQueryString(), null, Order.class);
+		var result =  client.getPaginated(ROOT_PURCHASES_ENDPOINT+"?"+req.toQueryString(), Order.class);
 		ret.addAll(result.data());
 		pagination = result.pagination();
 	}

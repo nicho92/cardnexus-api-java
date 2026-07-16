@@ -72,62 +72,55 @@ public class RestClient implements Closeable {
 
     // -------------------- Méthodes principales --------------------
     
-    public <T> PaginateResult<T> getPaginated(String url,Map<String,String> headers, Class<T> clazz) throws IOException {
+    public <T> PaginateResult<T> getPaginated(String url,Class<T> clazz) throws IOException {
 		var type = TypeToken.getParameterized(PaginateResult.class,clazz).getType();
-		return get(url, headers, type);
+		return get(url, type);
     }
     
-    public <T> PaginateResult<T> postPaginated(String url, Object body,Map<String,String> headers, Class<T> clazz) throws IOException {
+    public <T> PaginateResult<T> postPaginated(String url, Object body,Class<T> clazz) throws IOException {
  		var type = TypeToken.getParameterized(PaginateResult.class,clazz).getType();
- 		return post(url, body, headers, type);
+ 		return post(url, body, type);
      }
     
-    public <T> T get(String url, Map<String, String> headers,Type responseType) throws IOException {
+    public <T> T get(String url, Type responseType) throws IOException {
         
         var request = new HttpGet(NexusConfig.API_BASE_URL + url);
-        applyHeaders(request, headers);
-        return executeRequest(request, responseType);
+              return executeRequest(request, responseType);
         }
     
-    public <T> T get(String url, Map<String, String> headers, Class<T> responseType) throws IOException {
+    public <T> T get(String url, Class<T> responseType) throws IOException {
         var request = new HttpGet(NexusConfig.API_BASE_URL+url);
-        applyHeaders(request, headers);
         return executeRequest(request, responseType);
     }
     
-    public <T> T post(String url, Object body, Map<String, String> headers, Class<T> responseType) throws IOException {
+    public <T> T post(String url, Object body, Class<T> responseType) throws IOException {
         var request = new HttpPost(NexusConfig.API_BASE_URL+url);
-        applyHeaders(request, headers);
         addJsonBody(request, body);
         return executeRequest(request, responseType);
     }
     
-    public <T> T patch(String url, Object body, Map<String, String> headers, Class<T> responseType) throws IOException {
+    public <T> T patch(String url, Object body,Class<T> responseType) throws IOException {
         var request = new HttpPatch(NexusConfig.API_BASE_URL+url);
-        applyHeaders(request, headers);
         addJsonBody(request, body);
         return executeRequest(request, responseType);
     }
     
-    public <T> T post(String url, Object body, Map<String, String> headers,Type responseType) throws IOException {
+    public <T> T post(String url, Object body, Type responseType) throws IOException {
         var request = new HttpPost(NexusConfig.API_BASE_URL+url);
-        applyHeaders(request, headers);
         addJsonBody(request, body);
         return executeRequest(request, responseType);
     }
 
     
 
-    public <T> T put(String url, Object body, Map<String, String> headers, Class<T> responseType) throws IOException {
+    public <T> T put(String url, Object body, Class<T> responseType) throws IOException {
         var request = new HttpPut(NexusConfig.API_BASE_URL+url);
-        applyHeaders(request, headers);
         addJsonBody(request, body);
         return executeRequest(request, responseType);
     }
 
-    public <T> T delete(String url, Object body, Map<String, String> headers, Class<T> responseType) throws IOException {
+    public <T> T delete(String url, Object body, Class<T> responseType) throws IOException {
         var request = new HttpDeleteWithBody(NexusConfig.API_BASE_URL+url);
-        applyHeaders(request, headers);
         if (body != null) {
             addJsonBody(request, body);
         }
@@ -135,13 +128,6 @@ public class RestClient implements Closeable {
     }
 
     // -------------------- Méthodes internes --------------------
-
-    private void applyHeaders(HttpRequestBase request, Map<String, String> headers) {
-        defaultHeaders.forEach(request::addHeader);
-        if (headers != null) {
-            headers.forEach(request::setHeader);
-        }
-    }
 
     private void addJsonBody(HttpEntityEnclosingRequestBase request, Object body) {
         if (body != null) {

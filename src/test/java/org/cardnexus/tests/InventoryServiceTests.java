@@ -31,13 +31,9 @@ class InventoryServiceTests {
 		
 		service.getInventoryLines(req).forEach(line->{
 			var p = (CardProduct)serviceProduct.getProductById(line.productId());
-			try 
-			{
 				p.setExpansion(serviceProduct.getExpansionById(p.getExpansionId()));
 				System.out.println(line + "/"+ line.productId() + " : " + p.getName() + " " +p.getExpansion() + "/"+p.getPrintNumber() + " "  + line.condition());
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			
 		});
 		
 	}

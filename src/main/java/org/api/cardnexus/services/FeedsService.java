@@ -18,7 +18,7 @@ public class FeedsService extends AbstractNexusService{
    
     public Map<EnumFeedKey, Feed> getGameFeeds(String gameId) throws IOException
     {
-	var obj = client.get(ROOT_FEED_ENDPOINT+"/"+gameId, null, JsonObject.class);
+	var obj = client.get(ROOT_FEED_ENDPOINT+"/"+gameId, JsonObject.class);
 	var m = new EnumMap<EnumFeedKey, Feed>(EnumFeedKey.class);
 	obj.keySet().forEach(k->{
 	    var f = client.fromJson(obj.get(k).toString(), Feed.class);
@@ -34,7 +34,7 @@ public class FeedsService extends AbstractNexusService{
     
     public Feed getFeed(String gameId, EnumFeedKey f) throws IOException
     {
-	return client.get(ROOT_FEED_ENDPOINT+"/"+gameId+"/"+f.name(), null, Feed.class);
+	return client.get(ROOT_FEED_ENDPOINT+"/"+gameId+"/"+f.name(), Feed.class);
     }
     
     public File download(String gameId,EnumFeedKey k) throws IOException

@@ -14,13 +14,13 @@ public class PricesService extends AbstractNexusService {
 
     public  Price getCurrentPrice(Integer idProduct) throws IOException
     {
-	return client.get(ROOT_PRODUCT_ENDPOINT+"/"+idProduct+"/prices", null, Price.class);
+	return client.get(ROOT_PRODUCT_ENDPOINT+"/"+idProduct+"/prices", Price.class);
     }
     
     
     public List<History> getHistoryPrice(HistoryRequest req) throws IOException
     {
-	return client.getPaginated(ROOT_PRODUCT_ENDPOINT+"/"+req.getIdProduct()+"/prices/history?"+req.toQueryString(), null, History.class).data();
+	return client.getPaginated(ROOT_PRODUCT_ENDPOINT+"/"+req.getIdProduct()+"/prices/history?"+req.toQueryString(), History.class).data();
 	    
     }
     
@@ -33,7 +33,7 @@ public class PricesService extends AbstractNexusService {
     public List<Sales> getLastSales(Integer productId) throws IOException
     {
 	var ret = new ArrayList<Sales>();
-	var result = client.getPaginated(ROOT_PRODUCT_ENDPOINT+"/"+productId+"/sales" ,null,Sales.class);
+	var result = client.getPaginated(ROOT_PRODUCT_ENDPOINT+"/"+productId+"/sales" ,Sales.class);
 	    ret.addAll(result.data());
 	return ret;
     }
