@@ -37,11 +37,11 @@ class CartServiceTests {
 	var r = serv.runs(id);
 	
 	
-	System.out.println(r.getId());
-	System.out.println(r.getStatus());
-	r.getResult().getOptions().forEach(opt->{
+	System.out.println(r.id());
+	System.out.println(r.status());
+	r.result().options().forEach(opt->{
 	    
-	    System.out.println(opt.getKind() +" : " + opt.getSellerCount() + " user -> " + opt.getTotal());
+	    System.out.println(opt.kind() +" : " + opt.sellerCount() + " user -> " + opt.total());
 	});
 	
     }

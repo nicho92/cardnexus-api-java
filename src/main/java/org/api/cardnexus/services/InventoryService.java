@@ -20,9 +20,9 @@ public class InventoryService extends AbstractNexusService{
 	var ret = new ArrayList<InventoryLine>();
 	var pagination=result.getPagination();
 	
-	while(pagination.getNextCursor()!=null)
+	while(pagination.nextCursor()!=null)
 	{
-		result = client.getPaginated(ROOT_INVENTORY_ENDPOINT+"?cursor="+pagination.getNextCursor()+"&"+req.toQueryString(), null, InventoryLine.class);
+		result = client.getPaginated(ROOT_INVENTORY_ENDPOINT+"?cursor="+pagination.nextCursor()+"&"+req.toQueryString(), null, InventoryLine.class);
 		ret.addAll(result.getData());
 		pagination = result.getPagination();
 	}
@@ -91,9 +91,9 @@ public class InventoryService extends AbstractNexusService{
 	var ret = new ArrayList<InventoryLine>();
 	var pagination=result.getPagination();
 	
-	while(pagination.getNextCursor()!=null)
+	while(pagination.nextCursor()!=null)
 	{
-		result = client.getPaginated(ROOT_LISTING_ENDPOINT+"?cursor="+pagination.getNextCursor()+"&"+req.toQueryString(), null, InventoryLine.class);
+		result = client.getPaginated(ROOT_LISTING_ENDPOINT+"?cursor="+pagination.nextCursor()+"&"+req.toQueryString(), null, InventoryLine.class);
 		ret.addAll(result.getData());
 		pagination = result.getPagination();
 	}

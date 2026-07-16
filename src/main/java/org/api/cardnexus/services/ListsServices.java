@@ -22,7 +22,7 @@ public class ListsServices extends AbstractNexusService {
     public List<NexusList> listNexusLists() throws IOException
     {
 	var ret = new ArrayList<NexusList>();
-	var pagination=new Pagination();
+	var pagination=new Pagination(null,null,null,true,null);
 	while(pagination.hasMore())
 	{
 		var result =  client.getPaginated(ROOT_LISTS_ENDPOINT+"?offset="+ret.size()+"&limit="+NexusConfig.LIMIT_LIST_RESULTS, null, NexusList.class);

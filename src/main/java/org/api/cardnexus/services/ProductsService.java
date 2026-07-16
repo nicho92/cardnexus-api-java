@@ -66,7 +66,7 @@ public class ProductsService extends AbstractNexusService{
     public List<Expansion> listExpansion(String gameid) throws IOException
     {
 		var ret = new ArrayList<Expansion>();
-		var pagination=new Pagination();
+		var pagination=new Pagination(null,null,null,true,null);
 		while(pagination.hasMore())
 		{
 			var result =  client.getPaginated(ROOT_GAME_ENDPOINT+"/"+gameid+"/expansions?offset="+ret.size()+"&limit="+NexusConfig.LIMIT_LIST_RESULTS, null, Expansion.class);
@@ -96,7 +96,7 @@ public class ProductsService extends AbstractNexusService{
     public List<AbstractProduct> searchProduct(SearchProductRequest req) throws IOException
     {
 		var ret = new ArrayList<AbstractProduct>();
-		var pagination=new Pagination();
+		var pagination=new Pagination(null,null,null,true,null);
 		while(pagination.hasMore())
 		{
 		    req.setOffset(ret.size());
