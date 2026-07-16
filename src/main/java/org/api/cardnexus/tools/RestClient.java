@@ -39,8 +39,8 @@ public class RestClient implements Closeable {
     private final CloseableHttpClient httpClient;
     private final Gson gson;
     private final Map<String, String> defaultHeaders;
-	protected Logger logger = LogManager.getLogger(this.getClass());
-	private URLCallListener listener;
+    protected Logger logger = LogManager.getLogger(this.getClass());
+    private URLCallListener listener;
 	 
     /**
      * Constructeur sans authentification.
@@ -56,9 +56,7 @@ public class RestClient implements Closeable {
      */
     public RestClient(String token) {
         this.httpClient = HttpClients.createDefault();
-        var builder = new GsonBuilder()
-        		.registerTypeAdapter(AbstractProduct.class, new ProductAdapter())
-        		;
+        var builder = new GsonBuilder().registerTypeAdapter(AbstractProduct.class, new ProductAdapter());
         
         if(NexusConfig.GSON_PRETTY_PRINT)
             builder.setPrettyPrinting();

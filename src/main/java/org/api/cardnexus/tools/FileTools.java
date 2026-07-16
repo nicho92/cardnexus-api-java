@@ -30,7 +30,7 @@ public class FileTools {
     {
     	if(!NexusConfig.CHECKSUM_MD5_FEED)
     	{
-    		logger.warn("Carreful, MD5 checksum for {} is disabled. You can change value by set CHECKSUM_MD5_FEED=true");
+    		logger.warn("Carreful, MD5 checksum for {} is disabled. You can change value by set CHECKSUM_MD5_FEED=true",f);
     		return true;
     	}
     	
