@@ -69,7 +69,7 @@ class ProductServiceTests{
  		System.out.println("NexusPrice "+ sealed.getPrices().cardnexus());
 	    
  	    }
-    	    
+    	    System.out.println("Url= " + p.urlProduct());
     	}
     	
     	@Test

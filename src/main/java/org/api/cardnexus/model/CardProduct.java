@@ -6,6 +6,7 @@ import java.util.Map;
 import org.api.cardnexus.model.enums.EnumFinishes;
 import org.api.cardnexus.model.enums.EnumRarity;
 import org.api.cardnexus.model.enums.EnumVariant;
+import org.api.cardnexus.tools.Slugifyer;
 
 public class CardProduct extends AbstractProduct {
 
@@ -36,7 +37,11 @@ public class CardProduct extends AbstractProduct {
        return pricesByFinish;
    }
  
-   
+   @Override
+    public String urlProduct()
+    {
+    	return "https://cardnexus.com/fr/explore/"+getGame().id()+"/"+Slugifyer.nameSlug(getExpansion().name())+"/card/"+getNameSlug()+"-"+getId()+"?finish="+getFinishes().getFirst();
+    }
    
     public CardAttributs getAttributes() {
 	return attributes;

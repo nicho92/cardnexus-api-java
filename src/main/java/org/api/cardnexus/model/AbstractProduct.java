@@ -18,6 +18,8 @@ public abstract class AbstractProduct {
     private EnumProductType productType;
     private ExternalIds externalIds;
     
+    public abstract String urlProduct();
+    
   
     @Override
     public String toString() {
