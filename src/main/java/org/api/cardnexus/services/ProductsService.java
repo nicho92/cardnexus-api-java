@@ -36,7 +36,7 @@ public class ProductsService extends AbstractNexusService{
     
     public List<Game> listGames() throws IOException
     {
-    	return client.getPaginated(ROOT_GAME_ENDPOINT, null, Game.class).getData();
+    	return client.getPaginated(ROOT_GAME_ENDPOINT, null, Game.class).data();
     }
     
     public Game getGameById(String id) throws IOException
@@ -70,12 +70,12 @@ public class ProductsService extends AbstractNexusService{
 		while(pagination.hasMore())
 		{
 			var result =  client.getPaginated(ROOT_GAME_ENDPOINT+"/"+gameid+"/expansions?offset="+ret.size()+"&limit="+NexusConfig.LIMIT_LIST_RESULTS, null, Expansion.class);
-			ret.addAll(result.getData());
+			ret.addAll(result.data());
 			
-			result.getData().forEach(ex->expansionCache.put(ex.id(), ex));
+			result.data().forEach(ex->expansionCache.put(ex.id(), ex));
 			
 			
-			pagination = result.getPagination();
+			pagination = result.pagination();
 		}
 		return ret;
     }
@@ -101,9 +101,9 @@ public class ProductsService extends AbstractNexusService{
 		{
 		    req.setOffset(ret.size());
 		    var result = client.postPaginated(ROOT_PRODUCT_ENDPOINT+"/search",req,null,AbstractProduct.class);
-		    ret.addAll(result.getData());
+		    ret.addAll(result.data());
 		    
-		    pagination=result.getPagination();
+		    pagination=result.pagination();
 		}
 		
 		ret.forEach(p->productsCache.put(p.getId(), p));

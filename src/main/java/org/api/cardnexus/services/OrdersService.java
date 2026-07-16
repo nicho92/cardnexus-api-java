@@ -18,8 +18,8 @@ public class OrdersService extends AbstractNexusService {
 	while(pagination.hasMore())
 	{
 		var result =  client.getPaginated(ROOT_SALES_ENDPOINT+"?"+req.toQueryString(), null, Order.class);
-		ret.addAll(result.getData());
-		pagination = result.getPagination();
+		ret.addAll(result.data());
+		pagination = result.pagination();
 	}
 	return ret;
 	
@@ -42,8 +42,8 @@ public class OrdersService extends AbstractNexusService {
 	while(pagination.hasMore())
 	{
 		var result =  client.getPaginated(ROOT_PURCHASES_ENDPOINT+"?"+req.toQueryString(), null, Order.class);
-		ret.addAll(result.getData());
-		pagination = result.getPagination();
+		ret.addAll(result.data());
+		pagination = result.pagination();
 	}
 	return ret;
 	

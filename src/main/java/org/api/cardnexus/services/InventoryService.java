@@ -18,13 +18,13 @@ public class InventoryService extends AbstractNexusService{
     {
 	var result = client.getPaginated(ROOT_INVENTORY_ENDPOINT+"?"+req.toQueryString(), null, InventoryLine.class);
 	var ret = new ArrayList<InventoryLine>();
-	var pagination=result.getPagination();
+	var pagination=result.pagination();
 	
 	while(pagination.nextCursor()!=null)
 	{
 		result = client.getPaginated(ROOT_INVENTORY_ENDPOINT+"?cursor="+pagination.nextCursor()+"&"+req.toQueryString(), null, InventoryLine.class);
-		ret.addAll(result.getData());
-		pagination = result.getPagination();
+		ret.addAll(result.data());
+		pagination = result.pagination();
 	}
 	return ret;
     }
@@ -41,7 +41,7 @@ public class InventoryService extends AbstractNexusService{
     
     public List<Tag> listTags() throws IOException
     {
-	return client.getPaginated(ROOT_INVENTORY_ENDPOINT+"/tags", null,Tag.class).getData();
+	return client.getPaginated(ROOT_INVENTORY_ENDPOINT+"/tags", null,Tag.class).data();
     }
     
     public Tag createTag(Tag t) throws IOException
@@ -64,7 +64,7 @@ public class InventoryService extends AbstractNexusService{
     
     public List<Location> listLocations() throws IOException
     {
-	return client.getPaginated(ROOT_INVENTORY_ENDPOINT+"/locations", null,Location.class).getData();
+	return client.getPaginated(ROOT_INVENTORY_ENDPOINT+"/locations", null,Location.class).data();
     }
     
     public Location createLocation(Location t) throws IOException
@@ -89,13 +89,13 @@ public class InventoryService extends AbstractNexusService{
     {
 	var result = client.getPaginated(ROOT_LISTING_ENDPOINT+"?"+req.toQueryString(), null, InventoryLine.class);
 	var ret = new ArrayList<InventoryLine>();
-	var pagination=result.getPagination();
+	var pagination=result.pagination();
 	
 	while(pagination.nextCursor()!=null)
 	{
 		result = client.getPaginated(ROOT_LISTING_ENDPOINT+"?cursor="+pagination.nextCursor()+"&"+req.toQueryString(), null, InventoryLine.class);
-		ret.addAll(result.getData());
-		pagination = result.getPagination();
+		ret.addAll(result.data());
+		pagination = result.pagination();
 	}
 	return ret;
     }

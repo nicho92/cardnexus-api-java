@@ -20,7 +20,7 @@ public class PricesService extends AbstractNexusService {
     
     public List<History> getHistoryPrice(HistoryRequest req) throws IOException
     {
-	return client.getPaginated(ROOT_PRODUCT_ENDPOINT+"/"+req.getIdProduct()+"/prices/history?"+req.toQueryString(), null, History.class).getData();
+	return client.getPaginated(ROOT_PRODUCT_ENDPOINT+"/"+req.getIdProduct()+"/prices/history?"+req.toQueryString(), null, History.class).data();
 	    
     }
     
@@ -34,7 +34,7 @@ public class PricesService extends AbstractNexusService {
     {
 	var ret = new ArrayList<Sales>();
 	var result = client.getPaginated(ROOT_PRODUCT_ENDPOINT+"/"+productId+"/sales" ,null,Sales.class);
-	    ret.addAll(result.getData());
+	    ret.addAll(result.data());
 	return ret;
     }
     
