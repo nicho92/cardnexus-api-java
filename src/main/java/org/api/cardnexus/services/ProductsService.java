@@ -106,6 +106,7 @@ public class ProductsService extends AbstractNexusService{
 		    pagination=result.pagination();
 		}
 		
+		ret.forEach(p->p.setExpansion(getExpansionById(p.getExpansionId())));
 		ret.forEach(p->productsCache.put(p.getId(), p));
 		
 		if(req.isStrictTerms() && req.getName()!=null)

@@ -27,8 +27,11 @@ class ProductServiceTests{
 		req.setGame("mtg");
 		req.setStrictTerms(true);
 		req.setProductTypes(EnumProductType.card);
-		
 		req.setProductIds(List.of(75886));
+		
+		
+		service.listExpansion("mtg");//caching;
+		
 		
 		System.out.println("=====CardproductBySearch");
 		printData(service.searchProduct(req).getFirst());
@@ -48,7 +51,8 @@ class ProductServiceTests{
     	void printData(AbstractProduct p)
     	{
     	    if(p instanceof CardProduct card) {
-    		System.out.println(card.getId() + " " + card.getName() + " " + card.getExpansion()+"/"+card.getPrintNumber() +" - " + card.getRarity());
+    		System.out.println(card.getId() + " " + card.getName() + " " + card.getPrintNumber() +" - " + card.getRarity());
+    		System.out.println(card.getExpansion());
     		System.out.println(card.getNameSlug() + " " + card.getFinishes());
     		System.out.println("Attributs " + card.getAttributes());
     		System.out.println("ScryfallID "+ card.getExternalIds().scryfallId());

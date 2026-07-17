@@ -3,6 +3,7 @@ package org.api.cardnexus.model;
 import java.util.List;
 
 import org.api.cardnexus.model.enums.EnumProductType;
+import org.api.cardnexus.tools.Slugifyer;
 
 public abstract class AbstractProduct {
 
@@ -18,7 +19,10 @@ public abstract class AbstractProduct {
     private EnumProductType productType;
     private ExternalIds externalIds;
     
-    public abstract String urlProduct();
+    public String urlProduct()
+    {
+	return "https://cardnexus.com/fr/explore/"+getGame().id()+"/"+Slugifyer.nameSlug(getExpansion().name())+"/"+getProductType()+"/"+getNameSlug()+"-"+getId();
+    }
     
   
     @Override

@@ -1,7 +1,6 @@
 package org.api.cardnexus.model;
 
 import org.api.cardnexus.model.enums.EnumSealedType;
-import org.api.cardnexus.tools.Slugifyer;
 
 public class SealedProduct extends AbstractProduct {
 
@@ -17,12 +16,6 @@ public class SealedProduct extends AbstractProduct {
     }
     public ProductPriceMarket getPrices() {
 	return prices;
-    }
-    
-    @Override
-    public String urlProduct() {
-	  return "https://cardnexus.com/fr/explore/"+getGame().id()+"/"+Slugifyer.nameSlug(getExpansion().name())+"/sealed/"+getNameSlug()+"-"+getId();
-	    
     }
     
     

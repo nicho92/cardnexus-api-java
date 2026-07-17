@@ -37,12 +37,6 @@ public class CardProduct extends AbstractProduct {
        return pricesByFinish;
    }
  
-   @Override
-    public String urlProduct()
-    {
-    	return "https://cardnexus.com/fr/explore/"+getGame().id()+"/"+Slugifyer.nameSlug(getExpansion().name())+"/card/"+getNameSlug()+"-"+getId()+"?finish="+getFinishes().getFirst();
-    }
-   
     public CardAttributs getAttributes() {
 	return attributes;
     }
