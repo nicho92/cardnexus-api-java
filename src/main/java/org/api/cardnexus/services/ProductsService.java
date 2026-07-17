@@ -36,23 +36,10 @@ public class ProductsService extends AbstractNexusService{
 		expansionCache = CachingService.createCache();
     }
     
-    
-    /**
-     * Returns every game CardNexus tracks. Use the id of each entry to address the game in other catalogue endpoints.
-     * @return List<Game>
-     * @throws IOException
-     */
     public List<Game> listGames() throws IOException
     {
     	return client.getPaginated(ROOT_GAME_ENDPOINT, Game.class).data();
     }
-    
-    /***
-     * Returns a single game by its identifier.
-     * @param id
-     * @return Game
-     * @throws IOException
-     */
     
     public Game getGameById(String id) throws IOException
     {
@@ -73,24 +60,11 @@ public class ProductsService extends AbstractNexusService{
     	
     }
 
-    /**
-     * Returns every expansion (set) of a game, paginated. Newest expansions first by release date.
-     * @param game
-     * @return List<Expansion>
-     * @throws IOException
-     */
-    
     public List<Expansion> listExpansion(Game game) throws IOException
     {
     	return listExpansion(game.id());
     }
     
-    /**
-     * Returns every expansion (set) of a game, paginated. Newest expansions first by release date.
-     * @param gameid
-     * @return List<Expansion>
-     * @throws IOException
-     */    
     public List<Expansion> listExpansion(String gameid) throws IOException
     {
 		var ret = new ArrayList<Expansion>();
@@ -108,13 +82,6 @@ public class ProductsService extends AbstractNexusService{
 		return ret;
     }
     
-    /**
-     * Returns a single product by its identifier, including cross-platform IDs that map this product to its Cardmarket and TCGplayer equivalents.
-     * The response is a discriminated union by productType (card or sealed).
-     * @param id
-     * @return AbstractProduct
-     */
-    
     public AbstractProduct getProductById(Integer id)
     {
 		return productsCache.get(id, _->{
@@ -128,14 +95,6 @@ public class ProductsService extends AbstractNexusService{
 		});	
     }
      
-    /**
-     * Searches the catalogue. Returns a paginated list of products matching the body.
-     * Use this to find a card by name, browse an expansion, or filter on game-specific attributes like rarity or color. To replicate the full catalogue, use GET /v1/feeds/products instead — the feed is regenerated whenever a game's catalogue updates (typically minutes after a change).
-     * This endpoint has its own rate-limit bucket (catalogue-search); paginating through tens of thousands of results will hit it before your account-level limit. The daily feeds are the right tool for bulk catalogue replication.
-     * @param req
-     * @return List<AbstractProduct>
-     * @throws IOException
-     */
     public List<AbstractProduct> searchProduct(SearchProductRequest req) throws IOException
     {
 		var ret = new ArrayList<AbstractProduct>();
@@ -158,14 +117,6 @@ public class ProductsService extends AbstractNexusService{
 		return ret;
     }
     
-    /**
-     * Maps Cardmarket or TCGplayer product ids to CardNexus products, up to 200 ids per call. Each id resolves to at most one product, including the finish the id maps to — a marketplace product id is finish-specific, so a card's Foil and Standard printings carry different ids. Ids with no match come back with product: null, so a single call gives you a complete mapping table, misses included.
-     * Pair this with the bulk import: resolve your Cardmarket idProduct (or TCGplayer product id) column to CardNexus product ids, then send those as the productId on each POST /v1/inventory/bulk/import row.
-     * @param market
-     * @param ids
-     * @return Map<Integer,Integer>
-     * @throws IOException
-     */
     public Map<Integer,Integer> resolveProductsId(EnumMarketPlace market, List<Integer> ids) throws IOException
     {
 		var obj = new JsonObject();
