@@ -9,6 +9,7 @@ import org.api.cardnexus.model.CardProduct;
 import org.api.cardnexus.model.SealedProduct;
 import org.api.cardnexus.model.enums.EnumMarketPlace;
 import org.api.cardnexus.model.enums.EnumProductType;
+import org.api.cardnexus.model.requests.MarketListRequest;
 import org.api.cardnexus.model.requests.SearchProductRequest;
 import org.api.cardnexus.services.ProductsService;
 import org.junit.jupiter.api.Test;
@@ -17,6 +18,22 @@ import org.junit.jupiter.api.Test;
 class ProductServiceTests{
     
     	@Test
+    	void testMarketLists() throws IOException 
+    	{
+    	NexusConfig.loadTokenFromEnv();
+	
+	var service = new ProductsService();
+	
+	
+	var req = new MarketListRequest();
+	     req.setProductId(41547);
+	
+	service.listMarketListing(req).forEach(System.out::println);
+	
+    	}
+    
+    
+    	
     	void testSearchCardProduct() throws IOException {
 	    
 		NexusConfig.loadTokenFromEnv();
@@ -70,7 +87,7 @@ class ProductServiceTests{
     	    System.out.println("Url= " + p.urlProduct());
     	}
     	
-    	@Test
+    	
     	void testSearchSealedProduct() throws IOException {
 	    
 		NexusConfig.loadTokenFromEnv();
