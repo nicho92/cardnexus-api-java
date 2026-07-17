@@ -8,6 +8,7 @@ import org.api.cardnexus.model.enums.EnumRarity;
 import org.api.cardnexus.model.enums.EnumVariant;
 import org.api.cardnexus.tools.Slugifyer;
 
+
 public class CardProduct extends AbstractProduct {
 
     private String printNumber;
@@ -54,3 +55,6 @@ public class CardProduct extends AbstractProduct {
     }
     
 }
+
+
+record CardAttributs (List<String> color,List<String> colorIdentity, List<String> types,String description) {}

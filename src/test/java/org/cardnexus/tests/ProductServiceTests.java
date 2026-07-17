@@ -29,9 +29,7 @@ class ProductServiceTests{
 		req.setProductTypes(EnumProductType.card);
 		req.setProductIds(List.of(75886));
 		
-		
 		service.listExpansion("mtg");//caching;
-		
 		
 		System.out.println("=====CardproductBySearch");
 		printData(service.searchProduct(req).getFirst());
@@ -45,7 +43,6 @@ class ProductServiceTests{
 		System.out.println(EnumMarketPlace.cardmarket + " " + m.getKey() + " ->" + m.getValue());
 		    
 		});
-		
 	}
     	
     	void printData(AbstractProduct p)
@@ -67,12 +64,9 @@ class ProductServiceTests{
     	    }
     	    else if(p instanceof SealedProduct sealed) 
     	    {
- 		System.out.println(sealed.getId() + " " + sealed.getName() + " " + sealed.getExpansion());
- 		System.out.println("Types " + sealed.getProductCategory());
- 		System.out.println("MkmID "+ sealed.getExternalIds().cardmarket());
- 		System.out.println("NexusPrice "+ sealed.getPrices().cardnexus());
-	    
+ 		System.out.println(sealed);
  	    }
+
     	    System.out.println("Url= " + p.urlProduct());
     	}
     	
