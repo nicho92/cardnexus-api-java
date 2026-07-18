@@ -6,7 +6,6 @@ import java.util.Map;
 import org.api.cardnexus.model.enums.EnumFinishes;
 import org.api.cardnexus.model.enums.EnumRarity;
 import org.api.cardnexus.model.enums.EnumVariant;
-import org.api.cardnexus.tools.Slugifyer;
 
 
 public class CardProduct extends AbstractProduct {
@@ -23,7 +22,7 @@ public class CardProduct extends AbstractProduct {
     
     @Override
     public int hashCode() {
-        return getId().hashCode();
+        return getId();
     }
     
    @Override

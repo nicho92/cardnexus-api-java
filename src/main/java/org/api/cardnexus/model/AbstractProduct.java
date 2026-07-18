@@ -7,7 +7,7 @@ import org.api.cardnexus.tools.Slugifyer;
 
 public abstract class AbstractProduct {
 
-    private Integer id;
+    private int id;
     private String gameId;
     private Game game;
     private Expansion expansion;
@@ -39,10 +39,10 @@ public abstract class AbstractProduct {
     public ExternalIds getExternalIds() {
    	return externalIds;
     }
-    public Integer getId() {
+    public int getId() {
         return id;
     }
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
     public String getGameId() {
