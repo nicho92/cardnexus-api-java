@@ -47,7 +47,6 @@ class InventorySearch {
 	    System.out.println(p.getName() + " " + p.getExpansion().code());
 	    System.out.println(il);
 	    System.out.println(p.getPricesByFinish().get(il.finish()));
-	    
 	    System.out.println("=================================");
 	    
 	    
