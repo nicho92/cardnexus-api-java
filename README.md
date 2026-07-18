@@ -40,14 +40,14 @@ This project is part of a family of Java API clients built around the [MtgDeskto
 <dependency>
     <groupId>com.github.nicho92</groupId>
     <artifactId>cardnexus-api-java</artifactId>
-    <version>1.4.3</version>
+    <version>1.4.9</version>
 </dependency>
 ```
 
 ### Gradle
 
 ```groovy
-implementation 'com.github.nicho92:cardnexus-api-java:1.4.3'
+implementation 'com.github.nicho92:cardnexus-api-java:1.4.9'
 ```
 
 The library is published on [Maven Central](https://central.sonatype.com/artifact/com.github.nicho92/cardnexus-api-java), so no extra repository declaration is needed.
@@ -65,10 +65,8 @@ import java.util.List;
 
 public class Example {
     public static void main(String[] args) throws Exception {
-        // Initialize the API configuration once, at application startup
-        NexusConfig.setToken(
-            System.getenv("CARDNEXUS_API_KEY")
-        );
+
+       NexusConfig.loadTokenFromEnv();
 
      	var service = new ProductsService();
 		
