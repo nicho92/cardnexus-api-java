@@ -5,6 +5,7 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.StringJoiner;
 
 import org.api.cardnexus.configuration.NexusConfig;
@@ -38,10 +39,16 @@ public abstract class AbstractGetRequest {
 		var value = getter.invoke(this);
 
 		if (value != null) {
-		    if (value instanceof LocalDate d)
+		    if (value instanceof LocalDate d) {
 			joiner.add(encode(pd.getName()) + "="+ encode(DateTimeFormatter.ofPattern(NexusConfig.REQ_DATE_PATTERN).format(d)));
-		    else
+		    }
+		    else  if (value instanceof List<?> l) 
+		    {
+			l.forEach(v->joiner.add(encode(pd.getName()) + "=" + encode(v.toString())));
+		    } 
+		    else {
 			joiner.add(encode(pd.getName()) + "=" + encode(value.toString()));
+		    }
 		}
 	    }
 

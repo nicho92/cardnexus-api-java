@@ -1,4 +1,4 @@
-package org.cardnexus.tests;
+package org.cardnexus.tests.services;
 
 import java.io.IOException;
 

@@ -1,4 +1,4 @@
-package org.cardnexus.tests;
+package org.cardnexus.tests.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

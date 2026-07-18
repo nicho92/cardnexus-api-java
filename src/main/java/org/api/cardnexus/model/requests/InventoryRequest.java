@@ -2,12 +2,13 @@ package org.api.cardnexus.model.requests;
 
 import java.util.List;
 
+import org.api.cardnexus.configuration.NexusConfig;
 import org.api.cardnexus.model.enums.EnumCondition;
 import org.api.cardnexus.model.enums.EnumFinishes;
 
 public class InventoryRequest extends AbstractGetRequest{
-    private String game;
-    private List<Integer> productIds;
+    private String game = NexusConfig.DEFAULT_GAME_VALUE;
+    private List<Integer> productId;
     private EnumCondition condition;
     private String language;
     private EnumFinishes finish;
@@ -21,11 +22,11 @@ public class InventoryRequest extends AbstractGetRequest{
     public void setGame(String game) {
         this.game = game;
     }
-    public List<Integer> getProductIds() {
-        return productIds;
+    public List<Integer> getProductId() {
+        return productId;
     }
-    public void setProductIds(List<Integer> productIds) {
-        this.productIds = productIds;
+    public void setProductIds(List<Integer> productId) {
+        this.productId = productId;
     }
     public EnumCondition getCondition() {
         return condition;

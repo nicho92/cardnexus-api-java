@@ -10,7 +10,7 @@ public class MarketListRequest extends AbstractGetRequest {
     private EnumFinishes finish;
     private String region;
     private String deliveryCountry;
-    private transient Integer productId;
+    private Integer productId;
     
     
     public void setProductId(Integer productId) {

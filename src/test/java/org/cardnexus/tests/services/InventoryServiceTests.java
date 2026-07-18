@@ -1,4 +1,4 @@
-package org.cardnexus.tests;
+package org.cardnexus.tests.services;
 
 import java.io.IOException;
 
@@ -24,7 +24,7 @@ class InventoryServiceTests {
 		
 		var req = new InventoryRequest();
 			req.setGame("mtg");
-			req.setLimit(100);
+			req.setLimit(20);
 			req.setCondition(EnumCondition.MP);
 		
 		serviceProduct.listExpansion("mtg"); // put in cache

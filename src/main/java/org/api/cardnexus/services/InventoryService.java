@@ -16,9 +16,14 @@ public class InventoryService extends AbstractNexusService{
     
     public List<InventoryLine> getInventoryLines(InventoryRequest req) throws IOException
     {
-	var result = client.getPaginated(ROOT_INVENTORY_ENDPOINT+"?"+req.toQueryString(),  InventoryLine.class);
+	
 	var ret = new ArrayList<InventoryLine>();
+	
+	var result = client.getPaginated(ROOT_INVENTORY_ENDPOINT+"?"+req.toQueryString(),  InventoryLine.class);
+	
 	var pagination=result.pagination();
+	
+	ret.addAll(result.data());
 	
 	while(pagination.nextCursor()!=null)
 	{

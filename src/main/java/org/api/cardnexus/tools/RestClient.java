@@ -132,7 +132,7 @@ public class RestClient implements Closeable {
     private void addJsonBody(HttpEntityEnclosingRequestBase request, Object body) {
         if (body != null) {
             var json = gson.toJson(body);
-            logger.debug("body={}", json);
+            logger.debug("postContent={}", json);
             request.setEntity(new StringEntity(json, ContentType.APPLICATION_JSON));
         }
     }

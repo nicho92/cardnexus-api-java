@@ -1,11 +1,12 @@
 package org.api.cardnexus.model.requests;
 
+import org.api.cardnexus.configuration.NexusConfig;
 import org.api.cardnexus.model.enums.EnumStatus;
 
 public class ListCreationRequest {
 
     private String name;
-    private String game;
+    private String game=NexusConfig.DEFAULT_GAME_VALUE;
     private EnumStatus status;
     private String description;
     private boolean isPublic;

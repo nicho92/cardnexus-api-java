@@ -13,14 +13,14 @@ public class NexusConfig {
     public static final String API_BASE_URL="https://public-api.cardnexus.com/v1"; 
     public static final String API_VERSION="0.6.0";
     public static final String ENV_TOKEN_KEY="CARDNEXUS_API_KEY";
-    public static final String REQ_DATE_PATTERN="YYYY-MM-dd";
+    public static final String REQ_DATE_PATTERN="yyyy-MM-dd";
 	
     
     public static File DIRECTORY_FEED = new File(System.getProperty("user.home"));
     public static boolean GSON_PRETTY_PRINT=false;
     public static int LIMIT_LIST_RESULTS=200;
     public static boolean CHECKSUM_MD5_FEED=true;
-    
+    public static String DEFAULT_GAME_VALUE=null;
     private static String token;
 	
 
