@@ -11,7 +11,7 @@ public class NexusConfig {
 
     
     public static final String API_BASE_URL="https://public-api.cardnexus.com/v1"; 
-    public static final String API_VERSION="0.5.1";
+    public static final String API_VERSION="0.6.0";
     public static final String ENV_TOKEN_KEY="CARDNEXUS_API_KEY";
     public static final String REQ_DATE_PATTERN="YYYY-MM-dd";
 	

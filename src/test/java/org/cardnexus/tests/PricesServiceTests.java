@@ -27,7 +27,7 @@ class PricesServiceTests{
 		var req = new HistoryRequest();
 			req.setIdProduct(75886);
 			req.setFinish(EnumFinishes.Standard);
-			req.setMarketplace(EnumMarketPlace.tcgplayer);
+			req.setMarketplace(EnumMarketPlace.cardmarket);
 			req.setFrom(LocalDate.now().minusDays(10));
 			req.setTo(LocalDate.now());
 			

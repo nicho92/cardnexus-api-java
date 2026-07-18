@@ -12,33 +12,42 @@ import org.api.cardnexus.model.enums.EnumProductType;
 import org.api.cardnexus.model.requests.MarketListRequest;
 import org.api.cardnexus.model.requests.SearchProductRequest;
 import org.api.cardnexus.services.ProductsService;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 
+@TestInstance(Lifecycle.PER_CLASS)
 class ProductServiceTests{
+
+    	private ProductsService service;
+
+	@BeforeAll
+    	void init() throws IOException
+    	{
+	    NexusConfig.loadTokenFromEnv();
+    	    service = new ProductsService();
+    	
+    	}
+    
     
     	@Test
     	void testMarketLists() throws IOException 
     	{
-    	NexusConfig.loadTokenFromEnv();
-	
-	var service = new ProductsService();
-	
+    
+	System.out.println("=====CardproductBySearch");
 	
 	var req = new MarketListRequest();
 	     req.setProductId(41547);
 	
-	service.listMarketListing(req).forEach(System.out::println);
+	     service.listMarketListing(req).forEach(System.out::println);
 	
     	}
     
     
-    	
+    	@Test
     	void testSearchCardProduct() throws IOException {
-	    
-		NexusConfig.loadTokenFromEnv();
-		
-		var service = new ProductsService();
 		
 		var req = new SearchProductRequest();
 		req.setGame("mtg");
@@ -61,6 +70,29 @@ class ProductServiceTests{
 		    
 		});
 	}
+    	
+    	@Test
+    	void testSearchSealedProduct() throws IOException {
+	    
+		
+		var req = new SearchProductRequest();
+			req.setGame("mtg");
+			req.setName("Innistrad Booster Box");
+			req.setProductTypes(EnumProductType.sealed);
+			
+			
+			
+		System.out.println("=====SealedproductBySearch");
+		printData(service.searchProduct(req).getFirst());
+		
+		
+		System.out.println("=====SealedproductById");
+		printData(service.getProductById(164429));
+		
+		
+	}
+    	
+    	
     	
     	void printData(AbstractProduct p)
     	{
@@ -86,31 +118,6 @@ class ProductServiceTests{
 
     	    System.out.println("Url= " + p.urlProduct());
     	}
-    	
-    	
-    	void testSearchSealedProduct() throws IOException {
-	    
-		NexusConfig.loadTokenFromEnv();
-		
-		
-		var service = new ProductsService();
-		
-		var req = new SearchProductRequest();
-			req.setGame("mtg");
-			req.setName("Innistrad Booster Box");
-			req.setProductTypes(EnumProductType.sealed);
-			
-			
-			
-		System.out.println("=====SealedproductBySearch");
-		printData(service.searchProduct(req).getFirst());
-		
-		
-		System.out.println("=====SealedproductById");
-		printData(service.getProductById(164429));
-		
-		
-	}
     	
     	
     	
