@@ -17,11 +17,12 @@ class InventorySearchTest {
     void searchInventoryCardName() throws IOException
     {
 	
-	String search ="Black Lotus";
+	String search ="Lion's Eye Diamond";
+	
+	
 	
 	NexusConfig.loadTokenFromEnv();
 	NexusConfig.DEFAULT_GAME_VALUE="mtg";
-	
 	
 	var iService = new InventoryService();
 	var pService = new ProductsService();
