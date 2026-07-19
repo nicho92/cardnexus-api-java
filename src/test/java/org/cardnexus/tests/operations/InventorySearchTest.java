@@ -31,16 +31,13 @@ class InventorySearchTest {
 	var lines = iService.getInventoryLines(InventoryRequest.create().setProductIds(products.stream().map(ap->ap.getId()).toList()));
 	
 	lines.forEach(il->{
-	    
 	    var p = (CardProduct)products.stream().filter(ap->ap.getId()==il.productId()).findFirst().get();
-	    
 	    	    
-	    System.out.println(p.getName() + " " + p.getExpansion().code());
+	    System.out.println(p.getName() + " " + p.getExpansion().code().toUpperCase()+"/"+p.getPrintNumber());
 	    System.out.println(il);
+	    System.out.println("----------");
 	    System.out.println(p.getPricesByFinish().get(il.finish()));
 	    System.out.println("=================================");
-	    
-	    
 	});
     }
     
