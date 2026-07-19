@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.api.cardnexus.model.InventoryLine;
 import org.api.cardnexus.model.Location;
+import org.api.cardnexus.model.Pagination;
 import org.api.cardnexus.model.Tag;
 import org.api.cardnexus.model.requests.InventoryRequest;
 import org.api.cardnexus.model.requests.SearchInventoryRequest;
@@ -19,17 +20,15 @@ public class InventoryService extends AbstractNexusService{
     {
 	var ret = new ArrayList<InventoryLine>();
 	
-	var result = client.postPaginated(ROOT_INVENTORY_ENDPOINT+"/search",req,  InventoryLine.class);
+	var pagination=new Pagination(null,null,null,true,null);
 	
-	var pagination=result.pagination();
-	
-	ret.addAll(result.data());
-	
-	while(pagination.nextCursor()!=null)
+	while(pagination.hasMore())
 	{
-		result = client.getPaginated(ROOT_INVENTORY_ENDPOINT+"?cursor="+pagination.nextCursor(),  InventoryLine.class);
+		var result = client.postPaginated(ROOT_INVENTORY_ENDPOINT+"/search", req, InventoryLine.class);
 		ret.addAll(result.data());
 		pagination = result.pagination();
+		req.setOffset(ret.size());
+		
 	}
 	return ret;
     }

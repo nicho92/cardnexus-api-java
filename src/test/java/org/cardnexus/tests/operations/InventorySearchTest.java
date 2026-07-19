@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.api.cardnexus.configuration.NexusConfig;
 import org.api.cardnexus.model.CardProduct;
-import org.api.cardnexus.model.enums.EnumCondition;
+import org.api.cardnexus.model.enums.EnumFinishes;
 import org.api.cardnexus.model.enums.EnumOperand;
 import org.api.cardnexus.model.enums.EnumProductType;
 import org.api.cardnexus.model.requests.InventoryRequest;
@@ -25,20 +25,29 @@ class InventorySearchTest {
 	NexusConfig.DEFAULT_GAME_VALUE="mtg";
 
 	var iService = new InventoryService();
+	var pService = new ProductsService();
+	
 	
 	var req = SearchInventoryRequest.create()
-						.setProductType(EnumOperand.and, List.of(EnumProductType.card));
+						.setProductType(EnumOperand.or, List.of(EnumProductType.card))
+						.setFinish(EnumOperand.or, List.of(EnumFinishes.Foil, EnumFinishes.Standard))
+						.setQuantity(4, 10)
+						.setGraded(false)
+						;
 	
 	
-	iService.inventorySearch(req).forEach(il->{
-	    System.out.println(il);
+	var results = iService.inventorySearch(req);
+	System.out.println(results.size() + " items found");
+	
+	results.forEach(l->{
 	    
+	    var p = pService.getProductById(l.productId());
+	    
+	    System.out.println(p.getExpansion().id() + " " + p.getName());
+	    System.out.println(l);
+	    
+	    System.out.println("-------------------------------");
 	});
-						
-						
-					
-	
-	
 	
 	
     }

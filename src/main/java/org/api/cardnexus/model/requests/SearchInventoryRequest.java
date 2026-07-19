@@ -14,8 +14,11 @@ import org.api.cardnexus.model.enums.EnumProductType;
 import org.api.cardnexus.model.enums.EnumSortDirection;
 
 public class SearchInventoryRequest {
-    private Map<String, Object> gameFilters;
+    
+    private int offset=0;
     private int limit = NexusConfig.LIMIT_LIST_RESULTS;
+    
+   
     private String name;
     private String customId;
     private String customIdPrefix;
@@ -23,9 +26,10 @@ public class SearchInventoryRequest {
     private String commentContains;
     private List<Integer> productIds;
     private Integer expansionId;
-    private boolean graded;
-    private boolean forSale;
+    private Boolean graded;
+    private Boolean forSale;
     
+    private Map<String, Object> gameFilters; 
     private Map<String,Object>  tags;
     private Map<String,Object> location;
     private Map<String,Object> condition;
@@ -55,7 +59,11 @@ public class SearchInventoryRequest {
     {
 	tags = new HashMap<>();
 	tags.put("op", op.name());
-	tags.put("values", tag);
+	
+	if(tag==null)
+	    tags.put("values", null);
+	else
+	    tags.put("values", tag);
 	
 	return this;
     }
@@ -166,5 +174,9 @@ public class SearchInventoryRequest {
 	this.sortDirection = sortDirection;
 	return this;
     }
-        
+    
+    public void setOffset(int offset) {
+	this.offset = offset;
+    }
+    
 }
