@@ -10,16 +10,13 @@ import org.api.cardnexus.services.InventoryService;
 import org.api.cardnexus.services.ProductsService;
 import org.junit.jupiter.api.Test;
 
-class InventorySearch {
-    
-    
-    
+class InventorySearchTest {
     
     @Test
     void searchInventoryCardName() throws IOException
     {
 	
-	String search ="Lion's Eye Diamond";
+	String search ="Volrath's Stronghold";
 	
 	NexusConfig.loadTokenFromEnv();
 	NexusConfig.DEFAULT_GAME_VALUE="mtg";
@@ -28,16 +25,10 @@ class InventorySearch {
 	var iService = new InventoryService();
 	var pService = new ProductsService();
 	
-	var req2 = new SearchProductRequest();
-	req2.setName(search);
-	req2.setStrictTerms(true);
-
-	var products = pService.searchProduct(req2);
+	var products = pService.searchProduct(SearchProductRequest.create().setName(search).setStrictTerms(true));
+	System.out.println("results product for "+search+" : " + products.size() + " items : " + products.stream().map(p->p.getId()).toList());
 	
-	var req = new InventoryRequest();
-	req.setProductIds(products.stream().map(ap->ap.getId()).toList());
-	
-	var lines = iService.getInventoryLines(req);
+	var lines = iService.getInventoryLines(InventoryRequest.create().setProductIds(products.stream().map(ap->ap.getId()).toList()));
 	
 	lines.forEach(il->{
 	    

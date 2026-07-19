@@ -2,6 +2,7 @@ package org.api.cardnexus.model;
 
 import java.util.List;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.api.cardnexus.model.enums.EnumProductType;
 import org.api.cardnexus.tools.Slugifyer;
 
@@ -27,7 +28,7 @@ public abstract class AbstractProduct {
   
     @Override
     public String toString() {
-           return String.valueOf(getId());
+         return ToStringBuilder.reflectionToString(this);
     }
     public Integer getExpansionId() {
   		return expansionId;

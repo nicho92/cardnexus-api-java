@@ -16,53 +16,68 @@ public class InventoryRequest extends AbstractGetRequest{
     private Boolean forSale;
     private Boolean graded;
     
+    
+    public static InventoryRequest create()
+    {
+	return new InventoryRequest();
+    }
+    
+    
     public String getGame() {
         return game;
     }
-    public void setGame(String game) {
+    public InventoryRequest setGame(String game) {
         this.game = game;
+        return this;
     }
     public List<Integer> getProductId() {
         return productId;
     }
-    public void setProductIds(List<Integer> productId) {
+    public InventoryRequest setProductIds(List<Integer> productId) {
         this.productId = productId;
+        return this;
     }
     public EnumCondition getCondition() {
         return condition;
     }
-    public void setCondition(EnumCondition condition) {
+    public InventoryRequest setCondition(EnumCondition condition) {
         this.condition = condition;
+        return this;
     }
     public String getLanguage() {
         return language;
     }
-    public void setLanguage(String language) {
+    public InventoryRequest setLanguage(String language) {
         this.language = language;
+        return this;
     }
     public EnumFinishes getFinish() {
         return finish;
     }
-    public void setFinish(EnumFinishes finish) {
+    public InventoryRequest setFinish(EnumFinishes finish) {
         this.finish = finish;
+        return this;
     }
     public String getCommentContains() {
         return commentContains;
     }
-    public void setCommentContains(String commentContains) {
+    public InventoryRequest setCommentContains(String commentContains) {
         this.commentContains = commentContains;
+        return this;
     }
     public Boolean getForSale() {
         return forSale;
     }
-    public void setForSale(Boolean forSale) {
+    public InventoryRequest setForSale(Boolean forSale) {
         this.forSale = forSale;
+        return this;
     }
     public Boolean getGraded() {
         return graded;
     }
-    public void setGraded(Boolean graded) {
+    public InventoryRequest setGraded(Boolean graded) {
         this.graded = graded;
+        return this;
     }
     
     

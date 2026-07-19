@@ -29,21 +29,40 @@ public class ProductsService extends AbstractNexusService{
     
     Cache<Integer, AbstractProduct> productsCache ;
     Cache<Integer, Expansion> expansionCache;
+    Cache<String, Game> gamesCache;
     
     public ProductsService() {
 	super();
 		productsCache = CachingService.createCache();
 		expansionCache = CachingService.createCache();
+		gamesCache = CachingService.createCache();
+		
     }
     
     public List<Game> listGames() throws IOException
     {
-    	return client.getPaginated(ROOT_GAME_ENDPOINT, Game.class).data();
+    	var res =  client.getPaginated(ROOT_GAME_ENDPOINT, Game.class).data();
+    	
+    	res.forEach(g->gamesCache.put(g.id(),g));
+    	
+    	return res;
+    	
     }
     
-    public Game getGameById(String id) throws IOException
+    public Game getGameById(String id)
     {
-    	return client.get(ROOT_GAME_ENDPOINT+id, Game.class);
+	
+	return gamesCache.get(id, _->{
+	    try {
+		return client.get(ROOT_GAME_ENDPOINT+id, Game.class);
+	    } catch (IOException e) {
+		logger.error(e);
+		return null;
+	    }
+	});
+	
+	
+    	
     }
     
     public Expansion getExpansionById(Integer id) 
@@ -108,7 +127,10 @@ public class ProductsService extends AbstractNexusService{
 		    pagination=result.pagination();
 		}
 		
-		ret.forEach(p->p.setExpansion(getExpansionById(p.getExpansionId())));
+		ret.forEach(p->{
+		    if(p.getExpansion()==null)
+			p.setExpansion(getExpansionById(p.getExpansionId()));
+		});
 		ret.forEach(p->productsCache.put(p.getId(), p));
 		
 		if(req.isStrictTerms() && req.getName()!=null)

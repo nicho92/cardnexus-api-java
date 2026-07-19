@@ -52,7 +52,7 @@ public class FileTools {
     {
 	var f = new File(NexusConfig.DIRECTORY_FEED, key.name() + ".gz");
 	
-	try (var urlStream = url.openStream(); BoundedInputStream stream = BoundedInputStream.builder().setInputStream(urlStream).get()) 
+	try (var urlStream = url.openStream(); var stream = BoundedInputStream.builder().setInputStream(urlStream).get()) 
 	{
 	    FileUtils.copyInputStreamToFile(stream, f);
 	    logger.debug("Downloaded {} bytes", f.length());
