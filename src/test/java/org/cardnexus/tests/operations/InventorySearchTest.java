@@ -1,11 +1,15 @@
 package org.cardnexus.tests.operations;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.api.cardnexus.configuration.NexusConfig;
 import org.api.cardnexus.model.CardProduct;
+import org.api.cardnexus.model.enums.EnumCondition;
+import org.api.cardnexus.model.enums.EnumOperand;
 import org.api.cardnexus.model.enums.EnumProductType;
 import org.api.cardnexus.model.requests.InventoryRequest;
+import org.api.cardnexus.model.requests.SearchInventoryRequest;
 import org.api.cardnexus.model.requests.SearchProductRequest;
 import org.api.cardnexus.services.InventoryService;
 import org.api.cardnexus.services.ProductsService;
@@ -13,13 +17,37 @@ import org.junit.jupiter.api.Test;
 
 class InventorySearchTest {
     
+    
     @Test
     void searchInventoryCardName() throws IOException
     {
+	NexusConfig.loadTokenFromEnv();
+	NexusConfig.DEFAULT_GAME_VALUE="mtg";
+
+	var iService = new InventoryService();
+	
+	var req = SearchInventoryRequest.create()
+						.setProductType(EnumOperand.and, List.of(EnumProductType.card));
+	
+	
+	iService.inventorySearch(req).forEach(il->{
+	    System.out.println(il);
+	    
+	});
+						
+						
+					
+	
+	
+	
+	
+    }
+    
+    
+    void searchInventoryCardNameV1() throws IOException
+    {
 	
 	String search ="Lion's Eye Diamond";
-	
-	
 	
 	NexusConfig.loadTokenFromEnv();
 	NexusConfig.DEFAULT_GAME_VALUE="mtg";

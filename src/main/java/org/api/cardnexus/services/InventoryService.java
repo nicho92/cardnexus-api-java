@@ -8,11 +8,31 @@ import org.api.cardnexus.model.InventoryLine;
 import org.api.cardnexus.model.Location;
 import org.api.cardnexus.model.Tag;
 import org.api.cardnexus.model.requests.InventoryRequest;
+import org.api.cardnexus.model.requests.SearchInventoryRequest;
 
 import com.google.gson.JsonObject;
 
 public class InventoryService extends AbstractNexusService{
 
+    
+    public List<InventoryLine> inventorySearch(SearchInventoryRequest req) throws IOException
+    {
+	var ret = new ArrayList<InventoryLine>();
+	
+	var result = client.postPaginated(ROOT_INVENTORY_ENDPOINT+"/search",req,  InventoryLine.class);
+	
+	var pagination=result.pagination();
+	
+	ret.addAll(result.data());
+	
+	while(pagination.nextCursor()!=null)
+	{
+		result = client.getPaginated(ROOT_INVENTORY_ENDPOINT+"?cursor="+pagination.nextCursor(),  InventoryLine.class);
+		ret.addAll(result.data());
+		pagination = result.pagination();
+	}
+	return ret;
+    }
     
     public List<InventoryLine> getInventoryLines(InventoryRequest req) throws IOException
     {
