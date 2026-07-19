@@ -60,6 +60,7 @@ The library is published on [Maven Central](https://central.sonatype.com/artifac
 import org.api.cardnexus.configuration.NexusConfig;
 import org.api.cardnexus.model.requests.SearchProductRequest;
 import org.api.cardnexus.services.ProductsService;
+import org.api.cardnexus.model.enums.EnumProductType;
 
 import java.util.List;
 
@@ -73,6 +74,7 @@ public class Example {
 		
 		var req = SearchProductRequest.create()
 				.setName("liliana of the veil")
+				.setProductTypes(EnumProductType.card)
 				.strict();
 				
 		var res = service.searchProduct(req);

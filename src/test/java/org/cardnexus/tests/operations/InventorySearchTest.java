@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.api.cardnexus.configuration.NexusConfig;
 import org.api.cardnexus.model.CardProduct;
+import org.api.cardnexus.model.enums.EnumProductType;
 import org.api.cardnexus.model.requests.InventoryRequest;
 import org.api.cardnexus.model.requests.SearchProductRequest;
 import org.api.cardnexus.services.InventoryService;
@@ -16,7 +17,7 @@ class InventorySearchTest {
     void searchInventoryCardName() throws IOException
     {
 	
-	String search ="Lion's Eye Diamond";
+	String search ="Black Lotus";
 	
 	NexusConfig.loadTokenFromEnv();
 	NexusConfig.DEFAULT_GAME_VALUE="mtg";
@@ -25,7 +26,7 @@ class InventorySearchTest {
 	var iService = new InventoryService();
 	var pService = new ProductsService();
 	
-	var products = pService.searchProduct(SearchProductRequest.create().setName(search).strict());
+	var products = pService.searchProduct(SearchProductRequest.create().setName(search).setProductTypes(EnumProductType.card).strict());
 	System.out.println("results product for "+search+" : " + products.size() + " items : " + products.stream().map(p->p.getId()).toList());
 	
 	var lines = iService.getInventoryLines(InventoryRequest.create().setProductIds(products.stream().map(ap->ap.getId()).toList()));
