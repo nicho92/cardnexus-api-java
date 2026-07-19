@@ -3,11 +3,12 @@ package org.api.cardnexus.model.requests;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.api.cardnexus.model.CartItemEntry;
 import org.api.cardnexus.model.MarketList;
 
 public class CartAddingRequest {
 
-    private Map<MarketList,Integer> items;
+    private Map<String,Integer> items;
     private String deliveryCountry;
     
     
@@ -37,11 +38,21 @@ public class CartAddingRequest {
     
     public CartAddingRequest addItem(MarketList list , Integer qty)
     {
+	return addItem(list.listingId(), qty);
+    }
+    
+    public CartAddingRequest addItem(CartItemEntry list , Integer qty)
+    {
+	return addItem(list.listingId(), qty);
+    }
+    
+    public CartAddingRequest addItem(String list , Integer qty)
+    {
 	items.put(list, qty);
 	return this;
     }
     
-     public Map<MarketList, Integer> getItems() {
+    public Map<String, Integer> getItems() {
 	return items;
     }
 }

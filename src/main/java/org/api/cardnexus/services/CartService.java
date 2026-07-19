@@ -64,7 +64,7 @@ public class CartService extends AbstractNexusService {
 	
 		req.getItems().entrySet().forEach(e->{
 		    var it = new JsonObject();
-		    	it.addProperty("listingId", e.getKey().listingId());
+		    	it.addProperty("listingId", e.getKey());
 		    	it.addProperty("quantity", e.getValue());
 		    	arr.add(it);
 		});
