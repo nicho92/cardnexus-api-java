@@ -30,6 +30,7 @@ public class InventoryService extends AbstractNexusService{
 		req.setOffset(ret.size());
 		
 	}
+		
 	return ret;
     }
     

@@ -31,8 +31,11 @@ class InventorySearchTest {
 	var req = SearchInventoryRequest.create()
 						.setProductType(EnumOperand.or, List.of(EnumProductType.card))
 						.setFinish(EnumOperand.or, List.of(EnumFinishes.Foil, EnumFinishes.Standard))
-						.setQuantity(4, 10)
+						.setQuantity(1, 4)
+						.setName("Adarkar")
+						.setForSale(false)
 						.setGraded(false)
+						.contains()
 						;
 	
 	
@@ -41,9 +44,9 @@ class InventorySearchTest {
 	
 	results.forEach(l->{
 	    
-	    var p = pService.getProductById(l.productId());
+	    var p = (CardProduct)pService.getProductById(l.productId());
 	    
-	    System.out.println(p.getExpansion().id() + " " + p.getName());
+	    System.out.println(p.getName() + " - " + p.getExpansion().code().toUpperCase()+"/"+p.getPrintNumber());
 	    System.out.println(l);
 	    
 	    System.out.println("-------------------------------");

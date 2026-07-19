@@ -11,6 +11,7 @@ import org.api.cardnexus.model.enums.EnumFinishes;
 import org.api.cardnexus.model.enums.EnumOperand;
 import org.api.cardnexus.model.enums.EnumProductSort;
 import org.api.cardnexus.model.enums.EnumProductType;
+import org.api.cardnexus.model.enums.EnumSearchMod;
 import org.api.cardnexus.model.enums.EnumSortDirection;
 
 public class SearchInventoryRequest {
@@ -42,7 +43,9 @@ public class SearchInventoryRequest {
     
     private EnumProductSort sortBy;
     private EnumSortDirection sortDirection;
-
+    private EnumSearchMod nameSearchMod;
+    
+    
     private SearchInventoryRequest() {
 	gameFilters=new HashMap<>();
 	
@@ -54,6 +57,18 @@ public class SearchInventoryRequest {
     {
 	return new SearchInventoryRequest();
     }
+    
+    
+    public SearchInventoryRequest strict() {
+  	nameSearchMod = EnumSearchMod.STRICT;
+  	return this;
+      }
+      
+      public SearchInventoryRequest contains() {
+  	this.nameSearchMod = EnumSearchMod.CONTAINS;
+  	return this;
+      }
+      
     
     public SearchInventoryRequest setTags(EnumOperand op, List<String> tag)
     {
@@ -177,6 +192,14 @@ public class SearchInventoryRequest {
     
     public void setOffset(int offset) {
 	this.offset = offset;
+    }
+    
+    public String getName() {
+	return name;
+    }
+    
+    public EnumSearchMod getNameSearchMod() {
+	return nameSearchMod;
     }
     
 }
