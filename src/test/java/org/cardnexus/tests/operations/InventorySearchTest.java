@@ -16,7 +16,7 @@ class InventorySearchTest {
     void searchInventoryCardName() throws IOException
     {
 	
-	String search ="Volrath's Stronghold";
+	String search ="Lion's Eye Diamond";
 	
 	NexusConfig.loadTokenFromEnv();
 	NexusConfig.DEFAULT_GAME_VALUE="mtg";
@@ -25,7 +25,7 @@ class InventorySearchTest {
 	var iService = new InventoryService();
 	var pService = new ProductsService();
 	
-	var products = pService.searchProduct(SearchProductRequest.create().setName(search).setStrictTerms(true));
+	var products = pService.searchProduct(SearchProductRequest.create().setName(search).strict());
 	System.out.println("results product for "+search+" : " + products.size() + " items : " + products.stream().map(p->p.getId()).toList());
 	
 	var lines = iService.getInventoryLines(InventoryRequest.create().setProductIds(products.stream().map(ap->ap.getId()).toList()));

@@ -24,12 +24,7 @@ class PricesServiceTests{
 		System.out.println(eu);
 		
 		
-		var req = new HistoryRequest();
-			req.setIdProduct(75886);
-			req.setFinish(EnumFinishes.Standard);
-			req.setMarketplace(EnumMarketPlace.cardmarket);
-			req.setFrom(LocalDate.now().minusDays(10));
-			req.setTo(LocalDate.now());
+		var req = HistoryRequest.create().setIdProduct(75886).setFinish(EnumFinishes.Standard).setMarketplace(EnumMarketPlace.cardmarket).setFrom(LocalDate.now().minusDays(10)).setTo(LocalDate.now());
 			
 		
 		service.getHistoryPrice(req).forEach(System.out::println);

@@ -4,10 +4,13 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.api.cardnexus.configuration.NexusConfig;
 import org.api.cardnexus.model.AbstractProduct;
 import org.api.cardnexus.model.Expansion;
@@ -16,6 +19,7 @@ import org.api.cardnexus.model.MarketList;
 import org.api.cardnexus.model.Pagination;
 import org.api.cardnexus.model.enums.EnumFeedKey;
 import org.api.cardnexus.model.enums.EnumMarketPlace;
+import org.api.cardnexus.model.enums.EnumSearchMod;
 import org.api.cardnexus.model.requests.MarketListRequest;
 import org.api.cardnexus.model.requests.SearchProductRequest;
 import org.api.cardnexus.tools.CachingService;
@@ -133,9 +137,18 @@ public class ProductsService extends AbstractNexusService{
 		});
 		ret.forEach(p->productsCache.put(p.getId(), p));
 		
-		if(req.isStrictTerms() && req.getName()!=null)
+		if(req.getNameSearchMod()==EnumSearchMod.STRICT && req.getName()!=null)
+		{
 		    return ret.stream().filter(p->p.getName().equalsIgnoreCase(req.getName())).toList();
-		
+		}
+		else if(req.getNameSearchMod()==EnumSearchMod.CONTAINS && req.getName()!=null)
+		{
+		    List<String> words = Arrays.asList(StringUtils.split(req.getName()));
+		    return ret.stream().filter(o -> words.stream().allMatch(word ->Strings.CI.contains(o.getName(), word))).toList();
+		}
+		    
+ 
+		    
 		return ret;
     }
     

@@ -23,20 +23,20 @@ class ListingServiceTests {
 		
 		var service = new ListsServices();
 		
-		var req = new ListCreationRequest();
-			req.setGame("mtg");
-			req.setPublic(false);
-			req.setName("Tests API List");
-			req.setDescription("a api created list for java api");
-			req.setStatus(EnumStatus.hold);
+		var req = ListCreationRequest.create()
+			.setGame("mtg")
+			.setPublic(false)
+			.setName("Tests API List")
+			.setDescription("a api created list for java api")
+			.setStatus(EnumStatus.hold);
 			
 		var testList = service.createList(req);
 		assertEquals(true, service.listNexusLists().contains(testList));
 		
-		var reqItem = new ListItemRequest();
-			reqItem.addItem(null, 75886,EnumFinishes.Standard,"fr",1,EnumCondition.NM,500, 600);
-			reqItem.addItem(null, 93034,EnumFinishes.Standard,"fr",1,EnumCondition.HP,80, 90);
-			reqItem.addItem(null, 113580,EnumFinishes.Standard,"en",1,EnumCondition.MP,50, 60);
+		var reqItem = ListItemRequest.create()
+			.addItem(null, 75886,EnumFinishes.Standard,"fr",1,EnumCondition.NM,500, 600)
+			.addItem(null, 93034,EnumFinishes.Standard,"fr",1,EnumCondition.HP,80, 90)
+			.addItem(null, 113580,EnumFinishes.Standard,"en",1,EnumCondition.MP,50, 60);
 		
 		var listResults = service.updateListItems(testList.id(), reqItem);
 		

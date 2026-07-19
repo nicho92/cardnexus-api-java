@@ -10,24 +10,33 @@ public class ListItemRequest {
 
     private List<ListItemRequestData> items;
     
-    public ListItemRequest() {
+    public static ListItemRequest create()
+    {
+	return new ListItemRequest();
+    }
+    
+    
+    private ListItemRequest() {
 	items = new ArrayList<>();
     }
     
-    public void addItem(ListItemRequestData data)
+    public ListItemRequest addItem(ListItemRequestData data)
     {
 	items.add(data);
+	return this;
     }
     
-    public void addItem(List<ListItemRequestData> datas)
+    public ListItemRequest addItem(List<ListItemRequestData> datas)
     {
 	items.addAll(datas);
+	return this;
     }
     
     
-    public void addItem(String itemId, Integer productId,EnumFinishes finish,String language,int quantity,EnumCondition minCondition,double wantPrice, double sellPrice)
+    public ListItemRequest addItem(String itemId, Integer productId,EnumFinishes finish,String language,int quantity,EnumCondition minCondition,double wantPrice, double sellPrice)
     {
 	addItem(new ListItemRequestData(itemId, productId, finish, language, quantity, minCondition, wantPrice, sellPrice));
+	return this;
     }
 }
 

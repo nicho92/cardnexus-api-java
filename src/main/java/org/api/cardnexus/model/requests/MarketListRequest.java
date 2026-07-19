@@ -12,44 +12,58 @@ public class MarketListRequest extends AbstractGetRequest {
     private String deliveryCountry;
     private Integer productId;
     
+    private MarketListRequest()
+    {
+	
+    }
     
-    public void setProductId(Integer productId) {
+    public static MarketListRequest create()
+    {
+	return new MarketListRequest();
+    }
+    
+    
+    public MarketListRequest setProductId(Integer productId) {
 	this.productId = productId;
+	return this;
     }
     public Integer getProductId() {
 	return productId;
     }
-    
-    
     public EnumCondition getCondition() {
         return condition;
     }
-    public void setCondition(EnumCondition condition) {
+    public MarketListRequest setCondition(EnumCondition condition) {
         this.condition = condition;
+        return this;
     }
     public String getLanguage() {
         return language;
     }
-    public void setLanguage(String language) {
+    public MarketListRequest setLanguage(String language) {
         this.language = language;
+        return this;
     }
     public EnumFinishes getFinish() {
         return finish;
     }
-    public void setFinish(EnumFinishes finish) {
+    public MarketListRequest setFinish(EnumFinishes finish) {
         this.finish = finish;
+        return this;
     }
     public String getRegion() {
         return region;
     }
-    public void setRegion(String region) {
+    public MarketListRequest setRegion(String region) {
         this.region = region;
+        return this;
     }
     public String getDeliveryCountry() {
         return deliveryCountry;
     }
-    public void setDeliveryCountry(String deliveryCountry) {
+    public MarketListRequest setDeliveryCountry(String deliveryCountry) {
         this.deliveryCountry = deliveryCountry;
+        return this;
     }
     
     

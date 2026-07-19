@@ -27,8 +27,8 @@ class ProductServiceTests{
     	void init() throws IOException
     	{
 	    NexusConfig.loadTokenFromEnv();
+	    NexusConfig.DEFAULT_GAME_VALUE="mtg";
     	    service = new ProductsService();
-    	
     	}
     
     
@@ -36,12 +36,8 @@ class ProductServiceTests{
     	void testMarketLists() throws IOException 
     	{
     
-	System.out.println("=====CardproductBySearch");
-	
-	var req = new MarketListRequest();
-	     req.setProductId(41547);
-	
-	     service.listMarketListing(req).forEach(System.out::println);
+	System.out.println("=====MarketListSearch");
+	     service.listMarketListing(MarketListRequest.create().setProductId(41547)).forEach(System.out::println);
 	
     	}
     
@@ -49,13 +45,9 @@ class ProductServiceTests{
     	@Test
     	void testSearchCardProduct() throws IOException {
 		
-		var req = new SearchProductRequest();
-		req.setGame("mtg");
-		req.setStrictTerms(true);
-		req.setProductTypes(EnumProductType.card);
-		req.setProductIds(List.of(75886));
+		var req = SearchProductRequest.create().strict().setProductTypes(EnumProductType.card).setProductIds(List.of(75886));
 		
-		service.listExpansion("mtg");//caching;
+		service.listExpansion(NexusConfig.DEFAULT_GAME_VALUE);//caching;
 		
 		System.out.println("=====CardproductBySearch");
 		printData(service.searchProduct(req).getFirst());
@@ -65,22 +57,14 @@ class ProductServiceTests{
 		
 		System.out.println("=====ResolveIds");
 		service.resolveProductsId(EnumMarketPlace.cardmarket, List.of(890585,250569)).entrySet().forEach(m->{
-		    
-		System.out.println(EnumMarketPlace.cardmarket + " " + m.getKey() + " ->" + m.getValue());
-		    
+		    System.out.println(EnumMarketPlace.cardmarket + " " + m.getKey() + " ->" + m.getValue());
 		});
 	}
     	
     	@Test
     	void testSearchSealedProduct() throws IOException {
 	    
-		
-		var req = new SearchProductRequest();
-			req.setGame("mtg");
-			req.setName("Innistrad Booster Box");
-			req.setProductTypes(EnumProductType.sealed);
-			
-			
+		var req = SearchProductRequest.create().setName("Innistrad Booster Box").setProductTypes(EnumProductType.sealed);
 			
 		System.out.println("=====SealedproductBySearch");
 		printData(service.searchProduct(req).getFirst());

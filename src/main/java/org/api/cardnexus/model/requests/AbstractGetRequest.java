@@ -24,7 +24,7 @@ public abstract class AbstractGetRequest {
     private String encode(String value) {
 	return URLEncoder.encode(value, StandardCharsets.UTF_8);
     }
-
+    
     public String toQueryString() {
 
 	try {
