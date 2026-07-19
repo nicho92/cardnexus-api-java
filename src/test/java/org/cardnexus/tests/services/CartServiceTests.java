@@ -7,6 +7,7 @@ import org.api.cardnexus.configuration.NexusConfig;
 import org.api.cardnexus.model.Amount;
 import org.api.cardnexus.model.enums.EnumCondition;
 import org.api.cardnexus.model.enums.EnumFinishes;
+import org.api.cardnexus.model.enums.EnumKindsRun;
 import org.api.cardnexus.model.requests.CardOptimizationRequest;
 import org.api.cardnexus.services.CartService;
 import org.junit.jupiter.api.Test;
@@ -22,22 +23,20 @@ class CartServiceTests {
 	
 	var serv = new CartService();
 	
-	var optiRequest = new CardOptimizationRequest();
-
-	
-	optiRequest.addEntry(75886, 1, EnumCondition.MP,EnumFinishes.Standard, List.of("fr","en"),new Amount(800.0,"EUR"));
-	optiRequest.addEntry(93034, 1, EnumCondition.MP,EnumFinishes.Standard, List.of("fr","en"),new Amount(150.0,"EUR"));
-	optiRequest.addEntry(113580, 1, EnumCondition.MP,EnumFinishes.Standard, List.of("fr","en"),new Amount(150.0,"EUR"));
-		
-	optiRequest.setCountry("fr");
+	var optiRequest = CardOptimizationRequest.create()
+						.addEntry(75886, 1, EnumCondition.MP,EnumFinishes.Standard, List.of("fr","en"),new Amount(800.0,"EUR"))
+						.addEntry(93034, 1, EnumCondition.MP,EnumFinishes.Standard, List.of("fr","en"),new Amount(150.0,"EUR"))
+						.addEntry(113580, 1, EnumCondition.MP,EnumFinishes.Standard, List.of("fr","en"),new Amount(150.0,"EUR"))
+						.setCountry("fr");
 	
 	
 	var id = serv.runOptimizationQuery(optiRequest);
 	
 	var r = serv.getRunById(id);
 	
+	var cart = serv.applyRunsToCart(r.id(), EnumKindsRun.lowest_price);
 	
-	System.out.println(r);
+	System.out.println(cart);
 	
     }
     

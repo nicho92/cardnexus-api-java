@@ -14,19 +14,27 @@ public class CardOptimizationRequest {
     private ProductEntryCountry destination;
     private List<ProductEntry> targets;
     
-    public CardOptimizationRequest() {
+    public static CardOptimizationRequest create()
+    {
+	return new CardOptimizationRequest();
+    }
+    
+    
+    private CardOptimizationRequest() {
     	targets = new ArrayList<ProductEntry>();
     	destination = new ProductEntryCountry(Locale.getDefault().getCountry());
     }
     
-    public void setCountry(String countryCode)
+    public CardOptimizationRequest setCountry(String countryCode)
     {
     	destination = new ProductEntryCountry(countryCode);
+    	return this;
     }
     
-    public void addEntry(int productId, int quantity,EnumCondition minCondition,EnumFinishes finish, List<String> languages,Amount maxUnitPrice)
+    public CardOptimizationRequest addEntry(int productId, int quantity,EnumCondition minCondition,EnumFinishes finish, List<String> languages,Amount maxUnitPrice)
     {
 	targets.add(new ProductEntry(productId, quantity, minCondition, finish, languages, maxUnitPrice));
+	return this;
     }
 
 record ProductEntry( int productId, int quantity,EnumCondition minCondition,EnumFinishes finish, List<String> languages,Amount maxUnitPrice) {}

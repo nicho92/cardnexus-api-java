@@ -22,6 +22,7 @@ public abstract class AbstractNexusService {
     protected static final String ROOT_PURCHASES_ENDPOINT="/purchases";
     protected static final String ROOT_EXPANSION_ENDPOINT="/expansions";
     protected static final String ROOT_OPTIMIZER_ENDPOINT="/optimizer";
+    protected static final String ROOT_CART_ENDPOINT="/cart";
     
     
    protected AbstractNexusService() {
