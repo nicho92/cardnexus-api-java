@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.api.cardnexus.configuration.NexusConfig;
 import org.api.cardnexus.model.CardProduct;
-import org.api.cardnexus.model.enums.EnumBulkFormat;
 import org.api.cardnexus.model.enums.EnumFinishes;
 import org.api.cardnexus.model.enums.EnumOperand;
 import org.api.cardnexus.model.enums.EnumProductType;
@@ -27,7 +26,6 @@ class InventorySearchTest {
 
 	var iService = new InventoryService();
 	var pService = new ProductsService();
-	var bService = new BulkService();
 	
 	var req = SearchInventoryRequest.create()
 						.setProductType(EnumOperand.or, List.of(EnumProductType.card))
