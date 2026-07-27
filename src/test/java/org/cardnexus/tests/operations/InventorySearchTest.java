@@ -5,18 +5,19 @@ import java.util.List;
 
 import org.api.cardnexus.configuration.NexusConfig;
 import org.api.cardnexus.model.CardProduct;
+import org.api.cardnexus.model.enums.EnumBulkFormat;
 import org.api.cardnexus.model.enums.EnumFinishes;
 import org.api.cardnexus.model.enums.EnumOperand;
 import org.api.cardnexus.model.enums.EnumProductType;
 import org.api.cardnexus.model.requests.InventoryRequest;
 import org.api.cardnexus.model.requests.SearchInventoryRequest;
 import org.api.cardnexus.model.requests.SearchProductRequest;
+import org.api.cardnexus.services.BulkService;
 import org.api.cardnexus.services.InventoryService;
 import org.api.cardnexus.services.ProductsService;
 import org.junit.jupiter.api.Test;
 
 class InventorySearchTest {
-    
     
     @Test
     void searchInventoryCardName() throws IOException
@@ -26,7 +27,7 @@ class InventorySearchTest {
 
 	var iService = new InventoryService();
 	var pService = new ProductsService();
-	
+	var bService = new BulkService();
 	
 	var req = SearchInventoryRequest.create()
 						.setProductType(EnumOperand.or, List.of(EnumProductType.card))
@@ -37,6 +38,7 @@ class InventorySearchTest {
 						.setGraded(false)
 						.contains()
 						;
+	
 	
 	
 	var results = iService.inventorySearch(req);
@@ -52,8 +54,8 @@ class InventorySearchTest {
 	    System.out.println("-------------------------------");
 	});
 	
-	
     }
+    
     
     
     void searchInventoryCardNameV1() throws IOException

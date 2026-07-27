@@ -4,5 +4,9 @@ public enum EnumRunStatus {
     queued,
     solving,
     done,
-    failed
+    failed,
+    pending,
+    processing,
+    completed,
+
 }

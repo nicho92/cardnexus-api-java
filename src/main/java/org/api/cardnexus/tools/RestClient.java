@@ -21,15 +21,11 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.api.cardnexus.adapters.ProductAdapter;
 import org.api.cardnexus.configuration.NexusConfig;
 import org.api.cardnexus.listener.URLCallInfo;
 import org.api.cardnexus.listener.URLCallListener;
-import org.api.cardnexus.model.AbstractProduct;
 import org.api.cardnexus.model.PaginateResult;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
@@ -37,11 +33,12 @@ import com.google.gson.reflect.TypeToken;
 public class RestClient implements Closeable {
 
     private final CloseableHttpClient httpClient;
-    private final Gson gson;
+   
     private final Map<String, String> defaultHeaders;
     protected Logger logger = LogManager.getLogger(this.getClass());
     private URLCallListener listener;
-	 
+    private JsonService gson;
+    
     /**
      * Constructeur sans authentification.
      */
@@ -56,13 +53,7 @@ public class RestClient implements Closeable {
      */
     public RestClient(String token) {
         this.httpClient = HttpClients.createDefault();
-        var builder = new GsonBuilder().registerTypeAdapter(AbstractProduct.class, new ProductAdapter());
-        
-        if(NexusConfig.GSON_PRETTY_PRINT)
-            builder.setPrettyPrinting();
-        
-        
-        this.gson=builder.create();
+        gson = new JsonService();
         this.defaultHeaders = new HashMap<>();
         
         defaultHeaders.put("Authorization", "Bearer " +token);
