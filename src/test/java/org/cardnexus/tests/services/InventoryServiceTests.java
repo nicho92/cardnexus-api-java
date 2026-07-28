@@ -32,10 +32,9 @@ class InventoryServiceTests {
 	{
 		var serviceProduct = new ProductsService();
 		
-		serviceProduct.cachingProducts("mtg",true);
+		serviceProduct.cachingProducts( NexusConfig.DEFAULT_GAME_VALUE,true);
 		
 		var req = new InventoryRequest();
-			req.setGame("mtg");
 			req.setLimit(20);
 			req.setCondition(EnumCondition.MP);
 		
@@ -48,15 +47,19 @@ class InventoryServiceTests {
 			
 		});
 	}
+    	
+    	
 	
 	@Test
 	void lineManipulation() throws IOException
 	{
 	    var line = service.getInventoryLine("69d3e1663e676d07d4cd36ce");
-	    var req = UpdateInventoryRequest.create().changeQuantity(-4);
-	    service.updateInventoryLine(line.id(), req);
-	    
 	    System.out.println(line);
+	    
+	    var req = UpdateInventoryRequest.create().changeQuantity(1).setComment("update from my api");
+	    line= service.updateInventoryLine(line.id(), req);
+	    System.out.println(line);
+	    
 	}
 	
 	

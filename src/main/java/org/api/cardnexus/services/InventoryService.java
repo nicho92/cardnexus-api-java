@@ -11,6 +11,7 @@ import org.api.cardnexus.model.Tag;
 import org.api.cardnexus.model.requests.InventoryRequest;
 import org.api.cardnexus.model.requests.SearchInventoryRequest;
 import org.api.cardnexus.model.requests.UpdateInventoryRequest;
+import org.api.cardnexus.tools.JsonService;
 
 import com.google.gson.JsonObject;
 
@@ -35,7 +36,10 @@ public class InventoryService extends AbstractNexusService{
     
     public InventoryLine updateInventoryLine(String idLine, UpdateInventoryRequest req) throws IOException
     {
-	return client.patch(ROOT_INVENTORY_ENDPOINT+"/"+idLine, req, InventoryLine.class);
+	var obj = client.patch(ROOT_INVENTORY_ENDPOINT+"/"+idLine, req, JsonObject.class).get("line");
+	
+	
+	return new JsonService().fromJson(obj.toString(), InventoryLine.class);
     }
     
     
