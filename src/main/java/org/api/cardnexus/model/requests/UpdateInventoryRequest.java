@@ -3,7 +3,7 @@ package org.api.cardnexus.model.requests;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.api.cardnexus.model.Graded;
+import org.api.cardnexus.model.Grading;
 import org.api.cardnexus.model.enums.EnumCondition;
 import org.api.cardnexus.model.enums.EnumFinishes;
 
@@ -12,7 +12,7 @@ public class UpdateInventoryRequest {
     private EnumCondition condition;
     private EnumFinishes finish;
     private String language;
-    private Graded graded;
+    private Grading graded;
     private String customId;
     private String comment;
     private String notes;
@@ -99,7 +99,7 @@ public class UpdateInventoryRequest {
         return this;
     }
 
-    public UpdateInventoryRequest setGraded(Graded graded) {
+    public UpdateInventoryRequest setGraded(Grading graded) {
         this.graded = graded;
         return this;
     }
