@@ -102,7 +102,7 @@ public class Example {
         var productsService = new ProductsService();
 
         var request = new SearchProductRequest();
-        request.setGame("mtg");
+        request.setGame("mtg"); //not necessary if DEFAULT_GAME_VALUE = "mtg"
         request.setName("Liliana of the Veil");
         request.setProductTypes(EnumProductType.card);
 
