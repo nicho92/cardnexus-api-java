@@ -28,7 +28,7 @@
 		<developerConnection>scm:git:https://github.com/nicho92/cardnexus-api-java.git</developerConnection>
 	</scm>
 	
-	<version>1.4.15</version>
+	<version>1.4.16</version>
 	<packaging>jar</packaging>
 
 	<properties>
@@ -84,7 +84,7 @@
 		<dependency>
 		    <groupId>org.junit.jupiter</groupId>
 		    <artifactId>junit-jupiter-api</artifactId>
-		    <version>6.1.0</version>
+		    <version>6.1.2</version>
 		    <scope>test</scope>
 		</dependency>
 	</dependencies>

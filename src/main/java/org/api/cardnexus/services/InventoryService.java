@@ -10,6 +10,7 @@ import org.api.cardnexus.model.Pagination;
 import org.api.cardnexus.model.Tag;
 import org.api.cardnexus.model.requests.InventoryRequest;
 import org.api.cardnexus.model.requests.SearchInventoryRequest;
+import org.api.cardnexus.model.requests.UpdateInventoryRequest;
 
 import com.google.gson.JsonObject;
 
@@ -28,11 +29,15 @@ public class InventoryService extends AbstractNexusService{
 		ret.addAll(result.data());
 		pagination = result.pagination();
 		req.setOffset(ret.size());
-		
 	}
-		
 	return ret;
     }
+    
+    public InventoryLine updateInventoryLine(String idLine, UpdateInventoryRequest req) throws IOException
+    {
+	return client.patch(ROOT_INVENTORY_ENDPOINT+"/"+idLine, req, InventoryLine.class);
+    }
+    
     
     public List<InventoryLine> getInventoryLines(InventoryRequest req) throws IOException
     {

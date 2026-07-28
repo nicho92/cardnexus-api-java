@@ -11,7 +11,6 @@ import org.api.cardnexus.model.enums.EnumProductType;
 import org.api.cardnexus.model.requests.InventoryRequest;
 import org.api.cardnexus.model.requests.SearchInventoryRequest;
 import org.api.cardnexus.model.requests.SearchProductRequest;
-import org.api.cardnexus.services.BulkService;
 import org.api.cardnexus.services.InventoryService;
 import org.api.cardnexus.services.ProductsService;
 import org.junit.jupiter.api.Test;
