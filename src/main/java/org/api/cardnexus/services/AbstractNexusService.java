@@ -4,12 +4,14 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.api.cardnexus.configuration.NexusConfig;
 import org.api.cardnexus.listener.URLCallListener;
+import org.api.cardnexus.tools.JsonService;
 import org.api.cardnexus.tools.RestClient;
 
 public abstract class AbstractNexusService {
 
     protected Logger logger = LogManager.getLogger(getClass());
     protected RestClient client;
+    protected  JsonService jsonService;
     
     protected static final String ROOT_GAME_ENDPOINT="/games";
     protected static final String ROOT_PRODUCT_ENDPOINT="/products";
@@ -27,6 +29,7 @@ public abstract class AbstractNexusService {
     
    protected AbstractNexusService() {
 	client = new RestClient(NexusConfig.getToken());
+	jsonService = new JsonService();
     }
     
     public void setCallListener(URLCallListener listener) {

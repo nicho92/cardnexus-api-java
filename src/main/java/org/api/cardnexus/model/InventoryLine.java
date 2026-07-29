@@ -9,7 +9,6 @@ import org.api.cardnexus.model.enums.EnumFinishes;
 
 public record InventoryLine (String id,String customId,String comment,int productId,String game,EnumFinishes finish,EnumCondition condition,String language,Integer quantity,boolean forSale,Date updatedAt,Map<String,Amount> listings,Grading graded,List<String> tags)
 {
-    
     public Amount price() {
 	if(listings.isEmpty())
 		return new Amount(0.0, null);

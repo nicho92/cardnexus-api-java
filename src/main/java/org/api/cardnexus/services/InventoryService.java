@@ -8,10 +8,9 @@ import org.api.cardnexus.model.InventoryLine;
 import org.api.cardnexus.model.Location;
 import org.api.cardnexus.model.Pagination;
 import org.api.cardnexus.model.Tag;
-import org.api.cardnexus.model.requests.InventoryRequest;
+import org.api.cardnexus.model.requests.InventoryLinesRequest;
 import org.api.cardnexus.model.requests.SearchInventoryRequest;
 import org.api.cardnexus.model.requests.UpdateInventoryRequest;
-import org.api.cardnexus.tools.JsonService;
 
 import com.google.gson.JsonObject;
 
@@ -37,13 +36,11 @@ public class InventoryService extends AbstractNexusService{
     public InventoryLine updateInventoryLine(String idLine, UpdateInventoryRequest req) throws IOException
     {
 	var obj = client.patch(ROOT_INVENTORY_ENDPOINT+"/"+idLine, req, JsonObject.class).get("line");
-	
-	
-	return new JsonService().fromJson(obj.toString(), InventoryLine.class);
+	return jsonService.fromJson(obj.toString(), InventoryLine.class);
     }
     
     
-    public List<InventoryLine> getInventoryLines(InventoryRequest req) throws IOException
+    public List<InventoryLine> getInventoryLines(InventoryLinesRequest req) throws IOException
     {
 	
 	var ret = new ArrayList<InventoryLine>();
@@ -119,7 +116,7 @@ public class InventoryService extends AbstractNexusService{
 	
     }
     
-    public List<InventoryLine> listInventoryInMarketPlace(InventoryRequest req) throws IOException
+    public List<InventoryLine> listInventoryInMarketPlace(InventoryLinesRequest req) throws IOException
     {
 	var result = client.getPaginated(ROOT_LISTING_ENDPOINT+"?"+req.toQueryString(),  InventoryLine.class);
 	var ret = new ArrayList<InventoryLine>();
