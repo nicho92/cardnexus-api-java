@@ -3,7 +3,6 @@ package org.api.cardnexus.services;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.api.cardnexus.configuration.NexusConfig;
-import org.api.cardnexus.listener.URLCallListener;
 import org.api.cardnexus.tools.JsonService;
 import org.api.cardnexus.tools.RestClient;
 
@@ -31,12 +30,7 @@ public abstract class AbstractNexusService {
 	client = new RestClient(NexusConfig.getToken());
 	jsonService = new JsonService();
     }
-    
-    public void setCallListener(URLCallListener listener) {
-		client.setCallListener(listener);
-    }
-   
-   
+
    
    
 }

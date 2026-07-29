@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
+import org.api.cardnexus.listener.URLCallListener;
+
 public class NexusConfig {
     private NexusConfig() {
         /* This utility class should not be instantiated */
@@ -21,11 +23,15 @@ public class NexusConfig {
     public static int LIMIT_LIST_RESULTS=200;
     public static boolean CHECKSUM_MD5_FEED=true;
     public static String DEFAULT_GAME_VALUE=null;
+    public static URLCallListener LISTENER;
     
-    private static String token;
+    
+    
+    	private static String token;
 	
-
-	
+    	
+    	
+    	 
 	public static String getToken()
 	{
 		return token;

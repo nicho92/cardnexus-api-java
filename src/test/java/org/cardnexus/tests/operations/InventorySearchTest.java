@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.api.cardnexus.configuration.NexusConfig;
 import org.api.cardnexus.model.CardProduct;
-import org.api.cardnexus.model.enums.EnumFinishes;
 import org.api.cardnexus.model.enums.EnumOperand;
 import org.api.cardnexus.model.enums.EnumProductType;
 import org.api.cardnexus.model.requests.InventoryLinesRequest;
@@ -35,7 +34,7 @@ class InventorySearchTest {
 	    iService = new InventoryService();
 	    pService = new ProductsService();
 	    
-	    pService.cachingProducts( NexusConfig.DEFAULT_GAME_VALUE,true);
+	//    pService.cachingProducts( NexusConfig.DEFAULT_GAME_VALUE,true);
 	    pService.listExpansion(NexusConfig.DEFAULT_GAME_VALUE); // put in cache
 	}
     
@@ -44,11 +43,8 @@ class InventorySearchTest {
     void searchInventoryCardName() throws IOException
     {
 	var req = SearchInventoryRequest.create()
-						.setProductType(EnumOperand.or, List.of(EnumProductType.card))
-						.setFinish(EnumOperand.or, List.of(EnumFinishes.Foil, EnumFinishes.Standard))
+						.setProductType(EnumOperand.and, List.of(EnumProductType.card))
 						.setName("Black")
-						.setForSale(false)
-						.setGraded(false)
 						.contains();
 
 	var results = iService.inventorySearch(req);

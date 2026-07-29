@@ -36,7 +36,7 @@ public class RestClient implements Closeable {
    
     private final Map<String, String> defaultHeaders;
     protected Logger logger = LogManager.getLogger(this.getClass());
-    private URLCallListener listener;
+
     private JsonService gson;
     
     /**
@@ -145,10 +145,7 @@ public class RestClient implements Closeable {
     	return gson.fromJson(json, responseType);
     }
     
-    
-    public void setCallListener(URLCallListener listener2) {
-	this.listener=listener2;
-    }
+   
     
     @SuppressWarnings("unchecked")
     private <T> T executeRequest(HttpRequestBase request, Type  responseType) throws IOException {
@@ -192,8 +189,8 @@ public class RestClient implements Closeable {
         }
         finally {
         	
-        	if(listener!=null)
-        		listener.notify(callInfo);
+        	if(NexusConfig.LISTENER!=null)
+        	    NexusConfig.LISTENER.notify(callInfo);
 		}
         
         
