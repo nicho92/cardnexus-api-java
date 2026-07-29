@@ -21,24 +21,28 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 @TestInstance(Lifecycle.PER_CLASS)
 class InventorySearchTest {
     
-    @BeforeAll
-    void init() throws IOException
-    {
-	NexusConfig.loadTokenFromEnv();
-	NexusConfig.DEFAULT_GAME_VALUE="mtg";
+
+    InventoryService iService;
+    ProductsService pService;
 	
-    }
+    
+    @BeforeAll
+	void init() throws IOException
+	{
+	    NexusConfig.loadTokenFromEnv();
+	    NexusConfig.DEFAULT_GAME_VALUE="mtg";
+	    
+	    iService = new InventoryService();
+	    pService = new ProductsService();
+	    
+	    pService.cachingProducts( NexusConfig.DEFAULT_GAME_VALUE,true);
+	    pService.listExpansion(NexusConfig.DEFAULT_GAME_VALUE); // put in cache
+	}
     
     
     @Test
     void searchInventoryCardName() throws IOException
     {
-	NexusConfig.loadTokenFromEnv();
-	NexusConfig.DEFAULT_GAME_VALUE="mtg";
-
-	var iService = new InventoryService();
-	var pService = new ProductsService();
-	
 	var req = SearchInventoryRequest.create()
 						.setProductType(EnumOperand.or, List.of(EnumProductType.card))
 						.setFinish(EnumOperand.or, List.of(EnumFinishes.Foil, EnumFinishes.Standard))
@@ -46,7 +50,7 @@ class InventorySearchTest {
 						.setForSale(false)
 						.setGraded(false)
 						.contains();
-	
+
 	var results = iService.inventorySearch(req);
 	System.out.println(results.size() + " items found");
 	
@@ -63,11 +67,6 @@ class InventorySearchTest {
     {
 	
 	String search ="Lion's Eye Diamond";
-	
-	
-	var iService = new InventoryService();
-	var pService = new ProductsService();
-	
 	var products = pService.searchProduct(SearchProductRequest.create().setName(search).setProductTypes(EnumProductType.card).strict());
 	System.out.println("results product for "+search+" : " + products.size() + " items : " + products.stream().map(p->p.getId()).toList());
 	

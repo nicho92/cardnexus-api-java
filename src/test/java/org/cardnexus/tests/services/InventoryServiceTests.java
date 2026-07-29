@@ -19,33 +19,31 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 class InventoryServiceTests {
     
     private InventoryService service;
+    private ProductsService serviceProduct;
 
-    @BeforeAll
+    	@BeforeAll
 	void init() throws IOException
 	{
 	    NexusConfig.loadTokenFromEnv();
 	    NexusConfig.DEFAULT_GAME_VALUE="mtg";
+	    
 	    service = new InventoryService();
+	    serviceProduct = new ProductsService();
+	    
+	    serviceProduct.cachingProducts( NexusConfig.DEFAULT_GAME_VALUE,true);
+	    serviceProduct.listExpansion(NexusConfig.DEFAULT_GAME_VALUE); // put in cache
 	}
-    
+    	
     	@Test
     	void listsTest() throws IOException
 	{
-		var serviceProduct = new ProductsService();
-		
-		serviceProduct.cachingProducts( NexusConfig.DEFAULT_GAME_VALUE,true);
-		
 		var req =InventoryLinesRequest.create().setCondition(EnumCondition.MP);
-		
-		serviceProduct.listExpansion(NexusConfig.DEFAULT_GAME_VALUE); // put in cache
-		
 		service.getInventoryLines(req).forEach(line->{
 			var p = (CardProduct)serviceProduct.getProductById(line.productId());
 			     p.setExpansion(serviceProduct.getExpansionById(p.getExpansionId()));
 			     System.out.println(line + "/"+ line.productId() + " : " + p.getName() + " " +p.getExpansion() + "/"+p.getPrintNumber() + " "  + line.condition());
 		});
 	}
-    	
     	
 	void lineManipulation() throws IOException
 	{
