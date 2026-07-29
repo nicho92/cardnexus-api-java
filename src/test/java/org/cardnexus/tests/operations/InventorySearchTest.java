@@ -13,9 +13,22 @@ import org.api.cardnexus.model.requests.SearchInventoryRequest;
 import org.api.cardnexus.model.requests.SearchProductRequest;
 import org.api.cardnexus.services.InventoryService;
 import org.api.cardnexus.services.ProductsService;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 class InventorySearchTest {
+    
+    @BeforeAll
+    void init() throws IOException
+    {
+	NexusConfig.loadTokenFromEnv();
+	NexusConfig.DEFAULT_GAME_VALUE="mtg";
+	
+    }
+    
     
     @Test
     void searchInventoryCardName() throws IOException
@@ -32,20 +45,15 @@ class InventorySearchTest {
 						.setName("Black")
 						.setForSale(false)
 						.setGraded(false)
-						.contains()
-						;
-	
-	
+						.contains();
 	
 	var results = iService.inventorySearch(req);
 	System.out.println(results.size() + " items found");
 	
 	results.forEach(l->{
-	    
 	    var p = (CardProduct)pService.getProductById(l.productId());
 	    System.out.println(p.getName() + " - " + p.getExpansion().code().toUpperCase()+"/"+p.getPrintNumber());
 	    System.out.println(l);
-	    
 	    System.out.println("-------------------------------");
 	});
 	
@@ -56,8 +64,6 @@ class InventorySearchTest {
 	
 	String search ="Lion's Eye Diamond";
 	
-	NexusConfig.loadTokenFromEnv();
-	NexusConfig.DEFAULT_GAME_VALUE="mtg";
 	
 	var iService = new InventoryService();
 	var pService = new ProductsService();

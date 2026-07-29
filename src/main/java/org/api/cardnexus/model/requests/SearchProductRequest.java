@@ -7,6 +7,7 @@ import java.util.Map;
 import org.api.cardnexus.configuration.NexusConfig;
 import org.api.cardnexus.model.enums.EnumProductSort;
 import org.api.cardnexus.model.enums.EnumProductType;
+import org.api.cardnexus.model.enums.EnumSearchMod;
 import org.api.cardnexus.model.enums.EnumSortDirection;
 
 public class SearchProductRequest
@@ -23,102 +24,146 @@ public class SearchProductRequest
     private EnumProductSort sortBy;
     private EnumSortDirection sortDirection;
     private Map<String, Object> gameFilters;
-    private boolean strictTerms;
+    private EnumSearchMod nameSearchMod;
+    private HashMap<String,Object> productTypes;
     
-    public SearchProductRequest() {
+    
+    private SearchProductRequest() {
 	limit = NexusConfig.LIMIT_LIST_RESULTS;
 	gameFilters = new HashMap<>();
-	
+	setGame(NexusConfig.DEFAULT_GAME_VALUE);
     }
     
-    public void setProductTypes(EnumProductType...values)
+    public static SearchProductRequest create()
     {
-	var productTypes = new HashMap<>();
+	return new SearchProductRequest();
+    }
+    
+    
+    public SearchProductRequest setProductTypes(EnumProductType...values)
+    {
+	productTypes = new HashMap<>();
 	productTypes.put("op", "or");
 	productTypes.put("values", values);
+	return this;
     }
     
-    public void addFilter(String name, String value)
+    public SearchProductRequest addFilter(String name, String value)
     {
 	gameFilters.put(name, value);
+	return this;
+    }
+        
+    public SearchProductRequest strict() {
+	nameSearchMod = EnumSearchMod.STRICT;
+	return this;
     }
     
-    public void setStrictTerms(boolean strictTerms) {
-	this.strictTerms = strictTerms;
+    public SearchProductRequest contains() {
+	this.nameSearchMod = EnumSearchMod.CONTAINS;
+	return this;
     }
     
-    public boolean isStrictTerms() {
-	return strictTerms;
+    
+    public EnumSearchMod getNameSearchMod() {
+	return nameSearchMod;
     }
     
-    public void setGame(String gameId)
+    public SearchProductRequest setGame(String gameId)
     {
 	gameFilters.put("game", gameId);
+	return this;
     }
-    
+    public SearchProductRequest setLimit(int limit) {
+        this.limit = limit;
+        return this;
+    }
+    public SearchProductRequest setProductIds(List<Integer> productIds) {
+        this.productIds = productIds;
+        return this;
+    }
+    public SearchProductRequest setExpansionId(Integer expansionId) {
+        this.expansionId = expansionId;
+        return this;
+    }
+    public SearchProductRequest setName(String name) {
+        this.name = name;
+        return this;
+    }
+    public SearchProductRequest setNameSlug(String nameSlug) {
+        this.nameSlug = nameSlug;
+        return this;
+    }
+    public SearchProductRequest setCardmarketId(List<Integer> cardmarketId) {
+        this.cardmarketId = cardmarketId;
+        return this;
+    }
+    public SearchProductRequest setTcgplayerId(List<Integer> tcgplayerId) {
+        this.tcgplayerId = tcgplayerId;
+        return this;
+    }
+    public SearchProductRequest setSortBy(EnumProductSort sortBy) {
+        this.sortBy = sortBy;
+        return this;
+    }
+    public SearchProductRequest setSortDirection(EnumSortDirection sortDirection) {
+        this.sortDirection = sortDirection;
+        return this;
+    }
+
     public int getOffset() {
         return offset;
     }
+
     public void setOffset(int offset) {
         this.offset = offset;
     }
+
+    
+    
+    
+    public Map<String, Object> getGameFilters() {
+        return gameFilters;
+    }
+
+    public void setGameFilters(Map<String, Object> gameFilters) {
+        this.gameFilters = gameFilters;
+    }
+
     public int getLimit() {
         return limit;
     }
-    public void setLimit(int limit) {
-        this.limit = limit;
-    }
+
     public List<Integer> getProductIds() {
         return productIds;
     }
-    public void setProductIds(List<Integer> productIds) {
-        this.productIds = productIds;
-    }
+
     public Integer getExpansionId() {
         return expansionId;
     }
-    public void setExpansionId(Integer expansionId) {
-        this.expansionId = expansionId;
-    }
+
     public String getName() {
         return name;
     }
-    public void setName(String name) {
-        this.name = name;
-    }
+
     public String getNameSlug() {
         return nameSlug;
     }
-    public void setNameSlug(String nameSlug) {
-        this.nameSlug = nameSlug;
-    }
+
     public List<Integer> getCardmarketId() {
         return cardmarketId;
     }
-    public void setCardmarketId(List<Integer> cardmarketId) {
-        this.cardmarketId = cardmarketId;
-    }
+
     public List<Integer> getTcgplayerId() {
         return tcgplayerId;
-    }
-    public void setTcgplayerId(List<Integer> tcgplayerId) {
-        this.tcgplayerId = tcgplayerId;
     }
 
     public EnumProductSort getSortBy() {
         return sortBy;
     }
 
-    public void setSortBy(EnumProductSort sortBy) {
-        this.sortBy = sortBy;
-    }
-
     public EnumSortDirection getSortDirection() {
         return sortDirection;
-    }
-
-    public void setSortDirection(EnumSortDirection sortDirection) {
-        this.sortDirection = sortDirection;
     }
    
     
