@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.api.cardnexus.configuration.NexusConfig;
 import org.api.cardnexus.model.AddInventoryResults;
 import org.api.cardnexus.model.InventoryLine;
 import org.api.cardnexus.model.Location;
@@ -36,6 +37,10 @@ public class InventoryService extends AbstractNexusService{
     
     public AddInventoryResults addInventoryLines(List<InventoryLine> lines) throws IOException
     {
+	
+	if(lines.size()>NexusConfig.INVENTORY_CREATION_LIMIT|| lines.isEmpty())
+	    throw new IOException("You can only create between 1 and " + NexusConfig.INVENTORY_CREATION_LIMIT + " items");
+	
 	
 	var obj = new JsonObject();
 	obj.add("lines", jsonService.toJsonTree(lines).getAsJsonArray());

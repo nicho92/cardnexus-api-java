@@ -16,7 +16,7 @@ public class NexusConfig {
     public static final String API_VERSION="0.8.0";
     public static final String ENV_TOKEN_KEY="CARDNEXUS_API_KEY";
     public static final String REQ_DATE_PATTERN="yyyy-MM-dd";
-	
+    public static final int INVENTORY_CREATION_LIMIT=1000;
     
     public static File DIRECTORY_FEED = new File(System.getProperty("user.home"));
     public static boolean GSON_PRETTY_PRINT=false;
