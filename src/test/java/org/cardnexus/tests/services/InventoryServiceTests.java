@@ -1,14 +1,19 @@
 package org.cardnexus.tests.services;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.api.cardnexus.configuration.NexusConfig;
 import org.api.cardnexus.model.CardProduct;
+import org.api.cardnexus.model.InventoryLine;
 import org.api.cardnexus.model.enums.EnumCondition;
+import org.api.cardnexus.model.enums.EnumFinishes;
 import org.api.cardnexus.model.requests.InventoryLinesRequest;
+import org.api.cardnexus.model.requests.SearchProductRequest;
 import org.api.cardnexus.model.requests.UpdateInventoryRequest;
 import org.api.cardnexus.services.InventoryService;
 import org.api.cardnexus.services.ProductsService;
+import org.api.cardnexus.tools.CachingService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -30,11 +35,21 @@ class InventoryServiceTests {
 	    service = new InventoryService();
 	    serviceProduct = new ProductsService();
 	    
-	    serviceProduct.cachingProducts( NexusConfig.DEFAULT_GAME_VALUE,true);
+	    CachingService.inst().cachingProducts( NexusConfig.DEFAULT_GAME_VALUE,false);
 	    serviceProduct.listExpansion(NexusConfig.DEFAULT_GAME_VALUE); // put in cache
 	}
     	
-    	@Test
+   
+    	void addInventoryEntries() throws IOException
+    	{
+    	    var iline2 = new InventoryLine(null, null, "test creation", 44269, "mtg", EnumFinishes.Standard, EnumCondition.LP, "en", 1, false, null, null, null, null);
+    	    var results = service.addInventoryLines(List.of(iline2));
+    	    
+    	    System.out.println(results);
+    	    
+    	}
+    	
+ 	@Test
     	void listsTest() throws IOException
 	{
 		var req =InventoryLinesRequest.create().setCondition(EnumCondition.MP);

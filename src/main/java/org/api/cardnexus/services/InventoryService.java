@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.api.cardnexus.model.AddInventoryResults;
 import org.api.cardnexus.model.InventoryLine;
 import org.api.cardnexus.model.Location;
 import org.api.cardnexus.model.Pagination;
@@ -32,6 +33,16 @@ public class InventoryService extends AbstractNexusService{
 	}
 	return ret;
     }
+    
+    public AddInventoryResults addInventoryLines(List<InventoryLine> lines) throws IOException
+    {
+	
+	var obj = new JsonObject();
+	obj.add("lines", jsonService.toJsonTree(lines).getAsJsonArray());
+	return client.post(ROOT_INVENTORY_ENDPOINT, obj, AddInventoryResults.class);
+	
+    }
+    
     
     public InventoryLine updateInventoryLine(String idLine, UpdateInventoryRequest req) throws IOException
     {
