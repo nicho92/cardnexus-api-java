@@ -27,7 +27,7 @@ class ProductServiceTests{
     	void init() throws IOException
     	{
 	    NexusConfig.loadTokenFromEnv();
-	    NexusConfig.DEFAULT_GAME_VALUE="mtg";
+	    NexusConfig.setDefaultGameValue("mtg");
     	    service = new ProductsService();
     	}
     
@@ -47,7 +47,7 @@ class ProductServiceTests{
 		
 		var req = SearchProductRequest.create().strict().setProductTypes(EnumProductType.card).setProductIds(List.of(75886));
 		
-		service.listExpansion(NexusConfig.DEFAULT_GAME_VALUE);//caching;
+		service.listExpansion(NexusConfig.getDefaultGameValue());//caching;
 		
 		System.out.println("=====CardproductBySearch");
 		printData(service.searchProduct(req).getFirst());

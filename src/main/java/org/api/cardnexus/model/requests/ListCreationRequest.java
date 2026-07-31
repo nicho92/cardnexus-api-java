@@ -6,7 +6,7 @@ import org.api.cardnexus.model.enums.EnumStatus;
 public class ListCreationRequest {
 
     private String name;
-    private String game=NexusConfig.DEFAULT_GAME_VALUE;
+    private String game=NexusConfig.getDefaultGameValue();
     private EnumStatus status;
     private String description;
     private boolean isPublic;

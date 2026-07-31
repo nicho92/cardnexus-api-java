@@ -20,7 +20,7 @@ public class JsonService {
     public JsonService() {
         var builder = new GsonBuilder().registerTypeAdapter(AbstractProduct.class, new ProductAdapter());
         
-        if(NexusConfig.GSON_PRETTY_PRINT)
+        if(NexusConfig.isGsonPrettyPrint())
             builder.setPrettyPrinting();
         
         

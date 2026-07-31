@@ -52,14 +52,14 @@ The client is maintained as part of the Java API client family used by the [MtgD
 <dependency>
     <groupId>com.github.nicho92</groupId>
     <artifactId>cardnexus-api-java</artifactId>
-    <version>1.4.17</version>
+    <version>1.4.20</version>
 </dependency>
 ```
 
 ### Gradle
 
 ```groovy
-implementation 'com.github.nicho92:cardnexus-api-java:1.4.17'
+implementation 'com.github.nicho92:cardnexus-api-java:1.4.20'
 ```
 
 The artifact is published to [Maven Central](https://central.sonatype.com/artifact/com.github.nicho92/cardnexus-api-java), so consumers normally do not need an additional repository declaration.

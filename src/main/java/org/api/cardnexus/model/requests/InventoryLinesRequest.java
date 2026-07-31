@@ -7,7 +7,7 @@ import org.api.cardnexus.model.enums.EnumCondition;
 import org.api.cardnexus.model.enums.EnumFinishes;
 
 public class InventoryLinesRequest extends AbstractGetRequest{
-    private String game = NexusConfig.DEFAULT_GAME_VALUE;
+    private String game = NexusConfig.getDefaultGameValue();
     private List<Integer> productId;
     private EnumCondition condition;
     private String language;

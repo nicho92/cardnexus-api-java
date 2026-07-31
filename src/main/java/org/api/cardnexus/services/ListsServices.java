@@ -25,7 +25,7 @@ public class ListsServices extends AbstractNexusService {
 	var pagination=new Pagination(null,null,null,true,null);
 	while(pagination.hasMore())
 	{
-		var result =  client.getPaginated(ROOT_LISTS_ENDPOINT+"?offset="+ret.size()+"&limit="+NexusConfig.LIMIT_LIST_RESULTS, NexusList.class);
+		var result =  client.getPaginated(ROOT_LISTS_ENDPOINT+"?offset="+ret.size()+"&limit="+NexusConfig.getLimitListResults(), NexusList.class);
 		ret.addAll(result.data());
 		pagination = result.pagination();
 	}

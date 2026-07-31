@@ -17,7 +17,7 @@ import org.api.cardnexus.model.enums.EnumSortDirection;
 public class SearchInventoryRequest {
     
     private int offset=0;
-    private int limit = NexusConfig.LIMIT_LIST_RESULTS;
+    private int limit = NexusConfig.getLimitListResults();
     
    
     private String name;
@@ -49,8 +49,8 @@ public class SearchInventoryRequest {
     private SearchInventoryRequest() {
 	gameFilters=new HashMap<>();
 	
-	if(NexusConfig.DEFAULT_GAME_VALUE!=null)
-	    setGame(NexusConfig.DEFAULT_GAME_VALUE);
+	if(NexusConfig.getDefaultGameValue()!=null)
+	    setGame(NexusConfig.getDefaultGameValue());
     }
     
     public static SearchInventoryRequest create()

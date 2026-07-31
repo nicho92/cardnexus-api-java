@@ -28,7 +28,7 @@ public class FileTools {
     
     public static boolean md5(String md5,File f) 
     {
-    	if(!NexusConfig.CHECKSUM_MD5_FEED)
+    	if(!NexusConfig.isChecksumMd5Feed())
     	{
     		logger.warn("Carreful, MD5 checksum for {} is disabled. You can change value by set CHECKSUM_MD5_FEED=true",f);
     		return true;
@@ -50,7 +50,7 @@ public class FileTools {
     
     public static File download(URL url,EnumFeedKey key) throws IOException
     {
-	var f = new File(NexusConfig.DIRECTORY_FEED, key.name() + ".gz");
+	var f = new File(NexusConfig.getDirectoryFeed(), key.name() + ".gz");
 	
 	try (var urlStream = url.openStream(); var stream = BoundedInputStream.builder().setInputStream(urlStream).get()) 
 	{

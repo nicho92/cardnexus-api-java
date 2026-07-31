@@ -29,13 +29,13 @@ class InventorySearchTest {
 	void init() throws IOException
 	{
 	    NexusConfig.loadTokenFromEnv();
-	    NexusConfig.DEFAULT_GAME_VALUE="mtg";
+	    NexusConfig.setDefaultGameValue("mtg");
 	    
 	    iService = new InventoryService();
 	    pService = new ProductsService();
 	    
-	//    pService.cachingProducts( NexusConfig.DEFAULT_GAME_VALUE,true);
-	    pService.listExpansion(NexusConfig.DEFAULT_GAME_VALUE); // put in cache
+	//    pService.cachingProducts( NexusConfig.getDefaultGameValue(),true);
+	    pService.listExpansion(NexusConfig.getDefaultGameValue()); // put in cache
 	}
     
     

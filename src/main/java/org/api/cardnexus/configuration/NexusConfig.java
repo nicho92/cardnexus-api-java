@@ -7,29 +7,27 @@ import java.nio.file.Files;
 import org.api.cardnexus.listener.URLCallListener;
 
 public class NexusConfig {
+    
     private NexusConfig() {
         /* This utility class should not be instantiated */
     }
 
-    
-    public static final String API_BASE_URL="https://public-api.cardnexus.com/v1"; 
-    public static final String API_VERSION="0.8.0";
-    public static final String ENV_TOKEN_KEY="CARDNEXUS_API_KEY";
-    public static final String REQ_DATE_PATTERN="yyyy-MM-dd";
-    public static final int INVENTORY_CREATION_LIMIT=1000;
-    
-    public static File DIRECTORY_FEED = new File(System.getProperty("user.home"));
-    public static boolean GSON_PRETTY_PRINT=false;
-    public static int LIMIT_LIST_RESULTS=200;
-    public static boolean CHECKSUM_MD5_FEED=true;
-    public static String DEFAULT_GAME_VALUE=null;
-    public static URLCallListener LISTENER;
-    
-    
-    
-    	private static String token;
-	
-    	
+ // --- Immutable API constants -------------------------------------------------
+        public static final String API_BASE_URL = "https://public-api.cardnexus.com/v1";
+        public static final String API_VERSION = "0.8.0";
+        public static final String ENV_TOKEN_KEY = "CARDNEXUS_API_KEY";
+        public static final String REQ_DATE_PATTERN = "yyyy-MM-dd";
+        public static final int INVENTORY_CREATION_LIMIT = 1000;
+        
+        
+ // --- Mutable configuration state ----------------------------------------------
+        private static volatile File directoryFeed = new File(System.getProperty("user.home"));
+        private static volatile boolean gsonPrettyPrint = false;
+        private static volatile int limitListResults = 200;
+        private static volatile boolean checksumMd5Feed = true;
+        private static volatile String defaultGameValue;
+        private static URLCallListener listener;
+        private static volatile String token;
     	
     	 
 	public static String getToken()
@@ -38,10 +36,7 @@ public class NexusConfig {
 	}
 	
 	
-	public static void setToken(String t)
-	{
-		token=t;
-	}
+	
 	
 	public static void loadTokenFromEnv() throws IOException
 	{
@@ -53,12 +48,25 @@ public class NexusConfig {
 		setToken(t);
 	}
 	
-	
 	public static void loadTokenFromFile(File f) throws IOException
 	{
 		setToken(Files.readString(f.toPath()));
 	}
 	
+	public static File getDirectoryFeed() { return directoryFeed; }
+	public static boolean isGsonPrettyPrint() { return gsonPrettyPrint; }
+	public static int getLimitListResults() { return limitListResults; }
+	public static boolean isChecksumMd5Feed() { return checksumMd5Feed; }
+	public static String getDefaultGameValue() { return defaultGameValue; }
+	public static URLCallListener getListener() { return listener; }
 	
+	
+	public static void setDirectoryFeed(File directoryFeed) { NexusConfig.directoryFeed = directoryFeed; }
+	public static void setGsonPrettyPrint(boolean gsonPrettyPrint) { NexusConfig.gsonPrettyPrint = gsonPrettyPrint; }
+	public static void setLimitListResults(int limitListResults) { NexusConfig.limitListResults = limitListResults; }
+	public static void setChecksumMd5Feed(boolean checksumMd5Feed) { NexusConfig.checksumMd5Feed = checksumMd5Feed; }
+	public static void setDefaultGameValue(String defaultGameValue) { NexusConfig.defaultGameValue = defaultGameValue; }
+	public static void setListener(URLCallListener listener) { NexusConfig.listener = listener; }
+	public static void setToken(String t) {NexusConfig.token=t;}
 	
 }

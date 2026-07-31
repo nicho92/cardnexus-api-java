@@ -189,8 +189,8 @@ public class RestClient implements Closeable {
         }
         finally {
         	
-        	if(NexusConfig.LISTENER!=null)
-        	    NexusConfig.LISTENER.notify(callInfo);
+        	if(NexusConfig.getListener()!=null)
+        	    NexusConfig.getListener().notify(callInfo);
 		}
         
         

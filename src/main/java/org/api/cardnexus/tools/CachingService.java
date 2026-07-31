@@ -64,7 +64,7 @@ public class CachingService {
 		var serv =new FeedsService();
 		var gson = new JsonService();
 		
-		var f = new File(NexusConfig.DIRECTORY_FEED, "catalog.ndjson");
+		var f = new File(NexusConfig.getDirectoryFeed(), "catalog.ndjson");
 		
 		if(forceDownload || !f.exists())
 		{

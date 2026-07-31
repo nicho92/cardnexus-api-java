@@ -14,7 +14,7 @@ public class SearchProductRequest
 {
     
     private int offset;
-    private int limit;
+    private int limit = NexusConfig.getLimitListResults();
     private List<Integer> productIds;
     private Integer expansionId;
     private String name;
@@ -29,9 +29,9 @@ public class SearchProductRequest
     
     
     private SearchProductRequest() {
-	limit = NexusConfig.LIMIT_LIST_RESULTS;
+	
 	gameFilters = new HashMap<>();
-	setGame(NexusConfig.DEFAULT_GAME_VALUE);
+	setGame(NexusConfig.getDefaultGameValue());
     }
     
     public static SearchProductRequest create()

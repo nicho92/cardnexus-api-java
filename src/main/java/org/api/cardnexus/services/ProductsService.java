@@ -76,7 +76,7 @@ public class ProductsService extends AbstractNexusService{
 		var pagination=new Pagination(null,null,null,true,null);
 		while(pagination.hasMore())
 		{
-			var result =  client.getPaginated(ROOT_GAME_ENDPOINT+"/"+gameid+"/expansions?offset="+ret.size()+"&limit="+NexusConfig.LIMIT_LIST_RESULTS, Expansion.class);
+			var result =  client.getPaginated(ROOT_GAME_ENDPOINT+"/"+gameid+"/expansions?offset="+ret.size()+"&limit="+NexusConfig.getLimitListResults(), Expansion.class);
 			ret.addAll(result.data());
 			
 			result.data().forEach(ex->CachingService.inst().getExpansionCache().put(ex.id(), ex));
