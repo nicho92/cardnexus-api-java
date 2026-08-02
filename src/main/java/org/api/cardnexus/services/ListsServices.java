@@ -37,6 +37,12 @@ public class ListsServices extends AbstractNexusService {
 	return client.post(ROOT_LISTS_ENDPOINT, req, NexusList.class);
     }
     
+    public NexusList getListById(String listId) throws IOException
+    {
+	return client.get(ROOT_LISTS_ENDPOINT+"/"+listId, NexusList.class);
+    }
+    
+    
     public NexusList updateList(String listId,ListCreationRequest req) throws IOException
     {
 	return client.patch(ROOT_LISTS_ENDPOINT+"/"+listId, req, NexusList.class);

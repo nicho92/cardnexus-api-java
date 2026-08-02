@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.io.IOException;
 
 import org.api.cardnexus.configuration.NexusConfig;
+import org.api.cardnexus.model.NexusList;
 import org.api.cardnexus.model.enums.EnumCondition;
 import org.api.cardnexus.model.enums.EnumFinishes;
 import org.api.cardnexus.model.enums.EnumStatus;
@@ -23,6 +24,11 @@ class ListingServiceTests {
 		
 		var service = new ListsServices();
 		
+		service.listNexusLists().forEach(l->{
+		    System.out.println(l);
+		});
+		
+		System.out.println("-----------------------creation ");
 		var req = ListCreationRequest.create()
 			.setGame("mtg")
 			.setPublic(false)
@@ -46,6 +52,8 @@ class ListingServiceTests {
 			System.out.println(item);
 		});
 		
+		
+		System.out.println("-----------------------deletion ");
 		var ret = service.deleteList(testList.id());
 		System.out.println("Delete List Result: "+ret);
 		assertEquals(true, ret);

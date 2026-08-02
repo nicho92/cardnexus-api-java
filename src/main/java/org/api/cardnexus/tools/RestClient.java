@@ -23,7 +23,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.api.cardnexus.configuration.NexusConfig;
 import org.api.cardnexus.listener.URLCallInfo;
-import org.api.cardnexus.listener.URLCallListener;
 import org.api.cardnexus.model.PaginateResult;
 
 import com.google.gson.JsonArray;
