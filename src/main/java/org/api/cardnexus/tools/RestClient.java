@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.http.Header;
 import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPatch;
@@ -37,6 +38,8 @@ public class RestClient implements Closeable {
     protected Logger logger = LogManager.getLogger(this.getClass());
 
     private JsonService gson;
+
+    private Header[] lastCallHeaders;
     
     /**
      * Constructeur sans authentification.
@@ -144,6 +147,11 @@ public class RestClient implements Closeable {
     	return gson.fromJson(json, responseType);
     }
     
+    
+    public Header[] getLastCallHeaders() {
+	return lastCallHeaders;
+    }
+    
    
     
     @SuppressWarnings("unchecked")
@@ -155,9 +163,10 @@ public class RestClient implements Closeable {
     	
     	
         try (var response = httpClient.execute(request)) {
-        	var statusCode = response.getStatusLine().getStatusCode();
+            var statusCode = response.getStatusLine().getStatusCode();
             var jsonResponse = response.getEntity() != null ? EntityUtils.toString(response.getEntity()) : null;
             
+            this.lastCallHeaders = response.getAllHeaders();
             
             if(logger.isTraceEnabled()) {
         	for(var h : response.getAllHeaders())
@@ -194,9 +203,6 @@ public class RestClient implements Closeable {
         	if(NexusConfig.getListener()!=null)
         	    NexusConfig.getListener().notify(callInfo);
 		}
-        
-        
-        
     }
 
     @Override
