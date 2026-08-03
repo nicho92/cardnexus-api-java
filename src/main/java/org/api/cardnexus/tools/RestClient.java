@@ -1,6 +1,7 @@
 package org.api.cardnexus.tools;
 
 import java.io.Closeable;
+import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.time.Instant;
@@ -16,6 +17,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.entity.ContentType;
+import org.apache.http.entity.FileEntity;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
@@ -33,8 +35,6 @@ import com.google.gson.reflect.TypeToken;
 public class RestClient implements Closeable {
 
     private final CloseableHttpClient httpClient;
-   
-    private final Map<String, String> defaultHeaders;
     protected Logger logger = LogManager.getLogger(this.getClass());
 
     private JsonService gson;
@@ -56,11 +56,7 @@ public class RestClient implements Closeable {
     public RestClient(String token) {
         this.httpClient = HttpClients.createDefault();
         gson = new JsonService();
-        this.defaultHeaders = new HashMap<>();
-        
-        defaultHeaders.put("Authorization", "Bearer " +token);
-        defaultHeaders.put("Content-Type", "application/json");
-        defaultHeaders.put("Accept", "application/json");
+    
     }
 
     // -------------------- Méthodes principales --------------------
@@ -88,19 +84,27 @@ public class RestClient implements Closeable {
     
     public <T> T post(String url, Object body, Class<T> responseType) throws IOException {
         var request = new HttpPost(NexusConfig.API_BASE_URL+url);
-        addJsonBody(request, body);
+        setContentData(request, body);
         return executeRequest(request, responseType);
     }
     
+    public <T> T upload(String url, File body, Class<T> responseType) throws IOException {
+        var request = new HttpPost(NexusConfig.API_BASE_URL+url);
+        setContentData(request, body);
+        return executeRequest(request, responseType);
+    }
+   
+    
+    
     public <T> T patch(String url, Object body,Class<T> responseType) throws IOException {
         var request = new HttpPatch(NexusConfig.API_BASE_URL+url);
-        addJsonBody(request, body);
+        setContentData(request, body);
         return executeRequest(request, responseType);
     }
     
     public <T> T post(String url, Object body, Type responseType) throws IOException {
         var request = new HttpPost(NexusConfig.API_BASE_URL+url);
-        addJsonBody(request, body);
+        setContentData(request, body);
         return executeRequest(request, responseType);
     }
 
@@ -108,25 +112,35 @@ public class RestClient implements Closeable {
 
     public <T> T put(String url, Object body, Class<T> responseType) throws IOException {
         var request = new HttpPut(NexusConfig.API_BASE_URL+url);
-        addJsonBody(request, body);
+        setContentData(request, body);
         return executeRequest(request, responseType);
     }
 
     public <T> T delete(String url, Object body, Class<T> responseType) throws IOException {
         var request = new HttpDeleteWithBody(NexusConfig.API_BASE_URL+url);
         if (body != null) {
-            addJsonBody(request, body);
+            setContentData(request, body);
         }
         return executeRequest(request, responseType);
     }
 
     // -------------------- Méthodes internes --------------------
 
-    private void addJsonBody(HttpEntityEnclosingRequestBase request, Object body) {
+    private void setContentData(HttpEntityEnclosingRequestBase request, Object body) {
         if (body != null) {
-            var json = gson.toJson(body);
-            logger.debug("postContent={}", json);
-            request.setEntity(new StringEntity(json, ContentType.APPLICATION_JSON));
+            
+            
+            if(body instanceof File f)
+            {
+        	request.setEntity(new FileEntity(f,ContentType.MULTIPART_FORM_DATA));
+            }
+            else
+            {
+        	var json = gson.toJson(body);
+                logger.debug("postContent={}", json);
+          	request.setEntity(new StringEntity(json, ContentType.APPLICATION_JSON));
+            }
+            
         }
     }
 
@@ -151,17 +165,13 @@ public class RestClient implements Closeable {
     public Header[] getLastCallHeaders() {
 	return lastCallHeaders;
     }
-    
-   
-    
+     
     @SuppressWarnings("unchecked")
     private <T> T executeRequest(HttpRequestBase request, Type  responseType) throws IOException {
     	
     	var callInfo = new URLCallInfo();
-    	
     	request.addHeader("Authorization", "Bearer "+NexusConfig.getToken());
-    	
-    	
+     	
         try (var response = httpClient.execute(request)) {
             var statusCode = response.getStatusLine().getStatusCode();
             var jsonResponse = response.getEntity() != null ? EntityUtils.toString(response.getEntity()) : null;

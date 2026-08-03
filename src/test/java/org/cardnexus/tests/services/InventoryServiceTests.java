@@ -42,7 +42,8 @@ class InventoryServiceTests {
     	void addInventoryEntries() throws IOException
     	{
     	    var iline2 = new InventoryLine(null, null, "test creation", 44269, "mtg", EnumFinishes.Standard, EnumCondition.LP, "en", 1, false, null, null, null, null, null);
-    	    var results = service.addInventoryLines(List.of(iline2));
+    	    var iline = new InventoryLine(null, null, "test creation", 44269, "mtg", EnumFinishes.Standard, EnumCondition.LP, "fr", 1, false, null, null, null, null, null); // this product doesn't exist in this language
+    	    var results = service.addInventoryLines(List.of(iline,iline2));
     	    
     	    System.out.println(results);
     	    

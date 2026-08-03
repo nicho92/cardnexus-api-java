@@ -1,9 +1,11 @@
 package org.api.cardnexus.services;
 
+import java.io.File;
 import java.io.IOException;
 
 import org.api.cardnexus.model.Job;
 import org.api.cardnexus.model.enums.EnumBulkFormat;
+import org.api.cardnexus.model.enums.EnumBulkProvider;
 import org.api.cardnexus.model.requests.SearchInventoryRequest;
 
 import com.google.gson.JsonObject;
@@ -24,5 +26,14 @@ public class BulkService extends AbstractNexusService {
 	return  jsonService.fromJson(client.post(ROOT_INVENTORY_ENDPOINT+"/bulk/export", obj,  JsonObject.class).get("job").getAsJsonObject().toString(),Job.class);
     }
     
+    public Job bulkMarketImport(File f, EnumBulkProvider importer) throws IOException
+    {
+	return  jsonService.fromJson(client.upload(ROOT_INVENTORY_ENDPOINT+"/import/"+importer.name(), f,  JsonObject.class).get("job").getAsJsonObject().toString(),Job.class);
+    }
+    
+    public Job bulkCardNexusImport(File f) throws IOException
+    {
+	return  jsonService.fromJson(client.upload(ROOT_INVENTORY_ENDPOINT+"/import", f,  JsonObject.class).get("job").getAsJsonObject().toString(),Job.class);
+    }
     
 }
