@@ -158,8 +158,11 @@ public class RestClient implements Closeable {
         	var statusCode = response.getStatusLine().getStatusCode();
             var jsonResponse = response.getEntity() != null ? EntityUtils.toString(response.getEntity()) : null;
             
-            logger.trace("{}, X-RateLimit-Limit={}, X-RateLimit-Remaining={}",  response.getFirstHeader("X-Request-Id"), response.getFirstHeader("X-RateLimit-Limit"), response.getFirstHeader("X-RateLimit-Remaining"));
             
+            if(logger.isTraceEnabled()) {
+        	for(var h : response.getAllHeaders())
+        	    logger.trace("{} : {}",h.getName(),h.getValue());
+            }
             
             logger.debug("{} : {},", request,statusCode );
     		callInfo.setEnd(Instant.now());

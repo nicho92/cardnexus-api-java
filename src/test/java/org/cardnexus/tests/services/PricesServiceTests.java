@@ -8,6 +8,7 @@ import org.api.cardnexus.model.enums.EnumFinishes;
 import org.api.cardnexus.model.enums.EnumMarketPlace;
 import org.api.cardnexus.model.requests.HistoryRequest;
 import org.api.cardnexus.services.PricesService;
+import org.api.cardnexus.tools.Formatter;
 import org.junit.jupiter.api.Test;
 
 
@@ -24,11 +25,15 @@ class PricesServiceTests{
 		System.out.println(eu);
 		
 		
-		var req = HistoryRequest.create().setIdProduct(75886).setFinish(EnumFinishes.Standard).setMarketplace(EnumMarketPlace.cardmarket).setFrom(LocalDate.now().minusDays(10)).setTo(LocalDate.now());
+		var req = HistoryRequest.create().setIdProduct(75886).setFinish(EnumFinishes.Standard).setMarketplace(EnumMarketPlace.cardmarket).setFrom(LocalDate.now().minusDays(30)).setTo(LocalDate.now());
 			
 		
-		service.getHistoryPrice(req).forEach(System.out::println);
-		
+		service.getHistoryPrice(req).forEach(p->{
+		    
+		    System.out.println(Formatter.format(p.date(), false) + " " + Formatter.format(p.marketValue()));
+		    
+		});
+				
 		
 		System.out.println(service.getLastSales(108703));
 		
