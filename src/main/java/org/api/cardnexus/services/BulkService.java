@@ -31,7 +31,7 @@ public class BulkService extends AbstractNexusService {
 	return  jsonService.fromJson(client.upload(ROOT_INVENTORY_ENDPOINT+"/import/"+importer.name(), f,  JsonObject.class).get("job").getAsJsonObject().toString(),Job.class);
     }
     
-    public Job bulkCardNexusImport(File f) throws IOException
+    public Job bulkNexusImport(File f) throws IOException
     {
 	return  jsonService.fromJson(client.upload(ROOT_INVENTORY_ENDPOINT+"/import", f,  JsonObject.class).get("job").getAsJsonObject().toString(),Job.class);
     }
