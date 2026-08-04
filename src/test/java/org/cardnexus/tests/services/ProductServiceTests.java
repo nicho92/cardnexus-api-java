@@ -37,12 +37,12 @@ class ProductServiceTests{
     	{
     
 	System.out.println("=====MarketListSearch");
-	     service.listMarketListing(MarketListRequest.create().setProductId(41547)).forEach(System.out::println);
+	     service.listMarketListing(MarketListRequest.create().setProductId(75886)).forEach(System.out::println);
 	
     	}
     
     
-    	@Test
+    	
     	void testSearchCardProduct() throws IOException {
 		
 		var req = SearchProductRequest.create().strict().setProductTypes(EnumProductType.card).setProductIds(List.of(75886));
@@ -61,7 +61,6 @@ class ProductServiceTests{
 		});
 	}
     	
-    	@Test
     	void testSearchSealedProduct() throws IOException {
 	    
 		var req = SearchProductRequest.create().setName("Innistrad Booster Box").setProductTypes(EnumProductType.sealed);
