@@ -15,8 +15,7 @@ import com.google.gson.JsonObject;
 public class CartService extends AbstractNexusService {
 
     
-    public String runOptimizationQuery(CardOptimizationRequest req) throws IOException
-    {
+    public String runOptimizationQuery(CardOptimizationRequest req) throws IOException {
 	return client.post(ROOT_OPTIMIZER_ENDPOINT+"/runs", req, JsonObject.class).get("id").getAsString();
     }
     
@@ -27,7 +26,6 @@ public class CartService extends AbstractNexusService {
 	
 	return client.post(ROOT_OPTIMIZER_ENDPOINT+"/runs/"+runId+"/apply", obj, Cart.class);
     }
-    
     
     public Run getRunById(String id) throws IOException
     {

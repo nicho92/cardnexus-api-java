@@ -115,7 +115,7 @@ public class ProductsService extends AbstractNexusService{
 		
 		ret.forEach(p->{
 		    if(p.getExpansion()==null)
-				p.setExpansion(getExpansionById(p.getExpansionId()));
+			p.setExpansion(getExpansionById(p.getExpansionId()));
 		});
 		ret.forEach(p->CachingService.inst().getProductsCache().put(p.getId(), p));
 		

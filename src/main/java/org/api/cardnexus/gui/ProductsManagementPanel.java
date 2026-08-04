@@ -4,20 +4,18 @@ import java.awt.BorderLayout;
 import java.io.IOException;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.WindowConstants;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.api.cardnexus.configuration.NexusConfig;
 import org.api.cardnexus.gui.components.MarketPlacePanel;
 import org.api.cardnexus.gui.components.ProductPanel;
 import org.api.cardnexus.gui.model.NexusProductTableModel;
+import org.api.cardnexus.model.AbstractProduct;
 import org.api.cardnexus.model.Expansion;
 import org.api.cardnexus.model.requests.SearchProductRequest;
 import org.api.cardnexus.services.ProductsService;
@@ -29,26 +27,19 @@ public class ProductsManagementPanel extends JPanel{
     
     private ProductsService service;
     protected transient Logger logger = LogManager.getLogger(getClass());
-
+    private AbstractProduct selectedProduct;
     
-    
-    public static void main(String[] args) throws IOException {
-	
-	NexusConfig.loadTokenFromEnv();
-	NexusConfig.setDefaultGameValue("mtg");
-	
-	
-	
-	var f = new JFrame();
-	f.getContentPane().add(new ProductsManagementPanel());
-	f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-	f.pack();
-	f.setVisible(true);
-	
+    public ProductsManagementPanel()
+    {
+	this(false,false);
     }
     
     
-    public ProductsManagementPanel() {
+    public AbstractProduct getSelectedProduct() {
+	return selectedProduct;
+    }
+    
+    public ProductsManagementPanel(boolean showListings, boolean showdetails) {
 	
 		service = new ProductsService();
 	
@@ -60,16 +51,19 @@ public class ProductsManagementPanel extends JPanel{
 		var textField = new JTextField(30);
 		var btnSearch = new JButton("Search");
 		var productPanel = new ProductPanel();
-		
+		  var panelListMarket = new MarketPlacePanel();
 		
 		add(new JScrollPane(table), BorderLayout.CENTER);
 		add(panel, BorderLayout.NORTH);
 		panel.add(textField);
 		panel.add(btnSearch);
-		add(productPanel, BorderLayout.EAST);
 		
-		var panelListMarket = new MarketPlacePanel();
-		add(panelListMarket, BorderLayout.SOUTH);
+
+		if(showdetails) 
+		    add(productPanel, BorderLayout.EAST);
+		
+		if(showListings) 
+		    add(panelListMarket, BorderLayout.SOUTH);
 		
 		
 		table.setDefaultRenderer(Expansion.class, (JTable _, Object value, boolean _, boolean _,int _, int _) -> {
@@ -78,7 +72,6 @@ public class ProductsManagementPanel extends JPanel{
 		});
 		
 		textField.addActionListener(_->btnSearch.doClick());
-		
 		
 		btnSearch.addActionListener(_->{
 		    try {
@@ -97,10 +90,14 @@ public class ProductsManagementPanel extends JPanel{
 		    		 if(row>-1)
 		    		 {     
 		    		     var id = (Integer)modelProducts.getValueAt(row, 0);
-		        	     try {
-		        		 var p = service.getProductById(id);
-		        		 productPanel.init(p);
-		        		 panelListMarket.init(p);
+		        	     try 
+		        	     {
+		        		 selectedProduct = service.getProductById(id);
+		        		 if(showdetails)
+		        		     productPanel.init(selectedProduct);
+		        		
+		        		 if(showListings)		        		 
+		        		     panelListMarket.init(selectedProduct);
 		        	     } 
 		        	     catch (Exception e1) {
         		    		logger.error(e1);
@@ -108,9 +105,7 @@ public class ProductsManagementPanel extends JPanel{
 		    		 }
 		    	    }
 		 });
-		
-	}
 
-     
+		}
+    }
 
-}

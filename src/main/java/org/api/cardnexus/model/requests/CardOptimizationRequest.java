@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Locale;
 
 import org.api.cardnexus.model.Amount;
+import org.api.cardnexus.model.ProductEntry;
 import org.api.cardnexus.model.enums.EnumCondition;
 import org.api.cardnexus.model.enums.EnumFinishes;
 
@@ -31,13 +32,20 @@ public class CardOptimizationRequest {
     	return this;
     }
     
+    public CardOptimizationRequest addEntry(ProductEntry e)
+    {
+	targets.add(e);
+	return this;
+    }
+    
+    
     public CardOptimizationRequest addEntry(int productId, int quantity,EnumCondition minCondition,EnumFinishes finish, List<String> languages,Amount maxUnitPrice)
     {
 	targets.add(new ProductEntry(productId, quantity, minCondition, finish, languages, maxUnitPrice));
 	return this;
     }
 
-record ProductEntry( int productId, int quantity,EnumCondition minCondition,EnumFinishes finish, List<String> languages,Amount maxUnitPrice) {}
+
 
 record ProductEntryCountry (String country){}
     
