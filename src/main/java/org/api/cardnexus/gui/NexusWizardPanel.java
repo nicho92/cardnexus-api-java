@@ -2,7 +2,6 @@ package org.api.cardnexus.gui;
 
 import java.awt.BorderLayout;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -10,6 +9,7 @@ import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -27,7 +27,7 @@ import org.api.cardnexus.model.enums.EnumFinishes;
 import org.api.cardnexus.model.requests.CardOptimizationRequest;
 import org.api.cardnexus.services.CartService;
 
-public class WizardPanel extends JPanel {
+public class NexusWizardPanel extends JPanel {
     
     	private static final long serialVersionUID = 1L;
     	private JTable table;
@@ -36,18 +36,18 @@ public class WizardPanel extends JPanel {
         protected transient Logger logger = LogManager.getLogger(getClass());
     	
     	
-	public WizardPanel() {
+	public NexusWizardPanel() {
 	    	
 	    	model = new CardWizardTableModel();
 	    	cartService = new CartService();
 	    	
 		setLayout(new BorderLayout());
-		var productsManagementPanel = new ProductsManagementPanel();
+		var productsManagementPanel = new NexusProductPanel(false,true);
 		add(productsManagementPanel, BorderLayout.WEST);
 		
 		var panelWizardConfig = new JPanel();
 		add(panelWizardConfig, BorderLayout.CENTER);
-		panelWizardConfig.setLayout(new BorderLayout(0, 0));
+		panelWizardConfig.setLayout(new BorderLayout());
 		
 		table = new JTable(model);
 		panelWizardConfig.add(new JScrollPane(table), BorderLayout.CENTER);
@@ -64,6 +64,9 @@ public class WizardPanel extends JPanel {
 		var btnRemoveProduct = new JButton("Remove Product");
 		btnRemoveProduct.setEnabled(false);
 		panelCommand.add(btnRemoveProduct);
+		
+		JPanel jobResultsPanel = new JPanel();
+		add(jobResultsPanel, BorderLayout.SOUTH);
 		
 		
 		table.setDefaultEditor(EnumFinishes.class, new DefaultCellEditor(new JComboBox<>(EnumFinishes.values())));
@@ -95,11 +98,29 @@ public class WizardPanel extends JPanel {
 		    var req = CardOptimizationRequest.create().setCountry(Locale.getDefault().getCountry());
 		    model.getItems().forEach(req::addEntry);
 		    try {
-			cartService.runOptimizationQuery(req);
+			var idjob = cartService.runOptimizationQuery(req);
+			logger.info("job created with id={}",idjob);
+			var job = cartService.getRunById(idjob);
+			
+			
+			
 		    } catch (IOException e) {
 			logger.error(e);
 		    }
 		});
+		
+		table.getSelectionModel().addListSelectionListener(e -> {
+	    	    if (!e.getValueIsAdjusting()) 
+	    	    {
+	    		int row = table.convertRowIndexToModel(table.getSelectedRow());
+	    	        btnRemoveProduct.setEnabled(row>-1);
+	    	    }
+		});
+		
+		btnRemoveProduct.addActionListener(_->{
+	    	     int row = table.convertRowIndexToModel(table.getSelectedRow());
+	    	     model.removeRow(row);
+	    	 }); 
 		
 		
 	}
@@ -111,7 +132,7 @@ public class WizardPanel extends JPanel {
 	NexusConfig.setDefaultGameValue("mtg");
 	
 	var f = new JFrame();
-	f.getContentPane().add(new WizardPanel());
+	f.getContentPane().add(new NexusWizardPanel());
 	f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	f.pack();
 	f.setVisible(true);

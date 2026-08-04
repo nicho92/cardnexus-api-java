@@ -33,8 +33,7 @@ public class CardWizardTableModel extends DefaultTableModel {
         		case 5 :  items.get(row).setMaxUnitPrice(new Amount(Double.parseDouble(aValue.toString()), "EUR"));return;
 		}
     }
-    
-    
+
     @Override
     public Object getValueAt(int row, int column) {
         var l = items.get(row);

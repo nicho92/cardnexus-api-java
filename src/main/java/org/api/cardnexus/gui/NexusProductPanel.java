@@ -20,7 +20,7 @@ import org.api.cardnexus.model.Expansion;
 import org.api.cardnexus.model.requests.SearchProductRequest;
 import org.api.cardnexus.services.ProductsService;
 
-public class ProductsManagementPanel extends JPanel{
+public class NexusProductPanel extends JPanel{
     
     private static final long serialVersionUID = 1L;
     private NexusProductTableModel modelProducts;
@@ -29,7 +29,7 @@ public class ProductsManagementPanel extends JPanel{
     protected transient Logger logger = LogManager.getLogger(getClass());
     private AbstractProduct selectedProduct;
     
-    public ProductsManagementPanel()
+    public NexusProductPanel()
     {
 	this(false,false);
     }
@@ -39,7 +39,7 @@ public class ProductsManagementPanel extends JPanel{
 	return selectedProduct;
     }
     
-    public ProductsManagementPanel(boolean showListings, boolean showdetails) {
+    public NexusProductPanel(boolean showListings, boolean showdetails) {
 	
 		service = new ProductsService();
 	

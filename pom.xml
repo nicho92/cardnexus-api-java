@@ -28,14 +28,13 @@
 		<developerConnection>scm:git:https://github.com/nicho92/cardnexus-api-java.git</developerConnection>
 	</scm>
 	
-	<version>1.4.23</version>
+	<version>1.4.24</version>
 	<packaging>jar</packaging>
 
 	<properties>
 		<maven.compiler.release>23</maven.compiler.release>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-	
 	<issueManagement>
 		<system>Github</system>
 		<url>https://github.com/nicho92/cardnexus-api-java/issues</url>

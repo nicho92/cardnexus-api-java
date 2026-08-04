@@ -20,7 +20,7 @@ import org.api.cardnexus.model.requests.ListCreationRequest;
 import org.api.cardnexus.services.ListsServices;
 import org.api.cardnexus.services.ProductsService;
 
-public class ListManagementPanel extends JPanel {
+public class NexusListsPanel extends JPanel {
 
     private static final long serialVersionUID = 1L;
     private NexusListTableModel modelLists;
@@ -32,7 +32,7 @@ public class ListManagementPanel extends JPanel {
     
     protected transient Logger logger = LogManager.getLogger(getClass());
     
-    public ListManagementPanel() {
+    public NexusListsPanel() {
     	setLayout(new BorderLayout());
     	
     	modelLists = new NexusListTableModel();
