@@ -9,7 +9,7 @@ public record Progress (double fraction,List<RunOption> options)
 
     @Override
     public String toString() {
-        return Formatter.format(fraction()) +"%";
+        return Formatter.format(fraction()*100) +"%";
     }
     
 }

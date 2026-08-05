@@ -4,18 +4,22 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.image.BufferedImage;
 import java.net.URI;
+import java.util.concurrent.ExecutionException;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.api.cardnexus.model.AbstractProduct;
 
-public class ProductPanel extends JPanel {
+public class ProductPicturePanel extends JPanel {
     
     protected transient Logger logger = LogManager.getLogger(getClass());
 
@@ -23,7 +27,7 @@ public class ProductPanel extends JPanel {
     private JLabel lblImage;
 
 
-	public ProductPanel() {
+	public ProductPicturePanel() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{199, 0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
@@ -45,9 +49,33 @@ public class ProductPanel extends JPanel {
     public void init(AbstractProduct p) {
 	
 	try {
-	    var img = ImageIO.read(URI.create(p.getImageUrl()).toURL());
-	    var rimg =  img.getScaledInstance(img.getWidth()/3, img.getHeight()/3, Image.SCALE_SMOOTH);
-	    lblImage.setIcon(new ImageIcon(rimg));
+	    
+	    var wk = new SwingWorker<BufferedImage, Void>()
+		    {
+
+			@Override
+			protected BufferedImage doInBackground() throws Exception {
+			    return ImageIO.read(URI.create(p.getImageUrl()).toURL());
+			}
+			@Override
+			protected void done() {
+			    try {
+				var img = get();
+				var rimg =  img.getScaledInstance(img.getWidth()/3, img.getHeight()/3, Image.SCALE_SMOOTH);
+				lblImage.setIcon(new ImageIcon(rimg));
+			    } catch (InterruptedException _) {
+				Thread.currentThread().interrupt();
+			    } catch (ExecutionException e) {
+				logger.error(e);
+			    }
+			  
+			}
+			
+		    };
+	    
+	    wk.execute();
+	    
+	    
 	} catch (Exception e) {
 	   logger.error(e);
 	}

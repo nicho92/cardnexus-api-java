@@ -13,7 +13,7 @@ import javax.swing.JTextField;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.api.cardnexus.gui.components.MarketPlacePanel;
-import org.api.cardnexus.gui.components.ProductPanel;
+import org.api.cardnexus.gui.components.ProductPicturePanel;
 import org.api.cardnexus.gui.model.NexusProductTableModel;
 import org.api.cardnexus.model.AbstractProduct;
 import org.api.cardnexus.model.Expansion;
@@ -50,7 +50,7 @@ public class NexusProductPanel extends JPanel{
 		var panel = new JPanel();
 		var textField = new JTextField(30);
 		var btnSearch = new JButton("Search");
-		var productPanel = new ProductPanel();
+		var productPanel = new ProductPicturePanel();
 		  var panelListMarket = new MarketPlacePanel();
 		
 		add(new JScrollPane(table), BorderLayout.CENTER);

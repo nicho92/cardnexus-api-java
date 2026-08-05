@@ -12,7 +12,7 @@ import javax.swing.ListSelectionModel;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.api.cardnexus.gui.components.ProductPanel;
+import org.api.cardnexus.gui.components.ProductPicturePanel;
 import org.api.cardnexus.gui.model.NexusListItemTableModel;
 import org.api.cardnexus.gui.model.NexusListTableModel;
 import org.api.cardnexus.model.enums.EnumStatus;
@@ -25,7 +25,7 @@ public class NexusListsPanel extends JPanel {
     private static final long serialVersionUID = 1L;
     private NexusListTableModel modelLists;
     private NexusListItemTableModel modelItems;
-    private ProductPanel productPanel;
+    private ProductPicturePanel productPanel;
     
     private ListsServices servicesList;
     private ProductsService pservice;
@@ -38,7 +38,7 @@ public class NexusListsPanel extends JPanel {
     	modelLists = new NexusListTableModel();
     	modelItems = new NexusListItemTableModel();
     	
-    	productPanel = new ProductPanel();
+    	productPanel = new ProductPicturePanel();
     	var table = new JTable(modelLists);
     	var tableItems = new JTable(modelItems);
     	var panel = new JPanel();

@@ -8,12 +8,14 @@ import org.api.cardnexus.model.Amount;
 import org.api.cardnexus.model.ProductEntry;
 import org.api.cardnexus.model.enums.EnumCondition;
 import org.api.cardnexus.model.enums.EnumFinishes;
+import org.api.cardnexus.model.enums.EnumKindsRun;
 
 public class CardOptimizationRequest {
 
 
     private ProductEntryCountry destination;
     private List<ProductEntry> targets;
+    private OptionsRuns options;
     
     public static CardOptimizationRequest create()
     {
@@ -38,6 +40,12 @@ public class CardOptimizationRequest {
 	return this;
     }
     
+    public CardOptimizationRequest setOptions(List<EnumKindsRun> modes, boolean strictFullCoverage)
+    {
+	options = new OptionsRuns(modes, strictFullCoverage);
+	return this;
+    }
+    
     
     public CardOptimizationRequest addEntry(int productId, int quantity,EnumCondition minCondition,EnumFinishes finish, List<String> languages,Amount maxUnitPrice)
     {
@@ -47,8 +55,10 @@ public class CardOptimizationRequest {
 
 
 
-record ProductEntryCountry (String country){}
+record OptionsRuns (List<EnumKindsRun> modes, boolean strictFullCoverage) {};
     
+
+record ProductEntryCountry (String country){}
     
 }
 
