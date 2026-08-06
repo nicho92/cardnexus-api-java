@@ -43,7 +43,7 @@ public class NexusProductPanel extends JPanel{
 	
 		service = new ProductsService();
 	
-		setLayout(new BorderLayout(0, 0));
+		setLayout(new BorderLayout());
 		
 		modelProducts = new NexusProductTableModel();
 		var table = new JTable(modelProducts);

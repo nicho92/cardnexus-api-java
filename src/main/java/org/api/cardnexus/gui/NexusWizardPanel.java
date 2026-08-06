@@ -26,7 +26,6 @@ import org.api.cardnexus.gui.model.CardWizardTableModel;
 import org.api.cardnexus.model.Amount;
 import org.api.cardnexus.model.CardProduct;
 import org.api.cardnexus.model.ProductEntry;
-import org.api.cardnexus.model.Run;
 import org.api.cardnexus.model.SealedProduct;
 import org.api.cardnexus.model.enums.EnumCondition;
 import org.api.cardnexus.model.enums.EnumFinishes;
@@ -180,18 +179,6 @@ public class NexusWizardPanel extends JPanel {
 	}
 
 
-    public static void main(String[] args) throws IOException {
-	
-	NexusConfig.loadTokenFromEnv();
-	NexusConfig.setDefaultGameValue("mtg");
-	
-	var f = new JFrame();
-	f.getContentPane().add(new NexusWizardPanel());
-	f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-	f.pack();
-	f.setVisible(true);
-    }
-    
       
     
     

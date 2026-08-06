@@ -8,7 +8,3 @@ public record LangageData (Double low, Integer listingCount, Integer availableQu
 }
 
 
-record PriceStockValue (Double low, Integer listingCount,Integer availableQuantity)
-{
-            
-}

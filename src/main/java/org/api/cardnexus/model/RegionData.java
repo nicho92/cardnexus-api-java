@@ -4,7 +4,7 @@ import java.util.Map;
 
 import org.api.cardnexus.model.enums.EnumCondition;
 
-record RegionData (Double low, Integer listingCount,Integer availableQuantity,String currency,Map<EnumCondition, LangageData> byCondition)
+public record RegionData (Double low, Integer listingCount,Integer availableQuantity,String currency,Map<EnumCondition, LangageData> byCondition)
 {
 
 }

@@ -12,6 +12,8 @@ public class Formatter {
 
 	public static String format(Double d)
 	{
+	    	if(d==null)
+	    	    return "";
 		var otherSymbols = new DecimalFormatSymbols(Locale.getDefault());
 		return new DecimalFormat("#0.0#", otherSymbols).format(d);
 	}
