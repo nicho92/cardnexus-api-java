@@ -10,18 +10,16 @@ import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.WindowConstants;
+import javax.swing.ListSelectionModel;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.api.cardnexus.configuration.NexusConfig;
 import org.api.cardnexus.gui.model.CardWizardTableModel;
 import org.api.cardnexus.model.Amount;
 import org.api.cardnexus.model.CardProduct;
@@ -58,8 +56,15 @@ public class NexusWizardPanel extends JPanel {
 		table = new JTable(model);
 		panelWizardConfig.add(new JScrollPane(table), BorderLayout.CENTER);
 		
+		
+		var panelWizardLaunch = new JPanel();
+		var listKinds = new JList<EnumKindsRun>(EnumKindsRun.values());
 		var btnRunWizard = new JButton("Start Wizard");
-		panelWizardConfig.add(btnRunWizard, BorderLayout.SOUTH);
+		
+		panelWizardLaunch.add(listKinds);
+		panelWizardLaunch.add(btnRunWizard);
+		
+		panelWizardConfig.add(panelWizardLaunch, BorderLayout.SOUTH);
 		
 		var panelCommand = new JPanel();
 		panelWizardConfig.add(panelCommand, BorderLayout.NORTH);
@@ -71,15 +76,17 @@ public class NexusWizardPanel extends JPanel {
 		btnRemoveProduct.setEnabled(false);
 		panelCommand.add(btnRemoveProduct);
 		
-		JPanel jobResultsPanel = new JPanel();
+		var jobResultsPanel = new JPanel();
 		add(jobResultsPanel, BorderLayout.SOUTH);
 		jobResultsPanel.setLayout(new BorderLayout(0, 0));
 		
 		var modelRuns = new DefaultListModel<String>();
 		var listJobs = new JList<String>(modelRuns);
+		listJobs.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+		
 		jobResultsPanel.add(new JScrollPane(listJobs), BorderLayout.WEST);
 		
-		JTextArea textArea = new JTextArea();
+		var textArea = new JTextArea();
 		jobResultsPanel.add(textArea, BorderLayout.CENTER);
 		
 		
@@ -150,7 +157,7 @@ public class NexusWizardPanel extends JPanel {
 		
 		btnRunWizard.addActionListener(_->{
 		    
-		    var req = CardOptimizationRequest.create().setCountry(Locale.getDefault().getCountry()).setOptions(List.of(EnumKindsRun.lowest_price), false);
+		    var req = CardOptimizationRequest.create().setCountry(Locale.getDefault().getCountry()).setOptions(listKinds.getSelectedValuesList(), false);
 		    model.getItems().forEach(req::addEntry);
 		    try {
 			var idjob = cartService.runOptimizationQuery(req);
