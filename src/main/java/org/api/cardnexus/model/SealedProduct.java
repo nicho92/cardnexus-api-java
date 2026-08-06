@@ -1,5 +1,8 @@
 package org.api.cardnexus.model;
 
+import java.util.Map;
+
+import org.api.cardnexus.model.enums.EnumFinishes;
 import org.api.cardnexus.model.enums.EnumSealedType;
 
 public class SealedProduct extends AbstractProduct {
@@ -14,8 +17,8 @@ public class SealedProduct extends AbstractProduct {
     public EnumSealedType getProductCategory() {
         return productCategory;
     }
-    public ProductPriceMarket getPrices() {
-	return prices;
+    public Map<EnumFinishes, ProductPriceMarket> getPrices() {
+	return Map.of(EnumFinishes.Standard,prices);
     }
     
     

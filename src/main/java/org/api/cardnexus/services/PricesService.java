@@ -17,13 +17,11 @@ public class PricesService extends AbstractNexusService {
 	return client.get(ROOT_PRODUCT_ENDPOINT+"/"+idProduct+"/prices", Price.class);
     }
     
-    
     public List<History> getHistoryPrice(HistoryRequest req) throws IOException
     {
 	return client.getPaginated(ROOT_PRODUCT_ENDPOINT+"/"+req.getIdProduct()+"/prices/history?"+req.toQueryString(), History.class).data();
 	    
     }
-    
     
     public List<Sales> getLastSales(AbstractProduct product) throws IOException
     {

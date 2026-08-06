@@ -74,7 +74,7 @@ class InventorySearchTest {
 	    System.out.println(p.getName() + " " + p.getExpansion().code().toUpperCase()+"/"+p.getPrintNumber());
 	    System.out.println(il);
 	    System.out.println("----------");
-	    System.out.println(p.getPricesByFinish().get(il.finish()));
+	    System.out.println(p.getPrices().get(il.finish()));
 	    System.out.println("=================================");
 	});
     }

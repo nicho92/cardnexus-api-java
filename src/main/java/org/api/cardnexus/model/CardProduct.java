@@ -33,7 +33,7 @@ public class CardProduct extends AbstractProduct {
         return false;
    }
     
-   public Map<EnumFinishes, ProductPriceMarket> getPricesByFinish() {
+   public Map<EnumFinishes, ProductPriceMarket> getPrices() {
        return pricesByFinish;
    }
  

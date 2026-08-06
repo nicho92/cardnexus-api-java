@@ -1,8 +1,10 @@
 package org.api.cardnexus.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.api.cardnexus.model.enums.EnumFinishes;
 import org.api.cardnexus.model.enums.EnumProductType;
 import org.api.cardnexus.tools.Slugifyer;
 
@@ -24,6 +26,8 @@ public abstract class AbstractProduct {
     {
 	return "https://cardnexus.com/fr/explore/"+getGame().id()+"/"+Slugifyer.nameSlug(getExpansion().name())+"/"+getProductType()+"/"+getNameSlug()+"-"+getId();
     }
+    
+    public abstract Map<EnumFinishes, ProductPriceMarket> getPrices();
     
   
     @Override

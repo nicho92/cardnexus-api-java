@@ -89,9 +89,9 @@ class ProductServiceTests{
     		
         	    for(var f : card.getFinishes())
         	    {
-        		System.out.println(f + " mkm = " +  card.getPricesByFinish().get(f).cardmarket());
-        		System.out.println(f + " tcg =" +  card.getPricesByFinish().get(f).tcgplayer());
-        		System.out.println(f + " nexus=" +  card.getPricesByFinish().get(f).cardnexus());
+        		System.out.println(f + " mkm = " +  card.getPrices().get(f).cardmarket());
+        		System.out.println(f + " tcg =" +  card.getPrices().get(f).tcgplayer());
+        		System.out.println(f + " nexus=" +  card.getPrices().get(f).cardnexus());
         	    }
     	    }
     	    else if(p instanceof SealedProduct sealed) 
