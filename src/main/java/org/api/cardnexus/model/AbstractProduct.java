@@ -29,6 +29,11 @@ public abstract class AbstractProduct {
     
     public abstract Map<EnumFinishes, ProductPriceMarket> getPrices();
     
+    public boolean hasStock()
+    {
+	return getPrices().entrySet().stream().anyMatch(e->e.getValue().cardnexus()!=null);
+    }
+    
   
     @Override
     public String toString() {

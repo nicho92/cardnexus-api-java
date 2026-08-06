@@ -59,7 +59,14 @@ public class NexusWizardPanel extends JPanel {
 		
 		var panelWizardLaunch = new JPanel();
 		var listKinds = new JList<EnumKindsRun>(EnumKindsRun.values());
+		listKinds.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+		listKinds.setSelectedIndices(new int[] {0,1,2});
+	
+		
+		
 		var btnRunWizard = new JButton("Start Wizard");
+		
+		
 		
 		panelWizardLaunch.add(listKinds);
 		panelWizardLaunch.add(btnRunWizard);
@@ -82,7 +89,6 @@ public class NexusWizardPanel extends JPanel {
 		
 		var modelRuns = new DefaultListModel<String>();
 		var listJobs = new JList<String>(modelRuns);
-		listJobs.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		
 		jobResultsPanel.add(new JScrollPane(listJobs), BorderLayout.WEST);
 		

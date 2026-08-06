@@ -2,6 +2,8 @@ package org.api.cardnexus.gui;
 
 import java.awt.BorderLayout;
 import java.io.IOException;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -9,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.SwingWorker;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -74,13 +77,30 @@ public class NexusProductPanel extends JPanel{
 		textField.addActionListener(_->btnSearch.doClick());
 		
 		btnSearch.addActionListener(_->{
-		    try {
-			var res = service.searchProduct(SearchProductRequest.create().setName(textField.getText()).contains());
-			modelProducts.init(res);
-		    } catch (IOException e) {
-			logger.error(e);
-		    }
+		    
+		    var wk = new SwingWorker<List<AbstractProduct>, Void>()
+			    {
+
+				@Override
+				protected List<AbstractProduct> doInBackground() throws Exception {
+				   return service.searchProduct(SearchProductRequest.create().setName(textField.getText()).contains());
+				}
+
+				@Override
+				protected void done() {
+				    try {
+					modelProducts.init(get());
+				    } catch (InterruptedException e) {
+					Thread.currentThread().interrupt();
+				    } catch (ExecutionException e) {
+					logger.error(e);
+				    }
+				}
+			    };
+			   wk.execute(); 
 		});
+		
+		
 		
 		table.getSelectionModel().addListSelectionListener(e -> {
 		    	    if (!e.getValueIsAdjusting()) 

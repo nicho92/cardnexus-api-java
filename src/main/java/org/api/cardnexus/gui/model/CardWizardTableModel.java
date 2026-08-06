@@ -27,7 +27,7 @@ public class CardWizardTableModel extends DefaultTableModel {
     public void setValueAt(Object aValue, int row, int column) {
         	switch (column) {
         		case 1 :  items.get(row).setFinish(EnumFinishes.valueOf(aValue.toString()));return;
-        		case 2 :  items.get(row).setLanguages(List.of(aValue.toString()));return;
+        		case 2 :  items.get(row).setLanguages(List.of(aValue.toString().split(",")));return;
         		case 3 :  items.get(row).setMinCondition(EnumCondition.valueOf(aValue.toString()));return;
         		case 4 :  items.get(row).setQuantity(Integer.parseInt(aValue.toString()));return;
         		case 5 :  items.get(row).setMaxUnitPrice(new Amount(Double.parseDouble(aValue.toString()), "EUR"));return;
@@ -41,7 +41,7 @@ public class CardWizardTableModel extends DefaultTableModel {
         switch (column) {
 		case 0: return l.productId();
 		case 1 : return l.finish();
-		case 2 : return l.languages().get(0);
+		case 2 : return l.languages();
 		case 3 : return l.minCondition();
 		case 4 : return l.quantity();
 		case 5 : return l.maxUnitPrice();

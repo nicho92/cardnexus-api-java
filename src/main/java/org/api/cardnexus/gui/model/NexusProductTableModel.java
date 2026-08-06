@@ -13,7 +13,7 @@ public class NexusProductTableModel extends DefaultTableModel {
 
     private static final long serialVersionUID = 1L;
     
-    private String[] columns = new String[] {"id","name","expansion","type"};
+    private String[] columns = new String[] {"id","name","expansion","type","in stock"};
     private transient List<AbstractProduct> items;
     
     public NexusProductTableModel() {
@@ -30,6 +30,7 @@ public class NexusProductTableModel extends DefaultTableModel {
 		case 1 : return l.getName();
 		case 2 : return l.getExpansion();
 		case 3 : return l.getProductType();
+		case 4 : return l.hasStock();
 		default: return null;
         }
     }
@@ -41,6 +42,7 @@ public class NexusProductTableModel extends DefaultTableModel {
         	case 0: return Integer.class;
         	case 2 : return Expansion.class;
         	case 3 : return EnumProductType.class;
+        	case 4 : return Boolean.class;
         	default: return super.getColumnClass(c);
         }
     }
