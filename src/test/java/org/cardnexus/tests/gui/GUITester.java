@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
 import org.api.cardnexus.configuration.NexusConfig;
-import org.api.cardnexus.gui.NexusProductPanel;
+import org.api.cardnexus.gui.TagsAndLocationPanel;
 
 public class GUITester {
 
@@ -18,7 +18,7 @@ public class GUITester {
 	NexusConfig.setDefaultGameValue("mtg");
 	
 	var f = new JFrame();
-	f.getContentPane().add(new NexusProductPanel(true,true));
+	f.getContentPane().add(new TagsAndLocationPanel());
 	//f.getContentPane().add(new NexusWizardPanel());
 	f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	f.pack();

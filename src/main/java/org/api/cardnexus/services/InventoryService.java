@@ -6,15 +6,16 @@ import java.util.List;
 
 import org.api.cardnexus.configuration.NexusConfig;
 import org.api.cardnexus.model.AddInventoryResults;
+import org.api.cardnexus.model.IconableItem;
 import org.api.cardnexus.model.InventoryLine;
-import org.api.cardnexus.model.Location;
+import org.api.cardnexus.model.PaginateResult;
 import org.api.cardnexus.model.Pagination;
-import org.api.cardnexus.model.Tag;
 import org.api.cardnexus.model.requests.InventoryLinesRequest;
 import org.api.cardnexus.model.requests.SearchInventoryRequest;
 import org.api.cardnexus.model.requests.UpdateInventoryRequest;
 
 import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 
 public class InventoryService extends AbstractNexusService{
 
@@ -86,14 +87,15 @@ public class InventoryService extends AbstractNexusService{
 	return client.delete(ROOT_INVENTORY_ENDPOINT+"/"+inventoryId, null, JsonObject.class).get("deleted").getAsBoolean();
     }
     
-    public List<Tag> listTags() throws IOException
+    public List<IconableItem> listTags() throws IOException
     {
-	return client.getPaginated(ROOT_INVENTORY_ENDPOINT+"/tags", Tag.class).data();
+	var type = TypeToken.getParameterized(List.class,IconableItem.class).getType();
+	return client.get(ROOT_INVENTORY_ENDPOINT+"/tags", type);
     }
     
-    public Tag createTag(Tag t) throws IOException
+    public IconableItem createTag(IconableItem t) throws IOException
     {
-	return client.post(ROOT_INVENTORY_ENDPOINT+"/tags", t,  Tag.class);
+	return client.post(ROOT_INVENTORY_ENDPOINT+"/tags", t,  IconableItem.class);
     }
     
     public boolean deleteTag(String tagName) throws IOException
@@ -109,14 +111,15 @@ public class InventoryService extends AbstractNexusService{
 	
     }
     
-    public List<Location> listLocations() throws IOException
+    public List<IconableItem> listLocations() throws IOException
     {
-	return client.getPaginated(ROOT_INVENTORY_ENDPOINT+"/locations", Location.class).data();
+	var type = TypeToken.getParameterized(List.class,IconableItem.class).getType();
+	return client.get(ROOT_INVENTORY_ENDPOINT+"/locations", type);
     }
     
-    public Location createLocation(Location t) throws IOException
+    public IconableItem createLocation(IconableItem t) throws IOException
     {
-	return client.post(ROOT_INVENTORY_ENDPOINT+"/locations", t,  Location.class);
+	return client.post(ROOT_INVENTORY_ENDPOINT+"/locations", t,  IconableItem.class);
     }
     
     public boolean deleteLocation(String locName) throws IOException
