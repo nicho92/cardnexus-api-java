@@ -23,8 +23,8 @@ import org.api.cardnexus.gui.model.TagLocationTableModel;
 import org.api.cardnexus.model.IconableItem;
 import org.api.cardnexus.services.InventoryService;
 
-public class TagsAndLocationPanel extends JPanel {
-	public TagsAndLocationPanel() {
+public class NexusTagsAndLocationPanel extends JPanel {
+	public NexusTagsAndLocationPanel() {
 	    	service = new InventoryService();
 		setLayout(new BorderLayout(0, 0));
 		model = new TagLocationTableModel();
