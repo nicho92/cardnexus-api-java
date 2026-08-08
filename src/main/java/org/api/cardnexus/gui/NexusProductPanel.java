@@ -1,7 +1,6 @@
 package org.api.cardnexus.gui;
 
 import java.awt.BorderLayout;
-import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 

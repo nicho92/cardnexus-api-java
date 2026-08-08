@@ -1,7 +1,6 @@
 package org.api.cardnexus.gui.components;
 
 import java.io.IOException;
-import java.util.Map;
 
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
@@ -12,10 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.api.cardnexus.gui.model.MarketListTableModel;
 import org.api.cardnexus.model.AbstractProduct;
-import org.api.cardnexus.model.CardProduct;
-import org.api.cardnexus.model.SealedProduct;
 import org.api.cardnexus.model.Seller;
-import org.api.cardnexus.model.enums.EnumFinishes;
 import org.api.cardnexus.model.requests.HistoryRequest;
 import org.api.cardnexus.model.requests.MarketListRequest;
 import org.api.cardnexus.services.PricesService;

@@ -19,7 +19,6 @@ import javax.swing.WindowConstants;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import org.api.cardnexus.gui.model.TagLocationTableModel;
 import org.api.cardnexus.model.IconableItem;
 import org.api.cardnexus.services.InventoryService;
