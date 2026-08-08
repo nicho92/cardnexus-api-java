@@ -87,7 +87,7 @@ public class TagsAndLocationPanel extends JPanel {
 		    int row = table.convertRowIndexToModel(table.getSelectedRow());
 		    var id = model.getValueAt(row, 0).toString();
 		    var isTags = rdoTags.isSelected();
-		    var confirmation = JOptionPane.showConfirmDialog(this, "Delete " + (isTags?"Tag":"Location") + " " + id + " ?");
+		    var confirmation = JOptionPane.showConfirmDialog(this, "Delete " + (isTags?"Tag":"Location") + " " + id + " ?","Confirm",JOptionPane.YES_NO_OPTION);
 		    
 		    if(confirmation==JOptionPane.YES_OPTION)
 		    {
