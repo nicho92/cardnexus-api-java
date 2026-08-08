@@ -1,6 +1,6 @@
 package org.api.cardnexus.model;
 
-public record IconableItem (String color,String name,String icon)
+public record IconableItem (String name,String color,String icon)
 {
     
     

@@ -1,6 +1,8 @@
 package org.api.cardnexus.services;
 
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +10,6 @@ import org.api.cardnexus.configuration.NexusConfig;
 import org.api.cardnexus.model.AddInventoryResults;
 import org.api.cardnexus.model.IconableItem;
 import org.api.cardnexus.model.InventoryLine;
-import org.api.cardnexus.model.PaginateResult;
 import org.api.cardnexus.model.Pagination;
 import org.api.cardnexus.model.requests.InventoryLinesRequest;
 import org.api.cardnexus.model.requests.SearchInventoryRequest;
@@ -101,11 +102,12 @@ public class InventoryService extends AbstractNexusService{
     public boolean deleteTag(String tagName) throws IOException
     {
 		try{
-		    client.post(ROOT_INVENTORY_ENDPOINT+"/tags/"+tagName, null,  Object.class);
+		    client.delete(ROOT_INVENTORY_ENDPOINT+"/tags/"+tagName.replace(" ", "%20"), null,  Object.class);
 		    return true;
 		}
-		catch(Exception _)
+		catch(Exception e)
 		{
+		    logger.error(e);
 		    return false;
 		}
 	
@@ -125,11 +127,12 @@ public class InventoryService extends AbstractNexusService{
     public boolean deleteLocation(String locName) throws IOException
     {
 	try{
-	    client.post(ROOT_INVENTORY_ENDPOINT+"/locations/"+locName, null,  Object.class);
+	    client.delete(ROOT_INVENTORY_ENDPOINT+"/locations/"+locName.replace(" ", "%20"), null,  Object.class);
 	    return true;
 	}
-	catch(Exception _)
+	catch(Exception e)
 	{
+	    logger.error(e);
 	    return false;
 	}
 	

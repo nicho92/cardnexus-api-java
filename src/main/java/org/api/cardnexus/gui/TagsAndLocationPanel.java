@@ -8,6 +8,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
@@ -49,6 +50,7 @@ public class TagsAndLocationPanel extends JPanel {
 		panelcommand.add(btnAdd);
 		
 		var btnDelete = new JButton("Delete");
+		btnDelete.setEnabled(false);
 		panelcommand.add(btnDelete);
 		
 		buttonGroup.add(rdoLocation);
@@ -72,6 +74,53 @@ public class TagsAndLocationPanel extends JPanel {
 			logger.error(e);
 		    }
 		});
+		
+		table.getSelectionModel().addListSelectionListener(_->{
+		    
+		    int row = table.convertRowIndexToModel(table.getSelectedRow());
+		    btnDelete.setEnabled(row>-1);
+		});
+		
+		
+		btnDelete.addActionListener(_->{
+		    
+		    int row = table.convertRowIndexToModel(table.getSelectedRow());
+		    var id = model.getValueAt(row, 0).toString();
+		    var isTags = rdoTags.isSelected();
+		    var confirmation = JOptionPane.showConfirmDialog(this, "Delete " + (isTags?"Tag":"Location") + " " + id + " ?");
+		    
+		    if(confirmation==JOptionPane.YES_OPTION)
+		    {
+			
+			var result = false;
+			
+			
+			if(isTags)
+			    try {
+				result = service.deleteTag(id);
+			    } catch (IOException e) {
+				logger.error(e);
+			    }
+			else
+			    try {
+				result = service.deleteLocation(id);
+			    } catch (IOException e) {
+				logger.error(e);
+			    }
+			
+			if(result)
+			    model.removeRow(row);
+			else
+			    logger.error("can't delete " + id);
+			
+			
+		    }
+		    
+		    
+		    
+		});
+		
+		
 		
 		btnAdd.addActionListener(_->{
 		    
@@ -97,10 +146,8 @@ public class TagsAndLocationPanel extends JPanel {
 		    diag.setLocationRelativeTo(this);
 		    diag.getContentPane().add(pane);
 		    diag.setModal(true);
-		    diag.setVisible(true);
 		    diag.pack();
 		    diag.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-		    
 		    btnClose.addActionListener(_->{
 			    var item = new IconableItem(txtName.getText(), txtColor.getText(), txtIcon.getText());
 			    
@@ -118,7 +165,7 @@ public class TagsAndLocationPanel extends JPanel {
 				}
 			    	diag.dispose();
 		    });
-		    
+		    diag.setVisible(true);
 		    
 		
 		});

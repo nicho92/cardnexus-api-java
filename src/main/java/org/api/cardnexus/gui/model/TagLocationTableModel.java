@@ -6,7 +6,6 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 import org.api.cardnexus.model.IconableItem;
-import org.api.cardnexus.model.ProductEntry;
 
 public class TagLocationTableModel extends DefaultTableModel {
 
@@ -31,6 +30,16 @@ public class TagLocationTableModel extends DefaultTableModel {
 		default: return null;
         }
     }
+    
+
+    @Override
+    public void removeRow(int row) {
+        items.remove(row);
+        fireTableRowsDeleted(row, row);
+    }
+    
+    
+    
     
     @Override
     public Class<?> getColumnClass(int c) {
