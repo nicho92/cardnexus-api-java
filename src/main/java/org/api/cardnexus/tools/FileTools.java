@@ -17,7 +17,6 @@ import org.apache.commons.io.input.BoundedInputStream;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.api.cardnexus.configuration.NexusConfig;
-import org.api.cardnexus.model.enums.EnumFeedKey;
 
 public class FileTools {
     
@@ -30,6 +29,9 @@ public class FileTools {
 
 
     public static int daysBetween(File temp) throws IOException {
+	
+	
+	
 	return (int) ChronoUnit.DAYS.between(Files.getLastModifiedTime(temp.toPath()).toInstant(),new Date().toInstant());
     }
     
@@ -78,7 +80,7 @@ public class FileTools {
     public static File ungzip(File gzFile) throws IOException {
 	
 	 	
-	    var fileName = gzFile.getName().replaceFirst("\\.gz$", ".json");
+	    var fileName = gzFile.getName().replaceFirst("\\.gz$", ".ndjson");
 	    var output = new File(NexusConfig.getTempDirectory(), fileName);
 
 	    try (var gis = new GZIPInputStream(new FileInputStream(gzFile));var fos = new FileOutputStream(output)) 

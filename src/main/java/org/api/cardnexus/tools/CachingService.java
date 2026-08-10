@@ -20,6 +20,7 @@ import org.api.cardnexus.services.ProductsService;
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 
 public class CachingService {
 
@@ -83,13 +84,13 @@ public class CachingService {
 		pService.listExpansion(NexusConfig.getDefaultGameValue()); 
 			
 		    
-		if(FileTools.daysBetween(fProdudct)>NexusConfig.getFeedRententionDurationDays() || !fProdudct.exists())
+		if(!fProdudct.exists() || FileTools.daysBetween(fProdudct)>NexusConfig.getFeedRententionDurationDays())
 		{
 			logger.warn("{} retention>{} days or exists={}",fProdudct,NexusConfig.getFeedRententionDurationDays(),fProdudct.exists());
 			fProdudct = serv.download(gameId, EnumFeedKey.catalog);
 		}
 		
-		if(FileTools.daysBetween(fPrices)>NexusConfig.getFeedRententionDurationDays() || !fPrices.exists())
+		if(!fPrices.exists() || FileTools.daysBetween(fPrices)>NexusConfig.getFeedRententionDurationDays())
 		{
 			logger.warn("{} retention>{} days or exists={}",fPrices,NexusConfig.getFeedRententionDurationDays(),fPrices.exists());
 			fPrices = serv.download(gameId, EnumFeedKey.prices);
@@ -98,7 +99,7 @@ public class CachingService {
 		logger.info("begin caching Prices");
 		Files.readAllLines(fPrices.toPath()).forEach(s->{
 		    JsonObject obj = gson.fromJson(s, JsonObject.class);
-		    CachingService.inst().getPricesCache().put(obj.get("productId").getAsInt(), gson.fromJson(obj.get("pricesByFinish").toString(), Map.class));
+		    CachingService.inst().getPricesCache().put(obj.get("productId").getAsInt(), gson.fromJson(obj.get("pricesByFinish").toString(), new TypeToken<Map<EnumFinishes, ProductPriceMarket>>() { }.getType()));
 		});
 		logger.info("Cached {} prices for {}", CachingService.inst().getPricesCache().estimatedSize(), gameId );
 		
@@ -109,8 +110,6 @@ public class CachingService {
 		    AbstractProduct obj = gson.fromJson(s, AbstractProduct.class);
 		    obj.setExpansion(pService.getExpansionById(obj.getExpansionId()));
 		    obj.setPrices(getPricesCache().getIfPresent(obj.getId()));
-		    
-		    
 		    CachingService.inst().getProductsCache().put(obj.getId(), obj);
 		});
 		logger.info("Cached {} products for {}", CachingService.inst().getProductsCache().estimatedSize(), gameId );
