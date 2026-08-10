@@ -50,7 +50,7 @@ class InventorySearchTest {
 	lines.forEach(il->{
 	    var p = pService.getProductById(il.productId());
 	    	    
-	    System.out.println(p.getName() + " " + p.getExpansion().code().toUpperCase());
+	    System.out.println(p.getGame() + " " + p.getName() + " " + p.getExpansion().code().toUpperCase());
 	    System.out.println(il);
 	    System.out.println(p.getPrices().get(il.finish()));
 	    System.out.println("=================================");

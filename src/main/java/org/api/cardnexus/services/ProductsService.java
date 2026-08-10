@@ -40,7 +40,7 @@ public class ProductsService extends AbstractNexusService{
 	
 	return CachingService.inst().getGamesCache().get(id, _->{
 	    try {
-		return client.get(ROOT_GAME_ENDPOINT+id, Game.class);
+		return client.get(ROOT_GAME_ENDPOINT+"/"+id, Game.class);
 	    } catch (IOException e) {
 		logger.error(e);
 		return null;

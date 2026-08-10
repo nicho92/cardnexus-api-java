@@ -80,10 +80,10 @@ public class CachingService {
 		var fProdudct = new File(NexusConfig.getTempDirectory(), "catalog.ndjson");
 		var fPrices = new File(NexusConfig.getTempDirectory(), "prices.ndjson");
 		
-		
 		pService.listExpansion(NexusConfig.getDefaultGameValue()); 
-			
-		    
+	
+		var g = pService.getGameById(gameId);
+		
 		if(!fProdudct.exists() || FileTools.daysBetween(fProdudct)>NexusConfig.getFeedRententionDurationDays())
 		{
 			logger.warn("{} retention>{} days or exists={}",fProdudct,NexusConfig.getFeedRententionDurationDays(),fProdudct.exists());
@@ -103,13 +103,13 @@ public class CachingService {
 		});
 		logger.info("Cached {} prices for {}", CachingService.inst().getPricesCache().estimatedSize(), gameId );
 		
-		
-		
 		logger.info("begin caching Product");
+		
 		Files.readAllLines(fProdudct.toPath()).forEach(s->{
 		    AbstractProduct obj = gson.fromJson(s, AbstractProduct.class);
 		    obj.setExpansion(pService.getExpansionById(obj.getExpansionId()));
 		    obj.setPrices(getPricesCache().getIfPresent(obj.getId()));
+		    obj.setGame(g);
 		    CachingService.inst().getProductsCache().put(obj.getId(), obj);
 		});
 		logger.info("Cached {} products for {}", CachingService.inst().getProductsCache().estimatedSize(), gameId );
