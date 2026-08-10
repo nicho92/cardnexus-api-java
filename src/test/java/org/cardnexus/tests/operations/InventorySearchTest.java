@@ -6,7 +6,6 @@ import java.util.List;
 
 import org.api.cardnexus.configuration.NexusConfig;
 import org.api.cardnexus.model.CardProduct;
-import org.api.cardnexus.model.enums.EnumFinishes;
 import org.api.cardnexus.model.enums.EnumOperand;
 import org.api.cardnexus.model.enums.EnumProductType;
 import org.api.cardnexus.model.requests.InventoryLinesRequest;
