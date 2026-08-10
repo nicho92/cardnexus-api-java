@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.api.cardnexus.configuration.NexusConfig;
+import org.api.cardnexus.model.enums.EnumCondition;
 import org.api.cardnexus.model.enums.EnumProductSort;
 import org.api.cardnexus.model.enums.EnumProductType;
 import org.api.cardnexus.model.enums.EnumSearchMod;
@@ -19,6 +20,7 @@ public class SearchProductRequest
     private Integer expansionId;
     private String name;
     private String nameSlug;
+    private String printNumber;
     private List<Integer> cardmarketId;
     private List<Integer> tcgplayerId;
     private EnumProductSort sortBy;
@@ -26,6 +28,9 @@ public class SearchProductRequest
     private Map<String, Object> gameFilters;
     private EnumSearchMod nameSearchMod;
     private HashMap<String,Object> productTypes;
+    private ListingProductRequestRecord listings;
+    
+    
     
     
     private SearchProductRequest() {
@@ -69,6 +74,11 @@ public class SearchProductRequest
 	return nameSearchMod;
     }
     
+    public SearchProductRequest setListings(String deliveryCountry, Boolean inStock, EnumCondition conditions) {
+	this.listings = new ListingProductRequestRecord(deliveryCountry, inStock, conditions==null?List.of(EnumCondition.values()):List.of(conditions));
+	return this;
+    }
+    
     public SearchProductRequest setGame(String gameId)
     {
 	gameFilters.put("game", gameId);
@@ -77,6 +87,10 @@ public class SearchProductRequest
     public SearchProductRequest setLimit(int limit) {
         this.limit = limit;
         return this;
+    }
+    public SearchProductRequest setPrintNumber(String printNumber) {
+	this.printNumber = printNumber;
+	 return this;
     }
     public SearchProductRequest setProductIds(List<Integer> productIds) {
         this.productIds = productIds;
@@ -165,7 +179,9 @@ public class SearchProductRequest
     public EnumSortDirection getSortDirection() {
         return sortDirection;
     }
-   
-    
-    
-  }
+ }
+record ListingProductRequestRecord(String deliveryCountry, Boolean inStock, List<EnumCondition> condition) {
+
+}
+
+

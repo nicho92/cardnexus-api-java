@@ -29,6 +29,9 @@ public class SearchInventoryRequest {
     private Integer expansionId;
     private Boolean graded;
     private Boolean forSale;
+    private String nameSlug;
+    private String printNumber;
+    
     
     private Map<String, Object> gameFilters; 
     private Map<String,Object>  tags;
@@ -141,6 +144,16 @@ public class SearchInventoryRequest {
     public SearchInventoryRequest setGame(String gameId)
     {
 	gameFilters.put("game", gameId);
+	return this;
+    }
+    
+    public SearchInventoryRequest setNameSlug(String nameSlug) {
+	this.nameSlug = nameSlug;
+	return this;
+    }
+    
+    public SearchInventoryRequest setPrintNumber(String printNumber) {
+	this.printNumber = printNumber;
 	return this;
     }
     

@@ -32,22 +32,19 @@ class ProductServiceTests{
     	}
     
     
-    	@Test
+
     	void testMarketLists() throws IOException 
     	{
-    
-	System.out.println("=====MarketListSearch");
+    	    System.out.println("=====MarketListSearch");
 	     service.listMarketListing(MarketListRequest.create().setProductId(75886)).forEach(System.out::println);
 	
     	}
     
     
-    	
+    	@Test  	
     	void testSearchCardProduct() throws IOException {
 		
-		var req = SearchProductRequest.create().strict().setProductTypes(EnumProductType.card).setProductIds(List.of(75886));
-		
-		service.listExpansion(NexusConfig.getDefaultGameValue());//caching;
+		var req = SearchProductRequest.create().contains().setProductTypes(EnumProductType.card).setName("Black");
 		
 		System.out.println("=====CardproductBySearch");
 		printData(service.searchProduct(req).getFirst());
