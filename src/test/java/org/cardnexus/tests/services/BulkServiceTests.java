@@ -3,8 +3,6 @@ package org.cardnexus.tests.services;
 import java.io.IOException;
 
 import org.api.cardnexus.configuration.NexusConfig;
-import org.api.cardnexus.model.enums.EnumBulkFormat;
-import org.api.cardnexus.model.requests.SearchInventoryRequest;
 import org.api.cardnexus.services.BulkService;
 import org.junit.jupiter.api.Test;
 
