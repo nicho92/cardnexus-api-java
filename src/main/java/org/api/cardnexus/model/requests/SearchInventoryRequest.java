@@ -121,6 +121,16 @@ public class SearchInventoryRequest {
 	return this;
     }
     
+    public SearchInventoryRequest setFinish(EnumOperand op, EnumFinishes finishe)
+    {
+	return setFinish(op, List.of(finishe));
+    }
+    
+    public SearchInventoryRequest setProductType(EnumOperand op, EnumProductType t)
+    {
+	return setProductType(op,List.of(t));
+    }
+    
     public SearchInventoryRequest setProductType(EnumOperand op, List<EnumProductType> t)
     {
 	productType = new HashMap<>();

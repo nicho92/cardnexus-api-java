@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.api.cardnexus.configuration.NexusConfig;
 import org.api.cardnexus.model.CardProduct;
+import org.api.cardnexus.model.enums.EnumFinishes;
 import org.api.cardnexus.model.enums.EnumOperand;
 import org.api.cardnexus.model.enums.EnumProductType;
 import org.api.cardnexus.model.requests.InventoryLinesRequest;
@@ -43,11 +44,14 @@ class InventorySearchTest {
     void searchInventoryV2() throws IOException
     {
 	
-	var lines = iService.inventorySearch(SearchInventoryRequest.create().setProductType(EnumOperand.and, List.of(EnumProductType.card)).setName("black"));
+	var lines = iService.inventorySearch(SearchInventoryRequest.create()
+								.setProductType(EnumOperand.and, EnumProductType.card)
+								.setFinish(EnumOperand.and, EnumFinishes.Foil)
+							   );
 	lines.forEach(il->{
 	    var p = pService.getProductById(il.productId());
 	    	    
-	    System.out.println(p.getGame() + " " + p.getName() + " " + p.getExpansion().code().toUpperCase());
+	    System.out.println(p.getName() + " " + p.getExpansion().code().toUpperCase());
 	    System.out.println(il);
 	    System.out.println(p.getPrices().get(il.finish()));
 	    System.out.println("=================================");
@@ -55,26 +59,5 @@ class InventorySearchTest {
 	
     }
     
-    
-    
-    void searchInventoryCardNameV1() throws IOException
-    {
-	
-	String search ="Lion's Eye Diamond";
-	var products = pService.searchProduct(SearchProductRequest.create().setName(search).setProductTypes(EnumProductType.card).strict());
-	System.out.println("results product for "+search+" : " + products.size() + " items : " + products.stream().map(p->p.getId()).toList());
-	
-	var lines = iService.getInventoryLines(InventoryLinesRequest.create().setProductIds(products.stream().map(ap->ap.getId()).toList()));
-	
-	lines.forEach(il->{
-	    var p = (CardProduct)products.stream().filter(ap->ap.getId()==il.productId()).findFirst().get();
-	    	    
-	    System.out.println(p.getName() + " " + p.getExpansion().code().toUpperCase()+"/"+p.getPrintNumber());
-	    System.out.println(il);
-	    System.out.println("----------");
-	    System.out.println(p.getPrices().get(il.finish()));
-	    System.out.println("=================================");
-	});
-    }
     
 }
