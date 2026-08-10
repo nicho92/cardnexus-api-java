@@ -189,6 +189,16 @@ public class GuiExample {
 | `setFeedRententionDurationDays(...)` | `1` | Number of days to retain downloaded feed files. |
 | `setListener(...)` | `null` | Optional request listener for tracing URL calls. |
 
+## Caching Service
+
+CachingService allows you to store products in cache, and limit calling nexus-api endpoints.
+
+```java
+        CachingService.inst().cachingProducts( NexusConfig.getDefaultGameValue());
+```
+
+
+
 ## Project structure
 
 ```text
