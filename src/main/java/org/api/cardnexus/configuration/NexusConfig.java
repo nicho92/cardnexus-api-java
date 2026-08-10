@@ -14,7 +14,7 @@ public class NexusConfig {
 
     // --- Immutable API constants -------------------------------------------------
     public static final String API_BASE_URL = "https://public-api.cardnexus.com/v1";
-    public static final String API_VERSION = "0.8.0";
+    public static final String API_VERSION = "0.9.0";
     public static final String ENV_TOKEN_KEY = "CARDNEXUS_API_KEY";
     public static final String REQ_DATE_PATTERN = "yyyy-MM-dd";
     public static final int INVENTORY_CREATION_LIMIT = 1000;
