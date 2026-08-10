@@ -6,7 +6,6 @@ import java.net.URI;
 import java.util.EnumMap;
 import java.util.Map;
 
-import org.api.cardnexus.configuration.NexusConfig;
 import org.api.cardnexus.model.Feed;
 import org.api.cardnexus.model.Game;
 import org.api.cardnexus.model.enums.EnumFeedKey;
@@ -40,14 +39,14 @@ public class FeedsService extends AbstractNexusService{
     public File download(String gameId,EnumFeedKey k) throws IOException
     {
 		var feed = getFeed(gameId, k);
-		var zipFile = FileTools.download(URI.create(feed.url()).toURL(),k);
+		var zipFile = FileTools.download(URI.create(feed.url()).toURL(),k.name());
 	
 		if(FileTools.md5(feed.checksum(), zipFile))
 			throw new IOException("Checksum failed");
 			
 		logger.debug("Checksum for {} OK",zipFile);
 		
-		return FileTools.ungzip(zipFile, NexusConfig.getDirectoryFeed());
+		return FileTools.ungzip(zipFile);
     }
     
     

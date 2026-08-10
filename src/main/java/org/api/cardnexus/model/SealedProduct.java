@@ -21,5 +21,12 @@ public class SealedProduct extends AbstractProduct {
 	return Map.of(EnumFinishes.Standard,prices);
     }
     
+    @Override
+    public void setPrices(Map<EnumFinishes, ProductPriceMarket> map) {
+	if(map!=null)
+	    map.values().iterator().next();
+        
+    }
+    
     
 }

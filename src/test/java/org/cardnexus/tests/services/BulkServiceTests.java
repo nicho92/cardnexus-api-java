@@ -8,7 +8,7 @@ import org.api.cardnexus.model.requests.SearchInventoryRequest;
 import org.api.cardnexus.services.BulkService;
 import org.junit.jupiter.api.Test;
 
-public class BulkServiceTests {
+class BulkServiceTests {
 
     
     
@@ -21,12 +21,12 @@ public class BulkServiceTests {
 	var export = new BulkService();
 	
 	
-	var result =  export.bulkExport(SearchInventoryRequest.create().setGame("mtg"), EnumBulkFormat.csv);
+	//var result =  export.bulkExport(SearchInventoryRequest.create().setGame("mtg"), EnumBulkFormat.json);
+	var result = export.getJob("6a797deb834884eddb753d5a");
 	
 	
-	result = export.getJob(result.id());
 	
-	System.out.println(result);
+	System.out.println(result.downloadUrl());
 	
 	
     }

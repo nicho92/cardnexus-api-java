@@ -27,6 +27,7 @@ import org.api.cardnexus.listener.URLCallInfo;
 import org.api.cardnexus.model.PaginateResult;
 
 import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
@@ -203,7 +204,8 @@ public class RestClient implements Closeable {
                 }
                 return null;
             } else {
-                throw new IOException(statusCode + " : " + jsonResponse);
+        	logger.error(jsonResponse);
+                throw new IOException(statusCode + " : " + fromJson(jsonResponse, JsonObject.class).get("message"));
             }
         }
         finally {

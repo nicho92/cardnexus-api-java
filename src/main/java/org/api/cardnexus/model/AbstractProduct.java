@@ -28,6 +28,8 @@ public abstract class AbstractProduct {
     }
     
     public abstract Map<EnumFinishes, ProductPriceMarket> getPrices();
+    public abstract void setPrices(Map<EnumFinishes, ProductPriceMarket> map);
+    
     
     public boolean hasStock()
     {

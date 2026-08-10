@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.security.MessageDigest;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
 import java.util.HexFormat;
 import java.util.zip.GZIPInputStream;
 
@@ -25,7 +27,13 @@ public class FileTools {
 
 
     private static Logger logger = LogManager.getLogger(FileTools.class);
+
+
+    public static int daysBetween(File temp) throws IOException {
+	return (int) ChronoUnit.DAYS.between(Files.getLastModifiedTime(temp.toPath()).toInstant(),new Date().toInstant());
+    }
     
+    	
     public static boolean md5(String md5,File f) 
     {
     	if(!NexusConfig.isChecksumMd5Feed())
@@ -47,10 +55,17 @@ public class FileTools {
     }
     
     
-    
-    public static File download(URL url,EnumFeedKey key) throws IOException
+    public static File downloadandGzip(URL url,String filename) throws IOException
     {
-	var f = new File(NexusConfig.getDirectoryFeed(), key.name() + ".gz");
+	var f = download(url, filename);
+	
+	return ungzip(f);
+    }
+    
+    
+    public static File download(URL url,String filename) throws IOException
+    {
+	var f = new File(NexusConfig.getTempDirectory(), filename+ ".gz");
 	
 	try (var urlStream = url.openStream(); var stream = BoundedInputStream.builder().setInputStream(urlStream).get()) 
 	{
@@ -60,14 +75,11 @@ public class FileTools {
 	}
     }
 	
-    public static File ungzip(File gzFile, File destination) throws IOException {
-
-	 if (!destination.exists()) {
-	        destination.mkdirs();
-	    }
-
-	    var fileName = gzFile.getName().replaceFirst("\\.gz$", ".ndjson");
-	    var output = new File(destination, fileName);
+    public static File ungzip(File gzFile) throws IOException {
+	
+	 	
+	    var fileName = gzFile.getName().replaceFirst("\\.gz$", ".json");
+	    var output = new File(NexusConfig.getTempDirectory(), fileName);
 
 	    try (var gis = new GZIPInputStream(new FileInputStream(gzFile));var fos = new FileOutputStream(output)) 
 	    {

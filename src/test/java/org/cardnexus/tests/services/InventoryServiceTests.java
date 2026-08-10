@@ -34,7 +34,7 @@ class InventoryServiceTests {
 	    service = new InventoryService();
 	    serviceProduct = new ProductsService();
 	    
-	    CachingService.inst().cachingProducts( NexusConfig.getDefaultGameValue(),false);
+	    CachingService.inst().cachingProducts( NexusConfig.getDefaultGameValue());
 	    serviceProduct.listExpansion(NexusConfig.getDefaultGameValue()); // put in cache
 	}
     	

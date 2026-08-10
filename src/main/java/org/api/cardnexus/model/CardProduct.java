@@ -36,7 +36,12 @@ public class CardProduct extends AbstractProduct {
    public Map<EnumFinishes, ProductPriceMarket> getPrices() {
        return pricesByFinish;
    }
- 
+   
+   @Override
+    public void setPrices(Map<EnumFinishes, ProductPriceMarket> map) {
+           pricesByFinish = map;
+    }
+   
     public CardAttributs getAttributes() {
 	return attributes;
     }

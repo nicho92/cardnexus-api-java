@@ -18,16 +18,17 @@ public class NexusConfig {
     public static final String ENV_TOKEN_KEY = "CARDNEXUS_API_KEY";
     public static final String REQ_DATE_PATTERN = "yyyy-MM-dd";
     public static final int INVENTORY_CREATION_LIMIT = 1000;
-
+    
     // --- Mutable configuration state
     // ----------------------------------------------
-    private static volatile File directoryFeed = new File(System.getProperty("user.home"));
+    private static volatile File tempDirectory = new File(System.getProperty("user.home"));
     private static volatile boolean gsonPrettyPrint = false;
     private static volatile int limitListResults = 200;
     private static volatile boolean checksumMd5Feed = true;
     private static volatile String defaultGameValue;
     private static URLCallListener listener;
     private static volatile String token;
+    private static volatile Integer feedRententionDurationDays = 1;
 
     public static void loadTokenFromEnv() throws IOException {
 	var t = System.getenv(ENV_TOKEN_KEY);
@@ -42,8 +43,8 @@ public class NexusConfig {
 	setToken(Files.readString(f.toPath()));
     }
 
-    public static File getDirectoryFeed() {
-	return directoryFeed;
+    public static File getTempDirectory() {
+	return tempDirectory;
     }
 
     public static boolean isGsonPrettyPrint() {
@@ -70,8 +71,15 @@ public class NexusConfig {
 	return token;
     }
 
-    public static void setDirectoryFeed(File directoryFeed) {
-	NexusConfig.directoryFeed = directoryFeed;
+    public static Integer getFeedRententionDurationDays() {
+	return feedRententionDurationDays;
+    }
+    
+    public static void setFeedRententionDurationDays(Integer feedRententionDurationDays) {
+	NexusConfig.feedRententionDurationDays = feedRententionDurationDays;
+    }
+    public static void setTempDirectory(File directory) {
+	NexusConfig.tempDirectory = directory;
     }
 
     public static void setGsonPrettyPrint(boolean gsonPrettyPrint) {
