@@ -32,7 +32,6 @@ class InventorySearchTest {
 	{
 	    NexusConfig.loadTokenFromEnv();
 	    NexusConfig.setDefaultGameValue("mtg");
-	    NexusConfig.setTempDirectory(new File("C:\\Users\\nicol\\.magicDeskCompanion\\data"));
 	    
 	    iService = new InventoryService();
 	    pService = new ProductsService();
