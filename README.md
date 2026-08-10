@@ -19,6 +19,7 @@ The client is maintained as part of the Java API client family used by the [MtgD
 - [Available services](#available-services)
 - [Optional Swing GUI helpers](#optional-swing-gui-helpers)
 - [Configuration](#configuration)
+- [Caching Service](#caching-service)
 - [Project structure](#project-structure)
 - [Logging](#logging)
 - [Error handling](#error-handling)
@@ -196,7 +197,8 @@ CachingService allows you to store products in cache, and limit calling nexus-ap
 ```java
         CachingService.inst().cachingProducts( NexusConfig.getDefaultGameValue());
 ```
-
+It will download products and prices catalog, and fill thems in cache . It will use the cache when calling getProductById.
+New data files will be downloaded when previous files date > NexusConfig.getFeedRententionDurationDays() value.
 
 
 ## Project structure
