@@ -17,6 +17,7 @@ The client is maintained as part of the Java API client family used by the [MtgD
 - [Authentication](#authentication)
 - [Quick start](#quick-start)
 - [Available services](#available-services)
+- [Optional Swing GUI helpers](#optional-swing-gui-helpers)
 - [Configuration](#configuration)
 - [Project structure](#project-structure)
 - [Logging](#logging)
@@ -37,6 +38,7 @@ The client is maintained as part of the Java API client family used by the [MtgD
 - Gson-based JSON serialization/deserialization with polymorphic product support.
 - Caffeine-backed in-memory caches for product, expansion, and game lookups.
 - Optional URL call listener hook for request/response tracing.
+- Optional Swing panels for quickly embedding product search, list management, tag/location management, marketplace listings, product images, and cart optimization workflows in desktop tools.
 
 ## Requirements
 
@@ -52,14 +54,14 @@ The client is maintained as part of the Java API client family used by the [MtgD
 <dependency>
     <groupId>com.github.nicho92</groupId>
     <artifactId>cardnexus-api-java</artifactId>
-    <version>1.4.20</version>
+    <version>1.4.27</version>
 </dependency>
 ```
 
 ### Gradle
 
 ```groovy
-implementation 'com.github.nicho92:cardnexus-api-java:1.4.20'
+implementation 'com.github.nicho92:cardnexus-api-java:1.4.27'
 ```
 
 The artifact is published to [Maven Central](https://central.sonatype.com/artifact/com.github.nicho92/cardnexus-api-java), so consumers normally do not need an additional repository declaration.
@@ -97,12 +99,12 @@ import org.api.cardnexus.services.ProductsService;
 public class Example {
     public static void main(String[] args) throws IOException {
         NexusConfig.loadTokenFromEnv();
-        NexusConfig.DEFAULT_GAME_VALUE = "mtg";
+        NexusConfig.setDefaultGameValue("mtg");
 
         var productsService = new ProductsService();
 
         var request = new SearchProductRequest();
-        request.setGame("mtg"); //not necessary if DEFAULT_GAME_VALUE = "mtg"
+        request.setGame("mtg"); // not necessary if setDefaultGameValue("mtg") was called
         request.setName("Liliana of the Veil");
         request.setProductTypes(EnumProductType.card);
 
@@ -129,27 +131,70 @@ public class Example {
 | `PricesService` | Retrieve price history and market prices. |
 | `ProductsService` | List games and expansions, search products, resolve external IDs, and cache catalog data. |
 
+
+## Optional Swing GUI helpers
+
+The `org.api.cardnexus.gui` package provides ready-to-embed Swing components for desktop applications and small administration tools. These panels are optional convenience UI layers built on top of the same service classes documented above; they still require `NexusConfig` to be initialized before use.
+
+| Component | Purpose |
+|---|---|
+| `NexusProductPanel` | Search products and optionally display product details, images, and marketplace listings. |
+| `NexusListsPanel` | Browse, create, reload, and delete Nexus lists, then inspect list items and product images. |
+| `NexusTagsAndLocationPanel` | Manage inventory tags and locations, including creation and deletion. |
+| `NexusWizardPanel` | Build a cart optimization request from selected products and follow generated optimization jobs. |
+| `ProductPicturePanel` | Display a scaled product image from the product image URL. |
+| `MarketPlacePanel` / `MarketVariationPanel` | Inspect marketplace offers and structured market price variations. |
+
+Minimal Swing bootstrap example:
+
+```java
+import javax.swing.JFrame;
+import javax.swing.WindowConstants;
+
+import org.api.cardnexus.configuration.NexusConfig;
+import org.api.cardnexus.gui.NexusProductPanel;
+
+public class GuiExample {
+    public static void main(String[] args) throws Exception {
+        NexusConfig.loadTokenFromEnv();
+        NexusConfig.setDefaultGameValue("mtg");
+
+        var frame = new JFrame("CardNexus products");
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setContentPane(new NexusProductPanel(true, true));
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+    }
+}
+```
+
 ## Configuration
 
-`NexusConfig` centralizes runtime options used by the services:
+`NexusConfig` centralizes runtime options used by the services. Configure it through its setter methods before instantiating service classes, because services create their HTTP client during construction:
 
-| Setting | Default | Description |
+| Setting / accessor | Default | Description |
 |---|---:|---|
 | `API_BASE_URL` | `https://public-api.cardnexus.com/v1` | Base URL used for API calls. |
+| `API_VERSION` | `0.8.0` | CardNexus API version targeted by the SDK. |
 | `ENV_TOKEN_KEY` | `CARDNEXUS_API_KEY` | Environment variable read by `loadTokenFromEnv()`. |
-| `DIRECTORY_FEED` | user home directory | Directory used when downloading feed files. |
-| `GSON_PRETTY_PRINT` | `false` | Enables pretty JSON output in the JSON service. |
-| `LIMIT_LIST_RESULTS` | `200` | Default page size used by list/search helpers. |
-| `CHECKSUM_MD5_FEED` | `true` | Enables feed checksum validation. |
-| `DEFAULT_GAME_VALUE` | `null` | Optional application-level default game identifier, for example `mtg`. |
-
-Create and configure `NexusConfig` before instantiating service classes, because services create their HTTP client during construction.
+| `REQ_DATE_PATTERN` | `yyyy-MM-dd` | Date format used by request builders. |
+| `INVENTORY_CREATION_LIMIT` | `1000` | Maximum inventory lines sent in one creation request. |
+| `setToken(...)` / `loadTokenFromEnv()` / `loadTokenFromFile(...)` | `null` | Bearer token used by API calls. |
+| `setTempDirectory(...)` | user home directory | Temporary directory used by feed download and file helpers. |
+| `setGsonPrettyPrint(...)` | `false` | Enables pretty JSON output in the JSON service. |
+| `setLimitListResults(...)` | `200` | Default page size used by list/search helpers. |
+| `setChecksumMd5Feed(...)` | `true` | Enables feed checksum validation. |
+| `setDefaultGameValue(...)` | `null` | Optional application-level default game identifier, for example `mtg`. |
+| `setFeedRententionDurationDays(...)` | `1` | Number of days to retain downloaded feed files. |
+| `setListener(...)` | `null` | Optional request listener for tracing URL calls. |
 
 ## Project structure
 
 ```text
 src/main/java/org/api/cardnexus/adapters        Gson adapters and JSON mapping helpers
 src/main/java/org/api/cardnexus/configuration  SDK configuration
+src/main/java/org/api/cardnexus/gui            Optional Swing panels and reusable GUI components
 src/main/java/org/api/cardnexus/listener       Request listener contracts and call metadata
 src/main/java/org/api/cardnexus/model          API DTOs and domain models
 src/main/java/org/api/cardnexus/model/enums    API enum values
