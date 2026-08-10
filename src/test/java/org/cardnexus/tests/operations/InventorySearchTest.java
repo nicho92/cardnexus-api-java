@@ -38,7 +38,6 @@ class InventorySearchTest {
 	    iService = new InventoryService();
 	    pService = new ProductsService();
 	    
-	    
 	    CachingService.inst().cachingProducts( NexusConfig.getDefaultGameValue());
 	    
 	}

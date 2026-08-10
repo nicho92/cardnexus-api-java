@@ -56,15 +56,6 @@ public class FileTools {
     	}
     }
     
-    
-    public static File downloadandGzip(URL url,String filename) throws IOException
-    {
-	var f = download(url, filename);
-	
-	return ungzip(f);
-    }
-    
-    
     public static File download(URL url,String filename) throws IOException
     {
 	var f = new File(NexusConfig.getTempDirectory(), filename+ ".gz");
