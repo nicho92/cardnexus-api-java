@@ -25,9 +25,6 @@ public class ProductAdapter implements JsonDeserializer<AbstractProduct>{
 		catch (Exception ex) 
 		{
 		    	logger.error(ex);
-		    	
-		    	logger.error(elem);
-		    	
 			throw new JsonParseException(ex.getMessage());
 		}
 	}
