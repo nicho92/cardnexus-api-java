@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
 import org.api.cardnexus.configuration.NexusConfig;
-import org.api.cardnexus.gui.NexusProductPanel;
+import org.api.cardnexus.gui.NexusCartPanel;
 
 public class GUITester {
 
@@ -19,7 +19,7 @@ public class GUITester {
 	
 	var f = new JFrame();
 	
-	f.getContentPane().add(new NexusProductPanel(true,true));
+	f.getContentPane().add(new NexusCartPanel());
 	f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	f.pack();
 	f.setVisible(true);
