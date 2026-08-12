@@ -44,7 +44,7 @@ class ProductServiceTests{
     	@Test  	
     	void testSearchCardProduct() throws IOException {
 		
-		var req = SearchProductRequest.create().contains().setProductTypes(EnumProductType.card).setName("Black");
+		var req = SearchProductRequest.create().contains().setProductTypes(EnumProductType.card).setName("Black").setListings("FR", true, null);
 		
 		System.out.println("=====CardproductBySearch");
 		printData(service.searchProduct(req).getFirst());
@@ -83,7 +83,7 @@ class ProductServiceTests{
     		System.out.println("Attributs " + card.getAttributes());
     		System.out.println("ScryfallID "+ card.getExternalIds().scryfallId());
     		System.out.println("MkmId "+ card.getExternalIds().cardmarket());
-    		
+    		System.out.println("Available "+ p.getAvailability());
         	    for(var f : card.getFinishes())
         	    {
         		System.out.println(f + " mkm = " +  card.getPrices().get(f).cardmarket());

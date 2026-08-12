@@ -21,6 +21,8 @@ public abstract class AbstractProduct {
     private String imageUrl;
     private EnumProductType productType;
     private ExternalIds externalIds;
+    private Availability availability;
+    
     
     public String urlProduct()
     {
@@ -33,7 +35,7 @@ public abstract class AbstractProduct {
     
     public boolean hasStock()
     {
-	return getPrices().entrySet().stream().anyMatch(e->e.getValue().cardnexus()!=null);
+	return getAvailability().inStock();
     }
     
   
@@ -51,6 +53,14 @@ public abstract class AbstractProduct {
     public ExternalIds getExternalIds() {
    	return externalIds;
     }
+    
+    public Availability getAvailability() {
+	return availability;
+    }
+    public void setAvailability(Availability availability) {
+	this.availability = availability;
+    }
+    
     public int getId() {
         return id;
     }
