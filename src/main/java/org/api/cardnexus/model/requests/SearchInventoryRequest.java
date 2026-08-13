@@ -26,12 +26,11 @@ public class SearchInventoryRequest {
     private String customIdContains;
     private String commentContains;
     private List<Integer> productIds;
-    private Integer expansionId;
+    private List<Integer> expansionId;
     private Boolean graded;
     private Boolean forSale;
     private String nameSlug;
     private String printNumber;
-    
     
     private Map<String, Object> gameFilters; 
     private Map<String,Object>  tags;
@@ -187,10 +186,15 @@ public class SearchInventoryRequest {
 	this.productIds = productIds;
 	return this;
     }
-    public SearchInventoryRequest setExpansionId(int expansionId) {
+    public SearchInventoryRequest setExpansionId(List<Integer> expansionId) {
 	this.expansionId = expansionId;
 	return this;
     }
+    public SearchInventoryRequest setExpansionId(Integer expansionId) {
+	this.expansionId = List.of(expansionId);
+	return this;
+    }
+    
     public SearchInventoryRequest setGraded(boolean graded) {
 	this.graded = graded;
 	return this;

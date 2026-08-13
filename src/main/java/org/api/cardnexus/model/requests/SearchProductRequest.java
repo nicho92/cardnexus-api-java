@@ -17,7 +17,7 @@ public class SearchProductRequest
     private int offset;
     private int limit = NexusConfig.getLimitListResults();
     private List<Integer> productIds;
-    private Integer expansionId;
+    private List<Integer> expansionId;
     private String name;
     private String nameSlug;
     private String printNumber;
@@ -29,9 +29,6 @@ public class SearchProductRequest
     private EnumSearchMod nameSearchMod;
     private HashMap<String,Object> productTypes;
     private ListingProductRequestRecord listings;
-    
-    
-    
     
     private SearchProductRequest() {
 	
@@ -97,10 +94,16 @@ public class SearchProductRequest
         this.productIds = productIds;
         return this;
     }
-    public SearchProductRequest setExpansionId(Integer expansionId) {
+    public SearchProductRequest setExpansionId(List<Integer> expansionId) {
         this.expansionId = expansionId;
         return this;
     }
+    
+    public SearchProductRequest setExpansionId(Integer expansionId) {
+        this.expansionId = List.of(expansionId);
+        return this;
+    }
+    
     public SearchProductRequest setName(String name) {
         this.name = name;
         return this;
@@ -153,7 +156,7 @@ public class SearchProductRequest
         return productIds;
     }
 
-    public Integer getExpansionId() {
+    public List<Integer> getExpansionId() {
         return expansionId;
     }
 

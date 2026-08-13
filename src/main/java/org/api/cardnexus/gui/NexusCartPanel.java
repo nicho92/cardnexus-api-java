@@ -25,7 +25,7 @@ public class NexusCartPanel extends JPanel {
         protected transient Logger logger = LogManager.getLogger(getClass());
     
 	public NexusCartPanel() {
-		setLayout(new BorderLayout(0, 0));
+		setLayout(new BorderLayout());
 		
 		cService = new CartService();
 		var btnDelete = new JButton("Delete item");
@@ -43,6 +43,8 @@ public class NexusCartPanel extends JPanel {
 		tree.addTreeSelectionListener(_->{
 		    var node = (DefaultMutableTreeNode)tree.getLastSelectedPathComponent();
 		    btnDelete.setEnabled(node.getUserObject() instanceof CartItemEntry);
+		    
+		    
 		});
 		
 		btnDelete.addActionListener(_->{

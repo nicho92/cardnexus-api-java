@@ -41,7 +41,6 @@ public class MarketPlacePanel extends JTabbedPane {
 	pService = new PricesService();
 	cService = new CartService();
 	
-	
 	modelMarketList = new MarketListTableModel();
 	var tableMarketLists = new JTable(modelMarketList);
 	marketVariationsPanel = new MarketVariationPanel();
