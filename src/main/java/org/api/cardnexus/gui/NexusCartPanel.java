@@ -2,24 +2,19 @@ package org.api.cardnexus.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
-import java.awt.Font;
 import java.io.IOException;
 
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTree;
-import javax.swing.SwingConstants;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreeCellRenderer;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.api.cardnexus.model.CartItem;
 import org.api.cardnexus.model.CartItemEntry;
 import org.api.cardnexus.services.CartService;
 
@@ -32,25 +27,20 @@ public class NexusCartPanel extends JPanel {
 	public NexusCartPanel() {
 		setLayout(new BorderLayout(0, 0));
 		
-		
 		cService = new CartService();
-		
-		var panelCartCommand = new JPanel();
-		add(panelCartCommand, BorderLayout.NORTH);
-		
-		var btnReload = new JButton("Reload");
-		panelCartCommand.add(btnReload);
-		
 		var btnDelete = new JButton("Delete item");
-		panelCartCommand.add(btnDelete);
+		var btnReload = new JButton("Reload");
+		var panelCartCommand = new JPanel();
 		root = new DefaultMutableTreeNode("Cart");
 		tree = new JTree(new DefaultTreeModel(root));
 		
+		
+		add(panelCartCommand, BorderLayout.NORTH);
+		panelCartCommand.add(btnReload);
+		panelCartCommand.add(btnDelete);
 		add(new JScrollPane(tree), BorderLayout.CENTER);
 		
-		
 		tree.addTreeSelectionListener(_->{
-		    
 		    var node = (DefaultMutableTreeNode)tree.getLastSelectedPathComponent();
 		    btnDelete.setEnabled(node.getUserObject() instanceof CartItemEntry);
 		});
@@ -58,32 +48,26 @@ public class NexusCartPanel extends JPanel {
 		btnDelete.addActionListener(_->{
 		    
 		    var node = (DefaultMutableTreeNode)tree.getLastSelectedPathComponent();
-		    var id = ((CartItemEntry)node.getUserObject()).listingId();
-		    
-		    var res = JOptionPane.showConfirmDialog(this, "Remove Item #"+id + " ?");
+		    var entry = (CartItemEntry)node.getUserObject();
+		    var res = JOptionPane.showConfirmDialog(this, "Remove Item #"+ entry.productName() + " ?");
 		    
 		    if(res==JOptionPane.YES_OPTION)
 		    {
 			try {
-			    cService.removeItem(id);
+			    cService.removeItem( entry.listingId());
 			} catch (IOException e) {
 			  logger.error(e);
 			}
 		    }
-		    
-		    
 		});
 		
-		
 		tree.setCellRenderer(new DefaultTreeCellRenderer() {
-		    
 		    @Override
 		    public Component getTreeCellRendererComponent(JTree tree, Object value, boolean sel, boolean expanded, boolean leaf, int row, boolean hasFocus) {
 			var node = (DefaultMutableTreeNode)value;
 			if(node.getUserObject() instanceof CartItemEntry entry)
-			{
 			    return super.getTreeCellRendererComponent(tree, entry.productName(), sel, expanded, leaf, row, hasFocus);
-			}
+
 			return super.getTreeCellRendererComponent(tree, value, sel, expanded, leaf, row, hasFocus);
 		    }
 		});
