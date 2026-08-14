@@ -61,6 +61,9 @@ public class NexusCartPanel extends JPanel {
 			  logger.error(e);
 			}
 		    }
+		    
+		    btnReload.doClick();
+		    
 		});
 		
 		tree.setCellRenderer(new DefaultTreeCellRenderer() {
@@ -98,6 +101,8 @@ public class NexusCartPanel extends JPanel {
 				 
 			      }
 			      root.add(sellerNde);
+			      tree.updateUI();
+			      
 			  }
 		    } catch (IOException e) {
 			logger.error(e);
