@@ -46,7 +46,7 @@ public class NexusWizardPanel extends JPanel {
 	    	cartService = new CartService();
 	    	
 		setLayout(new BorderLayout());
-		var productsManagementPanel = new NexusProductPanel(false,true);
+		var productsManagementPanel = new NexusProductPanel(false,true,false);
 		add(productsManagementPanel, BorderLayout.WEST);
 		
 		var panelWizardConfig = new JPanel();

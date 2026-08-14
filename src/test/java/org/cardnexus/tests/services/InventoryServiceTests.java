@@ -5,10 +5,14 @@ import java.util.List;
 
 import org.api.cardnexus.configuration.NexusConfig;
 import org.api.cardnexus.model.CardProduct;
+import org.api.cardnexus.model.Expansion;
 import org.api.cardnexus.model.InventoryLine;
 import org.api.cardnexus.model.enums.EnumCondition;
 import org.api.cardnexus.model.enums.EnumFinishes;
+import org.api.cardnexus.model.enums.EnumOperand;
+import org.api.cardnexus.model.enums.EnumProductType;
 import org.api.cardnexus.model.requests.InventoryLinesRequest;
+import org.api.cardnexus.model.requests.SearchInventoryRequest;
 import org.api.cardnexus.model.requests.UpdateInventoryRequest;
 import org.api.cardnexus.services.InventoryService;
 import org.api.cardnexus.services.ProductsService;
@@ -35,9 +39,30 @@ class InventoryServiceTests {
 	    serviceProduct = new ProductsService();
 	    
 	    CachingService.inst().cachingProducts( NexusConfig.getDefaultGameValue());
-	    serviceProduct.listExpansion(NexusConfig.getDefaultGameValue()); // put in cache
+
 	}
-    	
+	  @Test
+	    void searchInventoryV2() throws IOException
+	    {
+	      
+	      var ids=serviceProduct.listExpansion(NexusConfig.getDefaultGameValue()).stream().filter(exp->exp.name().equalsIgnoreCase("Mirage")).map(Expansion::id).toList();
+	      
+	      
+		var lines = service.inventorySearch(SearchInventoryRequest.create()
+									.setProductType(EnumOperand.and, EnumProductType.card)
+									.setExpansionId(ids)
+									.setFinish(EnumOperand.and, EnumFinishes.Standard)
+								   );
+		lines.forEach(il->{
+		    var p = serviceProduct.getProductById(il.productId());
+		    	    
+		    System.out.println(p.getName() + " " + p.getExpansion().code().toUpperCase());
+		    System.out.println(il);
+		    System.out.println(p.getPrices().get(il.finish()).cardmarket().marketValue());
+		    System.out.println("=================================");
+		});
+		
+	    }
    
     	void addInventoryEntries() throws IOException
     	{
@@ -49,7 +74,6 @@ class InventoryServiceTests {
     	    
     	}
     	
- 	@Test
     	void listsTest() throws IOException
 	{
 		var req =InventoryLinesRequest.create().setCondition(EnumCondition.MP);
