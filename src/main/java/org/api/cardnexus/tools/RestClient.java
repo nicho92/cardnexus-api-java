@@ -39,23 +39,10 @@ public class RestClient implements Closeable {
     private JsonService gson;
 
     private Header[] lastCallHeaders;
-    
-    /**
-     * Constructeur sans authentification.
-     */
+  
     public RestClient() {
-        this(null);
-    }
-
-    /**
-     * Constructeur avec authentification.
-     *
-     * @param token  integration token
-     */
-    public RestClient(String token) {
-        this.httpClient = HttpClients.createDefault();
+	this.httpClient = HttpClients.createDefault();
         gson = new JsonService();
-    
     }
 
     // -------------------- Méthodes principales --------------------
@@ -177,10 +164,14 @@ public class RestClient implements Closeable {
             
             this.lastCallHeaders = response.getAllHeaders();
             
-            if(logger.isTraceEnabled()) {
-        	for(var h : response.getAllHeaders())
-        	    logger.trace("{} : {}",h.getName(),h.getValue());
-            }
+            var remaining = Integer.parseInt(response.getFirstHeader("x-ratelimit-remaining").getValue());
+            
+            logger.debug("Remaining ={}", remaining);
+                        
+            if(remaining<=10)
+        	logger.warn("rate limit = {}/{}.",remaining,response.getFirstHeader("x-ratelimit-remaining").getValue());
+                       
+            
             
             logger.debug("{} : {},", request,statusCode );
     		callInfo.setEnd(Instant.now());

@@ -89,15 +89,7 @@ public class MarketPlacePanel extends JTabbedPane {
 			logger.error(e1);
 		    }
 		}
-		
-		
-	    
 	});
-	
-	
-	
-	
-	
     }
     
     public void init(AbstractProduct p)

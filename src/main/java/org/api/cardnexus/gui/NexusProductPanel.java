@@ -2,11 +2,9 @@ package org.api.cardnexus.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
-import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
