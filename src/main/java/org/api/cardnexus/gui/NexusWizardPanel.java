@@ -14,7 +14,6 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
@@ -62,12 +61,7 @@ public class NexusWizardPanel extends JPanel {
 		var listKinds = new JList<EnumKindsRun>(EnumKindsRun.values());
 		listKinds.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		listKinds.setSelectedIndices(new int[] {0,1,2});
-	
-		
-		
 		var btnRunWizard = new JButton("Start Wizard");
-		
-		
 		
 		panelWizardLaunch.add(listKinds);
 		panelWizardLaunch.add(btnRunWizard);
@@ -93,8 +87,8 @@ public class NexusWizardPanel extends JPanel {
 		
 		jobResultsPanel.add(new JScrollPane(listJobs), BorderLayout.WEST);
 		
-		var textArea = new RunResultPanel();
-		jobResultsPanel.add(textArea, BorderLayout.CENTER);
+		var resultPanel = new RunResultPanel();
+		jobResultsPanel.add(resultPanel, BorderLayout.CENTER);
 		
 		
 		table.setDefaultEditor(EnumFinishes.class, new DefaultCellEditor(new JComboBox<>(EnumFinishes.values())));
@@ -124,7 +118,7 @@ public class NexusWizardPanel extends JPanel {
 			}
 			entry.setMinCondition(EnumCondition.LP);
 		    }
-		    else   if(p instanceof SealedProduct c)
+		    else if(p instanceof SealedProduct c)
 		    {
 			try 
 			{
@@ -152,7 +146,7 @@ public class NexusWizardPanel extends JPanel {
 			try {
 			    var job = cartService.getRunById(listJobs.getSelectedValue());
 			    
-			    textArea.init(job);
+			    resultPanel.init(job);
 			    
 			} catch (IOException e) {
 			    logger.error(e);

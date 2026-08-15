@@ -13,6 +13,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
 import org.api.cardnexus.model.Run;
+import org.api.cardnexus.services.ProductsService;
 
 public class RunResultPanel extends JPanel {
     
@@ -21,8 +22,14 @@ public class RunResultPanel extends JPanel {
     	private DefaultMutableTreeNode root;
     	private JTree tree;
     	private JButton btnAddCart;
+    	private ProductsService pService;
+    	
     	
 	public RunResultPanel() {
+	    
+	    pService = new ProductsService();
+	    
+	    
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0};
@@ -107,29 +114,18 @@ public class RunResultPanel extends JPanel {
 		    
 		    for(var it : uo.items())
 		    {
-			
-			var itmNode = new DefaultMutableTreeNode(it);
+			var itmNode = new DefaultMutableTreeNode(pService.getProductById(it.productId()).getName());
 			unode.add(itmNode);
 			
-			
-			
+			unode.add(new DefaultMutableTreeNode(it.language() + " / " + it.finish() + " / " + it.condition()));
+			unode.add(new DefaultMutableTreeNode(it.quantity()+ "x " + it.unitPrice()));
 			
 		    }
-		    
-		    
 		}
-		
-		
-		
 	    }
-	    
-	    
 	}
-	
-	
-	
-	
 	tree.updateUI();
+	tree.expandRow(0);
 	
 	
 	
