@@ -115,11 +115,11 @@ public class NexusWizardPanel extends JPanel {
 			entry.setFinish(c.getFinishes().getFirst());
 			try 
 			{
-			    entry.setMaxUnitPrice(new Amount(c.getPrices().get(c.getFinishes().getFirst()).cardmarket().low(), currency));
+			    entry.setMaxUnitPrice(new Amount(c.getPrices().get(c.getFinishes().getFirst()).cardmarket().marketValue(), currency));
 			}
 			catch(Exception _)
 			{
-			    entry.setMaxUnitPrice(new Amount(1.0,currency));
+			    entry.setMaxUnitPrice(new Amount(100.0,currency));
 			}
 			entry.setMinCondition(EnumCondition.LP);
 		    }
@@ -127,11 +127,11 @@ public class NexusWizardPanel extends JPanel {
 		    {
 			try 
 			{
-			    entry.setMaxUnitPrice(new Amount(c.getPrices().get(EnumFinishes.Standard).cardmarket().low(), currency));
+			    entry.setMaxUnitPrice(new Amount(c.getPrices().get(EnumFinishes.Standard).cardmarket().marketValue(), currency));
 			}
 			catch(Exception _)
 			{
-			    entry.setMaxUnitPrice(new Amount(1.0,currency));
+			    entry.setMaxUnitPrice(new Amount(100.0,currency));
 			}
 		    }
 
