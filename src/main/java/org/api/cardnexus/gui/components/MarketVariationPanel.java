@@ -107,7 +107,7 @@ public class MarketVariationPanel extends JPanel {
 		    	if(e.getValue().cardmarket()!=null)
 		    	    	fNode.add(addMarketNode(e.getValue().cardmarket(), "CardMarket"));
 		    
-		    	if(e.getValue().cardmarket()!=null)
+		    	if(e.getValue().tcgplayer()!=null)
 		    	    	fNode.add(addMarketNode(e.getValue().tcgplayer(), "TCGPlayer"));
 		    	
 		    	if(e.getValue().cardnexus()!=null)

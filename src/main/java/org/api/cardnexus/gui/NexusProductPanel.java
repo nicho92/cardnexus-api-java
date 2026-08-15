@@ -210,7 +210,7 @@ public class NexusProductPanel extends JPanel{
 		        	     } 
 		        	     catch (Exception e1) {
         		    		logger.error(e1);
-		        	     }
+ 		        	     }
 		    		 }
 		    	    }
 		 });

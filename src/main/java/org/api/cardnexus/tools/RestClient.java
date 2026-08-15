@@ -169,7 +169,7 @@ public class RestClient implements Closeable {
             logger.debug("Remaining ={}", remaining);
                         
             if(remaining<=10)
-        	logger.warn("rate limit = {}/{}.",remaining,response.getFirstHeader("x-ratelimit-remaining").getValue());
+        	logger.warn("rate limit = {}/{}.",remaining,response.getFirstHeader("x-ratelimit-limit").getValue());
                        
             
             
