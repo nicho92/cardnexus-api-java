@@ -19,6 +19,7 @@ import javax.swing.SwingWorker;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.api.cardnexus.configuration.NexusConfig;
+import org.api.cardnexus.gui.components.LoadingLabel;
 import org.api.cardnexus.gui.components.MarketPlacePanel;
 import org.api.cardnexus.gui.components.ProductPicturePanel;
 import org.api.cardnexus.gui.model.NexusProductTableModel;
@@ -57,7 +58,7 @@ public class NexusProductPanel extends JPanel{
 		modelProducts = new NexusProductTableModel();
 		modelExpansions = new DefaultListModel<Expansion>();
 		
-		
+		var loading = new LoadingLabel();
 		var table = new JTable(modelProducts);
 		var panel = new JPanel();
 		var textField = new JTextField(30);
@@ -70,6 +71,7 @@ public class NexusProductPanel extends JPanel{
 		add(panel, BorderLayout.NORTH);
 		panel.add(textField);
 		panel.add(btnSearch);
+		panel.add(loading);
 		
 		if(showdetails) 
 		    add(productPanel, BorderLayout.EAST);
@@ -79,7 +81,6 @@ public class NexusProductPanel extends JPanel{
 		
 		if(showExpansion) 
 		    add(new JScrollPane(listExpansion),BorderLayout.WEST);
-		
 		
 		listExpansion.setCellRenderer(new ListCellRenderer<Expansion>() {
 
@@ -121,6 +122,8 @@ public class NexusProductPanel extends JPanel{
 				} catch (ExecutionException e) {
 				    logger.error(e);
 				}
+				
+				loading.setVisible(false);
 			    }
 			    
 			  };
@@ -139,7 +142,7 @@ public class NexusProductPanel extends JPanel{
 		    
 		   if(!lsl.getValueIsAdjusting())
 		   {
-		       
+		       loading.setVisible(true);
 		       var wk = new SwingWorker<List<AbstractProduct>, Void>()
 			    {
 
@@ -157,6 +160,7 @@ public class NexusProductPanel extends JPanel{
 				    } catch (ExecutionException e) {
 					logger.error(e);
 				    }
+				    loading.setVisible(false);
 				}
 			    };
 			   wk.execute(); 
@@ -166,7 +170,7 @@ public class NexusProductPanel extends JPanel{
 		});
 		
 		btnSearch.addActionListener(_->{
-		    
+		    loading.setVisible(true);
 		    var wk = new SwingWorker<List<AbstractProduct>, Void>()
 			    {
 
@@ -184,6 +188,7 @@ public class NexusProductPanel extends JPanel{
 				    } catch (ExecutionException e) {
 					logger.error(e);
 				    }
+				    loading.setVisible(false);
 				}
 			    };
 			   wk.execute(); 

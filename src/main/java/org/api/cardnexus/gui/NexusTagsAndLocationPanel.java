@@ -26,7 +26,7 @@ import org.api.cardnexus.services.InventoryService;
 public class NexusTagsAndLocationPanel extends JPanel {
 	public NexusTagsAndLocationPanel() {
 	    	service = new InventoryService();
-		setLayout(new BorderLayout(0, 0));
+		setLayout(new BorderLayout());
 		model = new TagLocationTableModel();
 		var buttonGroup = new ButtonGroup();
 		
