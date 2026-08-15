@@ -42,8 +42,8 @@ public class MarketVariationPanel extends JPanel {
 	    nodeMarket.add(new DefaultMutableTreeNode("Change 24H ="+Formatter.format(v.change24h()), false));
 	    nodeMarket.add(new DefaultMutableTreeNode("Change 30d ="+Formatter.format(v.change30d()), false));
 	    nodeMarket.add(new DefaultMutableTreeNode("Change 7d ="+Formatter.format(v.change7d()), false));
-	    nodeMarket.add(new DefaultMutableTreeNode("Low ="+Formatter.format(v.low()), false));
-	    nodeMarket.add(new DefaultMutableTreeNode("Market Value ="+Formatter.format(v.marketValue()), false));
+	    nodeMarket.add(new DefaultMutableTreeNode("Low ="+Formatter.format(v.low()) + " " + v.currency(), false));
+	    nodeMarket.add(new DefaultMutableTreeNode("Market Value ="+Formatter.format(v.marketValue())+ " " + v.currency(), false));
 	    return nodeMarket;
     }
     
