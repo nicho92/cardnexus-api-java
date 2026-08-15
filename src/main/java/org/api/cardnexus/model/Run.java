@@ -4,7 +4,10 @@ import org.api.cardnexus.model.enums.EnumRunStatus;
 
 public record Run (String id,EnumRunStatus status,Progress progress,RunResult result)
 {
-    	
+    public boolean hasResult()
+    {
+	return !result.options().isEmpty();
+    }
 }
 
 

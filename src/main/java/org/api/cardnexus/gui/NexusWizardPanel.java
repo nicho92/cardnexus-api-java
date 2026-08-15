@@ -20,6 +20,7 @@ import javax.swing.ListSelectionModel;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.api.cardnexus.gui.components.RunResultPanel;
 import org.api.cardnexus.gui.model.CardWizardTableModel;
 import org.api.cardnexus.model.Amount;
 import org.api.cardnexus.model.CardProduct;
@@ -92,7 +93,7 @@ public class NexusWizardPanel extends JPanel {
 		
 		jobResultsPanel.add(new JScrollPane(listJobs), BorderLayout.WEST);
 		
-		var textArea = new JTextArea();
+		var textArea = new RunResultPanel();
 		jobResultsPanel.add(textArea, BorderLayout.CENTER);
 		
 		
@@ -151,7 +152,7 @@ public class NexusWizardPanel extends JPanel {
 			try {
 			    var job = cartService.getRunById(listJobs.getSelectedValue());
 			    
-			    textArea.setText(job.toString());
+			    textArea.init(job);
 			    
 			} catch (IOException e) {
 			    logger.error(e);
