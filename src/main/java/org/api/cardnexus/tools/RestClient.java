@@ -24,6 +24,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.api.cardnexus.configuration.NexusConfig;
 import org.api.cardnexus.listener.URLCallInfo;
+import org.api.cardnexus.model.NexusAPIException;
+import org.api.cardnexus.model.NexusError;
 import org.api.cardnexus.model.PaginateResult;
 
 import com.google.gson.JsonArray;
@@ -153,7 +155,7 @@ public class RestClient implements Closeable {
     }
      
     @SuppressWarnings("unchecked")
-    private <T> T executeRequest(HttpRequestBase request, Type  responseType) throws IOException {
+    private <T> T executeRequest(HttpRequestBase request, Type  responseType) throws IOException,NexusAPIException {
     	
     	var callInfo = new URLCallInfo();
     	request.addHeader("Authorization", "Bearer "+NexusConfig.getToken());
@@ -194,9 +196,9 @@ public class RestClient implements Closeable {
                     }
                 }
                 return null;
-            } else {
-        	logger.error(jsonResponse);
-                throw new IOException(statusCode + " : " + fromJson(jsonResponse, JsonObject.class).get("message"));
+            } 
+            else {
+                throw new NexusAPIException(fromJson(jsonResponse, NexusError.class));
             }
         }
         finally {
