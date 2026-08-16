@@ -9,10 +9,11 @@ public enum EnumRarity {
     @SerializedName(alternate = {"Uncommon","UNCOMMON"}, value = "uncommon") uncommon, 
     @SerializedName(alternate = {"Rare","RARE"}, value = "rare") rare,
     @SerializedName(alternate = {"Promo"}, value = "PROMO") promo,
+    @SerializedName(alternate = {"Special"}, value = "special") special,
+
     
-  //MTG
+   //MTG
     mythic,
-    special,
     
     //LORCANA
     @SerializedName(alternate = {"super_rare"}, value = "Super Rare") superrare,
@@ -24,7 +25,7 @@ public enum EnumRarity {
     //POKEMON
     
     @SerializedName(value = "DOUBLE_RARE") doublerare,
-    @SerializedName(value = "ILLUSTRATION_RARE") illustrationrare,
+    @SerializedName(alternate= {"Rare Art"}, value = "ILLUSTRATION_RARE") illustrationrare,
     @SerializedName(value = "ULTRA_RARE") ultrarare,
     @SerializedName(value = "HYPER_RARE") hyperrare,
     @SerializedName(value = "SPECIAL_ILLUSTRATION_RARE") specialillustrationrare,
@@ -46,7 +47,11 @@ public enum EnumRarity {
     @SerializedName(value="Unique") unique,
     @SerializedName(value="Exceptional") exceptional,
     @SerializedName(value="Ordinary") ordinary,
-    @SerializedName(value="Elite") elite
+    @SerializedName(value="Elite") elite,
     
+    //NARUTO
+    @SerializedName(value="Secret Variant") secretvariant,
+    @SerializedName(value="Mythos") mythos,
+    @SerializedName(value="Secret") secret
     
 }
