@@ -1,16 +1,15 @@
 package org.api.cardnexus.gui.components;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.Insets;
+import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.net.URI;
 import java.util.concurrent.ExecutionException;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingWorker;
 
@@ -23,28 +22,73 @@ public class ProductPicturePanel extends JPanel {
     protected transient Logger logger = LogManager.getLogger(getClass());
 
     private static final long serialVersionUID = 1L;
-    private JLabel lblImage;
+    private Image image;
 
+    public ProductPicturePanel() {
+        setOpaque(true);
+        
+        setPreferredSize(new Dimension(330,456));
+        
+        
+    }
 
-	public ProductPicturePanel() {
-		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{199, 0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		setLayout(gridBagLayout);
-		
-		lblImage = new JLabel(" ");
-		GridBagConstraints gbclblImage = new GridBagConstraints();
-		gbclblImage.gridheight = 5;
-		gbclblImage.insets = new Insets(0, 0, 5, 5);
-		gbclblImage.gridx = 0;
-		gbclblImage.gridy = 0;
-		add(lblImage, gbclblImage);
-		
-	
-	}
+    public void setImage(Image image) {
+        this.image = image;
+        repaint();
+    }
 
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        if (image == null) {
+            return;
+        }
+
+        int panelWidth = getWidth();
+        int panelHeight = getHeight();
+
+        int imageWidth = image.getWidth(this);
+        int imageHeight = image.getHeight(this);
+
+        if (imageWidth <= 0 || imageHeight <= 0) {
+            return;
+        }
+
+        // Calcul du ratio pour conserver les proportions
+        double scale = Math.min(
+                (double) panelWidth / imageWidth,
+                (double) panelHeight / imageHeight
+        );
+
+        int newWidth = (int) (imageWidth * scale);
+        int newHeight = (int) (imageHeight * scale);
+
+        // Centrage de l'image
+        int x = (panelWidth - newWidth) / 2;
+        int y = (panelHeight - newHeight) / 2;
+
+        var g2 = (Graphics2D) g.create();
+
+        g2.setRenderingHint(
+                RenderingHints.KEY_INTERPOLATION,
+                RenderingHints.VALUE_INTERPOLATION_BILINEAR
+        );
+
+        g2.setRenderingHint(
+                RenderingHints.KEY_RENDERING,
+                RenderingHints.VALUE_RENDER_QUALITY
+        );
+
+        g2.drawImage(
+                image,
+                x, y,
+                newWidth, newHeight,
+                this
+        );
+
+        g2.dispose();
+    }
     public void init(AbstractProduct p) {
 	
 	try {
@@ -59,16 +103,15 @@ public class ProductPicturePanel extends JPanel {
 			@Override
 			protected void done() {
 			    try {
-				var img = get();
-				if(img==null)
-				    return;
-				var rimg =  img.getScaledInstance(img.getWidth()/3, img.getHeight()/3, Image.SCALE_SMOOTH);
-				lblImage.setIcon(new ImageIcon(rimg));
+				image= get();
 			    } catch (InterruptedException _) {
 				Thread.currentThread().interrupt();
 			    } catch (ExecutionException e) {
 				logger.trace(e);
+				image=null;
 			    }
+			    revalidate();
+			    repaint();
 			  
 			}
 			

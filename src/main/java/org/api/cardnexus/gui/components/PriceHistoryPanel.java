@@ -2,22 +2,19 @@ package org.api.cardnexus.gui.components;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.event.ItemEvent;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComboBox;
 import javax.swing.JPanel;
+import javax.swing.SwingWorker;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.api.cardnexus.model.AbstractProduct;
-import org.api.cardnexus.model.CardProduct;
 import org.api.cardnexus.model.History;
-import org.api.cardnexus.model.enums.EnumFinishes;
 import org.api.cardnexus.model.enums.EnumMarketPlace;
 import org.api.cardnexus.model.requests.HistoryRequest;
 import org.api.cardnexus.services.PricesService;
@@ -61,15 +58,30 @@ public class PriceHistoryPanel extends JPanel {
 	    return;
 	
 	this.product = p;
-	
-	try {
-	    var res = new PricesService().getHistoryPrice(HistoryRequest.create().setIdProduct(p.getId()).setFrom(LocalDate.now(ZoneId.systemDefault()).minusDays(364)));
 	    
-	    createChart(createDataSet(res));
+	    var wk = new SwingWorker<List<History>, Void>() {
+
+		@Override
+		protected List<History> doInBackground() throws Exception {
+		    return new PricesService().getHistoryPrice(HistoryRequest.create().setIdProduct(p.getId()).setFrom(LocalDate.now(ZoneId.systemDefault()).minusDays(364)));
+		}
+		
+		@Override
+		protected void done() {
+		    
+		    try {
+			createChart(createDataSet(get()));
+		    } catch (InterruptedException _) {
+			Thread.currentThread().interrupt();
+		    } catch (ExecutionException e) {
+			logger.error(e);
+		    }
+		}
+		
+	    };
 	    
-	} catch (IOException e) {
-	  logger.error(e);
-	}
+	    wk.execute();
+	    
     }
     
     private TimeSeriesCollection createDataSet(List<History> res) {
