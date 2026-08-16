@@ -26,7 +26,7 @@ public enum EnumRarity {
     
     @SerializedName(value = "DOUBLE_RARE") doublerare,
     @SerializedName(alternate= {"Rare Art"}, value = "ILLUSTRATION_RARE") illustrationrare,
-    @SerializedName(value = "ULTRA_RARE") ultrarare,
+    @SerializedName(alternate= {"Ultra Rare"}, value = "ULTRA_RARE") ultrarare,
     @SerializedName(value = "HYPER_RARE") hyperrare,
     @SerializedName(value = "SPECIAL_ILLUSTRATION_RARE") specialillustrationrare,
     @SerializedName(value = "HOLO_RARE") holorare,
@@ -58,6 +58,13 @@ public enum EnumRarity {
     @SerializedName(value="Showcase") showcase,
     
     //DRAGONBALL
-    none
+    none,
+    
+    //GRAND ARCHIVE TCG
+    @SerializedName(value="Collector Super Rare") collectorsuperrare,
+    @SerializedName(value="Collector Promo Rare") collectorpromorare,
+    @SerializedName(value="Collector Ultra Rare") collectorultrarare,
+    @SerializedName(value="Promotional Rare") promorare
+    
     
 }
