@@ -4,8 +4,10 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListCellRenderer;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -65,7 +67,6 @@ public class GUITester {
 	      dialog.setVisible(true);
 	
         	var f = new JFrame();
-        	
         	f.getContentPane().add(new NexusProductPanel(true,true,true));
         	f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         	f.pack();
