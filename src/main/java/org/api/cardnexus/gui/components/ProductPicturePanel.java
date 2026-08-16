@@ -60,12 +60,14 @@ public class ProductPicturePanel extends JPanel {
 			protected void done() {
 			    try {
 				var img = get();
+				if(img==null)
+				    return;
 				var rimg =  img.getScaledInstance(img.getWidth()/3, img.getHeight()/3, Image.SCALE_SMOOTH);
 				lblImage.setIcon(new ImageIcon(rimg));
 			    } catch (InterruptedException _) {
 				Thread.currentThread().interrupt();
 			    } catch (ExecutionException e) {
-				logger.error(e);
+				logger.trace(e);
 			    }
 			  
 			}

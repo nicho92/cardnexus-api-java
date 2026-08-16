@@ -17,10 +17,8 @@ import org.api.cardnexus.gui.model.MarketListTableModel;
 import org.api.cardnexus.model.AbstractProduct;
 import org.api.cardnexus.model.Seller;
 import org.api.cardnexus.model.requests.CartAddingRequest;
-import org.api.cardnexus.model.requests.HistoryRequest;
 import org.api.cardnexus.model.requests.MarketListRequest;
 import org.api.cardnexus.services.CartService;
-import org.api.cardnexus.services.PricesService;
 import org.api.cardnexus.services.ProductsService;
 
 public class MarketPlacePanel extends JTabbedPane {
@@ -30,21 +28,22 @@ public class MarketPlacePanel extends JTabbedPane {
     private MarketListTableModel modelMarketList;
     private MarketVariationPanel marketVariationsPanel;
     private PriceHistoryPanel priceHistoryPanel;
-    
+    private LastProductSalesPanel salesPanel;
+     
     private transient ProductsService pservice;
-    private transient PricesService pService;
     private transient CartService cService;
-    
+   
     public MarketPlacePanel() {
 	
 	pservice = new ProductsService();
-	pService = new PricesService();
 	cService = new CartService();
 	
 	modelMarketList = new MarketListTableModel();
 	var tableMarketLists = new JTable(modelMarketList);
 	marketVariationsPanel = new MarketVariationPanel();
 	priceHistoryPanel = new PriceHistoryPanel();
+	salesPanel = new LastProductSalesPanel();
+	
 	
 	var panelMarketList = new JPanel();
 	var panelMarketListCommands = new JPanel();
@@ -68,7 +67,7 @@ public class MarketPlacePanel extends JTabbedPane {
 	addTab("Nexus MarketList",panelMarketList);
 	addTab("Markets",marketVariationsPanel);
 	addTab("History", priceHistoryPanel);
-	
+	addTab("Last Sales", salesPanel);
 	
 	tableMarketLists.getSelectionModel().addListSelectionListener(e->{
 	    if (!e.getValueIsAdjusting()) 
@@ -97,8 +96,8 @@ public class MarketPlacePanel extends JTabbedPane {
 	try {
 	    modelMarketList.init(pservice.listMarketListing(MarketListRequest.create().setProductId(p.getId())));
 	    marketVariationsPanel.init(p.getPrices());
-	    
-	    priceHistoryPanel.init(pService.getHistoryPrice(HistoryRequest.create().setIdProduct(p.getId())));
+	    salesPanel.init(p);
+	    priceHistoryPanel.init(p);
 	    
 	} catch (IOException e) {
 	  logger.error(e);

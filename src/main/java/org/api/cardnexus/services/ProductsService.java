@@ -46,9 +46,6 @@ public class ProductsService extends AbstractNexusService{
 		return null;
 	    }
 	});
-	
-	
-    	
     }
     
     public Expansion getExpansionById(Integer id) 
