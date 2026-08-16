@@ -52,6 +52,12 @@ public enum EnumRarity {
     //NARUTO
     @SerializedName(value="Secret Variant") secretvariant,
     @SerializedName(value="Mythos") mythos,
-    @SerializedName(value="Secret") secret
+    @SerializedName(value="Secret") secret,
+    
+    //RIFTBOUND
+    @SerializedName(value="Showcase") showcase,
+    
+    //DRAGONBALL
+    none
     
 }
