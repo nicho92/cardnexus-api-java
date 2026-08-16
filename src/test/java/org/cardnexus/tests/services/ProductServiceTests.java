@@ -40,8 +40,22 @@ class ProductServiceTests{
 	
     	}
     
-    
     	@Test  	
+    	void testSearchCardsByExpansion() throws IOException {
+		
+    	    var exp = service.getExpansionById(565);
+    	    
+    	    
+    	    service.searchCardsByExpansion(exp).forEach(card->{
+    		
+    		System.out.println(card.getId() +" " +  card.getName() + " " + card.getPrintNumber() + " " + card.getRarity());
+    		
+    	    });
+    	    
+    	    
+    	}
+    	
+    	
     	void testSearchCardProduct() throws IOException {
 		
 		var req = SearchProductRequest.create().contains().setProductTypes(EnumProductType.card).setName("Black").setListings("FR", true, null);

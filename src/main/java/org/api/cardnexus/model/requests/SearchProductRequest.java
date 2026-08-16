@@ -27,7 +27,7 @@ public class SearchProductRequest
     private EnumSortDirection sortDirection;
     private Map<String, Object> gameFilters;
     private EnumSearchMod nameSearchMod;
-    private HashMap<String,Object> productTypes;
+    private HashMap<String,Object> productType;
     private ListingProductRequestRecord listings;
     
     private SearchProductRequest() {
@@ -45,9 +45,14 @@ public class SearchProductRequest
     
     public SearchProductRequest setProductTypes(EnumProductType...values)
     {
-	productTypes = new HashMap<>();
-	productTypes.put("op", "or");
-	productTypes.put("values", values);
+	productType = new HashMap<>();
+	
+	if(values.length==1)
+	    productType.put("op", "and");
+	else
+	    productType.put("op", "or");
+	
+	productType.put("values", values);
 	return this;
     }
     
@@ -182,6 +187,11 @@ public class SearchProductRequest
 
     public EnumSortDirection getSortDirection() {
         return sortDirection;
+    }
+
+    public SearchProductRequest removeListing() {
+	listings=null;
+	return this;
     }
  }
 record ListingProductRequestRecord(String deliveryCountry, Boolean inStock, List<EnumCondition> condition) {

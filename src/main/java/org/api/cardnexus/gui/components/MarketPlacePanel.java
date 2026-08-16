@@ -96,8 +96,10 @@ public class MarketPlacePanel extends JTabbedPane {
 	try {
 	    modelMarketList.init(pservice.listMarketListing(MarketListRequest.create().setProductId(p.getId())));
 	    marketVariationsPanel.init(p.getPrices());
-	    salesPanel.init(p);
 	    priceHistoryPanel.init(p);
+	    
+	    if(p.hasStock())
+		salesPanel.init(p);
 	    
 	} catch (IOException e) {
 	  logger.error(e);
