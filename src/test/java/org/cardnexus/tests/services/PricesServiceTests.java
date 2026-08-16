@@ -8,7 +8,7 @@ import org.api.cardnexus.model.enums.EnumFinishes;
 import org.api.cardnexus.model.enums.EnumMarketPlace;
 import org.api.cardnexus.model.requests.HistoryRequest;
 import org.api.cardnexus.services.PricesService;
-import org.api.cardnexus.tools.Formatter;
+import org.api.cardnexus.tools.Utils;
 import org.junit.jupiter.api.Test;
 
 
@@ -30,7 +30,7 @@ class PricesServiceTests{
 		
 		service.getHistoryPrice(req).forEach(p->{
 		    
-		    System.out.println(Formatter.format(p.date(), false) + " " + Formatter.format(p.marketValue()));
+		    System.out.println(Utils.format(p.date(), false) + " " + Utils.format(p.marketValue()));
 		    
 		});
 				

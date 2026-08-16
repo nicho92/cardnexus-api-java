@@ -15,7 +15,7 @@ import org.api.cardnexus.model.MarketVariations;
 import org.api.cardnexus.model.ProductPriceMarket;
 import org.api.cardnexus.model.RegionData;
 import org.api.cardnexus.model.enums.EnumFinishes;
-import org.api.cardnexus.tools.Formatter;
+import org.api.cardnexus.tools.Utils;
 
 public class MarketVariationPanel extends JPanel {
     	private JTree tree;
@@ -39,11 +39,11 @@ public class MarketVariationPanel extends JPanel {
     private DefaultMutableTreeNode addMarketNode( MarketVariations v, String name)
     {
 	    var nodeMarket = new DefaultMutableTreeNode(name);
-	    nodeMarket.add(new DefaultMutableTreeNode("Change 24H ="+Formatter.format(v.change24h()), false));
-	    nodeMarket.add(new DefaultMutableTreeNode("Change 30d ="+Formatter.format(v.change30d()), false));
-	    nodeMarket.add(new DefaultMutableTreeNode("Change 7d ="+Formatter.format(v.change7d()), false));
-	    nodeMarket.add(new DefaultMutableTreeNode("Low ="+Formatter.format(v.low()) + " " + v.currency(), false));
-	    nodeMarket.add(new DefaultMutableTreeNode("Market Value ="+Formatter.format(v.marketValue())+ " " + v.currency(), false));
+	    nodeMarket.add(new DefaultMutableTreeNode("Change 24H ="+Utils.format(v.change24h()), false));
+	    nodeMarket.add(new DefaultMutableTreeNode("Change 30d ="+Utils.format(v.change30d()), false));
+	    nodeMarket.add(new DefaultMutableTreeNode("Change 7d ="+Utils.format(v.change7d()), false));
+	    nodeMarket.add(new DefaultMutableTreeNode("Low ="+Utils.format(v.low()) + " " + v.currency(), false));
+	    nodeMarket.add(new DefaultMutableTreeNode("Market Value ="+Utils.format(v.marketValue())+ " " + v.currency(), false));
 	    return nodeMarket;
     }
     

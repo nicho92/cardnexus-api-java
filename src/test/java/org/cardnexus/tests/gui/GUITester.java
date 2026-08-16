@@ -21,6 +21,7 @@ import org.api.cardnexus.configuration.NexusConfig;
 import org.api.cardnexus.gui.NexusProductPanel;
 import org.api.cardnexus.model.Game;
 import org.api.cardnexus.services.ProductsService;
+import org.api.cardnexus.tools.Utils;
 
 public class GUITester {
 
@@ -67,6 +68,7 @@ public class GUITester {
 	      dialog.setVisible(true);
 	
         	var f = new JFrame();
+        	f.setIconImage(Utils.getNexusImage());
         	f.getContentPane().add(new NexusProductPanel(true,true,true));
         	f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         	f.pack();

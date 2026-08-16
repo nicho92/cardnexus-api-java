@@ -11,6 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.api.cardnexus.gui.model.SalesTableModel;
 import org.api.cardnexus.model.AbstractProduct;
+import org.api.cardnexus.model.NexusAPIException;
 import org.api.cardnexus.services.PricesService;
 
 public class LastProductSalesPanel extends JPanel {
@@ -41,8 +42,8 @@ public class LastProductSalesPanel extends JPanel {
 	try {
 	    var ret = new PricesService().getLastSales(p);
 	    model.init(ret);
-	} catch (IOException e) {
-	  logger.error(e);
+	}catch (IOException e) {
+	  logger.trace(e.getMessage());
 	}
 	
 	
