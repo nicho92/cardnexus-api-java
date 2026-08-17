@@ -59,12 +59,24 @@ public enum EnumRarity {
     
     //DRAGONBALL
     none,
+    special_rare,
+    special_leader_rare,
+    son_gohan_rare,
+    god_rare,
     
     //GRAND ARCHIVE TCG
     @SerializedName(value="Collector Super Rare") collectorsuperrare,
     @SerializedName(value="Collector Promo Rare") collectorpromorare,
     @SerializedName(value="Collector Ultra Rare") collectorultrarare,
-    @SerializedName(value="Promotional Rare") promorare
+    @SerializedName(value="Promotional Rare") promorare,
     
+    
+    //GUNDAM
+    rare_plus,
+    legend_rare_plus,
+    legend_rare,
+    legend_rare_double_plus,
+    common_plus,
+    uncommon_plus
     
 }
