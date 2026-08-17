@@ -41,6 +41,10 @@ public class InventoryLinesRequest extends AbstractGetRequest{
         this.productId = productId;
         return this;
     }
+    public InventoryLinesRequest setProductId(Integer productId) {
+        this.productId = List.of(productId);
+        return this;
+    }    
     public EnumCondition getCondition() {
         return condition;
     }

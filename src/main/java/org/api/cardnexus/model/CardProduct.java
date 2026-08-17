@@ -61,4 +61,4 @@ public class CardProduct extends AbstractProduct {
 }
 
 
-record CardAttributs (List<String> color,List<String> colorIdentity, List<String> types,String description) {}
+record CardAttributs (List<String> colorIdentity, List<String> types,String description) {}

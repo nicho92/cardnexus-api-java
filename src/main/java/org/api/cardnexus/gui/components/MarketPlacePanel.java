@@ -32,6 +32,7 @@ public class MarketPlacePanel extends JTabbedPane {
      
     private transient ProductsService pservice;
     private transient CartService cService;
+    private InventoryPanel inventoryPanel;
    
     public MarketPlacePanel() {
 	
@@ -43,7 +44,7 @@ public class MarketPlacePanel extends JTabbedPane {
 	marketVariationsPanel = new MarketVariationPanel();
 	priceHistoryPanel = new PriceHistoryPanel();
 	salesPanel = new LastProductSalesPanel();
-	
+	inventoryPanel = new InventoryPanel();
 	
 	var panelMarketList = new JPanel();
 	var panelMarketListCommands = new JPanel();
@@ -68,6 +69,8 @@ public class MarketPlacePanel extends JTabbedPane {
 	addTab("Markets",marketVariationsPanel);
 	addTab("History", priceHistoryPanel);
 	addTab("Last Sales", salesPanel);
+	addTab("Inventory",inventoryPanel);
+	
 	
 	tableMarketLists.getSelectionModel().addListSelectionListener(e->{
 	    if (!e.getValueIsAdjusting()) 
@@ -97,6 +100,7 @@ public class MarketPlacePanel extends JTabbedPane {
 	    modelMarketList.init(pservice.listMarketListing(MarketListRequest.create().setProductId(p.getId())));
 	    marketVariationsPanel.init(p.getPrices());
 	    priceHistoryPanel.init(p);
+	    inventoryPanel.init(p);
 	    salesPanel.init(p);
 	    
 	} catch (IOException e) {

@@ -2,7 +2,6 @@ package org.api.cardnexus.gui.components;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.List;
@@ -91,7 +90,7 @@ public class PriceHistoryPanel extends JPanel {
 	{
         	for(var p : new EnumMarketPlace[] {EnumMarketPlace.cardmarket, EnumMarketPlace.tcgplayer})
         	{
-        	    	var series1 = new TimeSeries(p.name() + " " + f);
+        	    	var series1 = new TimeSeries(p.name() + " " + f );
                 	res.stream().filter(h->h.marketplace()==p && h.finish()==f).forEach(h-> series1.add(new Day(h.date()), h.marketValue()));
                 	dataset.addSeries(series1);
         	}
