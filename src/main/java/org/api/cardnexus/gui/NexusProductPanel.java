@@ -7,6 +7,7 @@ import java.util.concurrent.ExecutionException;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -25,6 +26,7 @@ import org.api.cardnexus.gui.components.ProductPicturePanel;
 import org.api.cardnexus.gui.model.NexusProductTableModel;
 import org.api.cardnexus.model.AbstractProduct;
 import org.api.cardnexus.model.Expansion;
+import org.api.cardnexus.model.enums.EnumProductType;
 import org.api.cardnexus.model.requests.SearchProductRequest;
 import org.api.cardnexus.services.ProductsService;
 
@@ -67,8 +69,19 @@ public class NexusProductPanel extends JPanel{
 		var panelListMarket = new MarketPlacePanel();
 		var listExpansion = new JList<Expansion>(modelExpansions);
 		 
+		var chkSealed = new JCheckBox("Sealed");
+		var chkCard = new JCheckBox("Card");
+		
+		
+		chkSealed.setSelected(true);
+		chkCard.setSelected(true);
+		
 		add(new JScrollPane(table), BorderLayout.CENTER);
 		add(panel, BorderLayout.NORTH);
+		
+		panel.add(chkSealed);
+		panel.add(chkCard);
+		
 		panel.add(textField);
 		panel.add(btnSearch);
 		panel.add(loading);
@@ -148,7 +161,16 @@ public class NexusProductPanel extends JPanel{
 
 				@Override
 				protected List<AbstractProduct> doInBackground() throws Exception {
-				   return service.searchProduct(SearchProductRequest.create().setExpansionId(listExpansion.getSelectedValue().id()));
+				    
+				    var req = SearchProductRequest.create().setExpansionId(listExpansion.getSelectedValue().id());
+				    	
+				    if(chkCard.isSelected() && chkSealed.isSelected())
+					req.setProductTypes(EnumProductType.card, EnumProductType.sealed);
+				    else
+					req.setProductTypes(chkSealed.isSelected()?EnumProductType.sealed:EnumProductType.card);
+				    
+				    
+				   return service.searchProduct(req);
 				}
 
 				@Override
@@ -176,7 +198,16 @@ public class NexusProductPanel extends JPanel{
 
 				@Override
 				protected List<AbstractProduct> doInBackground() throws Exception {
-				   return service.searchProduct(SearchProductRequest.create().setName(textField.getText()).contains());
+				    var req = SearchProductRequest.create().setName(textField.getText()).contains();
+				    
+				    if(chkCard.isSelected() && chkSealed.isSelected())
+						req.setProductTypes(EnumProductType.card, EnumProductType.sealed);
+					    else
+						req.setProductTypes(chkSealed.isSelected()?EnumProductType.sealed:EnumProductType.card);
+		
+				    
+				    
+				   return service.searchProduct(req);
 				}
 
 				@Override
