@@ -35,7 +35,7 @@ public class MarketListTableModel extends DefaultTableModel {
 		case 4 : return l.condition();
 		case 5 : return l.finish();
 		case 6 : return l.price();
-		case 7 : return l.shipping();
+		case 7 : return l.seller().shipping();
 		default: return null;
         }
     }

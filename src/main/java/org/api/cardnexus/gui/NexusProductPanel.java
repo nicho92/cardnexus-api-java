@@ -114,10 +114,6 @@ public class NexusProductPanel extends JPanel{
 			
 		}});
 		
-		
-		
-		
-		
 		  var wkEx = new SwingWorker<List<Expansion>, Void>()
 			  {
 
@@ -177,7 +173,7 @@ public class NexusProductPanel extends JPanel{
 				protected void done() {
 				    try {
 					modelProducts.init(get());
-				    } catch (InterruptedException e) {
+				    } catch (InterruptedException _) {
 					Thread.currentThread().interrupt();
 				    } catch (ExecutionException e) {
 					logger.error(e);
