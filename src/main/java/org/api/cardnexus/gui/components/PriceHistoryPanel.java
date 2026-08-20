@@ -76,11 +76,8 @@ public class PriceHistoryPanel extends JPanel {
 			logger.error(e);
 		    }
 		}
-		
 	    };
-	    
 	    wk.execute();
-	    
     }
     
     private TimeSeriesCollection createDataSet(List<History> res) {
