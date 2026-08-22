@@ -1,5 +1,6 @@
 package org.api.cardnexus.gui;
 
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
@@ -23,6 +24,7 @@ import javax.swing.SwingWorker;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.api.cardnexus.model.Account;
+import org.api.cardnexus.model.Balance;
 import org.api.cardnexus.model.Vacation;
 import org.api.cardnexus.model.enums.EnumAccountStatus;
 import org.api.cardnexus.model.enums.EnumScopes;
@@ -33,7 +35,16 @@ public class NexusAccountPanel extends JPanel {
     
     protected transient Logger logger = LogManager.getLogger(getClass());
     private DefaultListModel<EnumScopes> modelScope;
-    
+    private JLabel lblAvailable;
+    private JLabel lblPending;
+
+    private static final long serialVersionUID = 1L;
+    private JTextField txtID;
+    private JTextField txtUsername;
+    private JTextField txtEmail;
+    private JTextField txtCreated;
+    private JLabel lblAvatar;
+    private JCheckBox chkVacation; 
     
     public NexusAccountPanel() {
 	    
@@ -42,14 +53,14 @@ public class NexusAccountPanel extends JPanel {
 	    initGUI();
 	    
 	    try {
-		init(service.getAccount(), service.getVacationMode());
+		init(service.getAccount(), service.getVacationMode(),service.getWalletBalance());
 	    } catch (IOException e) {
 		logger.error(e);
 	    }
 	    
 	}
 	
-	public void init(Account account, Vacation vacation) {
+	public void init(Account account, Vacation vacation, Balance balance) {
 	    txtID.setText(account.id());
 	    txtUsername.setText(account.username());
 	    txtEmail.setText(account.email());
@@ -59,6 +70,8 @@ public class NexusAccountPanel extends JPanel {
 	    chkVacation.setSelected(vacation.status()!=EnumAccountStatus.active);
 	    
 	    
+	    lblAvailable.setText("Available : " + balance.available());
+	    lblPending.setText("Pending : " + balance.pending());
 	    
 	    modelScope.removeAllElements();
 	    modelScope.addAll(account.scopes());
@@ -90,9 +103,9 @@ public class NexusAccountPanel extends JPanel {
 	{
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{79, 347, 69, 0, 0};
-		gridBagLayout.rowHeights = new int[]{78, 0, 0, 0, 0, 0, 0, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		gridBagLayout.rowHeights = new int[]{78, 0, 0, 0, 0, 0, 0, 0, 0};
+		gridBagLayout.columnWeights = new double[]{1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		lblAvatar = new JLabel(" ");
@@ -189,7 +202,7 @@ public class NexusAccountPanel extends JPanel {
 		JLabel lblScopes = new JLabel("Scopes :");
 		GridBagConstraints gbc_lblScopes = new GridBagConstraints();
 		gbc_lblScopes.anchor = GridBagConstraints.NORTHEAST;
-		gbc_lblScopes.insets = new Insets(0, 0, 0, 5);
+		gbc_lblScopes.insets = new Insets(0, 0, 5, 5);
 		gbc_lblScopes.gridx = 0;
 		gbc_lblScopes.gridy = 6;
 		add(lblScopes, gbc_lblScopes);
@@ -197,19 +210,36 @@ public class NexusAccountPanel extends JPanel {
 		modelScope = new DefaultListModel<EnumScopes>();
 		var lstScops = new JList<>(modelScope);
 		GridBagConstraints gbc_lstScops = new GridBagConstraints();
-		gbc_lstScops.insets = new Insets(0, 0, 0, 5);
+		gbc_lstScops.insets = new Insets(0, 0, 5, 5);
 		gbc_lstScops.fill = GridBagConstraints.BOTH;
 		gbc_lstScops.gridx = 1;
 		gbc_lstScops.gridy = 6;
 		add(new JScrollPane(lstScops), gbc_lstScops);
+		
+		JLabel lblBalance = new JLabel("Balance : ");
+		GridBagConstraints gbc_lblBalance = new GridBagConstraints();
+		gbc_lblBalance.anchor = GridBagConstraints.EAST;
+		gbc_lblBalance.insets = new Insets(0, 0, 0, 5);
+		gbc_lblBalance.gridx = 0;
+		gbc_lblBalance.gridy = 7;
+		add(lblBalance, gbc_lblBalance);
+		
+		JPanel panel = new JPanel();
+		GridBagConstraints gbc_panel = new GridBagConstraints();
+		gbc_panel.insets = new Insets(0, 0, 0, 5);
+		gbc_panel.fill = GridBagConstraints.BOTH;
+		gbc_panel.gridx = 1;
+		gbc_panel.gridy = 7;
+		add(panel, gbc_panel);
+		
+		lblAvailable = new JLabel("Available");
+		lblAvailable.setFont(new Font("Tahoma", Font.BOLD, 16));
+		panel.add(lblAvailable);
+		
+		lblPending = new JLabel("Pending");
+		lblPending.setFont(new Font("Tahoma", Font.BOLD, 16));
+		panel.add(lblPending);
 	}
 	
 
-    private static final long serialVersionUID = 1L;
-    private JTextField txtID;
-    private JTextField txtUsername;
-    private JTextField txtEmail;
-    private JTextField txtCreated;
-    private JLabel lblAvatar;
-    private JCheckBox chkVacation; 
 }
