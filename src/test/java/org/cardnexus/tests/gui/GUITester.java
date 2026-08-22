@@ -16,6 +16,7 @@ import javax.swing.ListCellRenderer;
 import javax.swing.WindowConstants;
 
 import org.api.cardnexus.configuration.NexusConfig;
+import org.api.cardnexus.gui.NexusAccountPanel;
 import org.api.cardnexus.gui.NexusProductPanel;
 import org.api.cardnexus.model.Game;
 import org.api.cardnexus.services.ProductsService;
@@ -67,7 +68,7 @@ public class GUITester {
 	
         	var f = new JFrame();
         	f.setIconImage(Utils.getNexusImage());
-        	f.getContentPane().add(new NexusProductPanel(true,true,true));
+        	f.getContentPane().add(new NexusAccountPanel());
         	f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         	f.pack();
         	f.setVisible(true);

@@ -1,7 +1,6 @@
 package org.api.cardnexus.services;
 
 import java.io.IOException;
-import java.net.URI;
 
 import org.api.cardnexus.model.Account;
 import org.api.cardnexus.model.Balance;
