@@ -22,7 +22,6 @@ import org.api.cardnexus.services.ProductsService;
 import org.api.cardnexus.tools.Utils;
 
 public class GUITester {
-
     
 
     public static void main(String[] args) throws IOException {

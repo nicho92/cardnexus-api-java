@@ -258,7 +258,7 @@ public class NexusAccountPanel extends JPanel {
 		panel.add(lblPending);
 		
 		sellerPanel = new SellerPanel();
-		sellerPanel.setBorder(new TitledBorder(null, "Seller : ", TitledBorder.LEFT, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		sellerPanel.setBorder(new TitledBorder(null, "Seller : ", TitledBorder.LEFT, TitledBorder.TOP, null));
 		GridBagConstraints gbc_sellerPanel = new GridBagConstraints();
 		gbc_sellerPanel.gridwidth = 2;
 		gbc_sellerPanel.fill = GridBagConstraints.BOTH;
