@@ -5,6 +5,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.event.ItemEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URI;
@@ -16,6 +17,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -30,6 +32,9 @@ import org.api.cardnexus.model.enums.EnumAccountStatus;
 import org.api.cardnexus.model.enums.EnumScopes;
 import org.api.cardnexus.services.AccountService;
 import org.api.cardnexus.tools.Utils;
+import org.api.cardnexus.gui.components.SellerPanel;
+import javax.swing.border.TitledBorder;
+import java.awt.Color;
 
 public class NexusAccountPanel extends JPanel {
     
@@ -44,11 +49,13 @@ public class NexusAccountPanel extends JPanel {
     private JTextField txtEmail;
     private JTextField txtCreated;
     private JLabel lblAvatar;
-    private JCheckBox chkVacation; 
+    private JCheckBox chkVacation;
+    private AccountService service;
+    private SellerPanel sellerPanel; 
     
     public NexusAccountPanel() {
 	    
-	    var service = new AccountService();
+	   service = new AccountService();
 	    
 	    initGUI();
 	    
@@ -75,6 +82,24 @@ public class NexusAccountPanel extends JPanel {
 	    
 	    modelScope.removeAllElements();
 	    modelScope.addAll(account.scopes());
+	    
+	    sellerPanel.setSeller(account.seller());
+	    
+	    chkVacation.addItemListener((ItemEvent e) -> {
+		
+		var input="";
+		
+		if(e.getStateChange()==ItemEvent.SELECTED)
+		    input = JOptionPane.showInputDialog(this, "Vacation Message ? ");
+		
+		try {
+		    service.setVacationMode(e.getStateChange()==ItemEvent.SELECTED, input);
+		} catch (IOException e1) {
+		   logger.error(e1);
+		}
+	        
+	    });
+	    
 	    
 	    var wk = new SwingWorker<BufferedImage, Void>()
 	    {
@@ -104,8 +129,8 @@ public class NexusAccountPanel extends JPanel {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{79, 347, 69, 0, 0};
 		gridBagLayout.rowHeights = new int[]{78, 0, 0, 0, 0, 0, 0, 0, 0};
-		gridBagLayout.columnWeights = new double[]{1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, Double.MIN_VALUE};
+		gridBagLayout.columnWeights = new double[]{0.0, 1.0, 1.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 1.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		lblAvatar = new JLabel(" ");
@@ -132,21 +157,6 @@ public class NexusAccountPanel extends JPanel {
 		gbc_txtID.gridy = 1;
 		add(txtID, gbc_txtID);
 		txtID.setColumns(10);
-		
-		JLabel lblVacation = new JLabel("Vacation :");
-		GridBagConstraints gbc_lblVacation = new GridBagConstraints();
-		gbc_lblVacation.anchor = GridBagConstraints.EAST;
-		gbc_lblVacation.insets = new Insets(0, 0, 5, 5);
-		gbc_lblVacation.gridx = 2;
-		gbc_lblVacation.gridy = 1;
-		add(lblVacation, gbc_lblVacation);
-		
-		chkVacation = new JCheckBox(" ");
-		GridBagConstraints gbc_chkVacation = new GridBagConstraints();
-		gbc_chkVacation.insets = new Insets(0, 0, 5, 0);
-		gbc_chkVacation.gridx = 3;
-		gbc_chkVacation.gridy = 1;
-		add(chkVacation, gbc_chkVacation);
 		
 		JLabel lblUsername = new JLabel("Username : ");
 		GridBagConstraints gbc_lblUsername = new GridBagConstraints();
@@ -216,6 +226,13 @@ public class NexusAccountPanel extends JPanel {
 		gbc_lstScops.gridy = 6;
 		add(new JScrollPane(lstScops), gbc_lstScops);
 		
+		chkVacation = new JCheckBox("Vacation");
+		GridBagConstraints gbc_chkVacation = new GridBagConstraints();
+		gbc_chkVacation.insets = new Insets(0, 0, 5, 5);
+		gbc_chkVacation.gridx = 2;
+		gbc_chkVacation.gridy = 6;
+		add(chkVacation, gbc_chkVacation);
+		
 		JLabel lblBalance = new JLabel("Balance : ");
 		GridBagConstraints gbc_lblBalance = new GridBagConstraints();
 		gbc_lblBalance.anchor = GridBagConstraints.EAST;
@@ -227,7 +244,7 @@ public class NexusAccountPanel extends JPanel {
 		JPanel panel = new JPanel();
 		GridBagConstraints gbc_panel = new GridBagConstraints();
 		gbc_panel.insets = new Insets(0, 0, 0, 5);
-		gbc_panel.fill = GridBagConstraints.BOTH;
+		gbc_panel.fill = GridBagConstraints.HORIZONTAL;
 		gbc_panel.gridx = 1;
 		gbc_panel.gridy = 7;
 		add(panel, gbc_panel);
@@ -239,6 +256,15 @@ public class NexusAccountPanel extends JPanel {
 		lblPending = new JLabel("Pending");
 		lblPending.setFont(new Font("Tahoma", Font.BOLD, 16));
 		panel.add(lblPending);
+		
+		sellerPanel = new SellerPanel();
+		sellerPanel.setBorder(new TitledBorder(null, "Seller : ", TitledBorder.LEFT, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		GridBagConstraints gbc_sellerPanel = new GridBagConstraints();
+		gbc_sellerPanel.gridwidth = 2;
+		gbc_sellerPanel.fill = GridBagConstraints.BOTH;
+		gbc_sellerPanel.gridx = 2;
+		gbc_sellerPanel.gridy = 7;
+		add(sellerPanel, gbc_sellerPanel);
 	}
 	
 

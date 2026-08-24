@@ -17,7 +17,6 @@ import javax.swing.WindowConstants;
 
 import org.api.cardnexus.configuration.NexusConfig;
 import org.api.cardnexus.gui.NexusAccountPanel;
-import org.api.cardnexus.gui.NexusProductPanel;
 import org.api.cardnexus.model.Game;
 import org.api.cardnexus.services.ProductsService;
 import org.api.cardnexus.tools.Utils;
