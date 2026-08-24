@@ -162,7 +162,7 @@ public class GuiExample {
 
         var frame = new JFrame("CardNexus products");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setContentPane(new NexusProductPanel(true, true));
+        frame.setContentPane(new NexusProductPanel(true, true, true));
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
