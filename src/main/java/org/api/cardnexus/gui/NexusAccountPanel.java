@@ -157,7 +157,7 @@ public class NexusAccountPanel extends JPanel {
 		add(txtID, gbc_txtID);
 		txtID.setColumns(10);
 		
-		JLabel lblUsername = new JLabel("Username : ");
+		JLabel lblUsername = new JLabel("Username :");
 		GridBagConstraints gbc_lblUsername = new GridBagConstraints();
 		gbc_lblUsername.anchor = GridBagConstraints.EAST;
 		gbc_lblUsername.insets = new Insets(0, 0, 5, 5);
@@ -235,7 +235,7 @@ public class NexusAccountPanel extends JPanel {
 		gbc_chkVacation.gridy = 4;
 		add(chkVacation, gbc_chkVacation);
 		
-		JLabel lblBalance = new JLabel("Balance : ");
+		JLabel lblBalance = new JLabel("Balance :");
 		GridBagConstraints gbc_lblBalance = new GridBagConstraints();
 		gbc_lblBalance.anchor = GridBagConstraints.EAST;
 		gbc_lblBalance.insets = new Insets(0, 0, 0, 5);
