@@ -22,9 +22,11 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.SwingWorker;
+import javax.swing.border.TitledBorder;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.api.cardnexus.gui.components.SellerPanel;
 import org.api.cardnexus.model.Account;
 import org.api.cardnexus.model.Balance;
 import org.api.cardnexus.model.Vacation;
@@ -32,9 +34,6 @@ import org.api.cardnexus.model.enums.EnumAccountStatus;
 import org.api.cardnexus.model.enums.EnumScopes;
 import org.api.cardnexus.services.AccountService;
 import org.api.cardnexus.tools.Utils;
-import org.api.cardnexus.gui.components.SellerPanel;
-import javax.swing.border.TitledBorder;
-import java.awt.Color;
 
 public class NexusAccountPanel extends JPanel {
     
@@ -50,7 +49,7 @@ public class NexusAccountPanel extends JPanel {
     private JTextField txtCreated;
     private JLabel lblAvatar;
     private JCheckBox chkVacation;
-    private AccountService service;
+    private transient AccountService service;
     private SellerPanel sellerPanel; 
     
     public NexusAccountPanel() {
@@ -64,7 +63,6 @@ public class NexusAccountPanel extends JPanel {
 	    } catch (IOException e) {
 		logger.error(e);
 	    }
-	    
 	}
 	
 	public void init(Account account, Vacation vacation, Balance balance) {
@@ -127,17 +125,17 @@ public class NexusAccountPanel extends JPanel {
 	private void initGUI()
 	{
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{79, 347, 69, 0, 0};
-		gridBagLayout.rowHeights = new int[]{78, 0, 0, 0, 0, 0, 0, 0, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 1.0, 1.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 1.0, Double.MIN_VALUE};
+		gridBagLayout.columnWidths = new int[]{79, 347, 69, 0};
+		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
+		gridBagLayout.columnWeights = new double[]{0.0, 1.0, 1.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 1.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		lblAvatar = new JLabel(" ");
 		GridBagConstraints gbc_lblAvatar = new GridBagConstraints();
-		gbc_lblAvatar.gridwidth = 2;
-		gbc_lblAvatar.insets = new Insets(0, 0, 5, 5);
-		gbc_lblAvatar.gridx = 0;
+		gbc_lblAvatar.gridheight = 3;
+		gbc_lblAvatar.insets = new Insets(0, 0, 5, 0);
+		gbc_lblAvatar.gridx = 2;
 		gbc_lblAvatar.gridy = 0;
 		add(lblAvatar, gbc_lblAvatar);
 		
@@ -146,15 +144,16 @@ public class NexusAccountPanel extends JPanel {
 		gbc_lblNewLabel.anchor = GridBagConstraints.EAST;
 		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel.gridx = 0;
-		gbc_lblNewLabel.gridy = 1;
+		gbc_lblNewLabel.gridy = 0;
 		add(lblNewLabel, gbc_lblNewLabel);
 		
 		txtID = new JTextField();
+		txtID.setEditable(false);
 		GridBagConstraints gbc_txtID = new GridBagConstraints();
 		gbc_txtID.insets = new Insets(0, 0, 5, 5);
 		gbc_txtID.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtID.gridx = 1;
-		gbc_txtID.gridy = 1;
+		gbc_txtID.gridy = 0;
 		add(txtID, gbc_txtID);
 		txtID.setColumns(10);
 		
@@ -163,15 +162,16 @@ public class NexusAccountPanel extends JPanel {
 		gbc_lblUsername.anchor = GridBagConstraints.EAST;
 		gbc_lblUsername.insets = new Insets(0, 0, 5, 5);
 		gbc_lblUsername.gridx = 0;
-		gbc_lblUsername.gridy = 2;
+		gbc_lblUsername.gridy = 1;
 		add(lblUsername, gbc_lblUsername);
 		
 		txtUsername = new JTextField();
+		txtUsername.setEditable(false);
 		GridBagConstraints gbc_txtUsername = new GridBagConstraints();
 		gbc_txtUsername.insets = new Insets(0, 0, 5, 5);
 		gbc_txtUsername.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtUsername.gridx = 1;
-		gbc_txtUsername.gridy = 2;
+		gbc_txtUsername.gridy = 1;
 		add(txtUsername, gbc_txtUsername);
 		txtUsername.setColumns(10);
 		
@@ -180,15 +180,16 @@ public class NexusAccountPanel extends JPanel {
 		gbc_lblEmail.anchor = GridBagConstraints.EAST;
 		gbc_lblEmail.insets = new Insets(0, 0, 5, 5);
 		gbc_lblEmail.gridx = 0;
-		gbc_lblEmail.gridy = 3;
+		gbc_lblEmail.gridy = 2;
 		add(lblEmail, gbc_lblEmail);
 		
 		txtEmail = new JTextField();
+		txtEmail.setEditable(false);
 		GridBagConstraints gbc_txtEmail = new GridBagConstraints();
 		gbc_txtEmail.insets = new Insets(0, 0, 5, 5);
 		gbc_txtEmail.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtEmail.gridx = 1;
-		gbc_txtEmail.gridy = 3;
+		gbc_txtEmail.gridy = 2;
 		add(txtEmail, gbc_txtEmail);
 		txtEmail.setColumns(10);
 		
@@ -197,15 +198,16 @@ public class NexusAccountPanel extends JPanel {
 		gbc_lblCreated.insets = new Insets(0, 0, 5, 5);
 		gbc_lblCreated.anchor = GridBagConstraints.EAST;
 		gbc_lblCreated.gridx = 0;
-		gbc_lblCreated.gridy = 4;
+		gbc_lblCreated.gridy = 3;
 		add(lblCreated, gbc_lblCreated);
 		
 		txtCreated = new JTextField();
+		txtCreated.setEditable(false);
 		GridBagConstraints gbc_txtCreated = new GridBagConstraints();
 		gbc_txtCreated.insets = new Insets(0, 0, 5, 5);
 		gbc_txtCreated.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtCreated.gridx = 1;
-		gbc_txtCreated.gridy = 4;
+		gbc_txtCreated.gridy = 3;
 		add(txtCreated, gbc_txtCreated);
 		txtCreated.setColumns(10);
 		
@@ -214,7 +216,7 @@ public class NexusAccountPanel extends JPanel {
 		gbc_lblScopes.anchor = GridBagConstraints.NORTHEAST;
 		gbc_lblScopes.insets = new Insets(0, 0, 5, 5);
 		gbc_lblScopes.gridx = 0;
-		gbc_lblScopes.gridy = 6;
+		gbc_lblScopes.gridy = 4;
 		add(lblScopes, gbc_lblScopes);
 		
 		modelScope = new DefaultListModel<EnumScopes>();
@@ -223,14 +225,14 @@ public class NexusAccountPanel extends JPanel {
 		gbc_lstScops.insets = new Insets(0, 0, 5, 5);
 		gbc_lstScops.fill = GridBagConstraints.BOTH;
 		gbc_lstScops.gridx = 1;
-		gbc_lstScops.gridy = 6;
+		gbc_lstScops.gridy = 4;
 		add(new JScrollPane(lstScops), gbc_lstScops);
 		
 		chkVacation = new JCheckBox("Vacation");
 		GridBagConstraints gbc_chkVacation = new GridBagConstraints();
-		gbc_chkVacation.insets = new Insets(0, 0, 5, 5);
+		gbc_chkVacation.insets = new Insets(0, 0, 5, 0);
 		gbc_chkVacation.gridx = 2;
-		gbc_chkVacation.gridy = 6;
+		gbc_chkVacation.gridy = 4;
 		add(chkVacation, gbc_chkVacation);
 		
 		JLabel lblBalance = new JLabel("Balance : ");
@@ -238,7 +240,7 @@ public class NexusAccountPanel extends JPanel {
 		gbc_lblBalance.anchor = GridBagConstraints.EAST;
 		gbc_lblBalance.insets = new Insets(0, 0, 0, 5);
 		gbc_lblBalance.gridx = 0;
-		gbc_lblBalance.gridy = 7;
+		gbc_lblBalance.gridy = 5;
 		add(lblBalance, gbc_lblBalance);
 		
 		JPanel panel = new JPanel();
@@ -246,7 +248,7 @@ public class NexusAccountPanel extends JPanel {
 		gbc_panel.insets = new Insets(0, 0, 0, 5);
 		gbc_panel.fill = GridBagConstraints.HORIZONTAL;
 		gbc_panel.gridx = 1;
-		gbc_panel.gridy = 7;
+		gbc_panel.gridy = 5;
 		add(panel, gbc_panel);
 		
 		lblAvailable = new JLabel("Available");
@@ -260,10 +262,9 @@ public class NexusAccountPanel extends JPanel {
 		sellerPanel = new SellerPanel();
 		sellerPanel.setBorder(new TitledBorder(null, "Seller : ", TitledBorder.LEFT, TitledBorder.TOP, null));
 		GridBagConstraints gbc_sellerPanel = new GridBagConstraints();
-		gbc_sellerPanel.gridwidth = 2;
 		gbc_sellerPanel.fill = GridBagConstraints.BOTH;
 		gbc_sellerPanel.gridx = 2;
-		gbc_sellerPanel.gridy = 7;
+		gbc_sellerPanel.gridy = 5;
 		add(sellerPanel, gbc_sellerPanel);
 	}
 	
