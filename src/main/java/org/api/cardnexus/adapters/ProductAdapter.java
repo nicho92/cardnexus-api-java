@@ -16,6 +16,8 @@ import com.google.gson.JsonParseException;
 
 public class ProductAdapter implements JsonDeserializer<AbstractProduct>{
     	protected Logger logger = LogManager.getLogger(getClass());
+    	
+    	
     	@Override
 	public AbstractProduct deserialize(JsonElement elem, Type interfaceType, JsonDeserializationContext context) throws JsonParseException {
 		try {

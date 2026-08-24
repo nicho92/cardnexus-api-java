@@ -3,8 +3,10 @@ package org.api.cardnexus.tools;
 import java.lang.reflect.Type;
 import java.util.List;
 
+import org.api.cardnexus.adapters.AttributsAdapter;
 import org.api.cardnexus.adapters.ProductAdapter;
 import org.api.cardnexus.configuration.NexusConfig;
+import org.api.cardnexus.model.AbstractCardAttributs;
 import org.api.cardnexus.model.AbstractProduct;
 
 import com.google.gson.Gson;
@@ -18,8 +20,11 @@ public class JsonService {
     private final Gson gson;
     
     public JsonService() {
-        var builder = new GsonBuilder().registerTypeAdapter(AbstractProduct.class, new ProductAdapter());
-        
+        var builder = new GsonBuilder()
+        		.registerTypeAdapter(AbstractProduct.class, new ProductAdapter())
+        		.registerTypeAdapter(AbstractCardAttributs.class, new AttributsAdapter())
+        		;
+        		
         if(NexusConfig.isGsonPrettyPrint())
             builder.setPrettyPrinting();
         

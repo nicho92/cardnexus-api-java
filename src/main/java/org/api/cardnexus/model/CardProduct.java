@@ -14,11 +14,17 @@ public class CardProduct extends AbstractProduct {
     private EnumRarity rarity;
     private List<EnumFinishes> finishes;
     private Map<EnumFinishes, ProductPriceMarket> pricesByFinish;
-    private CardAttributs attributes;
+    private AbstractCardAttributs attributes;
     private EnumVariant variant;
+    
+    
 
-    
-    
+    public <T extends AbstractCardAttributs> T getAttributesAs(Class<T> type) {
+	    if (!type.isInstance(attributes)) {
+	        throw new IllegalStateException("Attributes are of type " + attributes.getClass().getSimpleName() + ", not " + type.getSimpleName());
+	    }
+	    return type.cast(attributes);
+	}
     
     @Override
     public int hashCode() {
@@ -33,6 +39,8 @@ public class CardProduct extends AbstractProduct {
         return false;
    }
     
+   
+   @Override
    public Map<EnumFinishes, ProductPriceMarket> getPrices() {
        return pricesByFinish;
    }
@@ -42,7 +50,7 @@ public class CardProduct extends AbstractProduct {
            pricesByFinish = map;
     }
    
-    public CardAttributs getAttributes() {
+    public AbstractCardAttributs getAttributes() {
 	return attributes;
     }
     public String getPrintNumber() {
@@ -59,6 +67,3 @@ public class CardProduct extends AbstractProduct {
     }
     
 }
-
-
-record CardAttributs (List<String> colorIdentity, List<String> types,String description) {}
