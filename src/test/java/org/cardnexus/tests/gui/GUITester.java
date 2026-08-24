@@ -12,11 +12,17 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JTabbedPane;
 import javax.swing.ListCellRenderer;
 import javax.swing.WindowConstants;
 
 import org.api.cardnexus.configuration.NexusConfig;
 import org.api.cardnexus.gui.NexusAccountPanel;
+import org.api.cardnexus.gui.NexusCartPanel;
+import org.api.cardnexus.gui.NexusListsPanel;
+import org.api.cardnexus.gui.NexusProductPanel;
+import org.api.cardnexus.gui.NexusTagsAndLocationPanel;
+import org.api.cardnexus.gui.NexusWizardPanel;
 import org.api.cardnexus.model.Game;
 import org.api.cardnexus.services.ProductsService;
 import org.api.cardnexus.tools.Utils;
@@ -64,9 +70,21 @@ public class GUITester {
 	      dialog.pack();
 	      dialog.setVisible(true);
 	
-        	var f = new JFrame();
+        	var f = new JFrame("CardNexus");
         	f.setIconImage(Utils.getNexusImage());
-        	f.getContentPane().add(new NexusAccountPanel());
+        	
+        	JTabbedPane pane = new JTabbedPane();
+        		pane.addTab("Account", new NexusAccountPanel());
+        		pane.addTab("Products", new NexusProductPanel(true,true,true));
+        		pane.addTab("Lists", new NexusListsPanel());
+        		pane.addTab("Wizard", new NexusWizardPanel());
+        		pane.addTab("Cart", new NexusCartPanel());
+        		pane.addTab("Tags & Location", new NexusTagsAndLocationPanel());
+        		
+        	f.getContentPane().add(pane);
+        	
+        	       	
+        	
         	f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         	f.pack();
         	f.setVisible(true);
