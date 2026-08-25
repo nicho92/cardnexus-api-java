@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListCellRenderer;
@@ -23,8 +24,10 @@ import org.api.cardnexus.configuration.NexusConfig;
 import org.api.cardnexus.gui.components.LoadingLabel;
 import org.api.cardnexus.gui.components.MarketPlacePanel;
 import org.api.cardnexus.gui.components.ProductPicturePanel;
+import org.api.cardnexus.gui.model.MapTableModel;
 import org.api.cardnexus.gui.model.NexusProductTableModel;
 import org.api.cardnexus.model.AbstractProduct;
+import org.api.cardnexus.model.CardProduct;
 import org.api.cardnexus.model.Expansion;
 import org.api.cardnexus.model.enums.EnumProductType;
 import org.api.cardnexus.model.requests.SearchProductRequest;
@@ -39,6 +42,7 @@ public class NexusProductPanel extends JPanel{
     protected transient Logger logger = LogManager.getLogger(getClass());
     private AbstractProduct selectedProduct;
     private DefaultListModel<Expansion> modelExpansions;
+	private MapTableModel attributsModel;
     
     
     public NexusProductPanel()
@@ -57,6 +61,7 @@ public class NexusProductPanel extends JPanel{
 	
 		setLayout(new BorderLayout());
 		
+		attributsModel = new MapTableModel();
 		modelProducts = new NexusProductTableModel();
 		modelExpansions = new DefaultListModel<Expansion>();
 		
@@ -65,7 +70,7 @@ public class NexusProductPanel extends JPanel{
 		var panel = new JPanel();
 		var textField = new JTextField(30);
 		var btnSearch = new JButton("Search");
-		var productPanel = new ProductPicturePanel();
+		var picturePanel = new ProductPicturePanel();
 		var panelListMarket = new MarketPlacePanel();
 		var listExpansion = new JList<Expansion>(modelExpansions);
 		 
@@ -87,7 +92,13 @@ public class NexusProductPanel extends JPanel{
 		panel.add(loading);
 		
 		if(showdetails) 
-		    add(productPanel, BorderLayout.EAST);
+		{
+			var pane = new JTabbedPane();
+			
+			pane.addTab("Picture",picturePanel);
+			pane.add("Attributs",new JScrollPane(new JTable(attributsModel)));
+			add(pane, BorderLayout.EAST);
+		}
 		
 		if(showListings) 
 		    add(panelListMarket, BorderLayout.SOUTH);
@@ -114,7 +125,7 @@ public class NexusProductPanel extends JPanel{
 			
 		}});
 		
-		  var wkEx = new SwingWorker<List<Expansion>, Void>()
+		var wkEx = new SwingWorker<List<Expansion>, Void>()
 			  {
 
 			    @Override
@@ -137,7 +148,7 @@ public class NexusProductPanel extends JPanel{
 			    
 			  };
 			  
-			  wkEx.execute();
+		wkEx.execute();
 		
 		table.setDefaultRenderer(Expansion.class, (JTable _, Object value, boolean _, boolean _,int _, int _) -> {
 		    	var ex = (Expansion)value;
@@ -235,7 +246,12 @@ public class NexusProductPanel extends JPanel{
 		        	     {
 		        		 selectedProduct = service.getProductById(id);
 		        		 if(showdetails)
-		        		     productPanel.init(selectedProduct);
+		        		 {
+		        			 picturePanel.init(selectedProduct);
+		        			 if(selectedProduct instanceof CardProduct card)
+		        				 attributsModel.init(card.getAttributes());
+		        			 
+		        		 }
 		        		
 		        		 if(showListings)		        		 
 		        		     panelListMarket.init(selectedProduct);

@@ -14,7 +14,7 @@ public class CardProduct extends AbstractProduct {
     private EnumRarity rarity;
     private List<EnumFinishes> finishes;
     private Map<EnumFinishes, ProductPriceMarket> pricesByFinish;
-    private AbstractCardAttributs attributes;
+    private Map<String,Object> attributes;
     private EnumVariant variant;
     
     
@@ -50,8 +50,8 @@ public class CardProduct extends AbstractProduct {
            pricesByFinish = map;
     }
    
-    public AbstractCardAttributs getAttributes() {
-	return attributes;
+    public Map<String,Object> getAttributes() {
+    	return attributes;
     }
     public String getPrintNumber() {
         return printNumber;
