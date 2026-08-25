@@ -133,7 +133,7 @@ public class Example {
 | `ProductsService` | List games and expansions, search products, resolve external IDs, and cache catalog data. |
 
 
-## Optional Swing GUI helpers
+## Optional Swing Components
 
 The `org.api.cardnexus.gui` package provides ready-to-embed Swing components for desktop applications and small administration tools. These panels are optional convenience UI layers built on top of the same service classes documented above; they still require `NexusConfig` to be initialized before use.
 
