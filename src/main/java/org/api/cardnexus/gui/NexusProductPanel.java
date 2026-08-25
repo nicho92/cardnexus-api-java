@@ -24,7 +24,7 @@ import org.api.cardnexus.configuration.NexusConfig;
 import org.api.cardnexus.gui.components.LoadingLabel;
 import org.api.cardnexus.gui.components.MarketPlacePanel;
 import org.api.cardnexus.gui.components.ProductPicturePanel;
-import org.api.cardnexus.gui.model.MapTableModel;
+import org.api.cardnexus.gui.model.CardAttributsTableModel;
 import org.api.cardnexus.gui.model.NexusProductTableModel;
 import org.api.cardnexus.model.AbstractProduct;
 import org.api.cardnexus.model.CardProduct;
@@ -42,12 +42,12 @@ public class NexusProductPanel extends JPanel{
     protected transient Logger logger = LogManager.getLogger(getClass());
     private AbstractProduct selectedProduct;
     private DefaultListModel<Expansion> modelExpansions;
-	private MapTableModel attributsModel;
+	private CardAttributsTableModel attributsModel;
     
     
     public NexusProductPanel()
     {
-	this(false,false,false);
+    	this(false,false,false);
     }
     
     
@@ -61,7 +61,7 @@ public class NexusProductPanel extends JPanel{
 	
 		setLayout(new BorderLayout());
 		
-		attributsModel = new MapTableModel();
+		attributsModel = new CardAttributsTableModel();
 		modelProducts = new NexusProductTableModel();
 		modelExpansions = new DefaultListModel<Expansion>();
 		
@@ -94,9 +94,8 @@ public class NexusProductPanel extends JPanel{
 		if(showdetails) 
 		{
 			var pane = new JTabbedPane();
-			
 			pane.addTab("Picture",picturePanel);
-			pane.add("Attributs",new JScrollPane(new JTable(attributsModel)));
+			pane.add("Attributs",new JScrollPane( new JTable(attributsModel)));
 			add(pane, BorderLayout.EAST);
 		}
 		

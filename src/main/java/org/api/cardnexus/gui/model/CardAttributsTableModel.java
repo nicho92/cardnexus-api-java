@@ -1,37 +1,30 @@
 package org.api.cardnexus.gui.model;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.swing.table.DefaultTableModel;
 
-import org.api.cardnexus.model.Amount;
-import org.api.cardnexus.model.enums.EnumCondition;
-import org.api.cardnexus.model.enums.EnumFinishes;
+import org.api.cardnexus.model.CardAttributs;
 
-public class MapTableModel extends DefaultTableModel {
+public class CardAttributsTableModel extends DefaultTableModel {
 
     private static final long serialVersionUID = 1L;
     
     private String[] columns = new String[] {"Property","Value"};
-    private transient Map<String,Object> items;
+    private transient CardAttributs items;
     
     
-    public Map<String,Object> getItems() {
-	return items;
+    public CardAttributs getItems() {
+    	return items;
     }
     
 
     @Override
     public Object getValueAt(int row, int column) {
-        var k = items.keySet().toArray()[row];
-        var v = items.get(k);
+        var e = items.getEntryAt(row);
         
         switch (column) {
-		case 0: return k;
-		case 1 : return v;
-		
-		default: return null;
+			case 0: return e.getKey();
+			case 1 : return e.getValue();
+			default: return null;
         }
     }
     
@@ -41,16 +34,16 @@ public class MapTableModel extends DefaultTableModel {
     	if(c==0)
     		return String.class;
     		
-        return super.getColumnClass(c);
+        return Object.class;
         
     }
     
     
-    public MapTableModel() {
-    	items = new HashMap<>();
+    public CardAttributsTableModel() {
+    	items = new CardAttributs();
     }
     
-    public void init(Map<String,Object> items)
+    public void init(CardAttributs items)
     {
     	this.items=items;
     	fireTableDataChanged();

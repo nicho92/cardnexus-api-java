@@ -7,7 +7,6 @@ import org.api.cardnexus.configuration.NexusConfig;
 import org.api.cardnexus.model.AbstractProduct;
 import org.api.cardnexus.model.CardProduct;
 import org.api.cardnexus.model.SealedProduct;
-import org.api.cardnexus.model.attributs.MTGAttributs;
 import org.api.cardnexus.model.enums.EnumMarketPlace;
 import org.api.cardnexus.model.enums.EnumProductType;
 import org.api.cardnexus.model.requests.MarketListRequest;
