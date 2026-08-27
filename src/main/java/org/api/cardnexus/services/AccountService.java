@@ -7,17 +7,25 @@ import org.api.cardnexus.model.Balance;
 import org.api.cardnexus.model.ManagedAccount;
 import org.api.cardnexus.model.OnBoardingLink;
 import org.api.cardnexus.model.Vacation;
+import org.api.cardnexus.tools.CachingService;
 
 import com.google.gson.JsonObject;
 
 public class AccountService extends AbstractNexusService {
-	
-    	
+
     
     public Account getAccount() throws IOException
     {
-	return client.get(ROOT_ACCOUNT_ENDPOINT+"/me", Account.class);
+    	return CachingService.inst().getAccountCache().get("account", _->{
+    		try {
+				return client.get(ROOT_ACCOUNT_ENDPOINT+"/me", Account.class);
+			} catch (IOException e) {
+				logger.error(e);
+				return null;
+			}
+    	});
     }
+
     
     public Balance getWalletBalance() throws IOException
     {

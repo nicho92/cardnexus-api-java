@@ -7,7 +7,6 @@ import java.lang.reflect.Type;
 import java.time.Instant;
 import java.util.List;
 
-import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPatch;

@@ -97,7 +97,12 @@ public class MarketPlacePanel extends JTabbedPane {
     public void init(AbstractProduct p)
     {
 	try {
-	    modelMarketList.init(pservice.listMarketListing(MarketListRequest.create().setProductId(p.getId())));
+		
+		
+		var req =MarketListRequest.create().setProductId(p.getId()).setDeliveryCountry(Locale.getDefault().getCountry());
+		
+		
+	    modelMarketList.init(pservice.listMarketListing(req));
 	    marketVariationsPanel.init(p.getPrices());
 	    priceHistoryPanel.init(p);
 	    inventoryPanel.init(p);

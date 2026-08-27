@@ -9,6 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.api.cardnexus.configuration.NexusConfig;
 import org.api.cardnexus.model.AbstractProduct;
+import org.api.cardnexus.model.Account;
 import org.api.cardnexus.model.Expansion;
 import org.api.cardnexus.model.Game;
 import org.api.cardnexus.model.ProductPriceMarket;
@@ -30,7 +31,7 @@ public class CachingService {
     private Cache<Integer, Expansion> expansionCache;
     private Cache<String, Game> gamesCache;
     private Cache<Integer, Map<EnumFinishes, ProductPriceMarket>> pricesCache;
-    
+    private Cache<String, Account> accountCache;
     
     public static <K, V> Cache<K, V> createCache()
     {
@@ -52,6 +53,7 @@ public class CachingService {
 	expansionCache=createCache();
 	gamesCache = createCache();
 	pricesCache = createCache();
+	accountCache = createCache();
     }
     
     
@@ -69,6 +71,12 @@ public class CachingService {
     public Cache<Integer, Map<EnumFinishes, ProductPriceMarket>> getPricesCache() {
 	return pricesCache;
     }
+    
+
+	public Cache<String, Account> getAccountCache() {
+		return accountCache;
+	}
+    
 
     
     public void cachingProducts(String gameId) throws IOException
@@ -117,7 +125,7 @@ public class CachingService {
 		
 		
    }
-    
+
     
     
 }

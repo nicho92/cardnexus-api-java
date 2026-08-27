@@ -1,6 +1,9 @@
 package org.api.cardnexus.model.tech;
 
 import java.io.Serializable;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpRequestBase;
@@ -28,14 +31,16 @@ public class NexusHeader implements Serializable {
     	
     }
 	
+	public LocalDateTime getResetTime() {
+		return LocalDateTime.ofInstant(Instant.ofEpochSecond(epoch), ZoneId.systemDefault());
+	}
 	
-
 	private NexusHeader() {
 		//use build method to create an instance
 	}
 	
 	public String toString() {
-		return "NexusHeader [limit=" + limit + ", remaining=" + remaining + ", id=" + id + ", epoch=" + epoch + "]";
+		return "NexusHeader [limit=" + limit + ", remaining=" + remaining + ", id=" + id + ", epoch=" + getResetTime() + "]";
 	}
 	private void setMethod(String method) {
 		this.method = method;
