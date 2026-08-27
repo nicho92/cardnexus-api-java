@@ -133,7 +133,7 @@ public class NexusAccountPanel extends JPanel {
 		
 		lblAvatar = new JLabel(" ");
 		GridBagConstraints gbc_lblAvatar = new GridBagConstraints();
-		gbc_lblAvatar.gridheight = 3;
+		gbc_lblAvatar.gridheight = 4;
 		gbc_lblAvatar.insets = new Insets(0, 0, 5, 0);
 		gbc_lblAvatar.gridx = 2;
 		gbc_lblAvatar.gridy = 0;
