@@ -7,6 +7,7 @@ import java.lang.reflect.Type;
 import java.time.Instant;
 import java.util.List;
 
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPatch;
@@ -26,6 +27,7 @@ import org.api.cardnexus.listener.URLCallInfo;
 import org.api.cardnexus.model.NexusAPIException;
 import org.api.cardnexus.model.NexusError;
 import org.api.cardnexus.model.PaginateResult;
+import org.api.cardnexus.model.tech.NexusHeader;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonSyntaxException;
@@ -154,18 +156,19 @@ public class RestClient implements Closeable {
      	request.addHeader("Accept-Language", NexusConfig.getAcceptLanguage());
     	
     	
-        try (var response = httpClient.execute(request)) {
+        try (var response = httpClient.execute(request)) 
+        {
             var statusCode = response.getStatusLine().getStatusCode();
             var jsonResponse = response.getEntity() != null ? EntityUtils.toString(response.getEntity()) : null;
             
-           
             
-            var remaining = Integer.parseInt(response.getFirstHeader("x-ratelimit-remaining").getValue());
+            var header = NexusHeader.build(request,response);
             
-            logger.debug("Remaining ={}", remaining);
+         
+            logger.info(header);
                         
-            if(remaining<=10)
-        	logger.warn("rate limit = {}/{}.",remaining,response.getFirstHeader("x-ratelimit-limit").getValue());
+            if(header.getRemaining()<=10)
+            	logger.warn("rate limit = {}/{}.",header.getRemaining(),header.getLimit());
                        
             
             
