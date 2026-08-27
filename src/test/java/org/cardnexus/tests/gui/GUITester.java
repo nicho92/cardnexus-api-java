@@ -3,6 +3,7 @@ package org.cardnexus.tests.gui;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.io.IOException;
+import java.util.Locale;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListCellRenderer;
@@ -32,7 +33,7 @@ public class GUITester {
 
     public static void main(String[] args) throws IOException {
 	NexusConfig.loadTokenFromEnv();
-	
+	NexusConfig.setAcceptLanguage(Locale.getDefault().getLanguage());
 	
 	var dialog = new JDialog();
 	      dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);

@@ -7,7 +7,6 @@ import java.lang.reflect.Type;
 import java.time.Instant;
 import java.util.List;
 
-import org.apache.http.Header;
 import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPatch;
@@ -29,7 +28,6 @@ import org.api.cardnexus.model.NexusError;
 import org.api.cardnexus.model.PaginateResult;
 
 import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
@@ -39,9 +37,7 @@ public class RestClient implements Closeable {
     protected Logger logger = LogManager.getLogger(this.getClass());
 
     private JsonService gson;
-
-    private Header[] lastCallHeaders;
-  
+ 
     public RestClient() {
 	this.httpClient = HttpClients.createDefault();
         gson = new JsonService();
@@ -149,22 +145,20 @@ public class RestClient implements Closeable {
     	return gson.fromJson(json, responseType);
     }
     
-    
-    public Header[] getLastCallHeaders() {
-	return lastCallHeaders;
-    }
-     
+   
     @SuppressWarnings("unchecked")
     private <T> T executeRequest(HttpRequestBase request, Type  responseType) throws IOException,NexusAPIException {
     	
     	var callInfo = new URLCallInfo();
     	request.addHeader("Authorization", "Bearer "+NexusConfig.getToken());
-     	
+     	request.addHeader("Accept-Language", NexusConfig.getAcceptLanguage());
+    	
+    	
         try (var response = httpClient.execute(request)) {
             var statusCode = response.getStatusLine().getStatusCode();
             var jsonResponse = response.getEntity() != null ? EntityUtils.toString(response.getEntity()) : null;
             
-            this.lastCallHeaders = response.getAllHeaders();
+           
             
             var remaining = Integer.parseInt(response.getFirstHeader("x-ratelimit-remaining").getValue());
             

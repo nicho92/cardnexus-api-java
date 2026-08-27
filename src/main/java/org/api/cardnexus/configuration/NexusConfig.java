@@ -26,6 +26,8 @@ public class NexusConfig {
     private static volatile int limitListResults = 200;
     private static volatile boolean checksumMd5Feed = true;
     private static volatile String defaultGameValue;
+    private static volatile String acceptLanguage = "en";
+    
     private static URLCallListener listener;
     private static volatile String token;
     private static volatile Integer feedRententionDurationDays = 1;
@@ -64,16 +66,24 @@ public class NexusConfig {
     }
 
     public static URLCallListener getListener() {
-	return listener;
+    	return listener;
     }
-
+    public static String getAcceptLanguage() {
+		return acceptLanguage;
+	}
+    
     public static String getToken() {
-	return token;
+    	return token;
     }
 
     public static Integer getFeedRententionDurationDays() {
 	return feedRententionDurationDays;
     }
+    
+    public static void setAcceptLanguage(String acceptLanguage) {
+	NexusConfig.acceptLanguage = acceptLanguage;
+    }
+    
     
     public static void setFeedRententionDurationDays(Integer feedRententionDurationDays) {
 	NexusConfig.feedRententionDurationDays = feedRententionDurationDays;
