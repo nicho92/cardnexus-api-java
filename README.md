@@ -189,6 +189,7 @@ public class GuiExample {
 | `setDefaultGameValue(...)` | `null` | Optional application-level default game identifier, for example `mtg`. |
 | `setFeedRententionDurationDays(...)` | `1` | Number of days to retain downloaded feed files. |
 | `setListener(...)` | `null` | Optional request listener for tracing URL calls. |
+| `setAcceptLanguage(...)` | `en` | use localised product information. Can use thoses values : en, fr, it, es, or de |
 
 ## Caching Service
 
