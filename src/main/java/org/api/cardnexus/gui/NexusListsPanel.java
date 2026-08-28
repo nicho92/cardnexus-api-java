@@ -1,7 +1,10 @@
 package org.api.cardnexus.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.io.IOException;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -9,12 +12,15 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingWorker;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.api.cardnexus.gui.components.LoadingLabel;
 import org.api.cardnexus.gui.components.ProductPicturePanel;
 import org.api.cardnexus.gui.model.NexusListItemTableModel;
 import org.api.cardnexus.gui.model.NexusListTableModel;
+import org.api.cardnexus.model.NexusList;
 import org.api.cardnexus.model.enums.EnumStatus;
 import org.api.cardnexus.model.requests.ListCreationRequest;
 import org.api.cardnexus.services.ListsServices;
@@ -32,7 +38,8 @@ public class NexusListsPanel extends JPanel {
     
     protected transient Logger logger = LogManager.getLogger(getClass());
     
-    public NexusListsPanel() {
+    public NexusListsPanel() 
+    {
     	setLayout(new BorderLayout());
     	
     	modelLists = new NexusListTableModel();
@@ -46,9 +53,10 @@ public class NexusListsPanel extends JPanel {
     	var btnDelete = new JButton("Delete");
     	var btnRefresh= new JButton("Reload");
     	var splitPane = new JPanel();
-    	
+    	var lblLoading = new LoadingLabel();
     	
     	btnDelete.setEnabled(false);
+    	productPanel.setPreferredSize(new Dimension(500,400));
     	table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     	tableItems.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     	splitPane.setLayout(new BorderLayout());
@@ -58,6 +66,9 @@ public class NexusListsPanel extends JPanel {
     	panel.add(btnAddList);
     	panel.add(btnDelete);
     	panel.add(btnRefresh);
+    	panel.add(lblLoading);
+    	
+    	
     	splitPane.add(new JScrollPane(tableItems),BorderLayout.CENTER);
     	splitPane.add(productPanel,BorderLayout.SOUTH);
     	add(splitPane, BorderLayout.CENTER);
@@ -66,51 +77,67 @@ public class NexusListsPanel extends JPanel {
     	pservice = new ProductsService();
     	servicesList = new ListsServices();
     	
-    
-    	btnRefresh.doClick();
-    	
-    	
-    	
-    
-    btnRefresh.addActionListener(_->{
-            	try {
-        	    modelLists.init(servicesList.listNexusLists());
-        	} catch (Exception e) {
-        	    logger.error(e);
-        	}
+		
+    	btnRefresh.addActionListener(_->{
+	    	
+	    System.out.println("lading list");
+	    
+	    lblLoading.setVisible(true);
+	    
+            	var wk = new SwingWorker<List<NexusList>, Void>() {
+
+		    @Override
+		    protected List<NexusList> doInBackground() throws Exception {
+			    return servicesList.listNexusLists();
+	        	
+		    }
+
+		    @Override
+		    protected void done() {
+			lblLoading.setVisible(false);
+			try {
+			    modelLists.init(get());
+			} catch (InterruptedException _) {
+			   Thread.currentThread().interrupt();
+			} catch (ExecutionException e) {
+			    logger.error(e);
+			}
+		    }
+            	    
+		   
+            	   
+            	    
+		};
+		wk.execute();
     	});
     	
-    btnAddList.addActionListener(_->{
-	var name = JOptionPane.showInputDialog("List Name ?");
-	try {
-	  var  l = servicesList.createList(ListCreationRequest.create().setName(name).setPublic(false).setStatus(EnumStatus.hold));
-		modelLists.addItem(l);
-	} catch (IOException e) {
-	    logger.error(e);
-	}
-
-    });
+        btnAddList.addActionListener(_->{
+        	var name = JOptionPane.showInputDialog("List Name ?");
+        	try {
+        	  var  l = servicesList.createList(ListCreationRequest.create().setName(name).setPublic(false).setStatus(EnumStatus.hold));
+        		modelLists.addItem(l);
+        	} catch (IOException e) {
+        	    logger.error(e);
+        	}
+        });
     	
-    
-    btnDelete.addActionListener(_->{
-	
-	int row = table.convertRowIndexToModel(table.getSelectedRow());
-	var id = modelLists.getValueAt(row, 0).toString();
-	var confirmation = JOptionPane.showConfirmDialog(this, "Delete " + id + " ?");
-	
-	if(confirmation==JOptionPane.YES_OPTION) {
-           	try {
-           	  servicesList.deleteList(id);
-           	  modelLists.removeRow(row);
-           	} catch (IOException e) {
-           	 logger.error(e);
-           	}
-	}
+        btnDelete.addActionListener(_->{
+        	
+        	int row = table.convertRowIndexToModel(table.getSelectedRow());
+        	var id = modelLists.getValueAt(row, 0).toString();
+        	var confirmation = JOptionPane.showConfirmDialog(this, "Delete " + id + " ?");
+        	
+        	if(confirmation==JOptionPane.YES_OPTION) {
+                   	try {
+                   	  servicesList.deleteList(id);
+                   	  modelLists.removeRow(row);
+                   	} catch (IOException e) {
+                   	 logger.error(e);
+                   	}
+        	}
        });
-    
-    
-    	
-    tableItems.getSelectionModel().addListSelectionListener(e -> {
+       
+        tableItems.getSelectionModel().addListSelectionListener(e -> {
     	    if (!e.getValueIsAdjusting()) {
     		int row = tableItems.convertRowIndexToModel(tableItems.getSelectedRow());
     	       
@@ -144,6 +171,9 @@ public class NexusListsPanel extends JPanel {
     	    }
     	});
 
+	btnRefresh.doClick();
+
+    	
     }
 
 }

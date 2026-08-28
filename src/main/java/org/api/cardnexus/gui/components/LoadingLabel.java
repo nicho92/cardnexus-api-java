@@ -11,6 +11,9 @@ public class LoadingLabel extends JLabel {
     private static final long serialVersionUID = 1L;
     
     public LoadingLabel() {
+	
+	
+	setVisible(false);
 	try {
 	    setIcon(new ImageIcon(ImageIO.read( this.getClass().getResource( "/load.gif" ))));
 	} catch (IOException _) {
