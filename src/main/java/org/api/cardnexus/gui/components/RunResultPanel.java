@@ -124,6 +124,22 @@ public class RunResultPanel extends JPanel {
 		}
 	    }
 	}
+	else
+	{
+	    job.result().unmet().forEach(unmet->{
+		
+		var optNode = new DefaultMutableTreeNode("unmet");
+		root.add(optNode);
+		optNode.add(new DefaultMutableTreeNode("Index : " + unmet.targetIndex()));
+		optNode.add(new DefaultMutableTreeNode("requested : " +unmet.requested()));
+		optNode.add(new DefaultMutableTreeNode("Reason :" + unmet.reason()));
+		
+		
+	    });
+	}
+	
+	
+	
 	tree.updateUI();
 	tree.expandRow(0);
 	

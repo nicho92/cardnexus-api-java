@@ -164,7 +164,7 @@ public class RestClient implements Closeable {
             var header = NexusHeader.build(request,response);
             
          
-            logger.info(header);
+            logger.debug(header);
                         
             if(header.getRemaining()<=10)
             	logger.warn("rate limit = {}/{}.",header.getRemaining(),header.getLimit());

@@ -40,14 +40,14 @@ public class NexusProductPanel extends JPanel{
     
     private ProductsService service;
     protected transient Logger logger = LogManager.getLogger(getClass());
-    private AbstractProduct selectedProduct;
+    private transient AbstractProduct selectedProduct;
     private DefaultListModel<Expansion> modelExpansions;
 	private CardAttributsTableModel attributsModel;
     
     
     public NexusProductPanel()
     {
-    	this(false,false,false);
+    	this(true,true,true);
     }
     
     
