@@ -76,6 +76,7 @@ public class NexusProductPanel extends JPanel{
 		 
 		var chkSealed = new JCheckBox("Sealed");
 		var chkCard = new JCheckBox("Card");
+		var chkInStock = new JCheckBox("In Stock only");
 		
 		
 		chkSealed.setSelected(true);
@@ -86,6 +87,7 @@ public class NexusProductPanel extends JPanel{
 		
 		panel.add(chkSealed);
 		panel.add(chkCard);
+		panel.add(chkInStock);
 		
 		panel.add(textField);
 		panel.add(btnSearch);
@@ -168,7 +170,8 @@ public class NexusProductPanel extends JPanel{
 				@Override
 				protected List<AbstractProduct> doInBackground() throws Exception {
 				    
-				    var req = SearchProductRequest.create().setExpansionId(listExpansion.getSelectedValue().id());
+				    var req = SearchProductRequest.create().setExpansionId(listExpansion.getSelectedValue().id())
+					    							.setListings(null, chkInStock.isSelected(), null);
 				    	
 				    if(chkCard.isSelected() && chkSealed.isSelected())
 					req.setProductTypes(EnumProductType.card, EnumProductType.sealed);
@@ -204,12 +207,13 @@ public class NexusProductPanel extends JPanel{
 
 				@Override
 				protected List<AbstractProduct> doInBackground() throws Exception {
-				    var req = SearchProductRequest.create().setName(textField.getText()).contains();
+				    var req = SearchProductRequest.create().setName(textField.getText()).contains().setListings(null, chkInStock.isSelected(), null);
+				    	
 				    
 				    if(chkCard.isSelected() && chkSealed.isSelected())
-						req.setProductTypes(EnumProductType.card, EnumProductType.sealed);
-					    else
-						req.setProductTypes(chkSealed.isSelected()?EnumProductType.sealed:EnumProductType.card);
+					req.setProductTypes(EnumProductType.card, EnumProductType.sealed);
+				    else
+					req.setProductTypes(chkSealed.isSelected()?EnumProductType.sealed:EnumProductType.card);
 		
 				    
 				    

@@ -34,7 +34,7 @@ public class SearchProductRequest
 	
 	gameFilters = new HashMap<>();
 	setGame(NexusConfig.getDefaultGameValue());
-	setListings(name, false, null);
+	setListings(null, false, null);
     }
     
     public static SearchProductRequest create()
