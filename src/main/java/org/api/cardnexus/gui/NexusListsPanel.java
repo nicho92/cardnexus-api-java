@@ -79,19 +79,13 @@ public class NexusListsPanel extends JPanel {
     	
 		
     	btnRefresh.addActionListener(_->{
-	    	
-	    System.out.println("lading list");
-	    
 	    lblLoading.setVisible(true);
-	    
-            	var wk = new SwingWorker<List<NexusList>, Void>() {
-
+	    	var wk = new SwingWorker<List<NexusList>, Void>() {
 		    @Override
 		    protected List<NexusList> doInBackground() throws Exception {
 			    return servicesList.listNexusLists();
 	        	
 		    }
-
 		    @Override
 		    protected void done() {
 			lblLoading.setVisible(false);

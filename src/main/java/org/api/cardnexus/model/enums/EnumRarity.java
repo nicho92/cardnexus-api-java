@@ -16,7 +16,7 @@ public enum EnumRarity {
     mythic,
     
     //LORCANA
-    @SerializedName(alternate = {"super_rare"}, value = "Super Rare") superrare,
+    @SerializedName(alternate = {"super_rare"}, value = "Super Rare") super_rare,
     @SerializedName(value = "Legendary") legendary,
     @SerializedName(value = "Epic") epic,
     @SerializedName(value = "Iconic") iconic,
@@ -24,16 +24,16 @@ public enum EnumRarity {
     
     //POKEMON
     
-    @SerializedName(value = "DOUBLE_RARE") doublerare,
-    @SerializedName(alternate= {"Rare Art"}, value = "ILLUSTRATION_RARE") illustrationrare,
-    @SerializedName(alternate= {"Ultra Rare"}, value = "ULTRA_RARE") ultrarare,
-    @SerializedName(value = "HYPER_RARE") hyperrare,
-    @SerializedName(value = "SPECIAL_ILLUSTRATION_RARE") specialillustrationrare,
-    @SerializedName(value = "HOLO_RARE") holorare,
-    @SerializedName(value = "BLACK_WHITE_RARE") blackwhiterare,
-    @SerializedName(alternate = {"secret_rare"}, value = "SECRET_RARE") secretrare,
-    @SerializedName(value = "ACE_SPEC_RARE") acespecrare,
-    @SerializedName(value = "RARE_PRISM_STAR") rareprismstar,
+    @SerializedName(value = "DOUBLE_RARE") double_rare,
+    @SerializedName(alternate= {"Rare Art"}, value = "ILLUSTRATION_RARE") illustration_rare,
+    @SerializedName(alternate= {"Ultra Rare"}, value = "ULTRA_RARE") ultra_rare,
+    @SerializedName(value = "HYPER_RARE") hyper_rare,
+    @SerializedName(value = "SPECIAL_ILLUSTRATION_RARE") special_illustration_rare,
+    @SerializedName(value = "HOLO_RARE") holo_rare,
+    @SerializedName(value = "BLACK_WHITE_RARE") black_white_rare,
+    @SerializedName(alternate = {"secret_rare"}, value = "SECRET_RARE") secret_rare,
+    @SerializedName(value = "ACE_SPEC_RARE") ac_espec_rare,
+    @SerializedName(value = "RARE_PRISM_STAR") rare_prism_star,
     
     //FLESH AND BLOOD
     @SerializedName(value = "Marvel") marvel,
@@ -41,7 +41,7 @@ public enum EnumRarity {
     
     //ONE PIECE
     leader,
-    @SerializedName(value = "treasure_rare") treasurerare, 
+    @SerializedName(value = "treasure_rare") treasure_rare, 
     
     //SORCERY
     @SerializedName(value="Unique") unique,
@@ -50,7 +50,7 @@ public enum EnumRarity {
     @SerializedName(value="Elite") elite,
     
     //NARUTO
-    @SerializedName(value="Secret Variant") secretvariant,
+    @SerializedName(value="Secret Variant") secret_variant,
     @SerializedName(value="Mythos") mythos,
     @SerializedName(value="Secret") secret,
     
@@ -65,10 +65,10 @@ public enum EnumRarity {
     god_rare,
     
     //GRAND ARCHIVE TCG
-    @SerializedName(value="Collector Super Rare") collectorsuperrare,
-    @SerializedName(value="Collector Promo Rare") collectorpromorare,
-    @SerializedName(value="Collector Ultra Rare") collectorultrarare,
-    @SerializedName(value="Promotional Rare") promorare,
+    @SerializedName(value="Collector Super Rare") collector_super_rare,
+    @SerializedName(value="Collector Promo Rare") collector_promo_rare,
+    @SerializedName(value="Collector Ultra Rare") collector_ultra_rare,
+    @SerializedName(value="Promotional Rare") promo_rare,
     
     
     //GUNDAM
