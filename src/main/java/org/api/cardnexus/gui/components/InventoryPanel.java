@@ -18,6 +18,7 @@ import org.api.cardnexus.model.AbstractProduct;
 import org.api.cardnexus.model.InventoryLine;
 import org.api.cardnexus.model.requests.InventoryLinesRequest;
 import org.api.cardnexus.services.InventoryService;
+import java.awt.GridLayout;
 
 public class InventoryPanel extends JPanel 
 {
@@ -43,12 +44,52 @@ public class InventoryPanel extends JPanel
 	btnSave = new JButton("Add to Inventory");
 	btnSave.setEnabled(false);
 	
+	var btnDelete = new JButton("Delete");
+	btnDelete.setEnabled(false);
+	
+	var panelButton = new JPanel();
+	panelButton.setLayout(new GridLayout(2, 1, 0, 0));
+	panelButton.add(btnSave);
+	panelButton.add(btnDelete);
+	
 	panelRight.setLayout(new BorderLayout());
 	panelRight.add(createPanel,BorderLayout.CENTER);
-	panelRight.add(btnSave,BorderLayout.SOUTH);
+	
+	
+	panelRight.add(panelButton,BorderLayout.SOUTH);
 	
 	
 	add(panelRight,BorderLayout.EAST);
+	
+	
+	table.getSelectionModel().addListSelectionListener(e->{
+	    if (!e.getValueIsAdjusting()) 
+    	    {
+    		int row = table.convertRowIndexToModel(table.getSelectedRow());
+    		btnDelete.setEnabled(row>-1);
+    	    }
+	});
+	
+	
+	btnDelete.addActionListener(_->{
+	    
+	    int row = table.convertRowIndexToModel(table.getSelectedRow());
+	    var idList = model.getValueAt(row, 0);
+	    
+	    try {
+		
+		if(service.deleteInventoryLine(idList.toString()))
+		    model.removeRow(row);
+		
+		
+		
+		
+	    } catch (IOException e1) {
+		logger.error(e1);
+	    }
+	    
+	});
+	
 	
 	btnSave.addActionListener(_->{
 	    

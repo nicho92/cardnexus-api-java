@@ -15,7 +15,7 @@ public class InventoryListTableModel extends DefaultTableModel {
 
     private static final long serialVersionUID = 1L;
     
-    private String[] columns = new String[] {"id","quantity","condition","lang","location","tags","comment","price","update","customId"};
+    private String[] columns = new String[] {"id","quantity","condition","finish","lang","location","tags","comment","price","update","customId"};
     private transient List<InventoryLine> items;
     
     public InventoryListTableModel() {

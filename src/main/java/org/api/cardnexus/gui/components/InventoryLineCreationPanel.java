@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -19,12 +18,10 @@ import javax.swing.SpinnerNumberModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.api.cardnexus.model.AbstractProduct;
-import org.api.cardnexus.model.AddInventoryResults;
 import org.api.cardnexus.model.CardProduct;
 import org.api.cardnexus.model.InventoryLine;
 import org.api.cardnexus.model.enums.EnumCondition;
 import org.api.cardnexus.model.enums.EnumFinishes;
-import org.api.cardnexus.services.InventoryService;
 
 public class InventoryLineCreationPanel extends JPanel {
 
@@ -206,7 +203,10 @@ public class InventoryLineCreationPanel extends JPanel {
     
     public InventoryLine getInventoryLine() throws IOException
     {
-	return new InventoryLine(null, txtCustomId.getText(), txtComment.getText(), product.getId(), product.getGameId(), cboFinish.getItemAt(cboFinish.getSelectedIndex()), cboCondition.getItemAt(cboCondition.getSelectedIndex()), cboLang.getItemAt(cboLang.getSelectedIndex()), (Integer)spnQty.getValue(), chkForSale.isSelected(), null, null, null, null, null);
+	var cId = txtCustomId.getText().isEmpty() ? null:txtCustomId.getText();
+	var comment = txtComment.getText().isEmpty() ? null:txtComment.getText();
+	
+	return new InventoryLine(null,cId, comment, product.getId(), product.getGameId(), cboFinish.getItemAt(cboFinish.getSelectedIndex()), cboCondition.getItemAt(cboCondition.getSelectedIndex()), cboLang.getItemAt(cboLang.getSelectedIndex()), (Integer)spnQty.getValue(), chkForSale.isSelected(), null, null, null, null, null);
     }
 
     public void init(AbstractProduct selectedProduct) {
