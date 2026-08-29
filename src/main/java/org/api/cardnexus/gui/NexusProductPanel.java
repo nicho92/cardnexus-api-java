@@ -42,7 +42,7 @@ public class NexusProductPanel extends JPanel{
     protected transient Logger logger = LogManager.getLogger(getClass());
     private transient AbstractProduct selectedProduct;
     private DefaultListModel<Expansion> modelExpansions;
-	private CardAttributsTableModel attributsModel;
+    private CardAttributsTableModel attributsModel;
     
     
     public NexusProductPanel()

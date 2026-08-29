@@ -35,6 +35,12 @@ public class InventoryService extends AbstractNexusService{
 	return ret;
     }
     
+    
+    public AddInventoryResults addInventoryLine(InventoryLine line) throws IOException
+    {
+	return addInventoryLines(List.of(line));
+    }
+    
     public AddInventoryResults addInventoryLines(List<InventoryLine> lines) throws IOException
     {
 	
