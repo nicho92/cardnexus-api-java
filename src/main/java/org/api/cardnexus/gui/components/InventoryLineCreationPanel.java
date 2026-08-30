@@ -206,7 +206,7 @@ public class InventoryLineCreationPanel extends JPanel {
 	var cId = txtCustomId.getText().isEmpty() ? null:txtCustomId.getText();
 	var comment = txtComment.getText().isEmpty() ? null:txtComment.getText();
 	
-	return new InventoryLine(null,cId, comment, product.getId(), product.getGameId(), cboFinish.getItemAt(cboFinish.getSelectedIndex()), cboCondition.getItemAt(cboCondition.getSelectedIndex()), cboLang.getItemAt(cboLang.getSelectedIndex()), (Integer)spnQty.getValue(), chkForSale.isSelected(), null, null, null, null, null);
+	return new InventoryLine(null,cId, comment, product.getId(), product.getGameId(), cboFinish.getItemAt(cboFinish.getSelectedIndex()), cboCondition.getItemAt(cboCondition.getSelectedIndex()), cboLang.getItemAt(cboLang.getSelectedIndex()), (Integer)spnQty.getValue(), chkForSale.isSelected(), null, null, null, null, null, null);
     }
 
     public void init(AbstractProduct selectedProduct) {
