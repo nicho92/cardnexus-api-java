@@ -25,7 +25,6 @@ import org.apache.logging.log4j.Logger;
 import org.api.cardnexus.model.AbstractProduct;
 import org.api.cardnexus.model.CardProduct;
 import org.api.cardnexus.model.InventoryLine;
-import org.api.cardnexus.model.SealedProduct;
 import org.api.cardnexus.model.enums.EnumCondition;
 import org.api.cardnexus.model.enums.EnumFinishes;
 import org.api.cardnexus.services.InventoryService;
@@ -71,14 +70,14 @@ public class InventoryLineCreationPanel extends JPanel {
     	
     	if(showThumbnail)
     	{
-    	productPicturePanel = new ProductPicturePanel();
-    	var gbcproductPicturePanel = new GridBagConstraints();
-    	gbcproductPicturePanel.gridheight = 7;
-    	gbcproductPicturePanel.insets = new Insets(0, 0, 5, 5);
-    	gbcproductPicturePanel.fill = GridBagConstraints.BOTH;
-    	gbcproductPicturePanel.gridx = 0;
-    	gbcproductPicturePanel.gridy = 0;
-    	add(productPicturePanel, gbcproductPicturePanel);
+        	productPicturePanel = new ProductPicturePanel();
+        	var gbcproductPicturePanel = new GridBagConstraints();
+        	gbcproductPicturePanel.gridheight = 7;
+        	gbcproductPicturePanel.insets = new Insets(0, 0, 5, 5);
+        	gbcproductPicturePanel.fill = GridBagConstraints.BOTH;
+        	gbcproductPicturePanel.gridx = 0;
+        	gbcproductPicturePanel.gridy = 0;
+        	add(productPicturePanel, gbcproductPicturePanel);
     	}
     	
     	
@@ -226,6 +225,11 @@ public class InventoryLineCreationPanel extends JPanel {
     	gbclstLocation.gridy = 8;
     	add(new JScrollPane(lstLocation), gbclstLocation);
     	
+	loadDatas();
+    	
+    }
+    
+    public void loadDatas() {
 	var wk1 = new SwingWorker<List<String>, Void>() {
     	    @Override
     	    protected List<String> doInBackground() throws Exception {
@@ -265,9 +269,10 @@ public class InventoryLineCreationPanel extends JPanel {
 	};
 	wk2.execute();
     
-    	
+	
     }
-    
+
+
     public InventoryLine getInventoryLine()
     {
 	var cId = txtCustomId.getText().isEmpty() ? null:txtCustomId.getText();
